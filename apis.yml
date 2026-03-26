@@ -1,11 +1,19 @@
 aid: stackrox
 name: StackRox
 description: >-
-  StackRox is a Kubernetes-native security platform for protecting containerized applications across build, deploy, and runtime.
+  StackRox is the open source upstream project for Red Hat Advanced Cluster
+  Security for Kubernetes. It provides risk analysis, visibility, runtime
+  alerts, and recommendations to proactively improve security by hardening
+  containerized environments across build, deploy, and runtime.
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
   - Containers
+  - Security
+  - Kubernetes
+  - Runtime Protection
+  - Compliance
+  - Open Source
 url: >-
   https://raw.githubusercontent.com/api-evangelist/stackrox/refs/heads/main/apis.yml
 created: '2026-03-26'
@@ -15,14 +23,35 @@ apis:
   - aid: stackrox:stackrox
     name: StackRox
     description: >-
-      StackRox is a Kubernetes-native security platform for protecting containerized applications across build, deploy, and runtime.
-    humanURL: https://github.com/api-evangelist/stackrox
+      StackRox is a Kubernetes-native security platform that performs risk
+      analysis of the container environment, delivers visibility and runtime
+      alerts, and provides recommendations to proactively improve security
+      by hardening the environment.
+    humanURL: https://www.stackrox.io/
     tags:
       - Containers
-    properties: []
+      - Security
+      - Kubernetes
+      - Runtime Protection
+      - Compliance
+    properties:
+      - type: Documentation
+        url: https://www.stackrox.io/docs/
+      - type: Getting Started
+        url: https://www.stackrox.io/docs/
 common:
   - type: Website
-    url: https://github.com/api-evangelist/stackrox
+    url: https://www.stackrox.io/
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub Organization
+    url: https://github.com/stackrox
+  - type: GitHub Repository
+    url: https://github.com/stackrox/stackrox
+  - type: Blog
+    url: https://www.stackrox.io/blog/
+  - type: Red Hat Product Page
+    url: https://www.redhat.com/en/technologies/cloud-computing/openshift/advanced-cluster-security-kubernetes
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
