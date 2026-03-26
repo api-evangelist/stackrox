@@ -1,0 +1,28 @@
+aid: stackrox
+name: StackRox
+description: >-
+  StackRox is a Kubernetes-native security platform for protecting containerized applications across build, deploy, and runtime.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Containers
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/stackrox/refs/heads/main/apis.yml
+created: '2026-03-26'
+modified: '2026-03-26'
+specificationVersion: '0.19'
+apis:
+  - aid: stackrox:stackrox
+    name: StackRox
+    description: >-
+      StackRox is a Kubernetes-native security platform for protecting containerized applications across build, deploy, and runtime.
+    humanURL: https://github.com/api-evangelist/stackrox
+    tags:
+      - Containers
+    properties: []
+common:
+  - type: Website
+    url: https://github.com/api-evangelist/stackrox
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
