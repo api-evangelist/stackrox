@@ -8,12 +8,12 @@ description: >-
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Containers
-  - Security
-  - Kubernetes
-  - Runtime Protection
   - Compliance
+  - Containers
+  - Kubernetes
   - Open Source
+  - Runtime Protection
+  - Security
 url: >-
   https://raw.githubusercontent.com/api-evangelist/stackrox/refs/heads/main/apis.yml
 created: '2026-03-26'
@@ -29,11 +29,11 @@ apis:
       by hardening the environment.
     humanURL: https://www.stackrox.io/
     tags:
+      - Compliance
       - Containers
-      - Security
       - Kubernetes
       - Runtime Protection
-      - Compliance
+      - Security
     properties:
       - type: Documentation
         url: https://www.stackrox.io/docs/
