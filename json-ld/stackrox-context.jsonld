@@ -1,0 +1,33 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "stackrox": "https://stackrox.io/schema/",
+    "Alert": {
+      "@id": "stackrox:SecurityAlert",
+      "@type": "@id"
+    },
+    "Policy": {
+      "@id": "stackrox:SecurityPolicy",
+      "@type": "@id"
+    },
+    "Deployment": {
+      "@id": "schema:SoftwareApplication",
+      "@type": "@id"
+    },
+    "Cluster": {
+      "@id": "stackrox:KubernetesCluster",
+      "@type": "@id"
+    },
+    "Image": {
+      "@id": "stackrox:ContainerImage",
+      "@type": "@id"
+    },
+    "severity": "stackrox:severity",
+    "state": "stackrox:alertState",
+    "lifecycleStage": "stackrox:lifecycleStage",
+    "namespace": "stackrox:kubernetesNamespace",
+    "clusterId": "stackrox:clusterIdentifier",
+    "name": "schema:name",
+    "description": "schema:description"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stackrox.io/schemas/alert",
+  "title": "StackRox Alert",
+  "description": "A security policy violation alert from the StackRox platform",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string", "description": "Unique alert identifier" },
+    "policy": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "severity": { "type": "string", "enum": ["LOW_SEVERITY", "MEDIUM_SEVERITY", "HIGH_SEVERITY", "CRITICAL_SEVERITY"] },
+        "categories": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "state": { "type": "string", "enum": ["ACTIVE", "SNOOZED", "RESOLVED"] },
+    "lifecycleStage": { "type": "string", "enum": ["DEPLOY", "BUILD", "RUNTIME"] },
+    "deployment": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "namespace": { "type": "string" },
+        "clusterId": { "type": "string" },
+        "clusterName": { "type": "string" }
+      }
+    },
+    "time": { "type": "string", "format": "date-time" },
+    "firstOccurred": { "type": "string", "format": "date-time" }
+  },
+  "required": ["id", "state"]
+}

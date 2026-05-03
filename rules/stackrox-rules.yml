@@ -1,0 +1,63 @@
+rules:
+  stackrox-operation-ids:
+    description: All operations must have an operationId
+    message: 'Operation must have an operationId: {{path}}'
+    severity: error
+    given: '$.paths[*][*]'
+    then:
+      field: operationId
+      function: truthy
+
+  stackrox-tags-required:
+    description: All operations must have at least one tag
+    message: 'Operation at {{path}} must have at least one tag'
+    severity: error
+    given: '$.paths[*][*]'
+    then:
+      field: tags
+      function: truthy
+
+  stackrox-v1-api-path:
+    description: All StackRox API paths should begin with /v1/
+    message: 'Path {{path}} must begin with /v1/'
+    severity: warn
+    given: '$.paths[*]~'
+    then:
+      function: pattern
+      functionOptions:
+        match: '^/v1/'
+
+  stackrox-api-token-auth:
+    description: StackRox API should use ApiToken security scheme
+    message: 'Security scheme must include ApiToken'
+    severity: error
+    given: '$.components.securitySchemes'
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          required: ['ApiToken']
+
+  stackrox-successful-response:
+    description: All operations must define at least one success response
+    message: 'Operation at {{path}} must define a 200, 201, or 204 response'
+    severity: error
+    given: '$.paths[*][*].responses'
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          anyOf:
+            - required: ['200']
+            - required: ['201']
+            - required: ['204']
+
+  stackrox-count-endpoint-naming:
+    description: Count endpoints should follow the {resource}count naming convention
+    message: 'Count endpoint {{path}} should follow /v1/{resource}count pattern'
+    severity: info
+    given: '$.paths[?(/count/)][*]~'
+    then:
+      function: pattern
+      functionOptions:
+        match: 'count$'

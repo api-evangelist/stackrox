@@ -1,0 +1,90 @@
+vocabulary:
+  name: StackRox
+  description: Domain vocabulary for the StackRox Kubernetes Security Platform
+  terms:
+    - term: Alert
+      definition: >-
+        A security event raised when a deployment or container violates a
+        configured security policy. Alerts have a lifecycle state (ACTIVE,
+        SNOOZED, RESOLVED) and can be triggered at build, deploy, or runtime.
+      aliases:
+        - Violation
+        - Security Event
+
+    - term: Policy
+      definition: >-
+        A set of conditions and enforcement actions that StackRox evaluates
+        against workloads. Policies can apply at build time, deploy time, or
+        runtime, and can trigger alerts, scale-down, or block deployment.
+      aliases:
+        - Security Policy
+        - Detection Rule
+
+    - term: Deployment
+      definition: >-
+        A Kubernetes Deployment or workload resource monitored by StackRox.
+        StackRox analyzes deployments for security risk, policy compliance,
+        and runtime behavior.
+      aliases:
+        - Workload
+        - Kubernetes Workload
+
+    - term: Image
+      definition: >-
+        A container image scanned by StackRox for CVEs, package vulnerabilities,
+        and configuration weaknesses. StackRox tracks which images are in use
+        across clusters.
+      aliases:
+        - Container Image
+        - Docker Image
+
+    - term: Cluster
+      definition: >-
+        A Kubernetes cluster registered with StackRox Central for security
+        monitoring. StackRox deploys Sensor agents into clusters to collect
+        runtime data.
+      aliases:
+        - Kubernetes Cluster
+
+    - term: Central
+      definition: >-
+        The StackRox Central component — the management plane that hosts the
+        StackRox API, stores security data, and coordinates with Sensor agents
+        deployed in clusters.
+      aliases:
+        - StackRox Central
+        - Control Plane
+
+    - term: Sensor
+      definition: >-
+        A StackRox agent deployed in a Kubernetes cluster that monitors
+        container runtime, network traffic, and process activity, reporting
+        to Central.
+      aliases:
+        - StackRox Sensor
+        - Cluster Agent
+
+    - term: Lifecycle Stage
+      definition: >-
+        One of three stages where StackRox can apply security policies:
+        BUILD (during image build), DEPLOY (at deployment time), or
+        RUNTIME (during container execution).
+      aliases:
+        - Security Stage
+
+    - term: Compliance
+      definition: >-
+        StackRox's compliance module that evaluates cluster and deployment
+        configurations against standards including CIS Benchmarks, NIST SP 800-190,
+        PCI-DSS, and HIPAA.
+      aliases:
+        - Compliance Check
+
+    - term: Risk Score
+      definition: >-
+        A numerical score assigned to deployments reflecting the security risk
+        based on policy violations, image vulnerabilities, network exposure,
+        and runtime behavior.
+      aliases:
+        - Risk Rating
+        - Security Score

@@ -1,0 +1,38 @@
+{
+  "title": "List Alerts Example",
+  "description": "Retrieve active security alerts from StackRox",
+  "request": {
+    "method": "GET",
+    "url": "https://stackrox.example.com/v1/alerts?query=Severity%3AHIGH&pagination.limit=25",
+    "headers": {
+      "Authorization": "Bearer {{STACKROX_API_TOKEN}}"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "alerts": [
+        {
+          "id": "alert-001",
+          "state": "ACTIVE",
+          "lifecycleStage": "DEPLOY",
+          "policy": {
+            "id": "policy-001",
+            "name": "Privileged Container",
+            "severity": "HIGH_SEVERITY",
+            "categories": ["Container Configuration"]
+          },
+          "deployment": {
+            "id": "deploy-001",
+            "name": "payment-service",
+            "namespace": "production",
+            "clusterId": "cluster-001",
+            "clusterName": "prod-eks-us-east-1"
+          },
+          "time": "2026-05-02T10:15:00Z",
+          "firstOccurred": "2026-05-02T10:15:00Z"
+        }
+      ]
+    }
+  }
+}

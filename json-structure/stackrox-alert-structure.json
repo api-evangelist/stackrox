@@ -1,0 +1,16 @@
+{
+  "title": "StackRox Alert",
+  "description": "Security policy violation alert structure",
+  "type": "object",
+  "fields": [
+    { "name": "id", "type": "string", "required": true },
+    { "name": "state", "type": "string", "enum": ["ACTIVE", "SNOOZED", "RESOLVED"], "required": true },
+    { "name": "lifecycleStage", "type": "string", "enum": ["BUILD", "DEPLOY", "RUNTIME"] },
+    { "name": "policy.name", "type": "string" },
+    { "name": "policy.severity", "type": "string" },
+    { "name": "deployment.name", "type": "string" },
+    { "name": "deployment.namespace", "type": "string" },
+    { "name": "deployment.clusterName", "type": "string" },
+    { "name": "time", "type": "string", "format": "date-time" }
+  ]
+}
