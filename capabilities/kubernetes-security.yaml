@@ -1,316 +1,571 @@
-naftiko: "1.0.0-alpha1"
-
+naftiko: 1.0.0-alpha2
 info:
-  label: "StackRox Kubernetes Security"
-  description: >-
-    Unified workflow capability for Kubernetes security operations using StackRox.
-    Combines alert triage, policy management, deployment risk analysis, container
-    image vulnerability scanning, compliance checking, and cluster monitoring into
-    a single security operations interface. Designed for security engineers,
-    platform teams, and AI agents operating cloud-native security programs.
+  label: StackRox Kubernetes Security
+  description: Unified workflow capability for Kubernetes security operations using StackRox. Combines alert triage, policy
+    management, deployment risk analysis, container image vulnerability scanning, compliance checking, and cluster monitoring
+    into a single security operations interface. Designed for security engineers, platform teams, and AI agents operating
+    cloud-native security programs.
   tags:
-    - Kubernetes Security
-    - Container Security
-    - Compliance
-    - Runtime Protection
-    - Vulnerability Management
-  created: "2026-05-02"
-  modified: "2026-05-02"
-
+  - Kubernetes Security
+  - Container Security
+  - Compliance
+  - Runtime Protection
+  - Vulnerability Management
+  created: '2026-05-02'
+  modified: '2026-05-06'
 binds:
-  - namespace: env
-    keys:
-      STACKROX_API_TOKEN: STACKROX_API_TOKEN
-      STACKROX_CENTRAL_HOST: STACKROX_CENTRAL_HOST
-
+- namespace: env
+  keys:
+    STACKROX_API_TOKEN: STACKROX_API_TOKEN
+    STACKROX_CENTRAL_HOST: STACKROX_CENTRAL_HOST
 capability:
   consumes:
-    - import: stackrox
-      location: ./shared/stackrox-api.yaml
-
+  - type: http
+    namespace: stackrox
+    baseUri: https://{{STACKROX_CENTRAL_HOST}}
+    description: StackRox Kubernetes Security Platform
+    authentication:
+      type: apikey
+      key: Authorization
+      value: Bearer {{STACKROX_API_TOKEN}}
+      placement: header
+    resources:
+    - name: alerts
+      path: /v1/alerts
+      description: Security policy violation alerts
+      operations:
+      - name: list-alerts
+        method: GET
+        description: List security alerts (slim version)
+        inputParameters:
+        - name: query
+          in: query
+          type: string
+          required: false
+          description: Search query to filter alerts
+        - name: pagination.limit
+          in: query
+          type: integer
+          required: false
+        - name: pagination.offset
+          in: query
+          type: integer
+          required: false
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-alert
+        method: GET
+        description: Get alert details by ID
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: resolve-alert
+        method: PATCH
+        description: Mark an alert as resolved
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+        body:
+          type: json
+          data: {}
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: deployments
+      path: /v1/deployments
+      description: Kubernetes deployments under management
+      operations:
+      - name: list-deployments
+        method: GET
+        description: List all monitored deployments
+        inputParameters:
+        - name: query
+          in: query
+          type: string
+          required: false
+        - name: pagination.limit
+          in: query
+          type: integer
+          required: false
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-deployment
+        method: GET
+        description: Get deployment details by ID
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: images
+      path: /v1/images
+      description: Container image vulnerability management
+      operations:
+      - name: list-images
+        method: GET
+        description: List all container images
+        inputParameters:
+        - name: query
+          in: query
+          type: string
+          required: false
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-image
+        method: GET
+        description: Get image details and vulnerabilities
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: scan-image
+        method: POST
+        description: Scan a single image for vulnerabilities
+        body:
+          type: json
+          data:
+            imageName: '{{tools.image_name}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: policies
+      path: /v1/policies
+      description: Security policy management
+      operations:
+      - name: list-policies
+        method: GET
+        description: List all security policies
+        inputParameters:
+        - name: query
+          in: query
+          type: string
+          required: false
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-policy
+        method: GET
+        description: Get a security policy by ID
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-policy
+        method: POST
+        description: Create a new security policy
+        body:
+          type: json
+          data:
+            name: '{{tools.name}}'
+            description: '{{tools.description}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: compliance
+      path: /v1/compliance
+      description: Compliance standards and results
+      operations:
+      - name: list-compliance-standards
+        method: GET
+        description: List available compliance standards (CIS, NIST, PCI-DSS)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-compliance-results
+        method: GET
+        description: Get compliance scan results
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: clusters
+      path: /v1/clusters
+      description: Kubernetes cluster management
+      operations:
+      - name: list-clusters
+        method: GET
+        description: List all registered Kubernetes clusters
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-cluster
+        method: GET
+        description: Get cluster details by ID
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-tokens
+      path: /v1/apitokens
+      description: API token management
+      operations:
+      - name: list-api-tokens
+        method: GET
+        description: List all API tokens
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: generate-api-token
+        method: POST
+        description: Generate a new API token
+        body:
+          type: json
+          data:
+            name: '{{tools.token_name}}'
+            role: '{{tools.role}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: roles
+      path: /v1/roles
+      description: RBAC role management
+      operations:
+      - name: list-roles
+        method: GET
+        description: List all RBAC roles
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: search
+      path: /v1/search
+      description: Universal search across all resources
+      operations:
+      - name: search
+        method: GET
+        description: Search across all StackRox resources
+        inputParameters:
+        - name: query
+          in: query
+          type: string
+          required: true
+          description: Search query string
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
   exposes:
-    - type: rest
-      port: 8080
-      namespace: stackrox-security-api
-      description: "Unified REST API for Kubernetes security operations with StackRox."
-      resources:
-        - path: /v1/alerts
-          name: alerts
-          description: "Security policy violation alerts"
-          operations:
-            - method: GET
-              name: list-alerts
-              description: "List security alerts"
-              call: "stackrox.list-alerts"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/alerts/{id}
-          name: alert
-          description: "Single alert"
-          operations:
-            - method: GET
-              name: get-alert
-              description: "Get alert details"
-              call: "stackrox.get-alert"
-              with:
-                id: "rest.id"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: PATCH
-              name: resolve-alert
-              description: "Resolve an alert"
-              call: "stackrox.resolve-alert"
-              with:
-                id: "rest.id"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/deployments
-          name: deployments
-          description: "Monitored deployments"
-          operations:
-            - method: GET
-              name: list-deployments
-              description: "List deployments"
-              call: "stackrox.list-deployments"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/images
-          name: images
-          description: "Container images"
-          operations:
-            - method: GET
-              name: list-images
-              description: "List container images"
-              call: "stackrox.list-images"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: POST
-              name: scan-image
-              description: "Scan an image for vulnerabilities"
-              call: "stackrox.scan-image"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/policies
-          name: policies
-          description: "Security policies"
-          operations:
-            - method: GET
-              name: list-policies
-              description: "List security policies"
-              call: "stackrox.list-policies"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: POST
-              name: create-policy
-              description: "Create a security policy"
-              call: "stackrox.create-policy"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/compliance/standards
-          name: compliance-standards
-          description: "Compliance standards"
-          operations:
-            - method: GET
-              name: list-compliance-standards
-              description: "List available compliance standards"
-              call: "stackrox.list-compliance-standards"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/compliance/results
-          name: compliance-results
-          description: "Compliance results"
-          operations:
-            - method: GET
-              name: get-compliance-results
-              description: "Get compliance scan results"
-              call: "stackrox.get-compliance-results"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/clusters
-          name: clusters
-          description: "Kubernetes clusters"
-          operations:
-            - method: GET
-              name: list-clusters
-              description: "List all clusters"
-              call: "stackrox.list-clusters"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/search
-          name: search
-          description: "Universal search"
-          operations:
-            - method: GET
-              name: search
-              description: "Search across all resources"
-              call: "stackrox.search"
-              with:
-                query: "rest.query"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-    - type: mcp
-      port: 9090
-      namespace: stackrox-security-mcp
-      transport: http
-      description: "MCP server for AI-assisted Kubernetes security operations."
-      tools:
-        - name: list-alerts
-          description: "List active security policy violation alerts in StackRox"
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "stackrox.list-alerts"
-          with:
-            query: "tools.query"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: get-alert
-          description: "Get full details for a specific security alert"
-          hints:
-            readOnly: true
-          call: "stackrox.get-alert"
-          with:
-            id: "tools.alert_id"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: resolve-alert
-          description: "Mark a security alert as resolved"
-          hints:
-            readOnly: false
-            idempotent: true
-          call: "stackrox.resolve-alert"
-          with:
-            id: "tools.alert_id"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: list-deployments
-          description: "List all Kubernetes deployments monitored by StackRox"
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "stackrox.list-deployments"
-          with:
-            query: "tools.query"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: get-deployment
-          description: "Get risk analysis and details for a specific deployment"
-          hints:
-            readOnly: true
-          call: "stackrox.get-deployment"
-          with:
-            id: "tools.deployment_id"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: list-images
-          description: "List container images and their vulnerability status"
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "stackrox.list-images"
-          with:
-            query: "tools.query"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: scan-image
-          description: "Scan a container image for CVEs and vulnerabilities"
-          hints:
-            readOnly: false
-          call: "stackrox.scan-image"
-          with:
-            image_name: "tools.image_name"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: list-policies
-          description: "List StackRox security policies"
-          hints:
-            readOnly: true
-          call: "stackrox.list-policies"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: get-policy
-          description: "Get details for a specific security policy"
-          hints:
-            readOnly: true
-          call: "stackrox.get-policy"
-          with:
-            id: "tools.policy_id"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: list-compliance-standards
-          description: "List available compliance standards (CIS Benchmarks, NIST, PCI-DSS)"
-          hints:
-            readOnly: true
-          call: "stackrox.list-compliance-standards"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: get-compliance-results
-          description: "Get compliance scan results for the cluster"
-          hints:
-            readOnly: true
-          call: "stackrox.get-compliance-results"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: list-clusters
-          description: "List all Kubernetes clusters registered with StackRox"
-          hints:
-            readOnly: true
-          call: "stackrox.list-clusters"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: search
-          description: "Search across all StackRox resources (alerts, deployments, images, policies)"
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "stackrox.search"
-          with:
-            query: "tools.query"
-          outputParameters:
-            - type: object
-              mapping: "$."
+  - type: rest
+    port: 8080
+    namespace: stackrox-security-api
+    description: Unified REST API for Kubernetes security operations with StackRox.
+    resources:
+    - path: /v1/alerts
+      name: alerts
+      description: Security policy violation alerts
+      operations:
+      - method: GET
+        name: list-alerts
+        description: List security alerts
+        call: stackrox.list-alerts
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/alerts/{id}
+      name: alert
+      description: Single alert
+      operations:
+      - method: GET
+        name: get-alert
+        description: Get alert details
+        call: stackrox.get-alert
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: resolve-alert
+        description: Resolve an alert
+        call: stackrox.resolve-alert
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/deployments
+      name: deployments
+      description: Monitored deployments
+      operations:
+      - method: GET
+        name: list-deployments
+        description: List deployments
+        call: stackrox.list-deployments
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/images
+      name: images
+      description: Container images
+      operations:
+      - method: GET
+        name: list-images
+        description: List container images
+        call: stackrox.list-images
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: scan-image
+        description: Scan an image for vulnerabilities
+        call: stackrox.scan-image
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/policies
+      name: policies
+      description: Security policies
+      operations:
+      - method: GET
+        name: list-policies
+        description: List security policies
+        call: stackrox.list-policies
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create-policy
+        description: Create a security policy
+        call: stackrox.create-policy
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/compliance/standards
+      name: compliance-standards
+      description: Compliance standards
+      operations:
+      - method: GET
+        name: list-compliance-standards
+        description: List available compliance standards
+        call: stackrox.list-compliance-standards
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/compliance/results
+      name: compliance-results
+      description: Compliance results
+      operations:
+      - method: GET
+        name: get-compliance-results
+        description: Get compliance scan results
+        call: stackrox.get-compliance-results
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/clusters
+      name: clusters
+      description: Kubernetes clusters
+      operations:
+      - method: GET
+        name: list-clusters
+        description: List all clusters
+        call: stackrox.list-clusters
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/search
+      name: search
+      description: Universal search
+      operations:
+      - method: GET
+        name: search
+        description: Search across all resources
+        call: stackrox.search
+        with:
+          query: rest.query
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: stackrox-security-mcp
+    transport: http
+    description: MCP server for AI-assisted Kubernetes security operations.
+    tools:
+    - name: list-alerts
+      description: List active security policy violation alerts in StackRox
+      hints:
+        readOnly: true
+        openWorld: true
+      call: stackrox.list-alerts
+      with:
+        query: tools.query
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-alert
+      description: Get full details for a specific security alert
+      hints:
+        readOnly: true
+      call: stackrox.get-alert
+      with:
+        id: tools.alert_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: resolve-alert
+      description: Mark a security alert as resolved
+      hints:
+        readOnly: false
+        idempotent: true
+      call: stackrox.resolve-alert
+      with:
+        id: tools.alert_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-deployments
+      description: List all Kubernetes deployments monitored by StackRox
+      hints:
+        readOnly: true
+        openWorld: true
+      call: stackrox.list-deployments
+      with:
+        query: tools.query
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-deployment
+      description: Get risk analysis and details for a specific deployment
+      hints:
+        readOnly: true
+      call: stackrox.get-deployment
+      with:
+        id: tools.deployment_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-images
+      description: List container images and their vulnerability status
+      hints:
+        readOnly: true
+        openWorld: true
+      call: stackrox.list-images
+      with:
+        query: tools.query
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: scan-image
+      description: Scan a container image for CVEs and vulnerabilities
+      hints:
+        readOnly: false
+      call: stackrox.scan-image
+      with:
+        image_name: tools.image_name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-policies
+      description: List StackRox security policies
+      hints:
+        readOnly: true
+      call: stackrox.list-policies
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-policy
+      description: Get details for a specific security policy
+      hints:
+        readOnly: true
+      call: stackrox.get-policy
+      with:
+        id: tools.policy_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-compliance-standards
+      description: List available compliance standards (CIS Benchmarks, NIST, PCI-DSS)
+      hints:
+        readOnly: true
+      call: stackrox.list-compliance-standards
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-compliance-results
+      description: Get compliance scan results for the cluster
+      hints:
+        readOnly: true
+      call: stackrox.get-compliance-results
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-clusters
+      description: List all Kubernetes clusters registered with StackRox
+      hints:
+        readOnly: true
+      call: stackrox.list-clusters
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: search
+      description: Search across all StackRox resources (alerts, deployments, images, policies)
+      hints:
+        readOnly: true
+        openWorld: true
+      call: stackrox.search
+      with:
+        query: tools.query
+      outputParameters:
+      - type: object
+        mapping: $.
