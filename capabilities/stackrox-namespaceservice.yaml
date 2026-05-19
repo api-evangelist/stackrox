@@ -1,0 +1,113 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: API Reference — NamespaceService
+  description: 'API Reference — NamespaceService. 2 operations. Lead operation: NamespaceService. Self-contained Naftiko capability
+    covering one Stackrox business surface.'
+  tags:
+  - Stackrox
+  - NamespaceService
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    STACKROX_API_KEY: STACKROX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: stackrox-namespaceservice
+    baseUri: https://{central-host}
+    description: API Reference — NamespaceService business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-namespaces
+      path: /v1/namespaces
+      operations:
+      - name: getnamespaces
+        method: GET
+        description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-namespaces-id
+      path: /v1/namespaces/{id}
+      operations:
+      - name: getnamespace
+        method: GET
+        description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.STACKROX_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: stackrox-namespaceservice-rest
+    port: 8080
+    description: REST adapter for API Reference — NamespaceService. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/v1/namespaces
+      name: v1-namespaces
+      description: REST surface for v1-namespaces.
+      operations:
+      - method: GET
+        name: getnamespaces
+        description: getnamespaces
+        call: stackrox-namespaceservice.getnamespaces
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/namespaces/{id}
+      name: v1-namespaces-id
+      description: REST surface for v1-namespaces-id.
+      operations:
+      - method: GET
+        name: getnamespace
+        description: getnamespace
+        call: stackrox-namespaceservice.getnamespace
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: stackrox-namespaceservice-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for API Reference — NamespaceService. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: getnamespaces
+      description: getnamespaces
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stackrox-namespaceservice.getnamespaces
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getnamespace
+      description: getnamespace
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stackrox-namespaceservice.getnamespace
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.

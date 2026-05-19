@@ -1,0 +1,294 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: API Reference — ComplianceService
+  description: 'API Reference — ComplianceService. 5 operations. Lead operation: ComplianceService. Self-contained Naftiko
+    capability covering one Stackrox business surface.'
+  tags:
+  - Stackrox
+  - ComplianceService
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    STACKROX_API_KEY: STACKROX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: stackrox-complianceservice
+    baseUri: https://{central-host}
+    description: API Reference — ComplianceService business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-compliance-aggregatedresults
+      path: /v1/compliance/aggregatedresults
+      operations:
+      - name: getaggregatedresults
+        method: GET
+        description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: groupBy
+          in: query
+          type: array
+        - name: unit
+          in: query
+          type: string
+        - name: where.query
+          in: query
+          type: string
+        - name: where.pagination.limit
+          in: query
+          type: integer
+        - name: where.pagination.offset
+          in: query
+          type: integer
+        - name: where.pagination.sort_option.field
+          in: query
+          type: string
+        - name: where.pagination.sort_option.reversed
+          in: query
+          type: boolean
+    - name: v1-compliance-results
+      path: /v1/compliance/results
+      operations:
+      - name: getcompliancecontrolresults
+        method: GET
+        description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: string
+        - name: pagination.limit
+          in: query
+          type: integer
+        - name: pagination.offset
+          in: query
+          type: integer
+        - name: pagination.sort_option.field
+          in: query
+          type: string
+        - name: pagination.sort_option.reversed
+          in: query
+          type: boolean
+    - name: v1-compliance-runresults
+      path: /v1/compliance/runresults
+      operations:
+      - name: getrunresults
+        method: GET
+        description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: clusterId
+          in: query
+          type: string
+        - name: standardId
+          in: query
+          type: string
+        - name: runId
+          in: query
+          type: string
+          description: Specifies the run ID for which to return results. If empty, the most recent run is returned.
+    - name: v1-compliance-standards
+      path: /v1/compliance/standards
+      operations:
+      - name: getstandards
+        method: GET
+        description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-compliance-standards-id
+      path: /v1/compliance/standards/{id}
+      operations:
+      - name: getstandard
+        method: GET
+        description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.STACKROX_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: stackrox-complianceservice-rest
+    port: 8080
+    description: REST adapter for API Reference — ComplianceService. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/v1/compliance/aggregatedresults
+      name: v1-compliance-aggregatedresults
+      description: REST surface for v1-compliance-aggregatedresults.
+      operations:
+      - method: GET
+        name: getaggregatedresults
+        description: getaggregatedresults
+        call: stackrox-complianceservice.getaggregatedresults
+        with:
+          groupBy: rest.groupBy
+          unit: rest.unit
+          where.query: rest.where.query
+          where.pagination.limit: rest.where.pagination.limit
+          where.pagination.offset: rest.where.pagination.offset
+          where.pagination.sort_option.field: rest.where.pagination.sort_option.field
+          where.pagination.sort_option.reversed: rest.where.pagination.sort_option.reversed
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/compliance/results
+      name: v1-compliance-results
+      description: REST surface for v1-compliance-results.
+      operations:
+      - method: GET
+        name: getcompliancecontrolresults
+        description: getcompliancecontrolresults
+        call: stackrox-complianceservice.getcompliancecontrolresults
+        with:
+          query: rest.query
+          pagination.limit: rest.pagination.limit
+          pagination.offset: rest.pagination.offset
+          pagination.sort_option.field: rest.pagination.sort_option.field
+          pagination.sort_option.reversed: rest.pagination.sort_option.reversed
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/compliance/runresults
+      name: v1-compliance-runresults
+      description: REST surface for v1-compliance-runresults.
+      operations:
+      - method: GET
+        name: getrunresults
+        description: getrunresults
+        call: stackrox-complianceservice.getrunresults
+        with:
+          clusterId: rest.clusterId
+          standardId: rest.standardId
+          runId: rest.runId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/compliance/standards
+      name: v1-compliance-standards
+      description: REST surface for v1-compliance-standards.
+      operations:
+      - method: GET
+        name: getstandards
+        description: getstandards
+        call: stackrox-complianceservice.getstandards
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/compliance/standards/{id}
+      name: v1-compliance-standards-id
+      description: REST surface for v1-compliance-standards-id.
+      operations:
+      - method: GET
+        name: getstandard
+        description: getstandard
+        call: stackrox-complianceservice.getstandard
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: stackrox-complianceservice-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for API Reference — ComplianceService. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: getaggregatedresults
+      description: getaggregatedresults
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stackrox-complianceservice.getaggregatedresults
+      with:
+        groupBy: tools.groupBy
+        unit: tools.unit
+        where.query: tools.where.query
+        where.pagination.limit: tools.where.pagination.limit
+        where.pagination.offset: tools.where.pagination.offset
+        where.pagination.sort_option.field: tools.where.pagination.sort_option.field
+        where.pagination.sort_option.reversed: tools.where.pagination.sort_option.reversed
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getcompliancecontrolresults
+      description: getcompliancecontrolresults
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stackrox-complianceservice.getcompliancecontrolresults
+      with:
+        query: tools.query
+        pagination.limit: tools.pagination.limit
+        pagination.offset: tools.pagination.offset
+        pagination.sort_option.field: tools.pagination.sort_option.field
+        pagination.sort_option.reversed: tools.pagination.sort_option.reversed
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getrunresults
+      description: getrunresults
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stackrox-complianceservice.getrunresults
+      with:
+        clusterId: tools.clusterId
+        standardId: tools.standardId
+        runId: tools.runId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getstandards
+      description: getstandards
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stackrox-complianceservice.getstandards
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getstandard
+      description: getstandard
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stackrox-complianceservice.getstandard
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.

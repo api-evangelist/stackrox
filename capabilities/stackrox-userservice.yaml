@@ -1,0 +1,145 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: API Reference — UserService
+  description: 'API Reference — UserService. 3 operations. Lead operation: UserService. Self-contained Naftiko capability
+    covering one Stackrox business surface.'
+  tags:
+  - Stackrox
+  - UserService
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    STACKROX_API_KEY: STACKROX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: stackrox-userservice
+    baseUri: https://{central-host}
+    description: API Reference — UserService business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-users
+      path: /v1/users
+      operations:
+      - name: getusers
+        method: GET
+        description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-users-id
+      path: /v1/users/{id}
+      operations:
+      - name: getuser
+        method: GET
+        description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+    - name: v1-usersattributes
+      path: /v1/usersattributes
+      operations:
+      - name: getusersattributes
+        method: GET
+        description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.STACKROX_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: stackrox-userservice-rest
+    port: 8080
+    description: REST adapter for API Reference — UserService. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/v1/users
+      name: v1-users
+      description: REST surface for v1-users.
+      operations:
+      - method: GET
+        name: getusers
+        description: getusers
+        call: stackrox-userservice.getusers
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/users/{id}
+      name: v1-users-id
+      description: REST surface for v1-users-id.
+      operations:
+      - method: GET
+        name: getuser
+        description: getuser
+        call: stackrox-userservice.getuser
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/usersattributes
+      name: v1-usersattributes
+      description: REST surface for v1-usersattributes.
+      operations:
+      - method: GET
+        name: getusersattributes
+        description: getusersattributes
+        call: stackrox-userservice.getusersattributes
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: stackrox-userservice-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for API Reference — UserService. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: getusers
+      description: getusers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stackrox-userservice.getusers
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getuser
+      description: getuser
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stackrox-userservice.getuser
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getusersattributes
+      description: getusersattributes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stackrox-userservice.getusersattributes
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,139 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: API Reference — ServiceIdentityService
+  description: 'API Reference — ServiceIdentityService. 3 operations. Lead operation: GetAuthorities returns the authorities
+    currently in use.. Self-contained Naftiko capability covering one Stackrox business surface.'
+  tags:
+  - Stackrox
+  - ServiceIdentityService
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    STACKROX_API_KEY: STACKROX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: stackrox-serviceidentityservice
+    baseUri: https://{central-host}
+    description: API Reference — ServiceIdentityService business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-authorities
+      path: /v1/authorities
+      operations:
+      - name: getauthorities
+        method: GET
+        description: GetAuthorities returns the authorities currently in use.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-serviceIdentities
+      path: /v1/serviceIdentities
+      operations:
+      - name: getserviceidentities
+        method: GET
+        description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createserviceidentity
+        method: POST
+        description: CreateServiceIdentity creates a new key pair and certificate.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.STACKROX_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: stackrox-serviceidentityservice-rest
+    port: 8080
+    description: REST adapter for API Reference — ServiceIdentityService. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/v1/authorities
+      name: v1-authorities
+      description: REST surface for v1-authorities.
+      operations:
+      - method: GET
+        name: getauthorities
+        description: GetAuthorities returns the authorities currently in use.
+        call: stackrox-serviceidentityservice.getauthorities
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/serviceidentities
+      name: v1-serviceidentities
+      description: REST surface for v1-serviceIdentities.
+      operations:
+      - method: GET
+        name: getserviceidentities
+        description: getserviceidentities
+        call: stackrox-serviceidentityservice.getserviceidentities
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createserviceidentity
+        description: CreateServiceIdentity creates a new key pair and certificate.
+        call: stackrox-serviceidentityservice.createserviceidentity
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: stackrox-serviceidentityservice-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for API Reference — ServiceIdentityService. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: getauthorities-returns-authorities-currently-use
+      description: GetAuthorities returns the authorities currently in use.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stackrox-serviceidentityservice.getauthorities
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getserviceidentities
+      description: getserviceidentities
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stackrox-serviceidentityservice.getserviceidentities
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createserviceidentity-creates-new-key-pair
+      description: CreateServiceIdentity creates a new key pair and certificate.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: stackrox-serviceidentityservice.createserviceidentity
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

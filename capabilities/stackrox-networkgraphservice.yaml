@@ -1,0 +1,91 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: API Reference — NetworkGraphService
+  description: 'API Reference — NetworkGraphService. 1 operations. Lead operation: NetworkGraphService. Self-contained Naftiko
+    capability covering one Stackrox business surface.'
+  tags:
+  - Stackrox
+  - NetworkGraphService
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    STACKROX_API_KEY: STACKROX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: stackrox-networkgraphservice
+    baseUri: https://{central-host}
+    description: API Reference — NetworkGraphService business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-networkgraph-cluster-clusterId
+      path: /v1/networkgraph/cluster/{clusterId}
+      operations:
+      - name: getnetworkgraph
+        method: GET
+        description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: clusterId
+          in: path
+          type: string
+          required: true
+        - name: query
+          in: query
+          type: string
+        - name: since
+          in: query
+          type: string
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.STACKROX_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: stackrox-networkgraphservice-rest
+    port: 8080
+    description: REST adapter for API Reference — NetworkGraphService. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/v1/networkgraph/cluster/{clusterid}
+      name: v1-networkgraph-cluster-clusterid
+      description: REST surface for v1-networkgraph-cluster-clusterId.
+      operations:
+      - method: GET
+        name: getnetworkgraph
+        description: getnetworkgraph
+        call: stackrox-networkgraphservice.getnetworkgraph
+        with:
+          clusterId: rest.clusterId
+          query: rest.query
+          since: rest.since
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: stackrox-networkgraphservice-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for API Reference — NetworkGraphService. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: getnetworkgraph
+      description: getnetworkgraph
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stackrox-networkgraphservice.getnetworkgraph
+      with:
+        clusterId: tools.clusterId
+        query: tools.query
+        since: tools.since
+      outputParameters:
+      - type: object
+        mapping: $.

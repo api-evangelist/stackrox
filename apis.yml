@@ -1,73 +1,148 @@
 aid: stackrox
 name: StackRox
-description: >-
-  StackRox is the open source upstream project for Red Hat Advanced Cluster
-  Security for Kubernetes. It provides risk analysis, visibility, runtime
-  alerts, and recommendations to proactively improve security by hardening
-  containerized environments across build, deploy, and runtime stages.
-  The platform performs compliance checking against standards like CIS, NIST,
-  and PCI-DSS, and manages security policies across Kubernetes clusters.
+description: StackRox is the open source upstream project for Red Hat Advanced Cluster Security for Kubernetes. It provides
+  risk analysis, visibility, runtime alerts, and recommendations to proactively improve security by hardening containerized
+  environments across build, deploy, and runtime stages. The platform performs compliance checking against standards like
+  CIS, NIST, and PCI-DSS, and manages security policies across Kubernetes clusters.
 url: https://raw.githubusercontent.com/api-evangelist/stackrox/refs/heads/main/apis.yml
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Compliance
-  - Container Security
-  - Kubernetes
-  - Open Source
-  - Runtime Protection
-  - Security
+- Compliance
+- Container Security
+- Kubernetes
+- Open Source
+- Runtime Protection
+- Security
 type: Index
 access: 3rd-Party
 created: '2026-03-26'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: stackrox:stackrox-api
-    name: StackRox API
-    description: >-
-      The StackRox REST API provides programmatic access to the StackRox
-      Kubernetes Security Platform. Covers alerts, deployments, images,
-      policies, compliance, clusters, network policies, roles, API tokens,
-      vulnerability management, and system configuration.
-    humanURL: https://www.stackrox.io/docs/
-    tags:
-      - Compliance
-      - Container Security
-      - Kubernetes
-      - Runtime Protection
-      - Security
-    properties:
-      - type: Documentation
-        url: https://www.stackrox.io/docs/
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/stackrox/refs/heads/main/openapi/stackrox-openapi.yml
-      - type: GitHub
-        url: https://github.com/stackrox/stackrox
-common:
-  - type: Website
-    url: https://www.stackrox.io/
-    name: StackRox Community
+- aid: stackrox:stackrox-api
+  name: StackRox API
+  description: The StackRox REST API provides programmatic access to the StackRox Kubernetes Security Platform. Covers alerts,
+    deployments, images, policies, compliance, clusters, network policies, roles, API tokens, vulnerability management, and
+    system configuration.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - Compliance
+  - Container Security
+  - Kubernetes
+  - Runtime Protection
+  - Security
+  properties:
   - type: Documentation
     url: https://www.stackrox.io/docs/
-    name: StackRox Documentation
-  - type: Blog
-    url: https://www.stackrox.io/blog/
-    name: StackRox Blog
-  - type: GitHubOrganization
-    url: https://github.com/stackrox
-    name: StackRox GitHub Organization
-  - type: GitHubRepository
+  - type: OpenAPI
+    url: https://raw.githubusercontent.com/api-evangelist/stackrox/refs/heads/main/openapi/stackrox-openapi.yml
+  - type: GitHub
     url: https://github.com/stackrox/stackrox
-    name: StackRox Main Repository
-  - type: RedHatProduct
-    url: https://www.redhat.com/en/technologies/cloud-computing/openshift/advanced-cluster-security-kubernetes
-    name: Red Hat Advanced Cluster Security
-  - type: CommunitySlack
-    url: https://cloud-native.slack.com/
-    name: Cloud Native Slack #stackrox
-  - name: MCP Server
-    url: https://github.com/stackrox/stackrox-mcp
-    type: MCPServer
+  - type: NaftikoCapability
+    url: capabilities/stackrox-apitokenservice.yaml
+  - type: NaftikoCapability
+    url: capabilities/stackrox-alertservice.yaml
+  - type: NaftikoCapability
+    url: capabilities/stackrox-authproviderservice.yaml
+  - type: NaftikoCapability
+    url: capabilities/stackrox-authservice.yaml
+  - type: NaftikoCapability
+    url: capabilities/stackrox-clustersservice.yaml
+  - type: NaftikoCapability
+    url: capabilities/stackrox-compliancemanagementservice.yaml
+  - type: NaftikoCapability
+    url: capabilities/stackrox-complianceservice.yaml
+  - type: NaftikoCapability
+    url: capabilities/stackrox-configservice.yaml
+  - type: NaftikoCapability
+    url: capabilities/stackrox-dbservice.yaml
+  - type: NaftikoCapability
+    url: capabilities/stackrox-debugservice.yaml
+  - type: NaftikoCapability
+    url: capabilities/stackrox-deploymentservice.yaml
+  - type: NaftikoCapability
+    url: capabilities/stackrox-detectionservice.yaml
+  - type: NaftikoCapability
+    url: capabilities/stackrox-externalbackupservice.yaml
+  - type: NaftikoCapability
+    url: capabilities/stackrox-featureflagservice.yaml
+  - type: NaftikoCapability
+    url: capabilities/stackrox-groupservice.yaml
+  - type: NaftikoCapability
+    url: capabilities/stackrox-imageintegrationservice.yaml
+  - type: NaftikoCapability
+    url: capabilities/stackrox-imageservice.yaml
+  - type: NaftikoCapability
+    url: capabilities/stackrox-licenseservice.yaml
+  - type: NaftikoCapability
+    url: capabilities/stackrox-metadataservice.yaml
+  - type: NaftikoCapability
+    url: capabilities/stackrox-namespaceservice.yaml
+  - type: NaftikoCapability
+    url: capabilities/stackrox-networkgraphservice.yaml
+  - type: NaftikoCapability
+    url: capabilities/stackrox-networkpolicyservice.yaml
+  - type: NaftikoCapability
+    url: capabilities/stackrox-nodeservice.yaml
+  - type: NaftikoCapability
+    url: capabilities/stackrox-notifierservice.yaml
+  - type: NaftikoCapability
+    url: capabilities/stackrox-pingservice.yaml
+  - type: NaftikoCapability
+    url: capabilities/stackrox-policyservice.yaml
+  - type: NaftikoCapability
+    url: capabilities/stackrox-probeuploadservice.yaml
+  - type: NaftikoCapability
+    url: capabilities/stackrox-processservice.yaml
+  - type: NaftikoCapability
+    url: capabilities/stackrox-processwhitelistservice.yaml
+  - type: NaftikoCapability
+    url: capabilities/stackrox-rbacservice.yaml
+  - type: NaftikoCapability
+    url: capabilities/stackrox-roleservice.yaml
+  - type: NaftikoCapability
+    url: capabilities/stackrox-scopedaccesscontrolservice.yaml
+  - type: NaftikoCapability
+    url: capabilities/stackrox-searchservice.yaml
+  - type: NaftikoCapability
+    url: capabilities/stackrox-secretservice.yaml
+  - type: NaftikoCapability
+    url: capabilities/stackrox-sensorupgradeservice.yaml
+  - type: NaftikoCapability
+    url: capabilities/stackrox-serviceaccountservice.yaml
+  - type: NaftikoCapability
+    url: capabilities/stackrox-serviceidentityservice.yaml
+  - type: NaftikoCapability
+    url: capabilities/stackrox-summaryservice.yaml
+  - type: NaftikoCapability
+    url: capabilities/stackrox-userservice.yaml
+common:
+- type: LinkedIn
+  url: https://www.linkedin.com/company/stackrox
+- type: Website
+  url: https://www.stackrox.io/
+  name: StackRox Community
+- type: Documentation
+  url: https://www.stackrox.io/docs/
+  name: StackRox Documentation
+- type: Blog
+  url: https://www.stackrox.io/blog/
+  name: StackRox Blog
+- type: GitHubOrganization
+  url: https://github.com/stackrox
+  name: StackRox GitHub Organization
+- type: GitHubRepository
+  url: https://github.com/stackrox/stackrox
+  name: StackRox Main Repository
+- type: RedHatProduct
+  url: https://www.redhat.com/en/technologies/cloud-computing/openshift/advanced-cluster-security-kubernetes
+  name: Red Hat Advanced Cluster Security
+- type: CommunitySlack
+  url: https://cloud-native.slack.com/
+  name: Cloud Native Slack
+- name: MCP Server
+  url: https://github.com/stackrox/stackrox-mcp
+  type: MCPServer
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com

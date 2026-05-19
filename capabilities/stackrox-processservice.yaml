@@ -1,0 +1,166 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: API Reference — ProcessService
+  description: 'API Reference — ProcessService. 3 operations. Lead operation: GetProcessesByDeployment returns the processes
+    executed in the given deployment.. Self-contained Naftiko capability covering one Stackrox business surface.'
+  tags:
+  - Stackrox
+  - ProcessService
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    STACKROX_API_KEY: STACKROX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: stackrox-processservice
+    baseUri: https://{central-host}
+    description: API Reference — ProcessService business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-processes-deployment-deploymentId
+      path: /v1/processes/deployment/{deploymentId}
+      operations:
+      - name: getprocessesbydeployment
+        method: GET
+        description: GetProcessesByDeployment returns the processes executed in the given deployment.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: deploymentId
+          in: path
+          type: string
+          required: true
+    - name: v1-processes-deployment-deploymentId-grouped
+      path: /v1/processes/deployment/{deploymentId}/grouped
+      operations:
+      - name: getgroupedprocessbydeployment
+        method: GET
+        description: GetGroupedProcessByDeployment returns all the processes executed grouped by deployment.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: deploymentId
+          in: path
+          type: string
+          required: true
+    - name: v1-processes-deployment-deploymentId-grouped-container
+      path: /v1/processes/deployment/{deploymentId}/grouped/container
+      operations:
+      - name: getgroupedprocessbydeploymentandcontainer
+        method: GET
+        description: GetGroupedProcessByDeploymentAndContainer returns all the processes executed grouped by deployment and
+          container.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: deploymentId
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.STACKROX_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: stackrox-processservice-rest
+    port: 8080
+    description: REST adapter for API Reference — ProcessService. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/v1/processes/deployment/{deploymentid}
+      name: v1-processes-deployment-deploymentid
+      description: REST surface for v1-processes-deployment-deploymentId.
+      operations:
+      - method: GET
+        name: getprocessesbydeployment
+        description: GetProcessesByDeployment returns the processes executed in the given deployment.
+        call: stackrox-processservice.getprocessesbydeployment
+        with:
+          deploymentId: rest.deploymentId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/processes/deployment/{deploymentid}/grouped
+      name: v1-processes-deployment-deploymentid-grouped
+      description: REST surface for v1-processes-deployment-deploymentId-grouped.
+      operations:
+      - method: GET
+        name: getgroupedprocessbydeployment
+        description: GetGroupedProcessByDeployment returns all the processes executed grouped by deployment.
+        call: stackrox-processservice.getgroupedprocessbydeployment
+        with:
+          deploymentId: rest.deploymentId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/processes/deployment/{deploymentid}/grouped/container
+      name: v1-processes-deployment-deploymentid-grouped-container
+      description: REST surface for v1-processes-deployment-deploymentId-grouped-container.
+      operations:
+      - method: GET
+        name: getgroupedprocessbydeploymentandcontainer
+        description: GetGroupedProcessByDeploymentAndContainer returns all the processes executed grouped by deployment and
+          container.
+        call: stackrox-processservice.getgroupedprocessbydeploymentandcontainer
+        with:
+          deploymentId: rest.deploymentId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: stackrox-processservice-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for API Reference — ProcessService. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: getprocessesbydeployment-returns-processes-executed-given
+      description: GetProcessesByDeployment returns the processes executed in the given deployment.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stackrox-processservice.getprocessesbydeployment
+      with:
+        deploymentId: tools.deploymentId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getgroupedprocessbydeployment-returns-all-processes-executed
+      description: GetGroupedProcessByDeployment returns all the processes executed grouped by deployment.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stackrox-processservice.getgroupedprocessbydeployment
+      with:
+        deploymentId: tools.deploymentId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getgroupedprocessbydeploymentandcontainer-returns-all-processes-executed
+      description: GetGroupedProcessByDeploymentAndContainer returns all the processes executed grouped by deployment and
+        container.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stackrox-processservice.getgroupedprocessbydeploymentandcontainer
+      with:
+        deploymentId: tools.deploymentId
+      outputParameters:
+      - type: object
+        mapping: $.

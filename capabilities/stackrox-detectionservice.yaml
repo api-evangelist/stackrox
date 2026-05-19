@@ -1,0 +1,166 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: API Reference — DetectionService
+  description: 'API Reference — DetectionService. 3 operations. Lead operation: DetectBuildTime checks if any images violate
+    build time policies.. Self-contained Naftiko capability covering one Stackrox business surface.'
+  tags:
+  - Stackrox
+  - DetectionService
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    STACKROX_API_KEY: STACKROX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: stackrox-detectionservice
+    baseUri: https://{central-host}
+    description: API Reference — DetectionService business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-detect-build
+      path: /v1/detect/build
+      operations:
+      - name: detectbuildtime
+        method: POST
+        description: DetectBuildTime checks if any images violate build time policies.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v1-detect-deploy
+      path: /v1/detect/deploy
+      operations:
+      - name: detectdeploytime
+        method: POST
+        description: DetectDeployTime checks if any deployments violate deploy time policies.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v1-detect-deploy-yaml
+      path: /v1/detect/deploy/yaml
+      operations:
+      - name: detectdeploytimefromyaml
+        method: POST
+        description: DetectDeployTimeFromYAML checks if the given deployment yaml violates any deploy time policies.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.STACKROX_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: stackrox-detectionservice-rest
+    port: 8080
+    description: REST adapter for API Reference — DetectionService. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/v1/detect/build
+      name: v1-detect-build
+      description: REST surface for v1-detect-build.
+      operations:
+      - method: POST
+        name: detectbuildtime
+        description: DetectBuildTime checks if any images violate build time policies.
+        call: stackrox-detectionservice.detectbuildtime
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/detect/deploy
+      name: v1-detect-deploy
+      description: REST surface for v1-detect-deploy.
+      operations:
+      - method: POST
+        name: detectdeploytime
+        description: DetectDeployTime checks if any deployments violate deploy time policies.
+        call: stackrox-detectionservice.detectdeploytime
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/detect/deploy/yaml
+      name: v1-detect-deploy-yaml
+      description: REST surface for v1-detect-deploy-yaml.
+      operations:
+      - method: POST
+        name: detectdeploytimefromyaml
+        description: DetectDeployTimeFromYAML checks if the given deployment yaml violates any deploy time policies.
+        call: stackrox-detectionservice.detectdeploytimefromyaml
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: stackrox-detectionservice-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for API Reference — DetectionService. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: detectbuildtime-checks-if-any-images
+      description: DetectBuildTime checks if any images violate build time policies.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: stackrox-detectionservice.detectbuildtime
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: detectdeploytime-checks-if-any-deployments
+      description: DetectDeployTime checks if any deployments violate deploy time policies.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: stackrox-detectionservice.detectdeploytime
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: detectdeploytimefromyaml-checks-if-given-deployment
+      description: DetectDeployTimeFromYAML checks if the given deployment yaml violates any deploy time policies.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: stackrox-detectionservice.detectdeploytimefromyaml
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

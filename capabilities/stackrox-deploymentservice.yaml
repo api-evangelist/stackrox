@@ -1,0 +1,334 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: API Reference — DeploymentService
+  description: 'API Reference — DeploymentService. 6 operations. Lead operation: ListDeployments returns the list of deployments..
+    Self-contained Naftiko capability covering one Stackrox business surface.'
+  tags:
+  - Stackrox
+  - DeploymentService
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    STACKROX_API_KEY: STACKROX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: stackrox-deploymentservice
+    baseUri: https://{central-host}
+    description: API Reference — DeploymentService business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-deployments
+      path: /v1/deployments
+      operations:
+      - name: listdeployments
+        method: GET
+        description: ListDeployments returns the list of deployments.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: string
+        - name: pagination.limit
+          in: query
+          type: integer
+        - name: pagination.offset
+          in: query
+          type: integer
+        - name: pagination.sort_option.field
+          in: query
+          type: string
+        - name: pagination.sort_option.reversed
+          in: query
+          type: boolean
+    - name: v1-deployments-metadata-labels
+      path: /v1/deployments/metadata/labels
+      operations:
+      - name: getlabels
+        method: GET
+        description: GetLabels returns the labels used by deployments.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-deployments-id
+      path: /v1/deployments/{id}
+      operations:
+      - name: getdeployment
+        method: GET
+        description: GetDeployment returns a deployment given its ID.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+    - name: v1-deploymentscount
+      path: /v1/deploymentscount
+      operations:
+      - name: countdeployments
+        method: GET
+        description: CountDeployments returns the list of deployments.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: string
+        - name: pagination.limit
+          in: query
+          type: integer
+        - name: pagination.offset
+          in: query
+          type: integer
+        - name: pagination.sort_option.field
+          in: query
+          type: string
+        - name: pagination.sort_option.reversed
+          in: query
+          type: boolean
+    - name: v1-deploymentswithprocessinfo
+      path: /v1/deploymentswithprocessinfo
+      operations:
+      - name: listdeploymentswithprocessinfo
+        method: GET
+        description: ListDeploymentsWithProcessInfo returns the list of deployments with process information.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: string
+        - name: pagination.limit
+          in: query
+          type: integer
+        - name: pagination.offset
+          in: query
+          type: integer
+        - name: pagination.sort_option.field
+          in: query
+          type: string
+        - name: pagination.sort_option.reversed
+          in: query
+          type: boolean
+    - name: v1-deploymentswithrisk-id
+      path: /v1/deploymentswithrisk/{id}
+      operations:
+      - name: getdeploymentwithrisk
+        method: GET
+        description: GetDeploymentWithRisk returns a deployment and its risk given its ID.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.STACKROX_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: stackrox-deploymentservice-rest
+    port: 8080
+    description: REST adapter for API Reference — DeploymentService. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/v1/deployments
+      name: v1-deployments
+      description: REST surface for v1-deployments.
+      operations:
+      - method: GET
+        name: listdeployments
+        description: ListDeployments returns the list of deployments.
+        call: stackrox-deploymentservice.listdeployments
+        with:
+          query: rest.query
+          pagination.limit: rest.pagination.limit
+          pagination.offset: rest.pagination.offset
+          pagination.sort_option.field: rest.pagination.sort_option.field
+          pagination.sort_option.reversed: rest.pagination.sort_option.reversed
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/deployments/metadata/labels
+      name: v1-deployments-metadata-labels
+      description: REST surface for v1-deployments-metadata-labels.
+      operations:
+      - method: GET
+        name: getlabels
+        description: GetLabels returns the labels used by deployments.
+        call: stackrox-deploymentservice.getlabels
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/deployments/{id}
+      name: v1-deployments-id
+      description: REST surface for v1-deployments-id.
+      operations:
+      - method: GET
+        name: getdeployment
+        description: GetDeployment returns a deployment given its ID.
+        call: stackrox-deploymentservice.getdeployment
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/deploymentscount
+      name: v1-deploymentscount
+      description: REST surface for v1-deploymentscount.
+      operations:
+      - method: GET
+        name: countdeployments
+        description: CountDeployments returns the list of deployments.
+        call: stackrox-deploymentservice.countdeployments
+        with:
+          query: rest.query
+          pagination.limit: rest.pagination.limit
+          pagination.offset: rest.pagination.offset
+          pagination.sort_option.field: rest.pagination.sort_option.field
+          pagination.sort_option.reversed: rest.pagination.sort_option.reversed
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/deploymentswithprocessinfo
+      name: v1-deploymentswithprocessinfo
+      description: REST surface for v1-deploymentswithprocessinfo.
+      operations:
+      - method: GET
+        name: listdeploymentswithprocessinfo
+        description: ListDeploymentsWithProcessInfo returns the list of deployments with process information.
+        call: stackrox-deploymentservice.listdeploymentswithprocessinfo
+        with:
+          query: rest.query
+          pagination.limit: rest.pagination.limit
+          pagination.offset: rest.pagination.offset
+          pagination.sort_option.field: rest.pagination.sort_option.field
+          pagination.sort_option.reversed: rest.pagination.sort_option.reversed
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/deploymentswithrisk/{id}
+      name: v1-deploymentswithrisk-id
+      description: REST surface for v1-deploymentswithrisk-id.
+      operations:
+      - method: GET
+        name: getdeploymentwithrisk
+        description: GetDeploymentWithRisk returns a deployment and its risk given its ID.
+        call: stackrox-deploymentservice.getdeploymentwithrisk
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: stackrox-deploymentservice-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for API Reference — DeploymentService. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: listdeployments-returns-list-deployments
+      description: ListDeployments returns the list of deployments.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stackrox-deploymentservice.listdeployments
+      with:
+        query: tools.query
+        pagination.limit: tools.pagination.limit
+        pagination.offset: tools.pagination.offset
+        pagination.sort_option.field: tools.pagination.sort_option.field
+        pagination.sort_option.reversed: tools.pagination.sort_option.reversed
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getlabels-returns-labels-used-deployments
+      description: GetLabels returns the labels used by deployments.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stackrox-deploymentservice.getlabels
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getdeployment-returns-deployment-given-its
+      description: GetDeployment returns a deployment given its ID.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stackrox-deploymentservice.getdeployment
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: countdeployments-returns-list-deployments
+      description: CountDeployments returns the list of deployments.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stackrox-deploymentservice.countdeployments
+      with:
+        query: tools.query
+        pagination.limit: tools.pagination.limit
+        pagination.offset: tools.pagination.offset
+        pagination.sort_option.field: tools.pagination.sort_option.field
+        pagination.sort_option.reversed: tools.pagination.sort_option.reversed
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listdeploymentswithprocessinfo-returns-list-deployments-process
+      description: ListDeploymentsWithProcessInfo returns the list of deployments with process information.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stackrox-deploymentservice.listdeploymentswithprocessinfo
+      with:
+        query: tools.query
+        pagination.limit: tools.pagination.limit
+        pagination.offset: tools.pagination.offset
+        pagination.sort_option.field: tools.pagination.sort_option.field
+        pagination.sort_option.reversed: tools.pagination.sort_option.reversed
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getdeploymentwithrisk-returns-deployment-and-its
+      description: GetDeploymentWithRisk returns a deployment and its risk given its ID.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stackrox-deploymentservice.getdeploymentwithrisk
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.

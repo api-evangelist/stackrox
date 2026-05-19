@@ -1,0 +1,204 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: API Reference — APITokenService
+  description: 'API Reference — APITokenService. 4 operations. Lead operation: GetAPITokens returns all the API tokens.. Self-contained
+    Naftiko capability covering one Stackrox business surface.'
+  tags:
+  - Stackrox
+  - APITokenService
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    STACKROX_API_KEY: STACKROX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: stackrox-apitokenservice
+    baseUri: https://{central-host}
+    description: API Reference — APITokenService business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-apitokens
+      path: /v1/apitokens
+      operations:
+      - name: getapitokens
+        method: GET
+        description: GetAPITokens returns all the API tokens.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: revoked
+          in: query
+          type: boolean
+    - name: v1-apitokens-generate
+      path: /v1/apitokens/generate
+      operations:
+      - name: generatetoken
+        method: POST
+        description: GenerateToken generates API token for a given user and role.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v1-apitokens-revoke-id
+      path: /v1/apitokens/revoke/{id}
+      operations:
+      - name: revoketoken
+        method: PATCH
+        description: RevokeToken removes the API token for a given id.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+    - name: v1-apitokens-id
+      path: /v1/apitokens/{id}
+      operations:
+      - name: getapitoken
+        method: GET
+        description: GetAPIToken returns API token metadata for a given id.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.STACKROX_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: stackrox-apitokenservice-rest
+    port: 8080
+    description: REST adapter for API Reference — APITokenService. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/v1/apitokens
+      name: v1-apitokens
+      description: REST surface for v1-apitokens.
+      operations:
+      - method: GET
+        name: getapitokens
+        description: GetAPITokens returns all the API tokens.
+        call: stackrox-apitokenservice.getapitokens
+        with:
+          revoked: rest.revoked
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/apitokens/generate
+      name: v1-apitokens-generate
+      description: REST surface for v1-apitokens-generate.
+      operations:
+      - method: POST
+        name: generatetoken
+        description: GenerateToken generates API token for a given user and role.
+        call: stackrox-apitokenservice.generatetoken
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/apitokens/revoke/{id}
+      name: v1-apitokens-revoke-id
+      description: REST surface for v1-apitokens-revoke-id.
+      operations:
+      - method: PATCH
+        name: revoketoken
+        description: RevokeToken removes the API token for a given id.
+        call: stackrox-apitokenservice.revoketoken
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/apitokens/{id}
+      name: v1-apitokens-id
+      description: REST surface for v1-apitokens-id.
+      operations:
+      - method: GET
+        name: getapitoken
+        description: GetAPIToken returns API token metadata for a given id.
+        call: stackrox-apitokenservice.getapitoken
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: stackrox-apitokenservice-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for API Reference — APITokenService. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: getapitokens-returns-all-api-tokens
+      description: GetAPITokens returns all the API tokens.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stackrox-apitokenservice.getapitokens
+      with:
+        revoked: tools.revoked
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: generatetoken-generates-api-token-given
+      description: GenerateToken generates API token for a given user and role.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: stackrox-apitokenservice.generatetoken
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: revoketoken-removes-api-token-given
+      description: RevokeToken removes the API token for a given id.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: stackrox-apitokenservice.revoketoken
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getapitoken-returns-api-token-metadata
+      description: GetAPIToken returns API token metadata for a given id.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stackrox-apitokenservice.getapitoken
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.

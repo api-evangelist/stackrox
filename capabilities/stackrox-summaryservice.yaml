@@ -1,0 +1,72 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: API Reference — SummaryService
+  description: 'API Reference — SummaryService. 1 operations. Lead operation: SummaryService. Self-contained Naftiko capability
+    covering one Stackrox business surface.'
+  tags:
+  - Stackrox
+  - SummaryService
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    STACKROX_API_KEY: STACKROX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: stackrox-summaryservice
+    baseUri: https://{central-host}
+    description: API Reference — SummaryService business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-summary-counts
+      path: /v1/summary/counts
+      operations:
+      - name: getsummarycounts
+        method: GET
+        description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.STACKROX_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: stackrox-summaryservice-rest
+    port: 8080
+    description: REST adapter for API Reference — SummaryService. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/v1/summary/counts
+      name: v1-summary-counts
+      description: REST surface for v1-summary-counts.
+      operations:
+      - method: GET
+        name: getsummarycounts
+        description: getsummarycounts
+        call: stackrox-summaryservice.getsummarycounts
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: stackrox-summaryservice-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for API Reference — SummaryService. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: getsummarycounts
+      description: getsummarycounts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stackrox-summaryservice.getsummarycounts
+      outputParameters:
+      - type: object
+        mapping: $.
