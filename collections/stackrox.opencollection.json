@@ -1,0 +1,3468 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "AlertService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List returns the slim list version of the alerts.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/alerts",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.field",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.reversed",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List returns the slim list version of the alerts."
+        },
+        {
+          "info": {
+            "name": "DeleteAlerts",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{central-host}/v1/alerts",
+            "params": [
+              {
+                "name": "query.query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "query.pagination.limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "query.pagination.offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "query.pagination.sort_option.field",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "query.pagination.sort_option.reversed",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "confirm",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "ResolveAlertsByQuery marks alerts matching search query as resolved.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{central-host}/v1/alerts/resolve",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "ResolveAlertsByQuery marks alerts matching search query as resolved."
+        },
+        {
+          "info": {
+            "name": "GetAlertsCounts returns the number of alerts in the requested cluster or category.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/alerts/summary/counts",
+            "params": [
+              {
+                "name": "request.query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "request.pagination.limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "request.pagination.offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "request.pagination.sort_option.field",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "request.pagination.sort_option.reversed",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "groupBy",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "GetAlertsCounts returns the number of alerts in the requested cluster or category."
+        },
+        {
+          "info": {
+            "name": "GetAlertsGroup returns alerts grouped by policy.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/alerts/summary/groups",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.field",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.reversed",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "GetAlertsGroup returns alerts grouped by policy."
+        },
+        {
+          "info": {
+            "name": "GetAlertTimeseries returns the alerts sorted by time.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/alerts/summary/timeseries",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.field",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.reversed",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "GetAlertTimeseries returns the alerts sorted by time."
+        },
+        {
+          "info": {
+            "name": "GetAlert returns the alert given its id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/alerts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "GetAlert returns the alert given its id."
+        },
+        {
+          "info": {
+            "name": "ResolveAlert marks the given alert (by ID) as resolved.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{central-host}/v1/alerts/:id/resolve",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "ResolveAlert marks the given alert (by ID) as resolved."
+        },
+        {
+          "info": {
+            "name": "SnoozeAlert is deprecated.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{central-host}/v1/alerts/:id/snooze",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "SnoozeAlert is deprecated."
+        },
+        {
+          "info": {
+            "name": "CountAlerts counts how many alerts match the get request.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/alertscount",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.field",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.reversed",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "CountAlerts counts how many alerts match the get request."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "APITokenService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GetAPITokens returns all the API tokens.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/apitokens",
+            "params": [
+              {
+                "name": "revoked",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "GetAPITokens returns all the API tokens."
+        },
+        {
+          "info": {
+            "name": "GenerateToken generates API token for a given user and role.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/apitokens/generate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "GenerateToken generates API token for a given user and role."
+        },
+        {
+          "info": {
+            "name": "RevokeToken removes the API token for a given id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{central-host}/v1/apitokens/revoke/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "RevokeToken removes the API token for a given id."
+        },
+        {
+          "info": {
+            "name": "GetAPIToken returns API token metadata for a given id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/apitokens/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "GetAPIToken returns API token metadata for a given id."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "AuthService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GetAuthStatus",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/auth/status"
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "AuthProviderService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GetAuthProviders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/authProviders",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PostAuthProvider",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/authProviders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "ExchangeToken",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/authProviders/exchangeToken",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "GetAuthProvider",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/authProviders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PutAuthProvider",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{central-host}/v1/authProviders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "UpdateAuthProvider",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{central-host}/v1/authProviders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "DeleteAuthProvider",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{central-host}/v1/authProviders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GetLoginAuthProviders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/login/authproviders"
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ExternalBackupService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GetExternalBackups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/externalbackups"
+          }
+        },
+        {
+          "info": {
+            "name": "PostExternalBackup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/externalbackups",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "TestExternalBackup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/externalbackups/test",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "GetExternalBackup",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/externalbackups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "TriggerExternalBackup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/externalbackups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PutExternalBackup",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{central-host}/v1/externalbackups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "DeleteExternalBackup",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{central-host}/v1/externalbackups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ClustersService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GetClusters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/clusters",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PostCluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/clusters",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "GetCluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/clusters/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PutCluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{central-host}/v1/clusters/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "DeleteCluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{central-host}/v1/clusters/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ComplianceManagementService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GetRecentRuns",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/complianceManagement/runs",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "standardId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "TriggerRuns",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/compliancemanagement/runs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "GetRunStatuses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/compliancemanagement/runstatuses",
+            "params": [
+              {
+                "name": "runIds",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ComplianceService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GetAggregatedResults",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/compliance/aggregatedresults",
+            "params": [
+              {
+                "name": "groupBy",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "unit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "where.query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "where.pagination.limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "where.pagination.offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "where.pagination.sort_option.field",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "where.pagination.sort_option.reversed",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GetComplianceControlResults",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/compliance/results",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.field",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.reversed",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GetRunResults",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/compliance/runresults",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "standardId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "runId",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the run ID for which to return results. If empty, the most recent run is returned.\nCAVEAT: Setting this field circumvents the results cache on the server-side, which may lead to significantly\n        increased memory pressure and decreased performance."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GetStandards",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/compliance/standards"
+          }
+        },
+        {
+          "info": {
+            "name": "GetStandard",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/compliance/standards/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ConfigService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GetConfig",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/config"
+          }
+        },
+        {
+          "info": {
+            "name": "PutConfig",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{central-host}/v1/config",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "GetPrivateConfig",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/config/private"
+          }
+        },
+        {
+          "info": {
+            "name": "GetPublicConfig",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/config/public"
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "DBService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GetExportCapabilities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/db/exportcaps"
+          }
+        },
+        {
+          "info": {
+            "name": "InterruptRestoreProcess",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/db/interruptrestore/:processId/:attemptId",
+            "params": [
+              {
+                "name": "processId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "attemptId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GetActiveRestoreProcess",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/db/restore"
+          }
+        },
+        {
+          "info": {
+            "name": "CancelRestoreProcess",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{central-host}/v1/db/restore/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "DebugService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the current logging level for StackRox services.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/debug/loglevel",
+            "params": [
+              {
+                "name": "modules",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get the current logging level for StackRox services."
+        },
+        {
+          "info": {
+            "name": "Set logging level for StackRox services.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{central-host}/v1/debug/loglevel",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set logging level for StackRox services."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "DeploymentService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ListDeployments returns the list of deployments.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/deployments",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.field",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.reversed",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "ListDeployments returns the list of deployments."
+        },
+        {
+          "info": {
+            "name": "GetLabels returns the labels used by deployments.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/deployments/metadata/labels"
+          },
+          "docs": "GetLabels returns the labels used by deployments."
+        },
+        {
+          "info": {
+            "name": "GetDeployment returns a deployment given its ID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/deployments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "GetDeployment returns a deployment given its ID."
+        },
+        {
+          "info": {
+            "name": "CountDeployments returns the list of deployments.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/deploymentscount",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.field",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.reversed",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "CountDeployments returns the list of deployments."
+        },
+        {
+          "info": {
+            "name": "ListDeploymentsWithProcessInfo returns the list of deployments with process information.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/deploymentswithprocessinfo",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.field",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.reversed",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "ListDeploymentsWithProcessInfo returns the list of deployments with process information."
+        },
+        {
+          "info": {
+            "name": "GetDeploymentWithRisk returns a deployment and its risk given its ID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/deploymentswithrisk/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "GetDeploymentWithRisk returns a deployment and its risk given its ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "DetectionService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "DetectBuildTime checks if any images violate build time policies.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/detect/build",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "DetectBuildTime checks if any images violate build time policies."
+        },
+        {
+          "info": {
+            "name": "DetectDeployTime checks if any deployments violate deploy time policies.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/detect/deploy",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "DetectDeployTime checks if any deployments violate deploy time policies."
+        },
+        {
+          "info": {
+            "name": "DetectDeployTimeFromYAML checks if the given deployment yaml violates any deploy time policies.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/detect/deploy/yaml",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "DetectDeployTimeFromYAML checks if the given deployment yaml violates any deploy time policies."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "FeatureFlagService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GetFeatureFlags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/featureflags"
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "GroupService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GetGroup",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/groups",
+            "params": [
+              {
+                "name": "authProviderId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "value",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "CreateGroup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/groups",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "UpdateGroup",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{central-host}/v1/groups",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "DeleteGroup",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{central-host}/v1/groups",
+            "params": [
+              {
+                "name": "authProviderId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "value",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "BatchUpdate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/groupsbatch",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ImageIntegrationService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GetImageIntegrations returns all image integrations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/imageintegrations",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "cluster",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "GetImageIntegrations returns all image integrations."
+        },
+        {
+          "info": {
+            "name": "PostImageIntegration creates a image integraton.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/imageintegrations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "PostImageIntegration creates a image integraton."
+        },
+        {
+          "info": {
+            "name": "TestImageIntegration checks if the given image integration is correctly configured.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/imageintegrations/test",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "TestImageIntegration checks if the given image integration is correctly configured."
+        },
+        {
+          "info": {
+            "name": "GetImageIntegration returns the image integration given its ID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/imageintegrations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "GetImageIntegration returns the image integration given its ID."
+        },
+        {
+          "info": {
+            "name": "PutImageIntegration modifies a given image integration.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{central-host}/v1/imageintegrations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "PutImageIntegration modifies a given image integration."
+        },
+        {
+          "info": {
+            "name": "DeleteImageIntegration removes a image integration given its ID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{central-host}/v1/imageintegrations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "DeleteImageIntegration removes a image integration given its ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ImageService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ListImages returns all the images.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/images",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.field",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.reversed",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "ListImages returns all the images."
+        },
+        {
+          "info": {
+            "name": "DeleteImage removes the images based on a query",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{central-host}/v1/images",
+            "params": [
+              {
+                "name": "query.query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "query.pagination.limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "query.pagination.offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "query.pagination.sort_option.field",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "query.pagination.sort_option.reversed",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "confirm",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "DeleteImage removes the images based on a query"
+        },
+        {
+          "info": {
+            "name": "InvalidateScanAndRegistryCaches removes the image metadata cache.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/images/cache/invalidate"
+          },
+          "docs": "InvalidateScanAndRegistryCaches removes the image metadata cache."
+        },
+        {
+          "info": {
+            "name": "ScanImage scans a single image and returns the result",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/images/scan",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "ScanImage scans a single image and returns the result"
+        },
+        {
+          "info": {
+            "name": "GetImage returns the image given its ID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/images/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "GetImage returns the image given its ID."
+        },
+        {
+          "info": {
+            "name": "ListImages returns all the images.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/imagescount",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.field",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.reversed",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "ListImages returns all the images."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "LicenseService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AddLicense",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/licenses/add",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "GetActiveLicenseExpiration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/licenses/expiration"
+          }
+        },
+        {
+          "info": {
+            "name": "GetLicenses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/licenses/list",
+            "params": [
+              {
+                "name": "active",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "statuses",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "MetadataService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GetMetadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/metadata"
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "NamespaceService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GetNamespaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/namespaces"
+          }
+        },
+        {
+          "info": {
+            "name": "GetNamespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/namespaces/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "NetworkGraphService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GetNetworkGraph",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/networkgraph/cluster/:clusterId",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "NetworkPolicyService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GetNetworkPolicies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/networkpolicies",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "deploymentQuery",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "ApplyNetworkPolicy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/networkpolicies/apply/:clusterId",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "GetNetworkGraph",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/networkpolicies/cluster/:clusterId",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GenerateNetworkPolicies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/networkpolicies/generate/:clusterId",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "deleteExisting",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "networkDataSince",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GetNetworkGraphEpoch",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/networkpolicies/graph/epoch",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "SimulateNetworkGraph",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/networkpolicies/simulate/:clusterId",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "SendNetworkPolicyYAML",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/networkpolicies/simulate/:clusterId/notify",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "GetUndoModification",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/networkpolicies/undo/:clusterId",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GetNetworkPolicy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/networkpolicies/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "NodeService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ListNodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/nodes/:clusterId",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GetNode",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/nodes/:clusterId/:nodeId",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "nodeId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "NotifierService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GetNotifiers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/notifiers",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PostNotifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/notifiers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "TestNotifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/notifiers/test",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "GetNotifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/notifiers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PutNotifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{central-host}/v1/notifiers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "DeleteNotifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{central-host}/v1/notifiers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "force",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "PingService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ping",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/ping"
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "PolicyService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ListPolicies returns the list of policies.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/policies",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.field",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.reversed",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "ListPolicies returns the list of policies."
+        },
+        {
+          "info": {
+            "name": "PostPolicy creates a new policy.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/policies",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "PostPolicy creates a new policy."
+        },
+        {
+          "info": {
+            "name": "DryRunPolicy evaluates the given policy and returns any alerts without creating the policy.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/policies/dryrun",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "DryRunPolicy evaluates the given policy and returns any alerts without creating the policy."
+        },
+        {
+          "info": {
+            "name": "ReassessPolicies reevaluates all the policies.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/policies/reassess"
+          },
+          "docs": "ReassessPolicies reevaluates all the policies."
+        },
+        {
+          "info": {
+            "name": "GetPolicy returns the requested policy by ID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/policies/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "GetPolicy returns the requested policy by ID."
+        },
+        {
+          "info": {
+            "name": "PutPolicy modifies an existing policy.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{central-host}/v1/policies/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "PutPolicy modifies an existing policy."
+        },
+        {
+          "info": {
+            "name": "PatchPolicy edits an existing policy.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{central-host}/v1/policies/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "PatchPolicy edits an existing policy."
+        },
+        {
+          "info": {
+            "name": "DeletePolicy removes a policy by ID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{central-host}/v1/policies/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "DeletePolicy removes a policy by ID."
+        },
+        {
+          "info": {
+            "name": "EnableDisablePolicyNotification enables or disables notifications for a policy by ID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{central-host}/v1/policies/:policyId/notifiers",
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "EnableDisablePolicyNotification enables or disables notifications for a policy by ID."
+        },
+        {
+          "info": {
+            "name": "GetPolicyCategories returns the policy categories.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/policyCategories"
+          },
+          "docs": "GetPolicyCategories returns the policy categories."
+        },
+        {
+          "info": {
+            "name": "DeletePolicyCategory removes the given policy category.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{central-host}/v1/policyCategories/:category",
+            "params": [
+              {
+                "name": "category",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "DeletePolicyCategory removes the given policy category."
+        },
+        {
+          "info": {
+            "name": "RenamePolicyCategory renames the given policy category.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{central-host}/v1/policyCategories/:oldCategory",
+            "params": [
+              {
+                "name": "oldCategory",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "RenamePolicyCategory renames the given policy category."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ProbeUploadService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GetExistingProbes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/probeupload/getexisting"
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ProcessService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GetProcessesByDeployment returns the processes executed in the given deployment.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/processes/deployment/:deploymentId",
+            "params": [
+              {
+                "name": "deploymentId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "GetProcessesByDeployment returns the processes executed in the given deployment."
+        },
+        {
+          "info": {
+            "name": "GetGroupedProcessByDeployment returns all the processes executed grouped by deployment.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/processes/deployment/:deploymentId/grouped",
+            "params": [
+              {
+                "name": "deploymentId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "GetGroupedProcessByDeployment returns all the processes executed grouped by deployment."
+        },
+        {
+          "info": {
+            "name": "GetGroupedProcessByDeploymentAndContainer returns all the processes executed grouped by deployment and container.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/processes/deployment/:deploymentId/grouped/container",
+            "params": [
+              {
+                "name": "deploymentId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "GetGroupedProcessByDeploymentAndContainer returns all the processes executed grouped by deployment and container."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ProcessWhitelistService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AddToProcessWhitelists adds a list of process names to each of a list of process whitelists",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{central-host}/v1/processwhitelists",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "AddToProcessWhitelists adds a list of process names to each of a list of process whitelists"
+        },
+        {
+          "info": {
+            "name": "GetProcessWhitelistById returns the single process whitelist referenced by the given ID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/processwhitelists/key",
+            "params": [
+              {
+                "name": "key.deploymentId",
+                "value": "",
+                "type": "query",
+                "description": "The idea is for the keys to be flexible.\nOnly certain combinations of these will be supported."
+              },
+              {
+                "name": "key.containerName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "key.clusterId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "key.namespace",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "GetProcessWhitelistById returns the single process whitelist referenced by the given ID."
+        },
+        {
+          "info": {
+            "name": "LockProcessWhitelists accepts a list of whitelist IDs, locks those whitelists, and returns the updated whitelist objects",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{central-host}/v1/processwhitelists/lock",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "LockProcessWhitelists accepts a list of whitelist IDs, locks those whitelists, and returns the updated whitelist objects"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "RbacService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ListRoleBindings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/rbac/bindings",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.field",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.reversed",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GetRoleBinding",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/rbac/bindings/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "ListRoles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/rbac/roles",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.field",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.reversed",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GetRole",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/rbac/roles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "Subjects served from this API are Groups and Users only.\nId in this case is the Name field, since for users and groups, that is unique, and subjects do not have IDs.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/rbac/subject/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Subjects served from this API are Groups and Users only.\nId in this case is the Name field, since for users and groups, that is unique, and subjects do not have IDs."
+        },
+        {
+          "info": {
+            "name": "ListSubjects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/rbac/subjects",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.field",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.reversed",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "RoleService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GetMyPermissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/mypermissions"
+          }
+        },
+        {
+          "info": {
+            "name": "GetResources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/resources"
+          }
+        },
+        {
+          "info": {
+            "name": "GetRoles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/roles"
+          }
+        },
+        {
+          "info": {
+            "name": "GetRole",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/roles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "DeleteRole",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{central-host}/v1/roles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "CreateRole",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/roles/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "UpdateRole",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{central-host}/v1/roles/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ScopedAccessControlService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AddAuthzPluginConfig",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/scopedaccessctrl/config",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "UpdateAuthzPluginConfig",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{central-host}/v1/scopedaccessctrl/config/:config.id",
+            "params": [
+              {
+                "name": "config.id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "DeleteAuthzPluginConfig",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{central-host}/v1/scopedaccessctrl/config/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GetAuthzPluginConfigs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/scopedaccessctrl/configs"
+          }
+        },
+        {
+          "info": {
+            "name": "DryRunAuthzPluginConfig",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/scopedaccessctrl/test",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "SearchService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/search",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "categories",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "Autocomplete",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/search/autocomplete",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "categories",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "Options",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/search/metadata/options",
+            "params": [
+              {
+                "name": "categories",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "SecretService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ListSecrets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/secrets",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.field",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.reversed",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GetSecret",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/secrets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "CountSecrets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/secretscount",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.field",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.reversed",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "SensorUpgradeService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "TriggerSensorUpgrade",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/sensorupgrades/cluster/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GetSensorUpgradeConfig",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/sensorupgrades/config"
+          }
+        },
+        {
+          "info": {
+            "name": "UpdateSensorUpgradeConfig",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/sensorupgrades/config",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ServiceAccountService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ListServiceAccounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/serviceaccounts",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.field",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.reversed",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GetServiceAccount",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/serviceaccounts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ServiceIdentityService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GetAuthorities returns the authorities currently in use.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/authorities"
+          },
+          "docs": "GetAuthorities returns the authorities currently in use."
+        },
+        {
+          "info": {
+            "name": "GetServiceIdentities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/serviceIdentities"
+          }
+        },
+        {
+          "info": {
+            "name": "CreateServiceIdentity creates a new key pair and certificate.\nThe key and certificate are not retained and can never be retrieved again.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/serviceIdentities",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "CreateServiceIdentity creates a new key pair and certificate.\nThe key and certificate are not retained and can never be retrieved again."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "SummaryService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GetSummaryCounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/summary/counts"
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "UserService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GetUsers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/users"
+          }
+        },
+        {
+          "info": {
+            "name": "GetUser",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GetUsersAttributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/usersattributes"
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
