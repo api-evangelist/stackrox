@@ -1,0 +1,16 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/stackrox-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: ApiToken
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: 'StackRox API token. Format: Bearer {token}'
+  sources:
+  - openapi/stackrox-openapi.yml

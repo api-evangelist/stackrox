@@ -41,6 +41,10 @@ apis:
       - type: GitHub
         url: https://github.com/stackrox/stackrox
 common:
+  - type: DomainSecurity
+    url: security/stackrox-domain-security.yml
+  - type: Authentication
+    url: authentication/stackrox-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/stackrox
   - type: Website
