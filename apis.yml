@@ -41,6 +41,8 @@ apis:
       - type: GitHub
         url: https://github.com/stackrox/stackrox
 common:
+  - type: AgenticAccess
+    url: agentic-access/stackrox-agentic-access.yml
   - type: DomainSecurity
     url: security/stackrox-domain-security.yml
   - type: Authentication
