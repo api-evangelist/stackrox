@@ -1,0 +1,217 @@
+openapi: 3.0.0
+info:
+  title: API Reference AlertService ProcessService API
+  version: '1'
+  description: API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.
+  contact:
+    email: support@stackrox.com
+    url: https://www.stackrox.io/
+  license:
+    name: All Rights Reserved
+    url: https://www.stackrox.com/
+servers:
+- url: https://{central-host}
+  description: StackRox Central API server
+  variables:
+    central-host:
+      default: stackrox.localhost
+      description: StackRox Central hostname or IP
+security:
+- ApiToken: []
+tags:
+- name: ProcessService
+paths:
+  /v1/processes/deployment/{deploymentId}:
+    get:
+      summary: GetProcessesByDeployment returns the processes executed in the given deployment.
+      operationId: GetProcessesByDeployment
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1GetProcessesResponse'
+      parameters:
+      - name: deploymentId
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - ProcessService
+  /v1/processes/deployment/{deploymentId}/grouped:
+    get:
+      summary: GetGroupedProcessByDeployment returns all the processes executed grouped by deployment.
+      operationId: GetGroupedProcessByDeployment
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1GetGroupedProcessesResponse'
+      parameters:
+      - name: deploymentId
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - ProcessService
+  /v1/processes/deployment/{deploymentId}/grouped/container:
+    get:
+      summary: GetGroupedProcessByDeploymentAndContainer returns all the processes executed grouped by deployment and container.
+      operationId: GetGroupedProcessByDeploymentAndContainer
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1GetGroupedProcessesWithContainerResponse'
+      parameters:
+      - name: deploymentId
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - ProcessService
+components:
+  schemas:
+    v1GetGroupedProcessesWithContainerResponse:
+      type: object
+      properties:
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ProcessNameAndContainerNameGroup'
+    v1ProcessGroup:
+      type: object
+      properties:
+        args:
+          type: string
+        signals:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageProcessIndicator'
+    v1GetProcessesResponse:
+      type: object
+      properties:
+        processes:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageProcessIndicator'
+    v1ProcessNameGroup:
+      type: object
+      properties:
+        name:
+          type: string
+        timesExecuted:
+          type: integer
+          format: int64
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ProcessGroup'
+    storageProcessSignal:
+      type: object
+      properties:
+        id:
+          type: string
+          description: 'A unique UUID for identifying the message
+
+            We have this here instead of at the top level
+
+            because we want to have each message to be
+
+            self contained.'
+        containerId:
+          type: string
+          title: ID of container associated with this process
+        time:
+          type: string
+          format: date-time
+          title: Process creation time
+        name:
+          type: string
+          title: Process name
+        args:
+          type: string
+          title: Process arguments
+        execFilePath:
+          type: string
+          title: Process executable file path
+        pid:
+          type: integer
+          format: int64
+          title: Host process ID
+        uid:
+          type: integer
+          format: int64
+          title: Real user ID
+        gid:
+          type: integer
+          format: int64
+          title: Real group ID
+        lineage:
+          type: array
+          items:
+            type: string
+          title: Process Lineage
+    v1GetGroupedProcessesResponse:
+      type: object
+      properties:
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ProcessNameGroup'
+    storageProcessIndicator:
+      type: object
+      properties:
+        id:
+          type: string
+          title: A unique uuid for the Indicator message
+        deploymentId:
+          type: string
+        deploymentStateTs:
+          type: string
+          format: int64
+        containerName:
+          type: string
+        podId:
+          type: string
+        signal:
+          $ref: '#/components/schemas/storageProcessSignal'
+        clusterId:
+          type: string
+        namespace:
+          type: string
+        containerStartTime:
+          type: string
+          format: date-time
+      title: 'Next available tag: 11'
+    v1ProcessNameAndContainerNameGroup:
+      type: object
+      properties:
+        name:
+          type: string
+        containerName:
+          type: string
+        timesExecuted:
+          type: integer
+          format: int64
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ProcessGroup'
+        suspicious:
+          type: boolean
+          format: boolean
+  securitySchemes:
+    ApiToken:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'StackRox API token. Format: Bearer {token}'

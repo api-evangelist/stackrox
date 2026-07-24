@@ -1,0 +1,303 @@
+openapi: 3.0.0
+info:
+  title: API Reference AlertService ImageIntegrationService API
+  version: '1'
+  description: API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.
+  contact:
+    email: support@stackrox.com
+    url: https://www.stackrox.io/
+  license:
+    name: All Rights Reserved
+    url: https://www.stackrox.com/
+servers:
+- url: https://{central-host}
+  description: StackRox Central API server
+  variables:
+    central-host:
+      default: stackrox.localhost
+      description: StackRox Central hostname or IP
+security:
+- ApiToken: []
+tags:
+- name: ImageIntegrationService
+paths:
+  /v1/imageintegrations:
+    get:
+      summary: GetImageIntegrations returns all image integrations.
+      operationId: GetImageIntegrations
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1GetImageIntegrationsResponse'
+      parameters:
+      - name: name
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: cluster
+        in: query
+        required: false
+        schema:
+          type: string
+      tags:
+      - ImageIntegrationService
+    post:
+      summary: PostImageIntegration creates a image integraton.
+      operationId: PostImageIntegration
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/storageImageIntegration'
+      requestBody:
+        $ref: '#/components/requestBodies/storageImageIntegration'
+      tags:
+      - ImageIntegrationService
+  /v1/imageintegrations/test:
+    post:
+      summary: TestImageIntegration checks if the given image integration is correctly configured.
+      operationId: TestImageIntegration
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1Empty'
+      requestBody:
+        $ref: '#/components/requestBodies/storageImageIntegration'
+      tags:
+      - ImageIntegrationService
+  /v1/imageintegrations/{id}:
+    get:
+      summary: GetImageIntegration returns the image integration given its ID.
+      operationId: GetImageIntegration
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/storageImageIntegration'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - ImageIntegrationService
+    delete:
+      summary: DeleteImageIntegration removes a image integration given its ID.
+      operationId: DeleteImageIntegration
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1Empty'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - ImageIntegrationService
+    put:
+      summary: PutImageIntegration modifies a given image integration.
+      operationId: PutImageIntegration
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1Empty'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/storageImageIntegration'
+      tags:
+      - ImageIntegrationService
+components:
+  schemas:
+    storageTenableConfig:
+      type: object
+      properties:
+        accessKey:
+          type: string
+        secretKey:
+          type: string
+    storageIBMRegistryConfig:
+      type: object
+      properties:
+        endpoint:
+          type: string
+        apiKey:
+          type: string
+    storageDTRConfig:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        endpoint:
+          type: string
+        insecure:
+          type: boolean
+          format: boolean
+    v1Empty:
+      type: object
+    storageQuayConfig:
+      type: object
+      properties:
+        endpoint:
+          type: string
+        oauthToken:
+          type: string
+    storageImageIntegration:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        clusters:
+          type: array
+          items:
+            type: string
+          description: If a list of clusters is provided, the integration will only be accessed from the specified clusters' sensors.
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageImageIntegrationCategory'
+        dtr:
+          $ref: '#/components/schemas/storageDTRConfig'
+        clairify:
+          $ref: '#/components/schemas/storageClairifyConfig'
+        docker:
+          $ref: '#/components/schemas/storageDockerConfig'
+        quay:
+          $ref: '#/components/schemas/storageQuayConfig'
+        ecr:
+          $ref: '#/components/schemas/storageECRConfig'
+        tenable:
+          $ref: '#/components/schemas/storageTenableConfig'
+        google:
+          $ref: '#/components/schemas/storageGoogleConfig'
+        clair:
+          $ref: '#/components/schemas/storageClairConfig'
+        anchore:
+          $ref: '#/components/schemas/storageAnchoreConfig'
+        scannerv2:
+          $ref: '#/components/schemas/storageScannerV2Config'
+        ibm:
+          $ref: '#/components/schemas/storageIBMRegistryConfig'
+        autogenerated:
+          type: boolean
+          format: boolean
+        clusterId:
+          type: string
+        skipTestIntegration:
+          type: boolean
+          format: boolean
+    storageClairifyConfig:
+      type: object
+      properties:
+        endpoint:
+          type: string
+    storageDockerConfig:
+      type: object
+      properties:
+        endpoint:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+        insecure:
+          type: boolean
+          format: boolean
+    v1GetImageIntegrationsResponse:
+      type: object
+      properties:
+        integrations:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageImageIntegration'
+    storageECRConfig:
+      type: object
+      properties:
+        registryId:
+          type: string
+        accessKeyId:
+          type: string
+        secretAccessKey:
+          type: string
+        region:
+          type: string
+        useIam:
+          type: boolean
+          format: boolean
+    storageClairConfig:
+      type: object
+      properties:
+        endpoint:
+          type: string
+    storageGoogleConfig:
+      type: object
+      properties:
+        endpoint:
+          type: string
+        serviceAccount:
+          type: string
+        project:
+          type: string
+    storageAnchoreConfig:
+      type: object
+      properties:
+        endpoint:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+    storageScannerV2Config:
+      type: object
+      properties:
+        endpoint:
+          type: string
+    storageImageIntegrationCategory:
+      type: string
+      enum:
+      - REGISTRY
+      - SCANNER
+      default: REGISTRY
+  requestBodies:
+    storageImageIntegration:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/storageImageIntegration'
+      required: true
+  securitySchemes:
+    ApiToken:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'StackRox API token. Format: Bearer {token}'

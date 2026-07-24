@@ -1,0 +1,215 @@
+openapi: 3.0.0
+info:
+  title: API Reference AlertService ExternalBackupService API
+  version: '1'
+  description: API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.
+  contact:
+    email: support@stackrox.com
+    url: https://www.stackrox.io/
+  license:
+    name: All Rights Reserved
+    url: https://www.stackrox.com/
+servers:
+- url: https://{central-host}
+  description: StackRox Central API server
+  variables:
+    central-host:
+      default: stackrox.localhost
+      description: StackRox Central hostname or IP
+security:
+- ApiToken: []
+tags:
+- name: ExternalBackupService
+paths:
+  /v1/externalbackups:
+    get:
+      operationId: GetExternalBackups
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1GetExternalBackupsResponse'
+      tags:
+      - ExternalBackupService
+    post:
+      operationId: PostExternalBackup
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/storageExternalBackup'
+      requestBody:
+        $ref: '#/components/requestBodies/storageExternalBackup'
+      tags:
+      - ExternalBackupService
+  /v1/externalbackups/test:
+    post:
+      operationId: TestExternalBackup
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1Empty'
+      requestBody:
+        $ref: '#/components/requestBodies/storageExternalBackup'
+      tags:
+      - ExternalBackupService
+  /v1/externalbackups/{id}:
+    get:
+      operationId: GetExternalBackup
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/storageExternalBackup'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - ExternalBackupService
+    delete:
+      operationId: DeleteExternalBackup
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1Empty'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - ExternalBackupService
+    post:
+      operationId: TriggerExternalBackup
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1Empty'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - ExternalBackupService
+    put:
+      operationId: PutExternalBackup
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/storageExternalBackup'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/storageExternalBackup'
+      tags:
+      - ExternalBackupService
+components:
+  schemas:
+    storageSchedule:
+      type: object
+      properties:
+        intervalType:
+          $ref: '#/components/schemas/ScheduleIntervalType'
+        hour:
+          type: integer
+          format: int32
+        minute:
+          type: integer
+          format: int32
+        weekly:
+          $ref: '#/components/schemas/ScheduleWeeklyInterval'
+    v1Empty:
+      type: object
+    v1GetExternalBackupsResponse:
+      type: object
+      properties:
+        externalBackups:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageExternalBackup'
+    storageS3Config:
+      type: object
+      properties:
+        bucket:
+          type: string
+        useIam:
+          type: boolean
+          format: boolean
+        accessKeyId:
+          type: string
+        secretAccessKey:
+          type: string
+        region:
+          type: string
+        objectPrefix:
+          type: string
+    storageExternalBackup:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        schedule:
+          $ref: '#/components/schemas/storageSchedule'
+        backupsToKeep:
+          type: integer
+          format: int32
+        s3:
+          $ref: '#/components/schemas/storageS3Config'
+    ScheduleWeeklyInterval:
+      type: object
+      properties:
+        day:
+          type: integer
+          format: int32
+    ScheduleIntervalType:
+      type: string
+      enum:
+      - UNSET
+      - DAILY
+      - WEEKLY
+      default: UNSET
+  requestBodies:
+    storageExternalBackup:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/storageExternalBackup'
+      required: true
+  securitySchemes:
+    ApiToken:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'StackRox API token. Format: Bearer {token}'

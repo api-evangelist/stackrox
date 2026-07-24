@@ -1,0 +1,257 @@
+openapi: 3.0.0
+info:
+  title: API Reference AlertService SearchService API
+  version: '1'
+  description: API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.
+  contact:
+    email: support@stackrox.com
+    url: https://www.stackrox.io/
+  license:
+    name: All Rights Reserved
+    url: https://www.stackrox.com/
+servers:
+- url: https://{central-host}
+  description: StackRox Central API server
+  variables:
+    central-host:
+      default: stackrox.localhost
+      description: StackRox Central hostname or IP
+security:
+- ApiToken: []
+tags:
+- name: SearchService
+paths:
+  /v1/search:
+    get:
+      operationId: Search
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1SearchResponse'
+      parameters:
+      - name: query
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: categories
+        in: query
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - SEARCH_UNSET
+            - ALERTS
+            - IMAGES
+            - POLICIES
+            - DEPLOYMENTS
+            - SECRETS
+            - PROCESS_INDICATORS
+            - COMPLIANCE
+            - CLUSTERS
+            - NAMESPACES
+            - NODES
+            - COMPLIANCE_STANDARD
+            - COMPLIANCE_CONTROL_GROUP
+            - COMPLIANCE_CONTROL
+            - SERVICE_ACCOUNTS
+            - ROLES
+            - ROLEBINDINGS
+            - PROCESS_WHITELISTS
+            - SUBJECTS
+            - RISKS
+            - IMAGE_COMPONENTS
+            - VULNERABILITIES
+      tags:
+      - SearchService
+  /v1/search/autocomplete:
+    get:
+      operationId: Autocomplete
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1AutocompleteResponse'
+      parameters:
+      - name: query
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: categories
+        in: query
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - SEARCH_UNSET
+            - ALERTS
+            - IMAGES
+            - POLICIES
+            - DEPLOYMENTS
+            - SECRETS
+            - PROCESS_INDICATORS
+            - COMPLIANCE
+            - CLUSTERS
+            - NAMESPACES
+            - NODES
+            - COMPLIANCE_STANDARD
+            - COMPLIANCE_CONTROL_GROUP
+            - COMPLIANCE_CONTROL
+            - SERVICE_ACCOUNTS
+            - ROLES
+            - ROLEBINDINGS
+            - PROCESS_WHITELISTS
+            - SUBJECTS
+            - RISKS
+            - IMAGE_COMPONENTS
+            - VULNERABILITIES
+      tags:
+      - SearchService
+  /v1/search/metadata/options:
+    get:
+      operationId: Options
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1SearchOptionsResponse'
+      parameters:
+      - name: categories
+        in: query
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - SEARCH_UNSET
+            - ALERTS
+            - IMAGES
+            - POLICIES
+            - DEPLOYMENTS
+            - SECRETS
+            - PROCESS_INDICATORS
+            - COMPLIANCE
+            - CLUSTERS
+            - NAMESPACES
+            - NODES
+            - COMPLIANCE_STANDARD
+            - COMPLIANCE_CONTROL_GROUP
+            - COMPLIANCE_CONTROL
+            - SERVICE_ACCOUNTS
+            - ROLES
+            - ROLEBINDINGS
+            - PROCESS_WHITELISTS
+            - SUBJECTS
+            - RISKS
+            - IMAGE_COMPONENTS
+            - VULNERABILITIES
+      tags:
+      - SearchService
+components:
+  schemas:
+    v1SearchOptionsResponse:
+      type: object
+      properties:
+        options:
+          type: array
+          items:
+            type: string
+    v1SearchResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1SearchResult'
+        counts:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchResponseCount'
+    SearchResultMatches:
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            type: string
+    v1SearchResult:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        category:
+          $ref: '#/components/schemas/v1SearchCategory'
+        fieldToMatches:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/SearchResultMatches'
+        score:
+          type: number
+          format: double
+        location:
+          type: string
+    v1SearchCategory:
+      type: string
+      enum:
+      - SEARCH_UNSET
+      - ALERTS
+      - IMAGES
+      - POLICIES
+      - DEPLOYMENTS
+      - SECRETS
+      - PROCESS_INDICATORS
+      - COMPLIANCE
+      - CLUSTERS
+      - NAMESPACES
+      - NODES
+      - COMPLIANCE_STANDARD
+      - COMPLIANCE_CONTROL_GROUP
+      - COMPLIANCE_CONTROL
+      - SERVICE_ACCOUNTS
+      - ROLES
+      - ROLEBINDINGS
+      - PROCESS_WHITELISTS
+      - SUBJECTS
+      - RISKS
+      - IMAGE_COMPONENTS
+      - VULNERABILITIES
+      default: SEARCH_UNSET
+    SearchResponseCount:
+      type: object
+      properties:
+        category:
+          $ref: '#/components/schemas/v1SearchCategory'
+        count:
+          type: string
+          format: int64
+    v1AutocompleteResponse:
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            type: string
+  securitySchemes:
+    ApiToken:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'StackRox API token. Format: Bearer {token}'

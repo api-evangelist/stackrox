@@ -1,0 +1,355 @@
+openapi: 3.0.0
+info:
+  title: API Reference AlertService ClustersService API
+  version: '1'
+  description: API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.
+  contact:
+    email: support@stackrox.com
+    url: https://www.stackrox.io/
+  license:
+    name: All Rights Reserved
+    url: https://www.stackrox.com/
+servers:
+- url: https://{central-host}
+  description: StackRox Central API server
+  variables:
+    central-host:
+      default: stackrox.localhost
+      description: StackRox Central hostname or IP
+security:
+- ApiToken: []
+tags:
+- name: ClustersService
+paths:
+  /v1/clusters:
+    get:
+      operationId: GetClusters
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1ClustersList'
+      parameters:
+      - name: query
+        in: query
+        required: false
+        schema:
+          type: string
+      tags:
+      - ClustersService
+    post:
+      operationId: PostCluster
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1ClusterResponse'
+      requestBody:
+        $ref: '#/components/requestBodies/storageCluster'
+      tags:
+      - ClustersService
+  /v1/clusters/{id}:
+    get:
+      operationId: GetCluster
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1ClusterResponse'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - ClustersService
+    delete:
+      operationId: DeleteCluster
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1Empty'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - ClustersService
+    put:
+      operationId: PutCluster
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1ClusterResponse'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/storageCluster'
+      tags:
+      - ClustersService
+components:
+  schemas:
+    storageOrchestratorMetadata:
+      type: object
+      properties:
+        version:
+          type: string
+        buildDate:
+          type: string
+          format: date-time
+        apiVersions:
+          type: array
+          items:
+            type: string
+    storageAWSProviderMetadata:
+      type: object
+      properties:
+        accountId:
+          type: string
+    storageCollectionMethod:
+      type: string
+      enum:
+      - UNSET_COLLECTION
+      - NO_COLLECTION
+      - KERNEL_MODULE
+      - EBPF
+      default: UNSET_COLLECTION
+    storageAdmissionControllerConfig:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          format: boolean
+        timeoutSeconds:
+          type: integer
+          format: int32
+        scanInline:
+          type: boolean
+          format: boolean
+        disableBypass:
+          type: boolean
+          format: boolean
+    storageDynamicClusterConfig:
+      type: object
+      properties:
+        admissionControllerConfig:
+          $ref: '#/components/schemas/storageAdmissionControllerConfig'
+        registryOverride:
+          type: string
+    ClusterUpgradeStatusUpgradeProcessStatus:
+      type: object
+      properties:
+        active:
+          type: boolean
+          format: boolean
+        id:
+          type: string
+        targetVersion:
+          type: string
+        upgraderImage:
+          type: string
+        initiatedAt:
+          type: string
+          format: date-time
+        progress:
+          $ref: '#/components/schemas/storageUpgradeProgress'
+    v1ClustersList:
+      type: object
+      properties:
+        clusters:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageCluster'
+    storageClusterType:
+      type: string
+      enum:
+      - GENERIC_CLUSTER
+      - KUBERNETES_CLUSTER
+      - OPENSHIFT_CLUSTER
+      default: GENERIC_CLUSTER
+    v1Empty:
+      type: object
+    v1ClusterResponse:
+      type: object
+      properties:
+        cluster:
+          $ref: '#/components/schemas/storageCluster'
+    storageUpgradeProgress:
+      type: object
+      properties:
+        upgradeState:
+          $ref: '#/components/schemas/UpgradeProgressUpgradeState'
+        upgradeStatusDetail:
+          type: string
+        since:
+          type: string
+          format: date-time
+    storageCluster:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/storageClusterType'
+        mainImage:
+          type: string
+        collectorImage:
+          type: string
+        centralApiEndpoint:
+          type: string
+        runtimeSupport:
+          type: boolean
+          format: boolean
+        monitoringEndpoint:
+          type: string
+        collectionMethod:
+          $ref: '#/components/schemas/storageCollectionMethod'
+        DEPRECATEDProviderMetadata:
+          $ref: '#/components/schemas/storageProviderMetadata'
+        admissionController:
+          type: boolean
+          format: boolean
+        DEPRECATEDOrchestratorMetadata:
+          $ref: '#/components/schemas/storageOrchestratorMetadata'
+        status:
+          $ref: '#/components/schemas/storageClusterStatus'
+        dynamicConfig:
+          $ref: '#/components/schemas/storageDynamicClusterConfig'
+        tolerationsConfig:
+          $ref: '#/components/schemas/storageTolerationsConfig'
+        priority:
+          type: string
+          format: int64
+    ClusterUpgradeStatusUpgradability:
+      type: string
+      enum:
+      - UNSET
+      - UP_TO_DATE
+      - MANUAL_UPGRADE_REQUIRED
+      - AUTO_UPGRADE_POSSIBLE
+      - SENSOR_VERSION_HIGHER
+      default: UNSET
+      description: ' - SENSOR_VERSION_HIGHER: SENSOR_VERSION_HIGHER occurs when we detect that the sensor
+
+        is running a newer version than this Central. This is unexpected,
+
+        but can occur depending on the patches a customer does.
+
+        In this case, we will NOT automatically "upgrade" the sensor,
+
+        since that would be a downgrade, even if the autoupgrade setting is
+
+        on. The user will be allowed to manually trigger the upgrade, but they are
+
+        strongly discouraged from doing so without upgrading Central first, since this
+
+        is an unsupported configuration.'
+    storageAzureProviderMetadata:
+      type: object
+      properties:
+        subscriptionId:
+          type: string
+    UpgradeProgressUpgradeState:
+      type: string
+      enum:
+      - UPGRADE_INITIALIZING
+      - UPGRADER_LAUNCHING
+      - UPGRADER_LAUNCHED
+      - PRE_FLIGHT_CHECKS_COMPLETE
+      - UPGRADE_OPERATIONS_DONE
+      - UPGRADE_COMPLETE
+      - UPGRADE_INITIALIZATION_ERROR
+      - PRE_FLIGHT_CHECKS_FAILED
+      - UPGRADE_ERROR_ROLLING_BACK
+      - UPGRADE_ERROR_ROLLED_BACK
+      - UPGRADE_ERROR_ROLLBACK_FAILED
+      - UPGRADE_ERROR_UNKNOWN
+      - UPGRADE_TIMED_OUT
+      default: UPGRADE_INITIALIZING
+      description: " - UPGRADER_LAUNCHING: In-progress states.\n - UPGRADE_COMPLETE: The success state.\nPLEASE NUMBER ALL IN-PROGRESS STATES ABOVE THIS\nAND ALL ERROR STATES BELOW THIS.\n - UPGRADE_INITIALIZATION_ERROR: Error states."
+    storageTolerationsConfig:
+      type: object
+      properties:
+        disabled:
+          type: boolean
+          format: boolean
+    storageClusterUpgradeStatus:
+      type: object
+      properties:
+        upgradability:
+          $ref: '#/components/schemas/ClusterUpgradeStatusUpgradability'
+        upgradabilityStatusReason:
+          type: string
+        mostRecentProcess:
+          $ref: '#/components/schemas/ClusterUpgradeStatusUpgradeProcessStatus'
+    storageClusterStatus:
+      type: object
+      properties:
+        sensorVersion:
+          type: string
+        lastContact:
+          type: string
+          format: date-time
+        providerMetadata:
+          $ref: '#/components/schemas/storageProviderMetadata'
+        orchestratorMetadata:
+          $ref: '#/components/schemas/storageOrchestratorMetadata'
+        upgradeStatus:
+          $ref: '#/components/schemas/storageClusterUpgradeStatus'
+    storageProviderMetadata:
+      type: object
+      properties:
+        region:
+          type: string
+        zone:
+          type: string
+        google:
+          $ref: '#/components/schemas/storageGoogleProviderMetadata'
+        aws:
+          $ref: '#/components/schemas/storageAWSProviderMetadata'
+        azure:
+          $ref: '#/components/schemas/storageAzureProviderMetadata'
+        verified:
+          type: boolean
+          format: boolean
+    storageGoogleProviderMetadata:
+      type: object
+      properties:
+        project:
+          type: string
+        clusterName:
+          type: string
+  requestBodies:
+    storageCluster:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/storageCluster'
+      required: true
+  securitySchemes:
+    ApiToken:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'StackRox API token. Format: Bearer {token}'

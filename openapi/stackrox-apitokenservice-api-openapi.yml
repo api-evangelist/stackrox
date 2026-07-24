@@ -1,0 +1,149 @@
+openapi: 3.0.0
+info:
+  title: API Reference AlertService APITokenService API
+  version: '1'
+  description: API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.
+  contact:
+    email: support@stackrox.com
+    url: https://www.stackrox.io/
+  license:
+    name: All Rights Reserved
+    url: https://www.stackrox.com/
+servers:
+- url: https://{central-host}
+  description: StackRox Central API server
+  variables:
+    central-host:
+      default: stackrox.localhost
+      description: StackRox Central hostname or IP
+security:
+- ApiToken: []
+tags:
+- name: APITokenService
+paths:
+  /v1/apitokens:
+    get:
+      summary: GetAPITokens returns all the API tokens.
+      operationId: GetAPITokens
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1GetAPITokensResponse'
+      parameters:
+      - name: revoked
+        in: query
+        required: false
+        schema:
+          type: boolean
+          format: boolean
+      tags:
+      - APITokenService
+  /v1/apitokens/generate:
+    post:
+      summary: GenerateToken generates API token for a given user and role.
+      operationId: GenerateToken
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1GenerateTokenResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1GenerateTokenRequest'
+        required: true
+      tags:
+      - APITokenService
+  /v1/apitokens/revoke/{id}:
+    patch:
+      summary: RevokeToken removes the API token for a given id.
+      operationId: RevokeToken
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1Empty'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - APITokenService
+  /v1/apitokens/{id}:
+    get:
+      summary: GetAPIToken returns API token metadata for a given id.
+      operationId: GetAPIToken
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/storageTokenMetadata'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - APITokenService
+components:
+  schemas:
+    v1Empty:
+      type: object
+    storageTokenMetadata:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        role:
+          type: string
+        issuedAt:
+          type: string
+          format: date-time
+        expiration:
+          type: string
+          format: date-time
+        revoked:
+          type: boolean
+          format: boolean
+    v1GetAPITokensResponse:
+      type: object
+      properties:
+        tokens:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageTokenMetadata'
+    v1GenerateTokenRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        role:
+          type: string
+    v1GenerateTokenResponse:
+      type: object
+      properties:
+        token:
+          type: string
+        metadata:
+          $ref: '#/components/schemas/storageTokenMetadata'
+  securitySchemes:
+    ApiToken:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'StackRox API token. Format: Bearer {token}'

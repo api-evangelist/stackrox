@@ -1,0 +1,287 @@
+openapi: 3.0.0
+info:
+  title: API Reference AlertService NotifierService API
+  version: '1'
+  description: API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.
+  contact:
+    email: support@stackrox.com
+    url: https://www.stackrox.io/
+  license:
+    name: All Rights Reserved
+    url: https://www.stackrox.com/
+servers:
+- url: https://{central-host}
+  description: StackRox Central API server
+  variables:
+    central-host:
+      default: stackrox.localhost
+      description: StackRox Central hostname or IP
+security:
+- ApiToken: []
+tags:
+- name: NotifierService
+paths:
+  /v1/notifiers:
+    get:
+      operationId: GetNotifiers
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1GetNotifiersResponse'
+      parameters:
+      - name: name
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: type
+        in: query
+        required: false
+        schema:
+          type: string
+      tags:
+      - NotifierService
+    post:
+      operationId: PostNotifier
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/storageNotifier'
+      requestBody:
+        $ref: '#/components/requestBodies/storageNotifier'
+      tags:
+      - NotifierService
+  /v1/notifiers/test:
+    post:
+      operationId: TestNotifier
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1Empty'
+      requestBody:
+        $ref: '#/components/requestBodies/storageNotifier'
+      tags:
+      - NotifierService
+  /v1/notifiers/{id}:
+    get:
+      operationId: GetNotifier
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/storageNotifier'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - NotifierService
+    delete:
+      operationId: DeleteNotifier
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1Empty'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: force
+        in: query
+        required: false
+        schema:
+          type: boolean
+          format: boolean
+      tags:
+      - NotifierService
+    put:
+      operationId: PutNotifier
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1Empty'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/storageNotifier'
+      tags:
+      - NotifierService
+components:
+  schemas:
+    v1Empty:
+      type: object
+    v1GetNotifiersResponse:
+      type: object
+      properties:
+        notifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageNotifier'
+    storageEmail:
+      type: object
+      properties:
+        server:
+          type: string
+        sender:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+        disableTLS:
+          type: boolean
+          format: boolean
+        useSTARTTLS:
+          type: boolean
+          format: boolean
+        from:
+          type: string
+    storageSumoLogic:
+      type: object
+      properties:
+        httpSourceAddress:
+          type: string
+        skipTLSVerify:
+          type: boolean
+          format: boolean
+    storageSplunk:
+      type: object
+      properties:
+        httpToken:
+          type: string
+        httpEndpoint:
+          type: string
+        insecure:
+          type: boolean
+          format: boolean
+        truncate:
+          type: string
+          format: int64
+        auditLoggingEnabled:
+          type: boolean
+          format: boolean
+    storageCSCC:
+      type: object
+      properties:
+        serviceAccount:
+          type: string
+        sourceId:
+          type: string
+    storageJira:
+      type: object
+      properties:
+        url:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+        issueType:
+          type: string
+    storageGeneric:
+      type: object
+      properties:
+        endpoint:
+          type: string
+        skipTLSVerify:
+          type: boolean
+          format: boolean
+        caCert:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+        headers:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageKeyValuePair'
+        extraFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageKeyValuePair'
+        auditLoggingEnabled:
+          type: boolean
+          format: boolean
+    storageNotifier:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        uiEndpoint:
+          type: string
+        enabled:
+          type: boolean
+          format: boolean
+        labelKey:
+          type: string
+        labelDefault:
+          type: string
+        jira:
+          $ref: '#/components/schemas/storageJira'
+        email:
+          $ref: '#/components/schemas/storageEmail'
+        cscc:
+          $ref: '#/components/schemas/storageCSCC'
+        splunk:
+          $ref: '#/components/schemas/storageSplunk'
+        pagerduty:
+          $ref: '#/components/schemas/storagePagerDuty'
+        generic:
+          $ref: '#/components/schemas/storageGeneric'
+        sumologic:
+          $ref: '#/components/schemas/storageSumoLogic'
+    storageKeyValuePair:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+    storagePagerDuty:
+      type: object
+      properties:
+        apiKey:
+          type: string
+  requestBodies:
+    storageNotifier:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/storageNotifier'
+      required: true
+  securitySchemes:
+    ApiToken:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'StackRox API token. Format: Bearer {token}'

@@ -1,0 +1,120 @@
+openapi: 3.0.0
+info:
+  title: API Reference AlertService AuthService API
+  version: '1'
+  description: API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.
+  contact:
+    email: support@stackrox.com
+    url: https://www.stackrox.io/
+  license:
+    name: All Rights Reserved
+    url: https://www.stackrox.com/
+servers:
+- url: https://{central-host}
+  description: StackRox Central API server
+  variables:
+    central-host:
+      default: stackrox.localhost
+      description: StackRox Central hostname or IP
+security:
+- ApiToken: []
+tags:
+- name: AuthService
+paths:
+  /v1/auth/status:
+    get:
+      operationId: GetAuthStatus
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1AuthStatus'
+      tags:
+      - AuthService
+components:
+  schemas:
+    storageServiceIdentity:
+      type: object
+      properties:
+        serial:
+          type: string
+          format: int64
+        serialStr:
+          type: string
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/storageServiceType'
+    storageAuthProvider:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        uiEndpoint:
+          type: string
+        enabled:
+          type: boolean
+          format: boolean
+        config:
+          type: object
+          additionalProperties:
+            type: string
+        loginUrl:
+          type: string
+          description: The login URL will be provided by the backend, and may not be specified in a request.
+        validated:
+          type: boolean
+          format: boolean
+        extraUiEndpoints:
+          type: array
+          items:
+            type: string
+          description: 'UI endpoints which to allow in addition to `ui_endpoint`. I.e., if a login request
+
+            is coming from any of these, the auth request will use these for the callback URL,
+
+            not ui_endpoint.'
+        active:
+          type: boolean
+          format: boolean
+      title: 'Next Tag: 9'
+    v1AuthStatus:
+      type: object
+      properties:
+        userId:
+          type: string
+        serviceId:
+          $ref: '#/components/schemas/storageServiceIdentity'
+        expires:
+          type: string
+          format: date-time
+        refreshUrl:
+          type: string
+        authProvider:
+          $ref: '#/components/schemas/storageAuthProvider'
+    storageServiceType:
+      type: string
+      enum:
+      - UNKNOWN_SERVICE
+      - SENSOR_SERVICE
+      - CENTRAL_SERVICE
+      - REMOTE_SERVICE
+      - COLLECTOR_SERVICE
+      - MONITORING_UI_SERVICE
+      - MONITORING_DB_SERVICE
+      - MONITORING_CLIENT_SERVICE
+      - BENCHMARK_SERVICE
+      - SCANNER_SERVICE
+      default: UNKNOWN_SERVICE
+  securitySchemes:
+    ApiToken:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'StackRox API token. Format: Bearer {token}'

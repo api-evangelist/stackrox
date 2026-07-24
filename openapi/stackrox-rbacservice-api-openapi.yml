@@ -1,0 +1,398 @@
+openapi: 3.0.0
+info:
+  title: API Reference AlertService RbacService API
+  version: '1'
+  description: API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.
+  contact:
+    email: support@stackrox.com
+    url: https://www.stackrox.io/
+  license:
+    name: All Rights Reserved
+    url: https://www.stackrox.com/
+servers:
+- url: https://{central-host}
+  description: StackRox Central API server
+  variables:
+    central-host:
+      default: stackrox.localhost
+      description: StackRox Central hostname or IP
+security:
+- ApiToken: []
+tags:
+- name: RbacService
+paths:
+  /v1/rbac/bindings:
+    get:
+      operationId: ListRoleBindings
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1ListRoleBindingsResponse'
+      parameters:
+      - name: query
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: pagination.limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pagination.offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pagination.sort_option.field
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: pagination.sort_option.reversed
+        in: query
+        required: false
+        schema:
+          type: boolean
+          format: boolean
+      tags:
+      - RbacService
+  /v1/rbac/bindings/{id}:
+    get:
+      operationId: GetRoleBinding
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1GetRoleBindingResponse'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - RbacService
+  /v1/rbac/roles:
+    get:
+      operationId: ListRoles
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1ListRolesResponse'
+      parameters:
+      - name: query
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: pagination.limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pagination.offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pagination.sort_option.field
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: pagination.sort_option.reversed
+        in: query
+        required: false
+        schema:
+          type: boolean
+          format: boolean
+      tags:
+      - RbacService
+  /v1/rbac/roles/{id}:
+    get:
+      operationId: GetRole
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1GetRoleResponse'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - RbacService
+  /v1/rbac/subject/{id}:
+    get:
+      summary: 'Subjects served from this API are Groups and Users only.
+
+        Id in this case is the Name field, since for users and groups, that is unique, and subjects do not have IDs.'
+      operationId: GetSubject
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1GetSubjectResponse'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - RbacService
+  /v1/rbac/subjects:
+    get:
+      operationId: ListSubjects
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1ListSubjectsResponse'
+      parameters:
+      - name: query
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: pagination.limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pagination.offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pagination.sort_option.field
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: pagination.sort_option.reversed
+        in: query
+        required: false
+        schema:
+          type: boolean
+          format: boolean
+      tags:
+      - RbacService
+components:
+  schemas:
+    v1GetRoleBindingResponse:
+      type: object
+      properties:
+        binding:
+          $ref: '#/components/schemas/storageK8sRoleBinding'
+    v1GetSubjectResponse:
+      type: object
+      properties:
+        subject:
+          $ref: '#/components/schemas/storageSubject'
+        clusterRoles:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageK8sRole'
+        scopedRoles:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ScopedRoles'
+    storageSubjectKind:
+      type: string
+      enum:
+      - UNSET_KIND
+      - SERVICE_ACCOUNT
+      - USER
+      - GROUP
+      default: UNSET_KIND
+    storageSubject:
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/storageSubjectKind'
+        name:
+          type: string
+        namespace:
+          type: string
+      title: 'Properties of an individual subjects who are granted roles via role bindings.
+
+        ////////////////////////////////////////'
+    storageK8sRoleBinding:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        namespace:
+          type: string
+        clusterId:
+          type: string
+        clusterName:
+          type: string
+        clusterRole:
+          type: boolean
+          format: boolean
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+        annotations:
+          type: object
+          additionalProperties:
+            type: string
+        createdAt:
+          type: string
+          format: date-time
+        subjects:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageSubject'
+        roleId:
+          type: string
+      title: 'Properties of an individual k8s RoleBinding or ClusterRoleBinding.
+
+        ////////////////////////////////////////'
+    v1GetRoleResponse:
+      type: object
+      properties:
+        role:
+          $ref: '#/components/schemas/storageK8sRole'
+    v1ListSubjectsResponse:
+      type: object
+      properties:
+        subjectAndRoles:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1SubjectAndRoles'
+      title: 'A list of k8s subjects (users and groups only, for service accounts, try the service account service)
+
+        Next Tag: 2'
+    storageK8sRole:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        namespace:
+          type: string
+        clusterId:
+          type: string
+        clusterName:
+          type: string
+        clusterRole:
+          type: boolean
+          format: boolean
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+        annotations:
+          type: object
+          additionalProperties:
+            type: string
+        createdAt:
+          type: string
+          format: date-time
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/storagePolicyRule'
+      title: 'Properties of an individual k8s Role or ClusterRole.
+
+        ////////////////////////////////////////'
+    v1ListRoleBindingsResponse:
+      type: object
+      properties:
+        bindings:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageK8sRoleBinding'
+      title: 'A list of k8s role bindings (free of scoped information)
+
+        Next Tag: 2'
+    v1SubjectAndRoles:
+      type: object
+      properties:
+        subject:
+          $ref: '#/components/schemas/storageSubject'
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageK8sRole'
+    v1ScopedRoles:
+      type: object
+      properties:
+        namespace:
+          type: string
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageK8sRole'
+    storagePolicyRule:
+      type: object
+      properties:
+        verbs:
+          type: array
+          items:
+            type: string
+        apiGroups:
+          type: array
+          items:
+            type: string
+        resources:
+          type: array
+          items:
+            type: string
+        nonResourceUrls:
+          type: array
+          items:
+            type: string
+        resourceNames:
+          type: array
+          items:
+            type: string
+      title: 'Properties of an individual rules that grant permissions to resources.
+
+        ////////////////////////////////////////'
+    v1ListRolesResponse:
+      type: object
+      properties:
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageK8sRole'
+      title: 'A list of k8s roles (free of scoped information)
+
+        Next Tag: 2'
+  securitySchemes:
+    ApiToken:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'StackRox API token. Format: Bearer {token}'

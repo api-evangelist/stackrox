@@ -1,0 +1,144 @@
+openapi: 3.0.0
+info:
+  title: API Reference AlertService NetworkGraphService API
+  version: '1'
+  description: API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.
+  contact:
+    email: support@stackrox.com
+    url: https://www.stackrox.io/
+  license:
+    name: All Rights Reserved
+    url: https://www.stackrox.com/
+servers:
+- url: https://{central-host}
+  description: StackRox Central API server
+  variables:
+    central-host:
+      default: stackrox.localhost
+      description: StackRox Central hostname or IP
+security:
+- ApiToken: []
+tags:
+- name: NetworkGraphService
+paths:
+  /v1/networkgraph/cluster/{clusterId}:
+    get:
+      operationId: GetNetworkGraph
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1NetworkGraph'
+      parameters:
+      - name: clusterId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: query
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: since
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      tags:
+      - NetworkGraphService
+components:
+  schemas:
+    storageNetworkEntityInfo:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/storageNetworkEntityInfoType'
+        id:
+          type: string
+        deployment:
+          $ref: '#/components/schemas/storageNetworkEntityInfoDeployment'
+    storageL4Protocol:
+      type: string
+      enum:
+      - L4_PROTOCOL_UNKNOWN
+      - L4_PROTOCOL_TCP
+      - L4_PROTOCOL_UDP
+      - L4_PROTOCOL_ICMP
+      - L4_PROTOCOL_RAW
+      default: L4_PROTOCOL_UNKNOWN
+    storageNetworkEntityInfoDeployment:
+      type: object
+      properties:
+        name:
+          type: string
+        namespace:
+          type: string
+        cluster:
+          type: string
+    v1NetworkEdgePropertiesBundle:
+      type: object
+      properties:
+        properties:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1NetworkEdgeProperties'
+    v1NetworkEdgeProperties:
+      type: object
+      properties:
+        port:
+          type: integer
+          format: int64
+        protocol:
+          $ref: '#/components/schemas/storageL4Protocol'
+        lastActiveTimestamp:
+          type: string
+          format: date-time
+    v1NetworkNode:
+      type: object
+      properties:
+        entity:
+          $ref: '#/components/schemas/storageNetworkEntityInfo'
+        internetAccess:
+          type: boolean
+          format: boolean
+        policyIds:
+          type: array
+          items:
+            type: string
+        nonIsolatedIngress:
+          type: boolean
+          format: boolean
+        nonIsolatedEgress:
+          type: boolean
+          format: boolean
+        outEdges:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/v1NetworkEdgePropertiesBundle'
+    v1NetworkGraph:
+      type: object
+      properties:
+        epoch:
+          type: integer
+          format: int64
+        nodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1NetworkNode'
+    storageNetworkEntityInfoType:
+      type: string
+      enum:
+      - UNKNOWN_TYPE
+      - DEPLOYMENT
+      - INTERNET
+      default: UNKNOWN_TYPE
+  securitySchemes:
+    ApiToken:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'StackRox API token. Format: Bearer {token}'

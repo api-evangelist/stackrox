@@ -1,0 +1,140 @@
+openapi: 3.0.0
+info:
+  title: API Reference AlertService ServiceIdentityService API
+  version: '1'
+  description: API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.
+  contact:
+    email: support@stackrox.com
+    url: https://www.stackrox.io/
+  license:
+    name: All Rights Reserved
+    url: https://www.stackrox.com/
+servers:
+- url: https://{central-host}
+  description: StackRox Central API server
+  variables:
+    central-host:
+      default: stackrox.localhost
+      description: StackRox Central hostname or IP
+security:
+- ApiToken: []
+tags:
+- name: ServiceIdentityService
+paths:
+  /v1/authorities:
+    get:
+      summary: GetAuthorities returns the authorities currently in use.
+      operationId: GetAuthorities
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1Authorities'
+      tags:
+      - ServiceIdentityService
+  /v1/serviceIdentities:
+    get:
+      operationId: GetServiceIdentities
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1ServiceIdentityResponse'
+      tags:
+      - ServiceIdentityService
+    post:
+      summary: 'CreateServiceIdentity creates a new key pair and certificate.
+
+        The key and certificate are not retained and can never be retrieved again.'
+      operationId: CreateServiceIdentity
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1CreateServiceIdentityResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1CreateServiceIdentityRequest'
+        required: true
+      tags:
+      - ServiceIdentityService
+components:
+  schemas:
+    storageServiceType:
+      type: string
+      enum:
+      - UNKNOWN_SERVICE
+      - SENSOR_SERVICE
+      - CENTRAL_SERVICE
+      - REMOTE_SERVICE
+      - COLLECTOR_SERVICE
+      - MONITORING_UI_SERVICE
+      - MONITORING_DB_SERVICE
+      - MONITORING_CLIENT_SERVICE
+      - BENCHMARK_SERVICE
+      - SCANNER_SERVICE
+      default: UNKNOWN_SERVICE
+    storageServiceIdentity:
+      type: object
+      properties:
+        serial:
+          type: string
+          format: int64
+        serialStr:
+          type: string
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/storageServiceType'
+    v1ServiceIdentityResponse:
+      type: object
+      properties:
+        identities:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageServiceIdentity'
+    v1CreateServiceIdentityRequest:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/storageServiceType'
+    v1Authority:
+      type: object
+      properties:
+        certificatePem:
+          type: string
+          format: byte
+    v1Authorities:
+      type: object
+      properties:
+        authorities:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Authority'
+    v1CreateServiceIdentityResponse:
+      type: object
+      properties:
+        identity:
+          $ref: '#/components/schemas/storageServiceIdentity'
+        certificatePem:
+          type: string
+          format: byte
+        privateKeyPem:
+          type: string
+          format: byte
+  securitySchemes:
+    ApiToken:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'StackRox API token. Format: Bearer {token}'

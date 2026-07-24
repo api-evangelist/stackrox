@@ -1,0 +1,1166 @@
+openapi: 3.0.0
+info:
+  title: API Reference AlertService ComplianceService API
+  version: '1'
+  description: API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.
+  contact:
+    email: support@stackrox.com
+    url: https://www.stackrox.io/
+  license:
+    name: All Rights Reserved
+    url: https://www.stackrox.com/
+servers:
+- url: https://{central-host}
+  description: StackRox Central API server
+  variables:
+    central-host:
+      default: stackrox.localhost
+      description: StackRox Central hostname or IP
+security:
+- ApiToken: []
+tags:
+- name: ComplianceService
+paths:
+  /v1/compliance/aggregatedresults:
+    get:
+      operationId: GetAggregatedResults
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComplianceAggregationResponse'
+      parameters:
+      - name: groupBy
+        in: query
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - UNKNOWN
+            - STANDARD
+            - CLUSTER
+            - CATEGORY
+            - CONTROL
+            - NAMESPACE
+            - NODE
+            - DEPLOYMENT
+            - CHECK
+      - name: unit
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - UNKNOWN
+          - STANDARD
+          - CLUSTER
+          - CATEGORY
+          - CONTROL
+          - NAMESPACE
+          - NODE
+          - DEPLOYMENT
+          - CHECK
+          default: UNKNOWN
+      - name: where.query
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: where.pagination.limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: where.pagination.offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: where.pagination.sort_option.field
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: where.pagination.sort_option.reversed
+        in: query
+        required: false
+        schema:
+          type: boolean
+          format: boolean
+      tags:
+      - ComplianceService
+  /v1/compliance/results:
+    get:
+      operationId: GetComplianceControlResults
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1ComplianceControlResultsResponse'
+      parameters:
+      - name: query
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: pagination.limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pagination.offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pagination.sort_option.field
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: pagination.sort_option.reversed
+        in: query
+        required: false
+        schema:
+          type: boolean
+          format: boolean
+      tags:
+      - ComplianceService
+  /v1/compliance/runresults:
+    get:
+      operationId: GetRunResults
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1GetComplianceRunResultsResponse'
+      parameters:
+      - name: clusterId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: standardId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: runId
+        description: "Specifies the run ID for which to return results. If empty, the most recent run is returned.\nCAVEAT: Setting this field circumvents the results cache on the server-side, which may lead to significantly\n        increased memory pressure and decreased performance."
+        in: query
+        required: false
+        schema:
+          type: string
+      tags:
+      - ComplianceService
+  /v1/compliance/standards:
+    get:
+      operationId: GetStandards
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1GetComplianceStandardsResponse'
+      tags:
+      - ComplianceService
+  /v1/compliance/standards/{id}:
+    get:
+      operationId: GetStandard
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1GetComplianceStandardResponse'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - ComplianceService
+components:
+  schemas:
+    ComplianceResultValueEvidence:
+      type: object
+      properties:
+        state:
+          $ref: '#/components/schemas/storageComplianceState'
+        message:
+          type: string
+        messageId:
+          type: integer
+          format: int32
+    storageOrchestratorMetadata:
+      type: object
+      properties:
+        version:
+          type: string
+        buildDate:
+          type: string
+          format: date-time
+        apiVersions:
+          type: array
+          items:
+            type: string
+    storageAWSProviderMetadata:
+      type: object
+      properties:
+        accountId:
+          type: string
+    SecurityContextSELinux:
+      type: object
+      properties:
+        user:
+          type: string
+        role:
+          type: string
+        type:
+          type: string
+        level:
+          type: string
+    storageComplianceControlResult:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/storageComplianceResource'
+        controlId:
+          type: string
+        value:
+          $ref: '#/components/schemas/storageComplianceResultValue'
+    storageCollectionMethod:
+      type: string
+      enum:
+      - UNSET_COLLECTION
+      - NO_COLLECTION
+      - KERNEL_MODULE
+      - EBPF
+      default: UNSET_COLLECTION
+    storageAdmissionControllerConfig:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          format: boolean
+        timeoutSeconds:
+          type: integer
+          format: int32
+        scanInline:
+          type: boolean
+          format: boolean
+        disableBypass:
+          type: boolean
+          format: boolean
+    storageImageName:
+      type: object
+      properties:
+        registry:
+          type: string
+        remote:
+          type: string
+        tag:
+          type: string
+        fullName:
+          type: string
+    ClusterUpgradeStatusUpgradeProcessStatus:
+      type: object
+      properties:
+        active:
+          type: boolean
+          format: boolean
+        id:
+          type: string
+        targetVersion:
+          type: string
+        upgraderImage:
+          type: string
+        initiatedAt:
+          type: string
+          format: date-time
+        progress:
+          $ref: '#/components/schemas/storageUpgradeProgress'
+    storageDynamicClusterConfig:
+      type: object
+      properties:
+        admissionControllerConfig:
+          $ref: '#/components/schemas/storageAdmissionControllerConfig'
+        registryOverride:
+          type: string
+    storageEmbeddedSecret:
+      type: object
+      properties:
+        name:
+          type: string
+        path:
+          type: string
+    ComplianceResourceNodeName:
+      type: object
+      properties:
+        cluster:
+          $ref: '#/components/schemas/ComplianceResourceClusterName'
+        id:
+          type: string
+        name:
+          type: string
+    v1ComplianceControlGroup:
+      type: object
+      properties:
+        id:
+          type: string
+        standardId:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        numImplementedChecks:
+          type: integer
+          format: int32
+    storageClusterType:
+      type: string
+      enum:
+      - GENERIC_CLUSTER
+      - KUBERNETES_CLUSTER
+      - OPENSHIFT_CLUSTER
+      default: GENERIC_CLUSTER
+    storageContainerInstance:
+      type: object
+      properties:
+        instanceId:
+          $ref: '#/components/schemas/storageContainerInstanceID'
+        containingPodId:
+          type: string
+          description: The pod containing this container instance (kubernetes only).
+        containerIps:
+          type: array
+          items:
+            type: string
+          description: The IP addresses of this container.
+        started:
+          type: string
+          format: date-time
+          title: The start time of the container
+      description: ContainerInstanceID allows to uniquely identify a container within a cluster.
+    storageComplianceState:
+      type: string
+      enum:
+      - COMPLIANCE_STATE_UNKNOWN
+      - COMPLIANCE_STATE_SKIP
+      - COMPLIANCE_STATE_NOTE
+      - COMPLIANCE_STATE_SUCCESS
+      - COMPLIANCE_STATE_FAILURE
+      - COMPLIANCE_STATE_ERROR
+      default: COMPLIANCE_STATE_UNKNOWN
+    v1ComplianceControlResultsResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageComplianceControlResult'
+    v1GetComplianceStandardsResponse:
+      type: object
+      properties:
+        standards:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ComplianceStandardMetadata'
+    storagePortConfig:
+      type: object
+      properties:
+        name:
+          type: string
+        containerPort:
+          type: integer
+          format: int32
+        protocol:
+          type: string
+        exposure:
+          $ref: '#/components/schemas/PortConfigExposureLevel'
+        exposedPort:
+          type: integer
+          format: int32
+        exposureInfos:
+          type: array
+          items:
+            $ref: '#/components/schemas/PortConfigExposureInfo'
+      title: 'Next Available Tag: 6'
+    EnvironmentConfigEnvVarSource:
+      type: string
+      enum:
+      - UNSET
+      - RAW
+      - SECRET_KEY
+      - CONFIG_MAP_KEY
+      - FIELD
+      - RESOURCE_FIELD
+      - UNKNOWN
+      default: UNSET
+      title: For any update to EnvVarSource, please also update 'ui/src/messages/common.js'
+    v1ComplianceControl:
+      type: object
+      properties:
+        id:
+          type: string
+        standardId:
+          type: string
+        groupId:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        implemented:
+          type: boolean
+          format: boolean
+        interpretationText:
+          type: string
+    ComplianceResourceDeploymentName:
+      type: object
+      properties:
+        cluster:
+          $ref: '#/components/schemas/ComplianceResourceClusterName'
+        id:
+          type: string
+        name:
+          type: string
+        namespace:
+          type: string
+    storageTaint:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+        taintEffect:
+          $ref: '#/components/schemas/storageTaintEffect'
+    storageTolerationOperator:
+      type: string
+      enum:
+      - TOLERATION_OPERATION_UNKNOWN
+      - TOLERATION_OPERATOR_EXISTS
+      - TOLERATION_OPERATOR_EQUAL
+      default: TOLERATION_OPERATION_UNKNOWN
+    storageContainerInstanceID:
+      type: object
+      properties:
+        containerRuntime:
+          $ref: '#/components/schemas/storageContainerRuntime'
+        id:
+          type: string
+          description: The ID of the container, specific to the given runtime.
+        node:
+          type: string
+          description: The node on which this container runs.
+    storageUpgradeProgress:
+      type: object
+      properties:
+        upgradeState:
+          $ref: '#/components/schemas/UpgradeProgressUpgradeState'
+        upgradeStatusDetail:
+          type: string
+        since:
+          type: string
+          format: date-time
+    ComplianceRunResultsEntityResults:
+      type: object
+      properties:
+        controlResults:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/storageComplianceResultValue'
+    storageCluster:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/storageClusterType'
+        mainImage:
+          type: string
+        collectorImage:
+          type: string
+        centralApiEndpoint:
+          type: string
+        runtimeSupport:
+          type: boolean
+          format: boolean
+        monitoringEndpoint:
+          type: string
+        collectionMethod:
+          $ref: '#/components/schemas/storageCollectionMethod'
+        DEPRECATEDProviderMetadata:
+          $ref: '#/components/schemas/storageProviderMetadata'
+        admissionController:
+          type: boolean
+          format: boolean
+        DEPRECATEDOrchestratorMetadata:
+          $ref: '#/components/schemas/storageOrchestratorMetadata'
+        status:
+          $ref: '#/components/schemas/storageClusterStatus'
+        dynamicConfig:
+          $ref: '#/components/schemas/storageDynamicClusterConfig'
+        tolerationsConfig:
+          $ref: '#/components/schemas/storageTolerationsConfig'
+        priority:
+          type: string
+          format: int64
+    ComplianceResourceClusterName:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    v1GetComplianceStandardResponse:
+      type: object
+      properties:
+        standard:
+          $ref: '#/components/schemas/v1ComplianceStandard'
+    ComplianceAggregationSource:
+      type: object
+      properties:
+        clusterId:
+          type: string
+        standardId:
+          type: string
+        successfulRun:
+          $ref: '#/components/schemas/storageComplianceRunMetadata'
+        failedRuns:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageComplianceRunMetadata'
+      title: 'Next available tag: 5'
+    storageContainer:
+      type: object
+      properties:
+        id:
+          type: string
+        config:
+          $ref: '#/components/schemas/storageContainerConfig'
+        image:
+          $ref: '#/components/schemas/storageContainerImage'
+        securityContext:
+          $ref: '#/components/schemas/storageSecurityContext'
+        volumes:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageVolume'
+        ports:
+          type: array
+          items:
+            $ref: '#/components/schemas/storagePortConfig'
+        secrets:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageEmbeddedSecret'
+        resources:
+          $ref: '#/components/schemas/storageResources'
+        instances:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageContainerInstance'
+        name:
+          type: string
+    PortConfigExposureInfo:
+      type: object
+      properties:
+        level:
+          $ref: '#/components/schemas/PortConfigExposureLevel'
+        serviceName:
+          type: string
+          title: only set if level is not HOST
+        serviceId:
+          type: string
+        serviceClusterIp:
+          type: string
+        servicePort:
+          type: integer
+          format: int32
+        nodePort:
+          type: integer
+          format: int32
+          title: only set if level is HOST, NODE, or EXTERNAL
+        externalIps:
+          type: array
+          items:
+            type: string
+          title: only set if level is EXTERNAL
+        externalHostnames:
+          type: array
+          items:
+            type: string
+    storageResources:
+      type: object
+      properties:
+        cpuCoresRequest:
+          type: number
+          format: float
+        cpuCoresLimit:
+          type: number
+          format: float
+        memoryMbRequest:
+          type: number
+          format: float
+        memoryMbLimit:
+          type: number
+          format: float
+    storageComplianceResource:
+      type: object
+      properties:
+        cluster:
+          $ref: '#/components/schemas/ComplianceResourceClusterName'
+        deployment:
+          $ref: '#/components/schemas/ComplianceResourceDeploymentName'
+        node:
+          $ref: '#/components/schemas/ComplianceResourceNodeName'
+        image:
+          $ref: '#/components/schemas/storageImageName'
+    LabelSelectorRequirement:
+      type: object
+      properties:
+        key:
+          type: string
+        op:
+          $ref: '#/components/schemas/storageLabelSelectorOperator'
+        values:
+          type: array
+          items:
+            type: string
+      title: 'Next available tag: 4'
+    ClusterUpgradeStatusUpgradability:
+      type: string
+      enum:
+      - UNSET
+      - UP_TO_DATE
+      - MANUAL_UPGRADE_REQUIRED
+      - AUTO_UPGRADE_POSSIBLE
+      - SENSOR_VERSION_HIGHER
+      default: UNSET
+      description: ' - SENSOR_VERSION_HIGHER: SENSOR_VERSION_HIGHER occurs when we detect that the sensor
+
+        is running a newer version than this Central. This is unexpected,
+
+        but can occur depending on the patches a customer does.
+
+        In this case, we will NOT automatically "upgrade" the sensor,
+
+        since that would be a downgrade, even if the autoupgrade setting is
+
+        on. The user will be allowed to manually trigger the upgrade, but they are
+
+        strongly discouraged from doing so without upgrading Central first, since this
+
+        is an unsupported configuration.'
+    storageSecurityContext:
+      type: object
+      properties:
+        privileged:
+          type: boolean
+          format: boolean
+        selinux:
+          $ref: '#/components/schemas/SecurityContextSELinux'
+        dropCapabilities:
+          type: array
+          items:
+            type: string
+        addCapabilities:
+          type: array
+          items:
+            type: string
+        readOnlyRootFilesystem:
+          type: boolean
+          format: boolean
+    storageAzureProviderMetadata:
+      type: object
+      properties:
+        subscriptionId:
+          type: string
+    storageVolume:
+      type: object
+      properties:
+        name:
+          type: string
+        source:
+          type: string
+        destination:
+          type: string
+        readOnly:
+          type: boolean
+          format: boolean
+        type:
+          type: string
+    UpgradeProgressUpgradeState:
+      type: string
+      enum:
+      - UPGRADE_INITIALIZING
+      - UPGRADER_LAUNCHING
+      - UPGRADER_LAUNCHED
+      - PRE_FLIGHT_CHECKS_COMPLETE
+      - UPGRADE_OPERATIONS_DONE
+      - UPGRADE_COMPLETE
+      - UPGRADE_INITIALIZATION_ERROR
+      - PRE_FLIGHT_CHECKS_FAILED
+      - UPGRADE_ERROR_ROLLING_BACK
+      - UPGRADE_ERROR_ROLLED_BACK
+      - UPGRADE_ERROR_ROLLBACK_FAILED
+      - UPGRADE_ERROR_UNKNOWN
+      - UPGRADE_TIMED_OUT
+      default: UPGRADE_INITIALIZING
+      description: " - UPGRADER_LAUNCHING: In-progress states.\n - UPGRADE_COMPLETE: The success state.\nPLEASE NUMBER ALL IN-PROGRESS STATES ABOVE THIS\nAND ALL ERROR STATES BELOW THIS.\n - UPGRADE_INITIALIZATION_ERROR: Error states."
+    storageTolerationsConfig:
+      type: object
+      properties:
+        disabled:
+          type: boolean
+          format: boolean
+    v1ComplianceStandard:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ComplianceStandardMetadata'
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ComplianceControlGroup'
+        controls:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ComplianceControl'
+    storageContainerRuntime:
+      type: string
+      enum:
+      - UNKNOWN_CONTAINER_RUNTIME
+      - DOCKER_CONTAINER_RUNTIME
+      - CRIO_CONTAINER_RUNTIME
+      default: UNKNOWN_CONTAINER_RUNTIME
+    PortConfigExposureLevel:
+      type: string
+      enum:
+      - UNSET
+      - EXTERNAL
+      - NODE
+      - INTERNAL
+      - HOST
+      default: UNSET
+    storageComplianceResultValue:
+      type: object
+      properties:
+        evidence:
+          type: array
+          items:
+            $ref: '#/components/schemas/ComplianceResultValueEvidence'
+        overallState:
+          $ref: '#/components/schemas/storageComplianceState'
+    v1ComplianceAggregationResult:
+      type: object
+      properties:
+        aggregationKeys:
+          type: array
+          items:
+            $ref: '#/components/schemas/ComplianceAggregationAggregationKey'
+        unit:
+          $ref: '#/components/schemas/v1ComplianceAggregationScope'
+        numPassing:
+          type: integer
+          format: int32
+        numFailing:
+          type: integer
+          format: int32
+      title: 'Next available tag: 5'
+    v1GetComplianceRunResultsResponse:
+      type: object
+      properties:
+        results:
+          $ref: '#/components/schemas/storageComplianceRunResults'
+        failedRuns:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageComplianceRunMetadata'
+    ContainerConfigEnvironmentConfig:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+        envVarSource:
+          $ref: '#/components/schemas/EnvironmentConfigEnvVarSource'
+    storageComplianceDomain:
+      type: object
+      properties:
+        cluster:
+          $ref: '#/components/schemas/storageCluster'
+        nodes:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/storageNode'
+        deployments:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/storageDeployment'
+    storageContainerRuntimeInfo:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/storageContainerRuntime'
+        version:
+          type: string
+    ComplianceAggregationResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ComplianceAggregationResult'
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/ComplianceAggregationSource'
+      title: 'Next available tag: 3'
+    storageNode:
+      type: object
+      properties:
+        id:
+          type: string
+          description: A unique ID identifying this node.
+        name:
+          type: string
+          description: The (host)name of the node. Might or might not be the same as ID.
+        taints:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageTaint'
+          title: Taints on the host
+        clusterId:
+          type: string
+        clusterName:
+          type: string
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+        annotations:
+          type: object
+          additionalProperties:
+            type: string
+        internalIpAddresses:
+          type: array
+          items:
+            type: string
+          title: node internal IP addresses
+        externalIpAddresses:
+          type: array
+          items:
+            type: string
+          title: node external IP addresses
+        containerRuntimeVersion:
+          type: string
+          title: From NodeInfo
+        containerRuntime:
+          $ref: '#/components/schemas/storageContainerRuntimeInfo'
+        kernelVersion:
+          type: string
+        osImage:
+          type: string
+        joinedAt:
+          type: string
+          format: date-time
+          title: When the cluster reported the node was added
+        kubeletVersion:
+          type: string
+      title: 'Node represents information about a node in the cluster.
+
+        next available tag: 16'
+    v1ComplianceAggregationScope:
+      type: string
+      enum:
+      - UNKNOWN
+      - STANDARD
+      - CLUSTER
+      - CATEGORY
+      - CONTROL
+      - NAMESPACE
+      - NODE
+      - DEPLOYMENT
+      - CHECK
+      default: UNKNOWN
+    storageContainerConfig:
+      type: object
+      properties:
+        env:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContainerConfigEnvironmentConfig'
+        command:
+          type: array
+          items:
+            type: string
+        args:
+          type: array
+          items:
+            type: string
+        directory:
+          type: string
+        user:
+          type: string
+        uid:
+          type: string
+          format: int64
+    storageToleration:
+      type: object
+      properties:
+        key:
+          type: string
+        operator:
+          $ref: '#/components/schemas/storageTolerationOperator'
+        value:
+          type: string
+        taintEffect:
+          $ref: '#/components/schemas/storageTaintEffect'
+    ComplianceAggregationAggregationKey:
+      type: object
+      properties:
+        scope:
+          $ref: '#/components/schemas/v1ComplianceAggregationScope'
+        id:
+          type: string
+      title: 'Next available tag: 3'
+    storageClusterUpgradeStatus:
+      type: object
+      properties:
+        upgradability:
+          $ref: '#/components/schemas/ClusterUpgradeStatusUpgradability'
+        upgradabilityStatusReason:
+          type: string
+        mostRecentProcess:
+          $ref: '#/components/schemas/ClusterUpgradeStatusUpgradeProcessStatus'
+    storageLabelSelectorOperator:
+      type: string
+      enum:
+      - UNKNOWN
+      - IN
+      - NOT_IN
+      - EXISTS
+      - NOT_EXISTS
+      default: UNKNOWN
+    storageTaintEffect:
+      type: string
+      enum:
+      - UNKNOWN_TAINT_EFFECT
+      - NO_SCHEDULE_TAINT_EFFECT
+      - PREFER_NO_SCHEDULE_TAINT_EFFECT
+      - NO_EXECUTE_TAINT_EFFECT
+      default: UNKNOWN_TAINT_EFFECT
+    v1ComplianceStandardMetadata:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        numImplementedChecks:
+          type: integer
+          format: int32
+    storageLabelSelector:
+      type: object
+      properties:
+        matchLabels:
+          type: object
+          additionalProperties:
+            type: string
+          description: This is actually a oneof, but we can't make it one due to backwards compatibility constraints.
+        requirements:
+          type: array
+          items:
+            $ref: '#/components/schemas/LabelSelectorRequirement'
+      title: 'Next available tag: 3'
+    storageClusterStatus:
+      type: object
+      properties:
+        sensorVersion:
+          type: string
+        lastContact:
+          type: string
+          format: date-time
+        providerMetadata:
+          $ref: '#/components/schemas/storageProviderMetadata'
+        orchestratorMetadata:
+          $ref: '#/components/schemas/storageOrchestratorMetadata'
+        upgradeStatus:
+          $ref: '#/components/schemas/storageClusterUpgradeStatus'
+    storageContainerImage:
+      type: object
+      properties:
+        id:
+          type: string
+          title: These tags maintain backwards compatibiltiy with the previously embedded storage.Image
+        name:
+          $ref: '#/components/schemas/storageImageName'
+        notPullable:
+          type: boolean
+          format: boolean
+    storageComplianceRunMetadata:
+      type: object
+      properties:
+        runId:
+          type: string
+        standardId:
+          type: string
+        clusterId:
+          type: string
+        startTimestamp:
+          type: string
+          format: date-time
+        finishTimestamp:
+          type: string
+          format: date-time
+        success:
+          type: boolean
+          format: boolean
+        errorMessage:
+          type: string
+      title: 'Next available tag: 5'
+    storageComplianceRunResults:
+      type: object
+      properties:
+        domain:
+          $ref: '#/components/schemas/storageComplianceDomain'
+        runMetadata:
+          $ref: '#/components/schemas/storageComplianceRunMetadata'
+        clusterResults:
+          $ref: '#/components/schemas/ComplianceRunResultsEntityResults'
+        nodeResults:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ComplianceRunResultsEntityResults'
+        deploymentResults:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ComplianceRunResultsEntityResults'
+      title: 'Next available tag: 6'
+    storageDeployment:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        hash:
+          type: string
+          format: uint64
+        type:
+          type: string
+        namespace:
+          type: string
+        namespaceId:
+          type: string
+        replicas:
+          type: string
+          format: int64
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+        podLabels:
+          type: object
+          additionalProperties:
+            type: string
+        labelSelector:
+          $ref: '#/components/schemas/storageLabelSelector'
+        created:
+          type: string
+          format: date-time
+        clusterId:
+          type: string
+        clusterName:
+          type: string
+        containers:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageContainer'
+        annotations:
+          type: object
+          additionalProperties:
+            type: string
+        priority:
+          type: string
+          format: int64
+        inactive:
+          type: boolean
+          format: boolean
+        imagePullSecrets:
+          type: array
+          items:
+            type: string
+        serviceAccount:
+          type: string
+        automountServiceAccountToken:
+          type: boolean
+          format: boolean
+        hostNetwork:
+          type: boolean
+          format: boolean
+        tolerations:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageToleration'
+        ports:
+          type: array
+          items:
+            $ref: '#/components/schemas/storagePortConfig'
+        stateTimestamp:
+          type: string
+          format: int64
+      title: 'Next available tag: 28'
+    storageProviderMetadata:
+      type: object
+      properties:
+        region:
+          type: string
+        zone:
+          type: string
+        google:
+          $ref: '#/components/schemas/storageGoogleProviderMetadata'
+        aws:
+          $ref: '#/components/schemas/storageAWSProviderMetadata'
+        azure:
+          $ref: '#/components/schemas/storageAzureProviderMetadata'
+        verified:
+          type: boolean
+          format: boolean
+    storageGoogleProviderMetadata:
+      type: object
+      properties:
+        project:
+          type: string
+        clusterName:
+          type: string
+  securitySchemes:
+    ApiToken:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'StackRox API token. Format: Bearer {token}'

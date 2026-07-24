@@ -1,0 +1,164 @@
+openapi: 3.0.0
+info:
+  title: API Reference AlertService NodeService API
+  version: '1'
+  description: API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.
+  contact:
+    email: support@stackrox.com
+    url: https://www.stackrox.io/
+  license:
+    name: All Rights Reserved
+    url: https://www.stackrox.com/
+servers:
+- url: https://{central-host}
+  description: StackRox Central API server
+  variables:
+    central-host:
+      default: stackrox.localhost
+      description: StackRox Central hostname or IP
+security:
+- ApiToken: []
+tags:
+- name: NodeService
+paths:
+  /v1/nodes/{clusterId}:
+    get:
+      operationId: ListNodes
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1ListNodesResponse'
+      parameters:
+      - name: clusterId
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - NodeService
+  /v1/nodes/{clusterId}/{nodeId}:
+    get:
+      operationId: GetNode
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/storageNode'
+      parameters:
+      - name: clusterId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: nodeId
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - NodeService
+components:
+  schemas:
+    storageNode:
+      type: object
+      properties:
+        id:
+          type: string
+          description: A unique ID identifying this node.
+        name:
+          type: string
+          description: The (host)name of the node. Might or might not be the same as ID.
+        taints:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageTaint'
+          title: Taints on the host
+        clusterId:
+          type: string
+        clusterName:
+          type: string
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+        annotations:
+          type: object
+          additionalProperties:
+            type: string
+        internalIpAddresses:
+          type: array
+          items:
+            type: string
+          title: node internal IP addresses
+        externalIpAddresses:
+          type: array
+          items:
+            type: string
+          title: node external IP addresses
+        containerRuntimeVersion:
+          type: string
+          title: From NodeInfo
+        containerRuntime:
+          $ref: '#/components/schemas/storageContainerRuntimeInfo'
+        kernelVersion:
+          type: string
+        osImage:
+          type: string
+        joinedAt:
+          type: string
+          format: date-time
+          title: When the cluster reported the node was added
+        kubeletVersion:
+          type: string
+      title: 'Node represents information about a node in the cluster.
+
+        next available tag: 16'
+    storageTaint:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+        taintEffect:
+          $ref: '#/components/schemas/storageTaintEffect'
+    storageTaintEffect:
+      type: string
+      enum:
+      - UNKNOWN_TAINT_EFFECT
+      - NO_SCHEDULE_TAINT_EFFECT
+      - PREFER_NO_SCHEDULE_TAINT_EFFECT
+      - NO_EXECUTE_TAINT_EFFECT
+      default: UNKNOWN_TAINT_EFFECT
+    storageContainerRuntime:
+      type: string
+      enum:
+      - UNKNOWN_CONTAINER_RUNTIME
+      - DOCKER_CONTAINER_RUNTIME
+      - CRIO_CONTAINER_RUNTIME
+      default: UNKNOWN_CONTAINER_RUNTIME
+    v1ListNodesResponse:
+      type: object
+      properties:
+        nodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageNode'
+    storageContainerRuntimeInfo:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/storageContainerRuntime'
+        version:
+          type: string
+  securitySchemes:
+    ApiToken:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'StackRox API token. Format: Bearer {token}'

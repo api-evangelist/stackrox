@@ -1,0 +1,194 @@
+openapi: 3.0.0
+info:
+  title: API Reference AlertService GroupService API
+  version: '1'
+  description: API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.
+  contact:
+    email: support@stackrox.com
+    url: https://www.stackrox.io/
+  license:
+    name: All Rights Reserved
+    url: https://www.stackrox.com/
+servers:
+- url: https://{central-host}
+  description: StackRox Central API server
+  variables:
+    central-host:
+      default: stackrox.localhost
+      description: StackRox Central hostname or IP
+security:
+- ApiToken: []
+tags:
+- name: GroupService
+paths:
+  /v1/groups:
+    get:
+      operationId: GetGroup
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/storageGroup'
+      parameters:
+      - name: authProviderId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: key
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: value
+        in: query
+        required: false
+        schema:
+          type: string
+      tags:
+      - GroupService
+    delete:
+      operationId: DeleteGroup
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1Empty'
+      parameters:
+      - name: authProviderId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: key
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: value
+        in: query
+        required: false
+        schema:
+          type: string
+      tags:
+      - GroupService
+    post:
+      operationId: CreateGroup
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1Empty'
+      requestBody:
+        $ref: '#/components/requestBodies/storageGroup'
+      tags:
+      - GroupService
+    put:
+      operationId: UpdateGroup
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1Empty'
+      requestBody:
+        $ref: '#/components/requestBodies/storageGroup'
+      tags:
+      - GroupService
+  /v1/groupsbatch:
+    post:
+      operationId: BatchUpdate
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1Empty'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1GroupBatchUpdateRequest'
+        required: true
+      tags:
+      - GroupService
+components:
+  schemas:
+    storageGroup:
+      type: object
+      properties:
+        props:
+          $ref: '#/components/schemas/storageGroupProperties'
+        roleName:
+          type: string
+          description: This is the name of the role that will apply to users in this group.
+      description: 'Group is a GroupProperties : Role mapping.'
+    v1Empty:
+      type: object
+    storageGroupProperties:
+      type: object
+      properties:
+        authProviderId:
+          type: string
+        key:
+          type: string
+        value:
+          type: string
+      description: 'GroupProperties defines the properties of a unique group.
+
+        Groups apply to users when their properties match. For instance:
+
+        If the GroupProperties on has a auth_provider_id, then that group applies to all users logged in
+
+        with that auth provider. If it has a claim key, then it applies to all users with that auth provider
+
+        and claim key, etc.
+
+        This can be used to create default groups/roles for All source provider (no fields set), a specific
+
+        auth provider (only auth_provider_id field set) etc.'
+    v1GroupBatchUpdateRequest:
+      type: object
+      properties:
+        previousGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageGroup'
+          description: 'Previous groups are the groups expected to be present in the store.
+
+            Performs a diff on the GroupProperties present in previous_groups and required_groups:
+
+            1) if in previous_groups but not required_groups, it gets deleted.
+
+            2) if in previous_groups and required_groups, it gets updated.
+
+            3) if not in previous_groups but in required_groups, it gets added.'
+        requiredGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageGroup'
+          description: Required groups are the groups we want to mutate the previous groups into.
+      title: 'GroupBatchUpdateRequest is an in transaction batch update to the groups present.
+
+        Next Available Tag: 3'
+  requestBodies:
+    storageGroup:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/storageGroup'
+      required: true
+  securitySchemes:
+    ApiToken:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'StackRox API token. Format: Bearer {token}'

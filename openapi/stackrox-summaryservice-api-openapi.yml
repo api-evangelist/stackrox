@@ -1,0 +1,64 @@
+openapi: 3.0.0
+info:
+  title: API Reference AlertService SummaryService API
+  version: '1'
+  description: API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.
+  contact:
+    email: support@stackrox.com
+    url: https://www.stackrox.io/
+  license:
+    name: All Rights Reserved
+    url: https://www.stackrox.com/
+servers:
+- url: https://{central-host}
+  description: StackRox Central API server
+  variables:
+    central-host:
+      default: stackrox.localhost
+      description: StackRox Central hostname or IP
+security:
+- ApiToken: []
+tags:
+- name: SummaryService
+paths:
+  /v1/summary/counts:
+    get:
+      operationId: GetSummaryCounts
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1SummaryCountsResponse'
+      tags:
+      - SummaryService
+components:
+  schemas:
+    v1SummaryCountsResponse:
+      type: object
+      properties:
+        numAlerts:
+          type: string
+          format: int64
+        numClusters:
+          type: string
+          format: int64
+        numDeployments:
+          type: string
+          format: int64
+        numImages:
+          type: string
+          format: int64
+        numSecrets:
+          type: string
+          format: int64
+        numNodes:
+          type: string
+          format: int64
+  securitySchemes:
+    ApiToken:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'StackRox API token. Format: Bearer {token}'

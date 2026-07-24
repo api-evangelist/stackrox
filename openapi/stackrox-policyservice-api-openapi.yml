@@ -1,0 +1,712 @@
+openapi: 3.0.0
+info:
+  title: API Reference AlertService PolicyService API
+  version: '1'
+  description: API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.
+  contact:
+    email: support@stackrox.com
+    url: https://www.stackrox.io/
+  license:
+    name: All Rights Reserved
+    url: https://www.stackrox.com/
+servers:
+- url: https://{central-host}
+  description: StackRox Central API server
+  variables:
+    central-host:
+      default: stackrox.localhost
+      description: StackRox Central hostname or IP
+security:
+- ApiToken: []
+tags:
+- name: PolicyService
+paths:
+  /v1/policies:
+    get:
+      summary: ListPolicies returns the list of policies.
+      operationId: ListPolicies
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1ListPoliciesResponse'
+      parameters:
+      - name: query
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: pagination.limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pagination.offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pagination.sort_option.field
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: pagination.sort_option.reversed
+        in: query
+        required: false
+        schema:
+          type: boolean
+          format: boolean
+      tags:
+      - PolicyService
+    post:
+      summary: PostPolicy creates a new policy.
+      operationId: PostPolicy
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/storagePolicy'
+      requestBody:
+        $ref: '#/components/requestBodies/storagePolicy'
+      tags:
+      - PolicyService
+  /v1/policies/dryrun:
+    post:
+      summary: DryRunPolicy evaluates the given policy and returns any alerts without creating the policy.
+      operationId: DryRunPolicy
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1DryRunResponse'
+      requestBody:
+        $ref: '#/components/requestBodies/storagePolicy'
+      tags:
+      - PolicyService
+  /v1/policies/reassess:
+    post:
+      summary: ReassessPolicies reevaluates all the policies.
+      operationId: ReassessPolicies
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1Empty'
+      tags:
+      - PolicyService
+  /v1/policies/{id}:
+    get:
+      summary: GetPolicy returns the requested policy by ID.
+      operationId: GetPolicy
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/storagePolicy'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - PolicyService
+    delete:
+      summary: DeletePolicy removes a policy by ID.
+      operationId: DeletePolicy
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1Empty'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - PolicyService
+    put:
+      summary: PutPolicy modifies an existing policy.
+      operationId: PutPolicy
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1Empty'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/storagePolicy'
+      tags:
+      - PolicyService
+    patch:
+      summary: PatchPolicy edits an existing policy.
+      operationId: PatchPolicy
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1Empty'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1PatchPolicyRequest'
+        required: true
+      tags:
+      - PolicyService
+  /v1/policies/{policyId}/notifiers:
+    patch:
+      summary: EnableDisablePolicyNotification enables or disables notifications for a policy by ID.
+      operationId: EnableDisablePolicyNotification
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1Empty'
+      parameters:
+      - name: policyId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1EnableDisablePolicyNotificationRequest'
+        required: true
+      tags:
+      - PolicyService
+  /v1/policyCategories:
+    get:
+      summary: GetPolicyCategories returns the policy categories.
+      operationId: GetPolicyCategories
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1PolicyCategoriesResponse'
+      tags:
+      - PolicyService
+  /v1/policyCategories/{category}:
+    delete:
+      summary: DeletePolicyCategory removes the given policy category.
+      operationId: DeletePolicyCategory
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1Empty'
+      parameters:
+      - name: category
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - PolicyService
+  /v1/policyCategories/{oldCategory}:
+    put:
+      summary: RenamePolicyCategory renames the given policy category.
+      operationId: RenamePolicyCategory
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1Empty'
+      parameters:
+      - name: oldCategory
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1RenamePolicyCategoryRequest'
+        required: true
+      tags:
+      - PolicyService
+components:
+  schemas:
+    storagePortPolicy:
+      type: object
+      properties:
+        port:
+          type: integer
+          format: int32
+        protocol:
+          type: string
+    storageComponent:
+      type: object
+      properties:
+        name:
+          type: string
+        version:
+          type: string
+    storageProcessPolicy:
+      type: object
+      properties:
+        name:
+          type: string
+        args:
+          type: string
+        ancestor:
+          type: string
+        uid:
+          type: string
+    storageScopeLabel:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+    v1PatchPolicyRequest:
+      type: object
+      properties:
+        id:
+          type: string
+        disabled:
+          type: boolean
+          format: boolean
+    storageNumericalPolicy:
+      type: object
+      properties:
+        op:
+          $ref: '#/components/schemas/storageComparator'
+        value:
+          type: number
+          format: float
+    EnvironmentConfigEnvVarSource:
+      type: string
+      enum:
+      - UNSET
+      - RAW
+      - SECRET_KEY
+      - CONFIG_MAP_KEY
+      - FIELD
+      - RESOURCE_FIELD
+      - UNKNOWN
+      default: UNSET
+      title: For any update to EnvVarSource, please also update 'ui/src/messages/common.js'
+    storageKeyValuePolicy:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+        envVarSource:
+          $ref: '#/components/schemas/EnvironmentConfigEnvVarSource'
+    v1Empty:
+      type: object
+    storageHostMountPolicy:
+      type: object
+      properties:
+        readOnly:
+          type: boolean
+          format: boolean
+    v1DryRunResponseAlert:
+      type: object
+      properties:
+        deployment:
+          type: string
+        violations:
+          type: array
+          items:
+            type: string
+    storageVolumePolicy:
+      type: object
+      properties:
+        name:
+          type: string
+        source:
+          type: string
+        destination:
+          type: string
+        readOnly:
+          type: boolean
+          format: boolean
+        type:
+          type: string
+    storagePermissionLevel:
+      type: string
+      enum:
+      - UNSET
+      - NONE
+      - DEFAULT
+      - ELEVATED_IN_NAMESPACE
+      - ELEVATED_CLUSTER_WIDE
+      - CLUSTER_ADMIN
+      default: UNSET
+      title: 'For any update to PermissionLevel, also update:
+
+        - central/searchbasedpolicies/builders/k8s_rbac.go
+
+        - ui/src/messages/common.js'
+    storageLifecycleStage:
+      type: string
+      enum:
+      - DEPLOY
+      - BUILD
+      - RUNTIME
+      default: DEPLOY
+    storageWhitelistImage:
+      type: object
+      properties:
+        name:
+          type: string
+    storageDockerfileLineRuleField:
+      type: object
+      properties:
+        instruction:
+          type: string
+        value:
+          type: string
+    storagePolicyFields:
+      type: object
+      properties:
+        imageName:
+          $ref: '#/components/schemas/storageImageNamePolicy'
+        imageAgeDays:
+          type: string
+          format: int64
+        lineRule:
+          $ref: '#/components/schemas/storageDockerfileLineRuleField'
+        cvss:
+          $ref: '#/components/schemas/storageNumericalPolicy'
+        cve:
+          type: string
+        component:
+          $ref: '#/components/schemas/storageComponent'
+        scanAgeDays:
+          type: string
+          format: int64
+        noScanExists:
+          type: boolean
+          format: boolean
+        env:
+          $ref: '#/components/schemas/storageKeyValuePolicy'
+        command:
+          type: string
+        args:
+          type: string
+        directory:
+          type: string
+        user:
+          type: string
+        volumePolicy:
+          $ref: '#/components/schemas/storageVolumePolicy'
+        portPolicy:
+          $ref: '#/components/schemas/storagePortPolicy'
+        requiredLabel:
+          $ref: '#/components/schemas/storageKeyValuePolicy'
+        requiredAnnotation:
+          $ref: '#/components/schemas/storageKeyValuePolicy'
+        disallowedAnnotation:
+          $ref: '#/components/schemas/storageKeyValuePolicy'
+        privileged:
+          type: boolean
+          format: boolean
+        dropCapabilities:
+          type: array
+          items:
+            type: string
+        addCapabilities:
+          type: array
+          items:
+            type: string
+        containerResourcePolicy:
+          $ref: '#/components/schemas/storageResourcePolicy'
+        processPolicy:
+          $ref: '#/components/schemas/storageProcessPolicy'
+        readOnlyRootFs:
+          type: boolean
+          format: boolean
+        fixedBy:
+          type: string
+        portExposurePolicy:
+          $ref: '#/components/schemas/storagePortExposurePolicy'
+        permissionPolicy:
+          $ref: '#/components/schemas/storagePermissionPolicy'
+        hostMountPolicy:
+          $ref: '#/components/schemas/storageHostMountPolicy'
+        whitelistEnabled:
+          type: boolean
+          format: boolean
+      title: 'Next Available Tag: 29'
+    storageWhitelist:
+      type: object
+      properties:
+        name:
+          type: string
+        deployment:
+          $ref: '#/components/schemas/storageWhitelistDeployment'
+        image:
+          $ref: '#/components/schemas/storageWhitelistImage'
+        expiration:
+          type: string
+          format: date-time
+    storageEnforcementAction:
+      type: string
+      enum:
+      - UNSET_ENFORCEMENT
+      - SCALE_TO_ZERO_ENFORCEMENT
+      - UNSATISFIABLE_NODE_CONSTRAINT_ENFORCEMENT
+      - KILL_POD_ENFORCEMENT
+      - FAIL_BUILD_ENFORCEMENT
+      default: UNSET_ENFORCEMENT
+    v1RenamePolicyCategoryRequest:
+      type: object
+      properties:
+        oldCategory:
+          type: string
+        newCategory:
+          type: string
+    storageListPolicy:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        severity:
+          $ref: '#/components/schemas/storageSeverity'
+        disabled:
+          type: boolean
+          format: boolean
+        lifecycleStages:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageLifecycleStage'
+        notifiers:
+          type: array
+          items:
+            type: string
+        lastUpdated:
+          type: string
+          format: date-time
+    DryRunResponseExcluded:
+      type: object
+      properties:
+        deployment:
+          type: string
+        whitelist:
+          $ref: '#/components/schemas/storageWhitelist'
+    storageScope:
+      type: object
+      properties:
+        cluster:
+          type: string
+        namespace:
+          type: string
+        label:
+          $ref: '#/components/schemas/storageScopeLabel'
+    PortConfigExposureLevel:
+      type: string
+      enum:
+      - UNSET
+      - EXTERNAL
+      - NODE
+      - INTERNAL
+      - HOST
+      default: UNSET
+    storageSeverity:
+      type: string
+      enum:
+      - UNSET_SEVERITY
+      - LOW_SEVERITY
+      - MEDIUM_SEVERITY
+      - HIGH_SEVERITY
+      - CRITICAL_SEVERITY
+      default: UNSET_SEVERITY
+    storageComparator:
+      type: string
+      enum:
+      - LESS_THAN
+      - LESS_THAN_OR_EQUALS
+      - EQUALS
+      - GREATER_THAN_OR_EQUALS
+      - GREATER_THAN
+      default: LESS_THAN
+    storageWhitelistDeployment:
+      type: object
+      properties:
+        name:
+          type: string
+        scope:
+          $ref: '#/components/schemas/storageScope'
+    v1ListPoliciesResponse:
+      type: object
+      properties:
+        policies:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageListPolicy'
+    storagePermissionPolicy:
+      type: object
+      properties:
+        permissionLevel:
+          $ref: '#/components/schemas/storagePermissionLevel'
+      description: K8S RBAC Permission level configuration.
+    v1DryRunResponse:
+      type: object
+      properties:
+        alerts:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1DryRunResponseAlert'
+        excluded:
+          type: array
+          items:
+            $ref: '#/components/schemas/DryRunResponseExcluded'
+    storagePolicy:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        rationale:
+          type: string
+        remediation:
+          type: string
+        disabled:
+          type: boolean
+          format: boolean
+        categories:
+          type: array
+          items:
+            type: string
+        fields:
+          $ref: '#/components/schemas/storagePolicyFields'
+        lifecycleStages:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageLifecycleStage'
+        whitelists:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageWhitelist'
+        scope:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageScope'
+        severity:
+          $ref: '#/components/schemas/storageSeverity'
+        enforcementActions:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageEnforcementAction'
+        notifiers:
+          type: array
+          items:
+            type: string
+        lastUpdated:
+          type: string
+          format: date-time
+    storageImageNamePolicy:
+      type: object
+      properties:
+        registry:
+          type: string
+        remote:
+          type: string
+        tag:
+          type: string
+    storageResourcePolicy:
+      type: object
+      properties:
+        cpuResourceRequest:
+          $ref: '#/components/schemas/storageNumericalPolicy'
+        cpuResourceLimit:
+          $ref: '#/components/schemas/storageNumericalPolicy'
+        memoryResourceRequest:
+          $ref: '#/components/schemas/storageNumericalPolicy'
+        memoryResourceLimit:
+          $ref: '#/components/schemas/storageNumericalPolicy'
+    storagePortExposurePolicy:
+      type: object
+      properties:
+        exposureLevels:
+          type: array
+          items:
+            $ref: '#/components/schemas/PortConfigExposureLevel'
+    v1EnableDisablePolicyNotificationRequest:
+      type: object
+      properties:
+        policyId:
+          type: string
+        notifierIds:
+          type: array
+          items:
+            type: string
+        disable:
+          type: boolean
+          format: boolean
+    v1PolicyCategoriesResponse:
+      type: object
+      properties:
+        categories:
+          type: array
+          items:
+            type: string
+  requestBodies:
+    storagePolicy:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/storagePolicy'
+      required: true
+  securitySchemes:
+    ApiToken:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'StackRox API token. Format: Bearer {token}'
