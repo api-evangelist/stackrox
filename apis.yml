@@ -6,7 +6,20 @@ description: >-
   environments across build, deploy, and runtime stages. The platform performs compliance checking against standards
   like CIS, NIST, and PCI-DSS, and manages security policies across Kubernetes clusters.
 url: https://raw.githubusercontent.com/api-evangelist/stackrox/refs/heads/main/apis.yml
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/stackrox.png
 tags:
   - Compliance
   - Container Security
@@ -20,26 +33,518 @@ created: '2026-03-26'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: stackrox:stackrox-api
-    name: StackRox API
-    description: >-
-      The StackRox REST API provides programmatic access to the StackRox Kubernetes Security Platform. Covers alerts,
-      deployments, images, policies, compliance, clusters, network policies, roles, API tokens, vulnerability
-      management, and system configuration.
-    humanURL: https://www.stackrox.io/docs/
-    tags:
-      - Compliance
-      - Container Security
-      - Kubernetes
-      - Runtime Protection
-      - Security
-    properties:
-      - type: Documentation
-        url: https://www.stackrox.io/docs/
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/stackrox/refs/heads/main/openapi/stackrox-openapi.yml
-      - type: GitHub
-        url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-alertservice-api
+  name: StackRox AlertService API
+  description: The AlertService API from StackRox — 9 operation(s) for alertservice.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - AlertService
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-alertservice-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-apitokenservice-api
+  name: StackRox APITokenService API
+  description: The APITokenService API from StackRox — 4 operation(s) for apitokenservice.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - APITokenService
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-apitokenservice-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-authproviderservice-api
+  name: StackRox AuthProviderService API
+  description: The AuthProviderService API from StackRox — 4 operation(s) for authproviderservice.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - AuthProviderService
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-authproviderservice-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-authservice-api
+  name: StackRox AuthService API
+  description: The AuthService API from StackRox — 1 operation(s) for authservice.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - AuthService
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-authservice-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-clustersservice-api
+  name: StackRox ClustersService API
+  description: The ClustersService API from StackRox — 2 operation(s) for clustersservice.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - ClustersService
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-clustersservice-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-compliancemanagementservice-api
+  name: StackRox ComplianceManagementService API
+  description: >-
+    The ComplianceManagementService API from StackRox — 3 operation(s) for compliancemanagementservice.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - ComplianceManagementService
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-compliancemanagementservice-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-complianceservice-api
+  name: StackRox ComplianceService API
+  description: The ComplianceService API from StackRox — 5 operation(s) for complianceservice.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - ComplianceService
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-complianceservice-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-configservice-api
+  name: StackRox ConfigService API
+  description: The ConfigService API from StackRox — 3 operation(s) for configservice.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - ConfigService
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-configservice-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-dbservice-api
+  name: StackRox DBService API
+  description: The DBService API from StackRox — 4 operation(s) for dbservice.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - DBService
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-dbservice-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-debugservice-api
+  name: StackRox DebugService API
+  description: The DebugService API from StackRox — 1 operation(s) for debugservice.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - DebugService
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-debugservice-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-deploymentservice-api
+  name: StackRox DeploymentService API
+  description: The DeploymentService API from StackRox — 6 operation(s) for deploymentservice.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - DeploymentService
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-deploymentservice-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-detectionservice-api
+  name: StackRox DetectionService API
+  description: The DetectionService API from StackRox — 3 operation(s) for detectionservice.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - DetectionService
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-detectionservice-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-externalbackupservice-api
+  name: StackRox ExternalBackupService API
+  description: The ExternalBackupService API from StackRox — 3 operation(s) for externalbackupservice.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - ExternalBackupService
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-externalbackupservice-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-featureflagservice-api
+  name: StackRox FeatureFlagService API
+  description: The FeatureFlagService API from StackRox — 1 operation(s) for featureflagservice.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - FeatureFlagService
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-featureflagservice-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-groupservice-api
+  name: StackRox GroupService API
+  description: The GroupService API from StackRox — 2 operation(s) for groupservice.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - GroupService
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-groupservice-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-imageintegrationservice-api
+  name: StackRox ImageIntegrationService API
+  description: >-
+    The ImageIntegrationService API from StackRox — 3 operation(s) for imageintegrationservice.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - ImageIntegrationService
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-imageintegrationservice-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-imageservice-api
+  name: StackRox ImageService API
+  description: The ImageService API from StackRox — 5 operation(s) for imageservice.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - ImageService
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-imageservice-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-licenseservice-api
+  name: StackRox LicenseService API
+  description: The LicenseService API from StackRox — 3 operation(s) for licenseservice.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - LicenseService
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-licenseservice-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-metadataservice-api
+  name: StackRox MetadataService API
+  description: The MetadataService API from StackRox — 1 operation(s) for metadataservice.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - MetadataService
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-metadataservice-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-namespaceservice-api
+  name: StackRox NamespaceService API
+  description: The NamespaceService API from StackRox — 2 operation(s) for namespaceservice.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - NamespaceService
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-namespaceservice-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-networkgraphservice-api
+  name: StackRox NetworkGraphService API
+  description: The NetworkGraphService API from StackRox — 1 operation(s) for networkgraphservice.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - NetworkGraphService
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-networkgraphservice-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-networkpolicyservice-api
+  name: StackRox NetworkPolicyService API
+  description: The NetworkPolicyService API from StackRox — 9 operation(s) for networkpolicyservice.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - NetworkPolicyService
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-networkpolicyservice-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-nodeservice-api
+  name: StackRox NodeService API
+  description: The NodeService API from StackRox — 2 operation(s) for nodeservice.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - NodeService
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-nodeservice-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-notifierservice-api
+  name: StackRox NotifierService API
+  description: The NotifierService API from StackRox — 3 operation(s) for notifierservice.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - NotifierService
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-notifierservice-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-pingservice-api
+  name: StackRox PingService API
+  description: The PingService API from StackRox — 1 operation(s) for pingservice.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - PingService
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-pingservice-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-policyservice-api
+  name: StackRox PolicyService API
+  description: The PolicyService API from StackRox — 8 operation(s) for policyservice.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - PolicyService
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-policyservice-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-probeuploadservice-api
+  name: StackRox ProbeUploadService API
+  description: The ProbeUploadService API from StackRox — 1 operation(s) for probeuploadservice.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - ProbeUploadService
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-probeuploadservice-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-processservice-api
+  name: StackRox ProcessService API
+  description: The ProcessService API from StackRox — 3 operation(s) for processservice.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - ProcessService
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-processservice-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-processwhitelistservice-api
+  name: StackRox ProcessWhitelistService API
+  description: >-
+    The ProcessWhitelistService API from StackRox — 3 operation(s) for processwhitelistservice.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - ProcessWhitelistService
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-processwhitelistservice-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-rbacservice-api
+  name: StackRox RbacService API
+  description: The RbacService API from StackRox — 6 operation(s) for rbacservice.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - RbacService
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-rbacservice-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-roleservice-api
+  name: StackRox RoleService API
+  description: The RoleService API from StackRox — 5 operation(s) for roleservice.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - RoleService
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-roleservice-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-scopedaccesscontrolservice-api
+  name: StackRox ScopedAccessControlService API
+  description: >-
+    The ScopedAccessControlService API from StackRox — 5 operation(s) for scopedaccesscontrolservice.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - ScopedAccessControlService
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-scopedaccesscontrolservice-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-searchservice-api
+  name: StackRox SearchService API
+  description: The SearchService API from StackRox — 3 operation(s) for searchservice.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - SearchService
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-searchservice-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-secretservice-api
+  name: StackRox SecretService API
+  description: The SecretService API from StackRox — 3 operation(s) for secretservice.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - SecretService
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-secretservice-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-sensorupgradeservice-api
+  name: StackRox SensorUpgradeService API
+  description: The SensorUpgradeService API from StackRox — 2 operation(s) for sensorupgradeservice.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - SensorUpgradeService
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-sensorupgradeservice-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-serviceaccountservice-api
+  name: StackRox ServiceAccountService API
+  description: The ServiceAccountService API from StackRox — 2 operation(s) for serviceaccountservice.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - ServiceAccountService
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-serviceaccountservice-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-serviceidentityservice-api
+  name: StackRox ServiceIdentityService API
+  description: >-
+    The ServiceIdentityService API from StackRox — 2 operation(s) for serviceidentityservice.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - ServiceIdentityService
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-serviceidentityservice-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-summaryservice-api
+  name: StackRox SummaryService API
+  description: The SummaryService API from StackRox — 1 operation(s) for summaryservice.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - SummaryService
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-summaryservice-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-userservice-api
+  name: StackRox UserService API
+  description: The UserService API from StackRox — 3 operation(s) for userservice.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - UserService
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-userservice-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
 common:
   - type: AgenticAccess
     url: agentic-access/stackrox-agentic-access.yml
