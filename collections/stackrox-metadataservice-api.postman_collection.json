@@ -1,0 +1,149 @@
+{
+  "item": [
+    {
+      "id": "87b31b75-207d-425a-a9b1-fd3a770515eb",
+      "name": "MetadataService",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9a58daa6-9207-4105-afa9-25f1b0d4f88f",
+          "name": "Get Metadata",
+          "request": {
+            "name": "Get Metadata",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "metadata"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a11d075c-bcc3-4902-8ebb-c909fecfb031",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"string\",\n  \"buildFlavor\": \"string\",\n  \"releaseBuild\": false,\n  \"licenseStatus\": \"NONE\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "StackRox Central hostname or IP",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "stackrox.localhost",
+      "key": "central-host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{central-host}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "80def4db-0428-49b5-a9ee-d42db2622a44",
+    "name": "API Reference AlertService MetadataService API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.\n\nContact Support:\n Email: support@stackrox.com",
+      "type": "text/plain"
+    }
+  }
+}

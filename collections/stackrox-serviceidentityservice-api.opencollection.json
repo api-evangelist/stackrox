@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference AlertService ServiceIdentityService API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ServiceIdentityService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GetAuthorities returns the authorities currently in use.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/authorities"
+          },
+          "docs": "GetAuthorities returns the authorities currently in use."
+        },
+        {
+          "info": {
+            "name": "GetServiceIdentities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/serviceIdentities"
+          }
+        },
+        {
+          "info": {
+            "name": "CreateServiceIdentity creates a new key pair and certificate.\nThe key and certificate are not retained and can never be retrieved again.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/serviceIdentities",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "CreateServiceIdentity creates a new key pair and certificate.\nThe key and certificate are not retained and can never be retrieved again."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

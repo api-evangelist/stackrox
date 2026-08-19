@@ -1,0 +1,416 @@
+{
+  "item": [
+    {
+      "id": "361747a9-cdbc-4a8d-abff-fe42af9a3869",
+      "name": "ProcessWhitelistService",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f2162818-c421-424f-9181-eb6b3a0452d4",
+          "name": "AddToProcessWhitelists adds a list of process names to each of a list of process whitelists",
+          "request": {
+            "name": "AddToProcessWhitelists adds a list of process names to each of a list of process whitelists",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "processwhitelists"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"keys\": [\n    {\n      \"deploymentId\": \"<string>\",\n      \"containerName\": \"<string>\",\n      \"clusterId\": \"<string>\",\n      \"namespace\": \"<string>\"\n    },\n    {\n      \"deploymentId\": \"<string>\",\n      \"containerName\": \"<string>\",\n      \"clusterId\": \"<string>\",\n      \"namespace\": \"<string>\"\n    }\n  ],\n  \"addElements\": [\n    {\n      \"processName\": \"<string>\"\n    },\n    {\n      \"processName\": \"<string>\"\n    }\n  ],\n  \"removeElements\": [\n    {\n      \"processName\": \"<string>\"\n    },\n    {\n      \"processName\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a7f2b2f3-9960-4265-a8a3-5862d3795e07",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "processwhitelists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"keys\": [\n    {\n      \"deploymentId\": \"<string>\",\n      \"containerName\": \"<string>\",\n      \"clusterId\": \"<string>\",\n      \"namespace\": \"<string>\"\n    },\n    {\n      \"deploymentId\": \"<string>\",\n      \"containerName\": \"<string>\",\n      \"clusterId\": \"<string>\",\n      \"namespace\": \"<string>\"\n    }\n  ],\n  \"addElements\": [\n    {\n      \"processName\": \"<string>\"\n    },\n    {\n      \"processName\": \"<string>\"\n    }\n  ],\n  \"removeElements\": [\n    {\n      \"processName\": \"<string>\"\n    },\n    {\n      \"processName\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"whitelists\": [\n    {\n      \"id\": \"string\",\n      \"key\": {\n        \"deploymentId\": \"<string>\",\n        \"containerName\": \"<string>\",\n        \"clusterId\": \"<string>\",\n        \"namespace\": \"<string>\"\n      },\n      \"elements\": [\n        {\n          \"element\": {\n            \"processName\": \"<string>\"\n          },\n          \"auto\": false\n        },\n        {\n          \"element\": {\n            \"processName\": \"<string>\"\n          },\n          \"auto\": false\n        }\n      ],\n      \"elementGraveyard\": [\n        {\n          \"element\": {\n            \"processName\": \"<string>\"\n          },\n          \"auto\": true\n        },\n        {\n          \"element\": {\n            \"processName\": \"<string>\"\n          },\n          \"auto\": false\n        }\n      ],\n      \"created\": \"2001-11-13T08:44:32.942Z\",\n      \"userLockedTimestamp\": \"1976-06-04T09:14:43.065Z\",\n      \"stackRoxLockedTimestamp\": \"1956-10-25T11:58:01.582Z\",\n      \"lastUpdate\": \"1992-04-30T14:18:57.840Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"key\": {\n        \"deploymentId\": \"<string>\",\n        \"containerName\": \"<string>\",\n        \"clusterId\": \"<string>\",\n        \"namespace\": \"<string>\"\n      },\n      \"elements\": [\n        {\n          \"element\": {\n            \"processName\": \"<string>\"\n          },\n          \"auto\": false\n        },\n        {\n          \"element\": {\n            \"processName\": \"<string>\"\n          },\n          \"auto\": false\n        }\n      ],\n      \"elementGraveyard\": [\n        {\n          \"element\": {\n            \"processName\": \"<string>\"\n          },\n          \"auto\": false\n        },\n        {\n          \"element\": {\n            \"processName\": \"<string>\"\n          },\n          \"auto\": false\n        }\n      ],\n      \"created\": \"1982-04-24T18:44:50.909Z\",\n      \"userLockedTimestamp\": \"1976-03-19T18:43:22.149Z\",\n      \"stackRoxLockedTimestamp\": \"1962-09-27T09:34:10.243Z\",\n      \"lastUpdate\": \"1985-04-28T05:57:11.462Z\"\n    }\n  ],\n  \"errors\": [\n    {\n      \"error\": \"string\",\n      \"key\": {\n        \"deploymentId\": \"<string>\",\n        \"containerName\": \"<string>\",\n        \"clusterId\": \"<string>\",\n        \"namespace\": \"<string>\"\n      }\n    },\n    {\n      \"error\": \"string\",\n      \"key\": {\n        \"deploymentId\": \"<string>\",\n        \"containerName\": \"<string>\",\n        \"clusterId\": \"<string>\",\n        \"namespace\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4e6727d5-6bae-4272-89d2-eda5027c565f",
+          "name": "GetProcessWhitelistById returns the single process whitelist referenced by the given ID.",
+          "request": {
+            "name": "GetProcessWhitelistById returns the single process whitelist referenced by the given ID.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "processwhitelists",
+                "key"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "key.deploymentId",
+                  "value": "<string>",
+                  "description": "The idea is for the keys to be flexible.\nOnly certain combinations of these will be supported."
+                },
+                {
+                  "disabled": false,
+                  "key": "key.containerName",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "key.clusterId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "key.namespace",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d14fb87a-8339-4956-9387-b4ea82a47cd2",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "processwhitelists",
+                    "key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key.deploymentId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key.containerName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key.clusterId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key.namespace",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"key\": {\n    \"deploymentId\": \"<string>\",\n    \"containerName\": \"<string>\",\n    \"clusterId\": \"<string>\",\n    \"namespace\": \"<string>\"\n  },\n  \"elements\": [\n    {\n      \"element\": {\n        \"processName\": \"<string>\"\n      },\n      \"auto\": false\n    },\n    {\n      \"element\": {\n        \"processName\": \"<string>\"\n      },\n      \"auto\": false\n    }\n  ],\n  \"elementGraveyard\": [\n    {\n      \"element\": {\n        \"processName\": \"<string>\"\n      },\n      \"auto\": false\n    },\n    {\n      \"element\": {\n        \"processName\": \"<string>\"\n      },\n      \"auto\": true\n    }\n  ],\n  \"created\": \"2002-04-15T09:47:15.357Z\",\n  \"userLockedTimestamp\": \"1982-04-20T21:20:30.748Z\",\n  \"stackRoxLockedTimestamp\": \"2021-07-14T10:48:58.199Z\",\n  \"lastUpdate\": \"1962-04-09T08:53:03.783Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5b7c7a2c-00f5-4d78-9b7e-a05b8f747a00",
+          "name": "LockProcessWhitelists accepts a list of whitelist IDs, locks those whitelists, and returns the updated whitelist objects",
+          "request": {
+            "name": "LockProcessWhitelists accepts a list of whitelist IDs, locks those whitelists, and returns the updated whitelist objects",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "processwhitelists",
+                "lock"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"keys\": [\n    {\n      \"deploymentId\": \"<string>\",\n      \"containerName\": \"<string>\",\n      \"clusterId\": \"<string>\",\n      \"namespace\": \"<string>\"\n    },\n    {\n      \"deploymentId\": \"<string>\",\n      \"containerName\": \"<string>\",\n      \"clusterId\": \"<string>\",\n      \"namespace\": \"<string>\"\n    }\n  ],\n  \"locked\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6a66a57e-4c67-4782-a1d2-90aa56f25bfe",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "processwhitelists",
+                    "lock"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"keys\": [\n    {\n      \"deploymentId\": \"<string>\",\n      \"containerName\": \"<string>\",\n      \"clusterId\": \"<string>\",\n      \"namespace\": \"<string>\"\n    },\n    {\n      \"deploymentId\": \"<string>\",\n      \"containerName\": \"<string>\",\n      \"clusterId\": \"<string>\",\n      \"namespace\": \"<string>\"\n    }\n  ],\n  \"locked\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"whitelists\": [\n    {\n      \"id\": \"string\",\n      \"key\": {\n        \"deploymentId\": \"<string>\",\n        \"containerName\": \"<string>\",\n        \"clusterId\": \"<string>\",\n        \"namespace\": \"<string>\"\n      },\n      \"elements\": [\n        {\n          \"element\": {\n            \"processName\": \"<string>\"\n          },\n          \"auto\": true\n        },\n        {\n          \"element\": {\n            \"processName\": \"<string>\"\n          },\n          \"auto\": true\n        }\n      ],\n      \"elementGraveyard\": [\n        {\n          \"element\": {\n            \"processName\": \"<string>\"\n          },\n          \"auto\": false\n        },\n        {\n          \"element\": {\n            \"processName\": \"<string>\"\n          },\n          \"auto\": false\n        }\n      ],\n      \"created\": \"1984-10-03T13:12:01.082Z\",\n      \"userLockedTimestamp\": \"1966-06-19T19:43:28.904Z\",\n      \"stackRoxLockedTimestamp\": \"1951-11-26T16:52:58.771Z\",\n      \"lastUpdate\": \"1949-03-11T11:19:57.400Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"key\": {\n        \"deploymentId\": \"<string>\",\n        \"containerName\": \"<string>\",\n        \"clusterId\": \"<string>\",\n        \"namespace\": \"<string>\"\n      },\n      \"elements\": [\n        {\n          \"element\": {\n            \"processName\": \"<string>\"\n          },\n          \"auto\": false\n        },\n        {\n          \"element\": {\n            \"processName\": \"<string>\"\n          },\n          \"auto\": false\n        }\n      ],\n      \"elementGraveyard\": [\n        {\n          \"element\": {\n            \"processName\": \"<string>\"\n          },\n          \"auto\": false\n        },\n        {\n          \"element\": {\n            \"processName\": \"<string>\"\n          },\n          \"auto\": true\n        }\n      ],\n      \"created\": \"2002-07-19T07:15:43.705Z\",\n      \"userLockedTimestamp\": \"1962-07-19T03:20:49.200Z\",\n      \"stackRoxLockedTimestamp\": \"2013-03-18T15:37:13.613Z\",\n      \"lastUpdate\": \"1960-05-19T06:51:12.673Z\"\n    }\n  ],\n  \"errors\": [\n    {\n      \"error\": \"string\",\n      \"key\": {\n        \"deploymentId\": \"<string>\",\n        \"containerName\": \"<string>\",\n        \"clusterId\": \"<string>\",\n        \"namespace\": \"<string>\"\n      }\n    },\n    {\n      \"error\": \"string\",\n      \"key\": {\n        \"deploymentId\": \"<string>\",\n        \"containerName\": \"<string>\",\n        \"clusterId\": \"<string>\",\n        \"namespace\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "StackRox Central hostname or IP",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "stackrox.localhost",
+      "key": "central-host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{central-host}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "aca87a15-0280-458c-989a-00cf1bd00a91",
+    "name": "API Reference AlertService ProcessWhitelistService API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.\n\nContact Support:\n Email: support@stackrox.com",
+      "type": "text/plain"
+    }
+  }
+}

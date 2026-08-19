@@ -1,0 +1,1417 @@
+{
+  "item": [
+    {
+      "id": "e6d7cdec-3eac-46da-a644-3a13440b814a",
+      "name": "PolicyService",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "689ff78f-6f99-42cb-9d92-81c40d9ab3cd",
+          "name": "ListPolicies returns the list of policies.",
+          "request": {
+            "name": "ListPolicies returns the list of policies.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "policies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination.limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination.offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination.sort_option.field",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination.sort_option.reversed",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dca60151-4aa5-4521-9ef6-71db098df049",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pagination.limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pagination.offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pagination.sort_option.field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pagination.sort_option.reversed",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"policies\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"severity\": \"UNSET_SEVERITY\",\n      \"disabled\": true,\n      \"lifecycleStages\": [\n        \"DEPLOY\",\n        \"DEPLOY\"\n      ],\n      \"notifiers\": [\n        \"string\",\n        \"string\"\n      ],\n      \"lastUpdated\": \"2020-06-11T03:51:00.895Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"severity\": \"UNSET_SEVERITY\",\n      \"disabled\": false,\n      \"lifecycleStages\": [\n        \"DEPLOY\",\n        \"DEPLOY\"\n      ],\n      \"notifiers\": [\n        \"string\",\n        \"string\"\n      ],\n      \"lastUpdated\": \"1962-02-22T20:21:39.895Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1fc90a58-a91a-48db-9be6-85fe5e021ace",
+          "name": "PostPolicy creates a new policy.",
+          "request": {
+            "name": "PostPolicy creates a new policy.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "policies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"rationale\": \"<string>\",\n  \"remediation\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"categories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fields\": {\n    \"imageName\": {\n      \"registry\": \"<string>\",\n      \"remote\": \"<string>\",\n      \"tag\": \"<string>\"\n    },\n    \"imageAgeDays\": \"<int64>\",\n    \"lineRule\": {\n      \"instruction\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    \"cvss\": {\n      \"op\": \"LESS_THAN\",\n      \"value\": \"<float>\"\n    },\n    \"cve\": \"<string>\",\n    \"component\": {\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    \"scanAgeDays\": \"<int64>\",\n    \"noScanExists\": \"<boolean>\",\n    \"env\": {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"envVarSource\": \"UNSET\"\n    },\n    \"command\": \"<string>\",\n    \"args\": \"<string>\",\n    \"directory\": \"<string>\",\n    \"user\": \"<string>\",\n    \"volumePolicy\": {\n      \"name\": \"<string>\",\n      \"source\": \"<string>\",\n      \"destination\": \"<string>\",\n      \"readOnly\": \"<boolean>\",\n      \"type\": \"<string>\"\n    },\n    \"portPolicy\": {\n      \"port\": \"<integer>\",\n      \"protocol\": \"<string>\"\n    },\n    \"requiredLabel\": {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"envVarSource\": \"UNSET\"\n    },\n    \"requiredAnnotation\": {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"envVarSource\": \"UNSET\"\n    },\n    \"disallowedAnnotation\": {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"envVarSource\": \"UNSET\"\n    },\n    \"privileged\": \"<boolean>\",\n    \"dropCapabilities\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"addCapabilities\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"containerResourcePolicy\": {\n      \"cpuResourceRequest\": {\n        \"op\": \"LESS_THAN\",\n        \"value\": \"<float>\"\n      },\n      \"cpuResourceLimit\": {\n        \"op\": \"LESS_THAN\",\n        \"value\": \"<float>\"\n      },\n      \"memoryResourceRequest\": {\n        \"op\": \"LESS_THAN\",\n        \"value\": \"<float>\"\n      },\n      \"memoryResourceLimit\": {\n        \"op\": \"LESS_THAN\",\n        \"value\": \"<float>\"\n      }\n    },\n    \"processPolicy\": {\n      \"name\": \"<string>\",\n      \"args\": \"<string>\",\n      \"ancestor\": \"<string>\",\n      \"uid\": \"<string>\"\n    },\n    \"readOnlyRootFs\": \"<boolean>\",\n    \"fixedBy\": \"<string>\",\n    \"portExposurePolicy\": {\n      \"exposureLevels\": [\n        \"UNSET\",\n        \"UNSET\"\n      ]\n    },\n    \"permissionPolicy\": {\n      \"permissionLevel\": \"UNSET\"\n    },\n    \"hostMountPolicy\": {\n      \"readOnly\": \"<boolean>\"\n    },\n    \"whitelistEnabled\": \"<boolean>\"\n  },\n  \"lifecycleStages\": [\n    \"DEPLOY\",\n    \"DEPLOY\"\n  ],\n  \"whitelists\": [\n    {\n      \"name\": \"<string>\",\n      \"deployment\": {\n        \"name\": \"<string>\",\n        \"scope\": {\n          \"cluster\": \"<string>\",\n          \"namespace\": \"<string>\",\n          \"label\": {\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      },\n      \"image\": {\n        \"name\": \"<string>\"\n      },\n      \"expiration\": \"<dateTime>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"deployment\": {\n        \"name\": \"<string>\",\n        \"scope\": {\n          \"cluster\": \"<string>\",\n          \"namespace\": \"<string>\",\n          \"label\": {\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      },\n      \"image\": {\n        \"name\": \"<string>\"\n      },\n      \"expiration\": \"<dateTime>\"\n    }\n  ],\n  \"scope\": [\n    {\n      \"cluster\": \"<string>\",\n      \"namespace\": \"<string>\",\n      \"label\": {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    },\n    {\n      \"cluster\": \"<string>\",\n      \"namespace\": \"<string>\",\n      \"label\": {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    }\n  ],\n  \"severity\": \"UNSET_SEVERITY\",\n  \"enforcementActions\": [\n    \"UNSET_ENFORCEMENT\",\n    \"UNSET_ENFORCEMENT\"\n  ],\n  \"notifiers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"lastUpdated\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "feac808f-ae1e-4410-872c-621b26b876d6",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"rationale\": \"<string>\",\n  \"remediation\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"categories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fields\": {\n    \"imageName\": {\n      \"registry\": \"<string>\",\n      \"remote\": \"<string>\",\n      \"tag\": \"<string>\"\n    },\n    \"imageAgeDays\": \"<int64>\",\n    \"lineRule\": {\n      \"instruction\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    \"cvss\": {\n      \"op\": \"LESS_THAN\",\n      \"value\": \"<float>\"\n    },\n    \"cve\": \"<string>\",\n    \"component\": {\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    \"scanAgeDays\": \"<int64>\",\n    \"noScanExists\": \"<boolean>\",\n    \"env\": {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"envVarSource\": \"UNSET\"\n    },\n    \"command\": \"<string>\",\n    \"args\": \"<string>\",\n    \"directory\": \"<string>\",\n    \"user\": \"<string>\",\n    \"volumePolicy\": {\n      \"name\": \"<string>\",\n      \"source\": \"<string>\",\n      \"destination\": \"<string>\",\n      \"readOnly\": \"<boolean>\",\n      \"type\": \"<string>\"\n    },\n    \"portPolicy\": {\n      \"port\": \"<integer>\",\n      \"protocol\": \"<string>\"\n    },\n    \"requiredLabel\": {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"envVarSource\": \"UNSET\"\n    },\n    \"requiredAnnotation\": {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"envVarSource\": \"UNSET\"\n    },\n    \"disallowedAnnotation\": {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"envVarSource\": \"UNSET\"\n    },\n    \"privileged\": \"<boolean>\",\n    \"dropCapabilities\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"addCapabilities\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"containerResourcePolicy\": {\n      \"cpuResourceRequest\": {\n        \"op\": \"LESS_THAN\",\n        \"value\": \"<float>\"\n      },\n      \"cpuResourceLimit\": {\n        \"op\": \"LESS_THAN\",\n        \"value\": \"<float>\"\n      },\n      \"memoryResourceRequest\": {\n        \"op\": \"LESS_THAN\",\n        \"value\": \"<float>\"\n      },\n      \"memoryResourceLimit\": {\n        \"op\": \"LESS_THAN\",\n        \"value\": \"<float>\"\n      }\n    },\n    \"processPolicy\": {\n      \"name\": \"<string>\",\n      \"args\": \"<string>\",\n      \"ancestor\": \"<string>\",\n      \"uid\": \"<string>\"\n    },\n    \"readOnlyRootFs\": \"<boolean>\",\n    \"fixedBy\": \"<string>\",\n    \"portExposurePolicy\": {\n      \"exposureLevels\": [\n        \"UNSET\",\n        \"UNSET\"\n      ]\n    },\n    \"permissionPolicy\": {\n      \"permissionLevel\": \"UNSET\"\n    },\n    \"hostMountPolicy\": {\n      \"readOnly\": \"<boolean>\"\n    },\n    \"whitelistEnabled\": \"<boolean>\"\n  },\n  \"lifecycleStages\": [\n    \"DEPLOY\",\n    \"DEPLOY\"\n  ],\n  \"whitelists\": [\n    {\n      \"name\": \"<string>\",\n      \"deployment\": {\n        \"name\": \"<string>\",\n        \"scope\": {\n          \"cluster\": \"<string>\",\n          \"namespace\": \"<string>\",\n          \"label\": {\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      },\n      \"image\": {\n        \"name\": \"<string>\"\n      },\n      \"expiration\": \"<dateTime>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"deployment\": {\n        \"name\": \"<string>\",\n        \"scope\": {\n          \"cluster\": \"<string>\",\n          \"namespace\": \"<string>\",\n          \"label\": {\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      },\n      \"image\": {\n        \"name\": \"<string>\"\n      },\n      \"expiration\": \"<dateTime>\"\n    }\n  ],\n  \"scope\": [\n    {\n      \"cluster\": \"<string>\",\n      \"namespace\": \"<string>\",\n      \"label\": {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    },\n    {\n      \"cluster\": \"<string>\",\n      \"namespace\": \"<string>\",\n      \"label\": {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    }\n  ],\n  \"severity\": \"UNSET_SEVERITY\",\n  \"enforcementActions\": [\n    \"UNSET_ENFORCEMENT\",\n    \"UNSET_ENFORCEMENT\"\n  ],\n  \"notifiers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"lastUpdated\": \"<dateTime>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e7714d2f-30e1-48fe-9212-bb52294e8f85",
+          "name": "DryRunPolicy evaluates the given policy and returns any alerts without creating the policy.",
+          "request": {
+            "name": "DryRunPolicy evaluates the given policy and returns any alerts without creating the policy.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "policies",
+                "dryrun"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"rationale\": \"<string>\",\n  \"remediation\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"categories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fields\": {\n    \"imageName\": {\n      \"registry\": \"<string>\",\n      \"remote\": \"<string>\",\n      \"tag\": \"<string>\"\n    },\n    \"imageAgeDays\": \"<int64>\",\n    \"lineRule\": {\n      \"instruction\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    \"cvss\": {\n      \"op\": \"LESS_THAN\",\n      \"value\": \"<float>\"\n    },\n    \"cve\": \"<string>\",\n    \"component\": {\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    \"scanAgeDays\": \"<int64>\",\n    \"noScanExists\": \"<boolean>\",\n    \"env\": {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"envVarSource\": \"UNSET\"\n    },\n    \"command\": \"<string>\",\n    \"args\": \"<string>\",\n    \"directory\": \"<string>\",\n    \"user\": \"<string>\",\n    \"volumePolicy\": {\n      \"name\": \"<string>\",\n      \"source\": \"<string>\",\n      \"destination\": \"<string>\",\n      \"readOnly\": \"<boolean>\",\n      \"type\": \"<string>\"\n    },\n    \"portPolicy\": {\n      \"port\": \"<integer>\",\n      \"protocol\": \"<string>\"\n    },\n    \"requiredLabel\": {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"envVarSource\": \"UNSET\"\n    },\n    \"requiredAnnotation\": {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"envVarSource\": \"UNSET\"\n    },\n    \"disallowedAnnotation\": {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"envVarSource\": \"UNSET\"\n    },\n    \"privileged\": \"<boolean>\",\n    \"dropCapabilities\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"addCapabilities\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"containerResourcePolicy\": {\n      \"cpuResourceRequest\": {\n        \"op\": \"LESS_THAN\",\n        \"value\": \"<float>\"\n      },\n      \"cpuResourceLimit\": {\n        \"op\": \"LESS_THAN\",\n        \"value\": \"<float>\"\n      },\n      \"memoryResourceRequest\": {\n        \"op\": \"LESS_THAN\",\n        \"value\": \"<float>\"\n      },\n      \"memoryResourceLimit\": {\n        \"op\": \"LESS_THAN\",\n        \"value\": \"<float>\"\n      }\n    },\n    \"processPolicy\": {\n      \"name\": \"<string>\",\n      \"args\": \"<string>\",\n      \"ancestor\": \"<string>\",\n      \"uid\": \"<string>\"\n    },\n    \"readOnlyRootFs\": \"<boolean>\",\n    \"fixedBy\": \"<string>\",\n    \"portExposurePolicy\": {\n      \"exposureLevels\": [\n        \"UNSET\",\n        \"UNSET\"\n      ]\n    },\n    \"permissionPolicy\": {\n      \"permissionLevel\": \"UNSET\"\n    },\n    \"hostMountPolicy\": {\n      \"readOnly\": \"<boolean>\"\n    },\n    \"whitelistEnabled\": \"<boolean>\"\n  },\n  \"lifecycleStages\": [\n    \"DEPLOY\",\n    \"DEPLOY\"\n  ],\n  \"whitelists\": [\n    {\n      \"name\": \"<string>\",\n      \"deployment\": {\n        \"name\": \"<string>\",\n        \"scope\": {\n          \"cluster\": \"<string>\",\n          \"namespace\": \"<string>\",\n          \"label\": {\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      },\n      \"image\": {\n        \"name\": \"<string>\"\n      },\n      \"expiration\": \"<dateTime>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"deployment\": {\n        \"name\": \"<string>\",\n        \"scope\": {\n          \"cluster\": \"<string>\",\n          \"namespace\": \"<string>\",\n          \"label\": {\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      },\n      \"image\": {\n        \"name\": \"<string>\"\n      },\n      \"expiration\": \"<dateTime>\"\n    }\n  ],\n  \"scope\": [\n    {\n      \"cluster\": \"<string>\",\n      \"namespace\": \"<string>\",\n      \"label\": {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    },\n    {\n      \"cluster\": \"<string>\",\n      \"namespace\": \"<string>\",\n      \"label\": {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    }\n  ],\n  \"severity\": \"UNSET_SEVERITY\",\n  \"enforcementActions\": [\n    \"UNSET_ENFORCEMENT\",\n    \"UNSET_ENFORCEMENT\"\n  ],\n  \"notifiers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"lastUpdated\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8da92c5e-3d2a-4668-99db-17ad4e5ff5c5",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "policies",
+                    "dryrun"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"alerts\": [\n    {\n      \"deployment\": \"string\",\n      \"violations\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"deployment\": \"string\",\n      \"violations\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"excluded\": [\n    {\n      \"deployment\": \"string\",\n      \"whitelist\": {\n        \"name\": \"<string>\",\n        \"deployment\": {\n          \"name\": \"<string>\",\n          \"scope\": {\n            \"cluster\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"namespace\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"label\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"image\": {\n          \"name\": \"<string>\"\n        },\n        \"expiration\": \"<dateTime>\"\n      }\n    },\n    {\n      \"deployment\": \"string\",\n      \"whitelist\": {\n        \"name\": \"<string>\",\n        \"deployment\": {\n          \"name\": \"<string>\",\n          \"scope\": {\n            \"cluster\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"namespace\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"label\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"image\": {\n          \"name\": \"<string>\"\n        },\n        \"expiration\": \"<dateTime>\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "974da4c6-4453-44b0-b6f6-4a3c574fc3dc",
+          "name": "ReassessPolicies reevaluates all the policies.",
+          "request": {
+            "name": "ReassessPolicies reevaluates all the policies.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "policies",
+                "reassess"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a886fc0e-ca95-44ad-95c9-5b7cac71174e",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "policies",
+                    "reassess"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fb71e646-7ca8-4c16-851d-2b4f49417e41",
+          "name": "GetPolicy returns the requested policy by ID.",
+          "request": {
+            "name": "GetPolicy returns the requested policy by ID.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "policies",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e5ab61c2-e7fe-4740-9f08-5ff89be5245d",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"rationale\": \"<string>\",\n  \"remediation\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"categories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fields\": {\n    \"imageName\": {\n      \"registry\": \"<string>\",\n      \"remote\": \"<string>\",\n      \"tag\": \"<string>\"\n    },\n    \"imageAgeDays\": \"<int64>\",\n    \"lineRule\": {\n      \"instruction\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    \"cvss\": {\n      \"op\": \"LESS_THAN\",\n      \"value\": \"<float>\"\n    },\n    \"cve\": \"<string>\",\n    \"component\": {\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    \"scanAgeDays\": \"<int64>\",\n    \"noScanExists\": \"<boolean>\",\n    \"env\": {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"envVarSource\": \"UNSET\"\n    },\n    \"command\": \"<string>\",\n    \"args\": \"<string>\",\n    \"directory\": \"<string>\",\n    \"user\": \"<string>\",\n    \"volumePolicy\": {\n      \"name\": \"<string>\",\n      \"source\": \"<string>\",\n      \"destination\": \"<string>\",\n      \"readOnly\": \"<boolean>\",\n      \"type\": \"<string>\"\n    },\n    \"portPolicy\": {\n      \"port\": \"<integer>\",\n      \"protocol\": \"<string>\"\n    },\n    \"requiredLabel\": {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"envVarSource\": \"UNSET\"\n    },\n    \"requiredAnnotation\": {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"envVarSource\": \"UNSET\"\n    },\n    \"disallowedAnnotation\": {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"envVarSource\": \"UNSET\"\n    },\n    \"privileged\": \"<boolean>\",\n    \"dropCapabilities\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"addCapabilities\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"containerResourcePolicy\": {\n      \"cpuResourceRequest\": {\n        \"op\": \"LESS_THAN\",\n        \"value\": \"<float>\"\n      },\n      \"cpuResourceLimit\": {\n        \"op\": \"LESS_THAN\",\n        \"value\": \"<float>\"\n      },\n      \"memoryResourceRequest\": {\n        \"op\": \"LESS_THAN\",\n        \"value\": \"<float>\"\n      },\n      \"memoryResourceLimit\": {\n        \"op\": \"LESS_THAN\",\n        \"value\": \"<float>\"\n      }\n    },\n    \"processPolicy\": {\n      \"name\": \"<string>\",\n      \"args\": \"<string>\",\n      \"ancestor\": \"<string>\",\n      \"uid\": \"<string>\"\n    },\n    \"readOnlyRootFs\": \"<boolean>\",\n    \"fixedBy\": \"<string>\",\n    \"portExposurePolicy\": {\n      \"exposureLevels\": [\n        \"UNSET\",\n        \"UNSET\"\n      ]\n    },\n    \"permissionPolicy\": {\n      \"permissionLevel\": \"UNSET\"\n    },\n    \"hostMountPolicy\": {\n      \"readOnly\": \"<boolean>\"\n    },\n    \"whitelistEnabled\": \"<boolean>\"\n  },\n  \"lifecycleStages\": [\n    \"DEPLOY\",\n    \"DEPLOY\"\n  ],\n  \"whitelists\": [\n    {\n      \"name\": \"<string>\",\n      \"deployment\": {\n        \"name\": \"<string>\",\n        \"scope\": {\n          \"cluster\": \"<string>\",\n          \"namespace\": \"<string>\",\n          \"label\": {\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      },\n      \"image\": {\n        \"name\": \"<string>\"\n      },\n      \"expiration\": \"<dateTime>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"deployment\": {\n        \"name\": \"<string>\",\n        \"scope\": {\n          \"cluster\": \"<string>\",\n          \"namespace\": \"<string>\",\n          \"label\": {\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      },\n      \"image\": {\n        \"name\": \"<string>\"\n      },\n      \"expiration\": \"<dateTime>\"\n    }\n  ],\n  \"scope\": [\n    {\n      \"cluster\": \"<string>\",\n      \"namespace\": \"<string>\",\n      \"label\": {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    },\n    {\n      \"cluster\": \"<string>\",\n      \"namespace\": \"<string>\",\n      \"label\": {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    }\n  ],\n  \"severity\": \"UNSET_SEVERITY\",\n  \"enforcementActions\": [\n    \"UNSET_ENFORCEMENT\",\n    \"UNSET_ENFORCEMENT\"\n  ],\n  \"notifiers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"lastUpdated\": \"<dateTime>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "58bdf212-d289-4dfa-81b2-874dde305f33",
+          "name": "DeletePolicy removes a policy by ID.",
+          "request": {
+            "name": "DeletePolicy removes a policy by ID.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "policies",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1c7e3e8a-4535-4cca-b364-f09371cbeb17",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "10a30346-8a6e-4179-b010-ce2f88b0279f",
+          "name": "PutPolicy modifies an existing policy.",
+          "request": {
+            "name": "PutPolicy modifies an existing policy.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "policies",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"rationale\": \"<string>\",\n  \"remediation\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"categories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fields\": {\n    \"imageName\": {\n      \"registry\": \"<string>\",\n      \"remote\": \"<string>\",\n      \"tag\": \"<string>\"\n    },\n    \"imageAgeDays\": \"<int64>\",\n    \"lineRule\": {\n      \"instruction\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    \"cvss\": {\n      \"op\": \"LESS_THAN\",\n      \"value\": \"<float>\"\n    },\n    \"cve\": \"<string>\",\n    \"component\": {\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    \"scanAgeDays\": \"<int64>\",\n    \"noScanExists\": \"<boolean>\",\n    \"env\": {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"envVarSource\": \"UNSET\"\n    },\n    \"command\": \"<string>\",\n    \"args\": \"<string>\",\n    \"directory\": \"<string>\",\n    \"user\": \"<string>\",\n    \"volumePolicy\": {\n      \"name\": \"<string>\",\n      \"source\": \"<string>\",\n      \"destination\": \"<string>\",\n      \"readOnly\": \"<boolean>\",\n      \"type\": \"<string>\"\n    },\n    \"portPolicy\": {\n      \"port\": \"<integer>\",\n      \"protocol\": \"<string>\"\n    },\n    \"requiredLabel\": {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"envVarSource\": \"UNSET\"\n    },\n    \"requiredAnnotation\": {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"envVarSource\": \"UNSET\"\n    },\n    \"disallowedAnnotation\": {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"envVarSource\": \"UNSET\"\n    },\n    \"privileged\": \"<boolean>\",\n    \"dropCapabilities\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"addCapabilities\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"containerResourcePolicy\": {\n      \"cpuResourceRequest\": {\n        \"op\": \"LESS_THAN\",\n        \"value\": \"<float>\"\n      },\n      \"cpuResourceLimit\": {\n        \"op\": \"LESS_THAN\",\n        \"value\": \"<float>\"\n      },\n      \"memoryResourceRequest\": {\n        \"op\": \"LESS_THAN\",\n        \"value\": \"<float>\"\n      },\n      \"memoryResourceLimit\": {\n        \"op\": \"LESS_THAN\",\n        \"value\": \"<float>\"\n      }\n    },\n    \"processPolicy\": {\n      \"name\": \"<string>\",\n      \"args\": \"<string>\",\n      \"ancestor\": \"<string>\",\n      \"uid\": \"<string>\"\n    },\n    \"readOnlyRootFs\": \"<boolean>\",\n    \"fixedBy\": \"<string>\",\n    \"portExposurePolicy\": {\n      \"exposureLevels\": [\n        \"UNSET\",\n        \"UNSET\"\n      ]\n    },\n    \"permissionPolicy\": {\n      \"permissionLevel\": \"UNSET\"\n    },\n    \"hostMountPolicy\": {\n      \"readOnly\": \"<boolean>\"\n    },\n    \"whitelistEnabled\": \"<boolean>\"\n  },\n  \"lifecycleStages\": [\n    \"DEPLOY\",\n    \"DEPLOY\"\n  ],\n  \"whitelists\": [\n    {\n      \"name\": \"<string>\",\n      \"deployment\": {\n        \"name\": \"<string>\",\n        \"scope\": {\n          \"cluster\": \"<string>\",\n          \"namespace\": \"<string>\",\n          \"label\": {\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      },\n      \"image\": {\n        \"name\": \"<string>\"\n      },\n      \"expiration\": \"<dateTime>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"deployment\": {\n        \"name\": \"<string>\",\n        \"scope\": {\n          \"cluster\": \"<string>\",\n          \"namespace\": \"<string>\",\n          \"label\": {\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      },\n      \"image\": {\n        \"name\": \"<string>\"\n      },\n      \"expiration\": \"<dateTime>\"\n    }\n  ],\n  \"scope\": [\n    {\n      \"cluster\": \"<string>\",\n      \"namespace\": \"<string>\",\n      \"label\": {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    },\n    {\n      \"cluster\": \"<string>\",\n      \"namespace\": \"<string>\",\n      \"label\": {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    }\n  ],\n  \"severity\": \"UNSET_SEVERITY\",\n  \"enforcementActions\": [\n    \"UNSET_ENFORCEMENT\",\n    \"UNSET_ENFORCEMENT\"\n  ],\n  \"notifiers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"lastUpdated\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c63c2913-0e1a-49dc-b0be-35fdb0bee659",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "82380589-b369-41b3-81af-e540c1ad9434",
+          "name": "PatchPolicy edits an existing policy.",
+          "request": {
+            "name": "PatchPolicy edits an existing policy.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "policies",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"disabled\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "146b829b-57b7-4f57-801f-052916a408b2",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"disabled\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2d2afe1d-1bf6-4aad-a86a-0c9261271216",
+          "name": "EnableDisablePolicyNotification enables or disables notifications for a policy by ID.",
+          "request": {
+            "name": "EnableDisablePolicyNotification enables or disables notifications for a policy by ID.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "policies",
+                ":policyId",
+                "notifiers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "policyId",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"policyId\": \"<string>\",\n  \"notifierIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"disable\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0e8e853a-29fc-423b-a237-e2edc9a1d367",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "policies",
+                    ":policyId",
+                    "notifiers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policyId\": \"<string>\",\n  \"notifierIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"disable\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "656417d5-73e5-4ab0-b04d-0846512e2bcc",
+          "name": "GetPolicyCategories returns the policy categories.",
+          "request": {
+            "name": "GetPolicyCategories returns the policy categories.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "policyCategories"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "683edd45-7ea4-4c86-b2b2-742b8ff13cbf",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "policyCategories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"categories\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "738bc103-958c-42da-9590-ab36cf366b19",
+          "name": "DeletePolicyCategory removes the given policy category.",
+          "request": {
+            "name": "DeletePolicyCategory removes the given policy category.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "policyCategories",
+                ":category"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "category",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "27e4a591-1800-4d00-bae9-e3770024f2b7",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "policyCategories",
+                    ":category"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "category",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fb3ce845-ff55-449f-a682-39522ed5faa2",
+          "name": "RenamePolicyCategory renames the given policy category.",
+          "request": {
+            "name": "RenamePolicyCategory renames the given policy category.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "policyCategories",
+                ":oldCategory"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "oldCategory",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"oldCategory\": \"<string>\",\n  \"newCategory\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "453b7884-3fb2-45f3-80ce-6a811e1a9a32",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "policyCategories",
+                    ":oldCategory"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "oldCategory",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"oldCategory\": \"<string>\",\n  \"newCategory\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "StackRox Central hostname or IP",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "stackrox.localhost",
+      "key": "central-host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{central-host}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "453ff92f-1281-444a-ad69-5bfa1296d590",
+    "name": "API Reference AlertService PolicyService API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.\n\nContact Support:\n Email: support@stackrox.com",
+      "type": "text/plain"
+    }
+  }
+}

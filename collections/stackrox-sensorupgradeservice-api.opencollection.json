@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference AlertService SensorUpgradeService API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SensorUpgradeService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "TriggerSensorUpgrade",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/sensorupgrades/cluster/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GetSensorUpgradeConfig",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/sensorupgrades/config"
+          }
+        },
+        {
+          "info": {
+            "name": "UpdateSensorUpgradeConfig",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/sensorupgrades/config",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

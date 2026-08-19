@@ -1,0 +1,36 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference AlertService AuthService API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "AuthService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GetAuthStatus",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/auth/status"
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

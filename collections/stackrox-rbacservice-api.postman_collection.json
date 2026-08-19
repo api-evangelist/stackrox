@@ -1,0 +1,805 @@
+{
+  "item": [
+    {
+      "id": "1fb9b3fd-ea92-422a-a4cd-fc35812702b5",
+      "name": "RbacService",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c9558c5a-8654-40bf-aaa7-921f4b956736",
+          "name": "List Role Bindings",
+          "request": {
+            "name": "List Role Bindings",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "rbac",
+                "bindings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination.limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination.offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination.sort_option.field",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination.sort_option.reversed",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b6ac9fef-ac06-43f6-bbb0-c369079a5972",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "rbac",
+                    "bindings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pagination.limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pagination.offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pagination.sort_option.field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pagination.sort_option.reversed",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"bindings\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"namespace\": \"string\",\n      \"clusterId\": \"string\",\n      \"clusterName\": \"string\",\n      \"clusterRole\": false,\n      \"labels\": {\n        \"key_0\": \"string\"\n      },\n      \"annotations\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\",\n        \"key_3\": \"string\"\n      },\n      \"createdAt\": \"1969-06-10T02:35:55.183Z\",\n      \"subjects\": [\n        {\n          \"kind\": \"UNSET_KIND\",\n          \"name\": \"string\",\n          \"namespace\": \"string\"\n        },\n        {\n          \"kind\": \"UNSET_KIND\",\n          \"name\": \"string\",\n          \"namespace\": \"string\"\n        }\n      ],\n      \"roleId\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"namespace\": \"string\",\n      \"clusterId\": \"string\",\n      \"clusterName\": \"string\",\n      \"clusterRole\": true,\n      \"labels\": {\n        \"key_0\": \"string\"\n      },\n      \"annotations\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"createdAt\": \"1994-03-11T08:26:53.014Z\",\n      \"subjects\": [\n        {\n          \"kind\": \"UNSET_KIND\",\n          \"name\": \"string\",\n          \"namespace\": \"string\"\n        },\n        {\n          \"kind\": \"UNSET_KIND\",\n          \"name\": \"string\",\n          \"namespace\": \"string\"\n        }\n      ],\n      \"roleId\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "16c45cd2-5911-44ab-81ca-d3b6b6003837",
+          "name": "Get Role Binding",
+          "request": {
+            "name": "Get Role Binding",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "rbac",
+                "bindings",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6717dad5-fe15-4373-8f09-f86e0f247b4d",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "rbac",
+                    "bindings",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"binding\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"namespace\": \"string\",\n    \"clusterId\": \"string\",\n    \"clusterName\": \"string\",\n    \"clusterRole\": false,\n    \"labels\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"createdAt\": \"1976-02-03T14:28:03.118Z\",\n    \"subjects\": [\n      {\n        \"kind\": \"UNSET_KIND\",\n        \"name\": \"string\",\n        \"namespace\": \"string\"\n      },\n      {\n        \"kind\": \"UNSET_KIND\",\n        \"name\": \"string\",\n        \"namespace\": \"string\"\n      }\n    ],\n    \"roleId\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d3c26621-87a9-455a-8837-8a711b14048d",
+          "name": "List Roles",
+          "request": {
+            "name": "List Roles",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "rbac",
+                "roles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination.limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination.offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination.sort_option.field",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination.sort_option.reversed",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6eefbe09-d0d7-4aaa-8944-7b1f8d095e46",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "rbac",
+                    "roles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pagination.limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pagination.offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pagination.sort_option.field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pagination.sort_option.reversed",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"roles\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"namespace\": \"string\",\n      \"clusterId\": \"string\",\n      \"clusterName\": \"string\",\n      \"clusterRole\": true,\n      \"labels\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"annotations\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"createdAt\": \"2000-04-22T18:12:10.853Z\",\n      \"rules\": [\n        {\n          \"verbs\": [\n            \"string\",\n            \"string\"\n          ],\n          \"apiGroups\": [\n            \"string\",\n            \"string\"\n          ],\n          \"resources\": [\n            \"string\",\n            \"string\"\n          ],\n          \"nonResourceUrls\": [\n            \"string\",\n            \"string\"\n          ],\n          \"resourceNames\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"verbs\": [\n            \"string\",\n            \"string\"\n          ],\n          \"apiGroups\": [\n            \"string\",\n            \"string\"\n          ],\n          \"resources\": [\n            \"string\",\n            \"string\"\n          ],\n          \"nonResourceUrls\": [\n            \"string\",\n            \"string\"\n          ],\n          \"resourceNames\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"namespace\": \"string\",\n      \"clusterId\": \"string\",\n      \"clusterName\": \"string\",\n      \"clusterRole\": true,\n      \"labels\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"annotations\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      },\n      \"createdAt\": \"1949-02-03T17:08:58.585Z\",\n      \"rules\": [\n        {\n          \"verbs\": [\n            \"string\",\n            \"string\"\n          ],\n          \"apiGroups\": [\n            \"string\",\n            \"string\"\n          ],\n          \"resources\": [\n            \"string\",\n            \"string\"\n          ],\n          \"nonResourceUrls\": [\n            \"string\",\n            \"string\"\n          ],\n          \"resourceNames\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"verbs\": [\n            \"string\",\n            \"string\"\n          ],\n          \"apiGroups\": [\n            \"string\",\n            \"string\"\n          ],\n          \"resources\": [\n            \"string\",\n            \"string\"\n          ],\n          \"nonResourceUrls\": [\n            \"string\",\n            \"string\"\n          ],\n          \"resourceNames\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6a0191a1-ad52-447c-9af7-d8c4bfb4fc7b",
+          "name": "Get Role",
+          "request": {
+            "name": "Get Role",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "rbac",
+                "roles",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e1578e39-4b0d-4855-84b9-ec4632004807",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "rbac",
+                    "roles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"role\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"namespace\": \"string\",\n    \"clusterId\": \"string\",\n    \"clusterName\": \"string\",\n    \"clusterRole\": true,\n    \"labels\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\"\n    },\n    \"createdAt\": \"1985-01-17T07:40:37.532Z\",\n    \"rules\": [\n      {\n        \"verbs\": [\n          \"string\",\n          \"string\"\n        ],\n        \"apiGroups\": [\n          \"string\",\n          \"string\"\n        ],\n        \"resources\": [\n          \"string\",\n          \"string\"\n        ],\n        \"nonResourceUrls\": [\n          \"string\",\n          \"string\"\n        ],\n        \"resourceNames\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      {\n        \"verbs\": [\n          \"string\",\n          \"string\"\n        ],\n        \"apiGroups\": [\n          \"string\",\n          \"string\"\n        ],\n        \"resources\": [\n          \"string\",\n          \"string\"\n        ],\n        \"nonResourceUrls\": [\n          \"string\",\n          \"string\"\n        ],\n        \"resourceNames\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2b8e4266-d17b-4af9-bf3d-8c73910c21a6",
+          "name": "Subjects served from this API are Groups and Users only.\nId in this case is the Name field, since for users and groups, that is unique, and subjects do not have IDs.",
+          "request": {
+            "name": "Subjects served from this API are Groups and Users only.\nId in this case is the Name field, since for users and groups, that is unique, and subjects do not have IDs.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "rbac",
+                "subject",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "930468c1-c98c-4659-aa9a-4c0e4d49c93c",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "rbac",
+                    "subject",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"subject\": {\n    \"kind\": \"UNSET_KIND\",\n    \"name\": \"string\",\n    \"namespace\": \"string\"\n  },\n  \"clusterRoles\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"namespace\": \"string\",\n      \"clusterId\": \"string\",\n      \"clusterName\": \"string\",\n      \"clusterRole\": false,\n      \"labels\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      },\n      \"annotations\": {\n        \"key_0\": \"string\"\n      },\n      \"createdAt\": \"2018-09-30T08:19:23.126Z\",\n      \"rules\": [\n        {\n          \"verbs\": [\n            \"string\",\n            \"string\"\n          ],\n          \"apiGroups\": [\n            \"string\",\n            \"string\"\n          ],\n          \"resources\": [\n            \"string\",\n            \"string\"\n          ],\n          \"nonResourceUrls\": [\n            \"string\",\n            \"string\"\n          ],\n          \"resourceNames\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"verbs\": [\n            \"string\",\n            \"string\"\n          ],\n          \"apiGroups\": [\n            \"string\",\n            \"string\"\n          ],\n          \"resources\": [\n            \"string\",\n            \"string\"\n          ],\n          \"nonResourceUrls\": [\n            \"string\",\n            \"string\"\n          ],\n          \"resourceNames\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"namespace\": \"string\",\n      \"clusterId\": \"string\",\n      \"clusterName\": \"string\",\n      \"clusterRole\": false,\n      \"labels\": {\n        \"key_0\": \"string\"\n      },\n      \"annotations\": {\n        \"key_0\": \"string\"\n      },\n      \"createdAt\": \"1996-02-15T00:41:05.829Z\",\n      \"rules\": [\n        {\n          \"verbs\": [\n            \"string\",\n            \"string\"\n          ],\n          \"apiGroups\": [\n            \"string\",\n            \"string\"\n          ],\n          \"resources\": [\n            \"string\",\n            \"string\"\n          ],\n          \"nonResourceUrls\": [\n            \"string\",\n            \"string\"\n          ],\n          \"resourceNames\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"verbs\": [\n            \"string\",\n            \"string\"\n          ],\n          \"apiGroups\": [\n            \"string\",\n            \"string\"\n          ],\n          \"resources\": [\n            \"string\",\n            \"string\"\n          ],\n          \"nonResourceUrls\": [\n            \"string\",\n            \"string\"\n          ],\n          \"resourceNames\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    }\n  ],\n  \"scopedRoles\": [\n    {\n      \"namespace\": \"string\",\n      \"roles\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"namespace\": \"string\",\n          \"clusterId\": \"string\",\n          \"clusterName\": \"string\",\n          \"clusterRole\": true,\n          \"labels\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          },\n          \"annotations\": {\n            \"key_0\": \"string\"\n          },\n          \"createdAt\": \"1947-04-05T09:51:13.951Z\",\n          \"rules\": [\n            {\n              \"verbs\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"apiGroups\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"resources\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"nonResourceUrls\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"resourceNames\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"verbs\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"apiGroups\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"resources\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"nonResourceUrls\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"resourceNames\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"namespace\": \"string\",\n          \"clusterId\": \"string\",\n          \"clusterName\": \"string\",\n          \"clusterRole\": false,\n          \"labels\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          },\n          \"annotations\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\",\n            \"key_2\": \"string\"\n          },\n          \"createdAt\": \"1966-02-11T16:55:59.788Z\",\n          \"rules\": [\n            {\n              \"verbs\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"apiGroups\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"resources\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"nonResourceUrls\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"resourceNames\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"verbs\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"apiGroups\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"resources\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"nonResourceUrls\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"resourceNames\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"namespace\": \"string\",\n      \"roles\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"namespace\": \"string\",\n          \"clusterId\": \"string\",\n          \"clusterName\": \"string\",\n          \"clusterRole\": true,\n          \"labels\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          },\n          \"annotations\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          },\n          \"createdAt\": \"1992-03-12T16:23:51.970Z\",\n          \"rules\": [\n            {\n              \"verbs\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"apiGroups\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"resources\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"nonResourceUrls\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"resourceNames\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"verbs\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"apiGroups\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"resources\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"nonResourceUrls\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"resourceNames\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"namespace\": \"string\",\n          \"clusterId\": \"string\",\n          \"clusterName\": \"string\",\n          \"clusterRole\": false,\n          \"labels\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          },\n          \"annotations\": {\n            \"key_0\": \"string\"\n          },\n          \"createdAt\": \"1954-03-09T20:16:34.614Z\",\n          \"rules\": [\n            {\n              \"verbs\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"apiGroups\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"resources\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"nonResourceUrls\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"resourceNames\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"verbs\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"apiGroups\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"resources\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"nonResourceUrls\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"resourceNames\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "304d6137-25e7-477c-8cc1-cdee6927a710",
+          "name": "List Subjects",
+          "request": {
+            "name": "List Subjects",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "rbac",
+                "subjects"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination.limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination.offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination.sort_option.field",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination.sort_option.reversed",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a46ad466-9a8b-4c8d-b4aa-6b7872c9052f",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "rbac",
+                    "subjects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pagination.limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pagination.offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pagination.sort_option.field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pagination.sort_option.reversed",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"subjectAndRoles\": [\n    {\n      \"subject\": {\n        \"kind\": \"UNSET_KIND\",\n        \"name\": \"string\",\n        \"namespace\": \"string\"\n      },\n      \"roles\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"namespace\": \"string\",\n          \"clusterId\": \"string\",\n          \"clusterName\": \"string\",\n          \"clusterRole\": false,\n          \"labels\": {\n            \"key_0\": \"string\"\n          },\n          \"annotations\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          },\n          \"createdAt\": \"1980-11-07T21:50:00.694Z\",\n          \"rules\": [\n            {\n              \"verbs\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"apiGroups\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"resources\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"nonResourceUrls\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"resourceNames\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"verbs\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"apiGroups\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"resources\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"nonResourceUrls\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"resourceNames\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"namespace\": \"string\",\n          \"clusterId\": \"string\",\n          \"clusterName\": \"string\",\n          \"clusterRole\": false,\n          \"labels\": {\n            \"key_0\": \"string\"\n          },\n          \"annotations\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\",\n            \"key_2\": \"string\"\n          },\n          \"createdAt\": \"2021-07-07T12:20:28.407Z\",\n          \"rules\": [\n            {\n              \"verbs\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"apiGroups\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"resources\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"nonResourceUrls\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"resourceNames\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"verbs\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"apiGroups\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"resources\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"nonResourceUrls\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"resourceNames\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"subject\": {\n        \"kind\": \"UNSET_KIND\",\n        \"name\": \"string\",\n        \"namespace\": \"string\"\n      },\n      \"roles\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"namespace\": \"string\",\n          \"clusterId\": \"string\",\n          \"clusterName\": \"string\",\n          \"clusterRole\": false,\n          \"labels\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          },\n          \"annotations\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          },\n          \"createdAt\": \"1979-03-22T05:19:59.779Z\",\n          \"rules\": [\n            {\n              \"verbs\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"apiGroups\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"resources\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"nonResourceUrls\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"resourceNames\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"verbs\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"apiGroups\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"resources\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"nonResourceUrls\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"resourceNames\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"namespace\": \"string\",\n          \"clusterId\": \"string\",\n          \"clusterName\": \"string\",\n          \"clusterRole\": false,\n          \"labels\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          },\n          \"annotations\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          },\n          \"createdAt\": \"2012-01-19T20:43:22.292Z\",\n          \"rules\": [\n            {\n              \"verbs\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"apiGroups\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"resources\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"nonResourceUrls\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"resourceNames\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"verbs\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"apiGroups\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"resources\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"nonResourceUrls\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"resourceNames\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "StackRox Central hostname or IP",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "stackrox.localhost",
+      "key": "central-host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{central-host}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "104d0d6b-9f26-4dd0-bd29-3238660c1c67",
+    "name": "API Reference AlertService RbacService API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.\n\nContact Support:\n Email: support@stackrox.com",
+      "type": "text/plain"
+    }
+  }
+}

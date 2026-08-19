@@ -1,0 +1,187 @@
+{
+  "item": [
+    {
+      "id": "1cf93df7-fae5-4af2-b2af-3bdfc29ceb68",
+      "name": "NetworkGraphService",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8083d4d9-5c61-4c71-b196-6bd686fc7a01",
+          "name": "Get Network Graph",
+          "request": {
+            "name": "Get Network Graph",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "networkgraph",
+                "cluster",
+                ":clusterId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "since",
+                  "value": "<dateTime>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "clusterId",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f362c200-804c-4b54-ae35-51abcb4bffa0",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "networkgraph",
+                    "cluster",
+                    ":clusterId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clusterId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"epoch\": 9785,\n  \"nodes\": [\n    {\n      \"entity\": {\n        \"type\": \"UNKNOWN_TYPE\",\n        \"id\": \"string\",\n        \"deployment\": {\n          \"name\": \"string\",\n          \"namespace\": \"string\",\n          \"cluster\": \"string\"\n        }\n      },\n      \"internetAccess\": true,\n      \"policyIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"nonIsolatedIngress\": false,\n      \"nonIsolatedEgress\": true,\n      \"outEdges\": {\n        \"key_0\": {\n          \"properties\": [\n            {\n              \"port\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"protocol\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastActiveTimestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"port\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"protocol\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastActiveTimestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        \"key_1\": {\n          \"properties\": [\n            {\n              \"port\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"protocol\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastActiveTimestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"port\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"protocol\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastActiveTimestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        \"key_2\": {\n          \"properties\": [\n            {\n              \"port\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"protocol\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastActiveTimestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"port\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"protocol\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastActiveTimestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      }\n    },\n    {\n      \"entity\": {\n        \"type\": \"UNKNOWN_TYPE\",\n        \"id\": \"string\",\n        \"deployment\": {\n          \"name\": \"string\",\n          \"namespace\": \"string\",\n          \"cluster\": \"string\"\n        }\n      },\n      \"internetAccess\": false,\n      \"policyIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"nonIsolatedIngress\": false,\n      \"nonIsolatedEgress\": true,\n      \"outEdges\": {\n        \"key_0\": {\n          \"properties\": [\n            {\n              \"port\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"protocol\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastActiveTimestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"port\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"protocol\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastActiveTimestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "StackRox Central hostname or IP",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "stackrox.localhost",
+      "key": "central-host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{central-host}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "87581885-38a6-4f07-aa87-83a500920e03",
+    "name": "API Reference AlertService NetworkGraphService API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.\n\nContact Support:\n Email: support@stackrox.com",
+      "type": "text/plain"
+    }
+  }
+}

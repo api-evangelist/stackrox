@@ -1,0 +1,122 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference AlertService GroupService API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "GroupService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GetGroup",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/groups",
+            "params": [
+              {
+                "name": "authProviderId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "value",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "CreateGroup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/groups",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "UpdateGroup",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{central-host}/v1/groups",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "DeleteGroup",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{central-host}/v1/groups",
+            "params": [
+              {
+                "name": "authProviderId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "value",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "BatchUpdate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/groupsbatch",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

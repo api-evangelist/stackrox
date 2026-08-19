@@ -1,0 +1,189 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference AlertService RbacService API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "RbacService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ListRoleBindings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/rbac/bindings",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.field",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.reversed",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GetRoleBinding",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/rbac/bindings/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "ListRoles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/rbac/roles",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.field",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.reversed",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GetRole",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/rbac/roles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "Subjects served from this API are Groups and Users only.\nId in this case is the Name field, since for users and groups, that is unique, and subjects do not have IDs.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/rbac/subject/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Subjects served from this API are Groups and Users only.\nId in this case is the Name field, since for users and groups, that is unique, and subjects do not have IDs."
+        },
+        {
+          "info": {
+            "name": "ListSubjects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/rbac/subjects",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.field",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.reversed",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

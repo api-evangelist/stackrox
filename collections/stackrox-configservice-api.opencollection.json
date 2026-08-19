@@ -1,0 +1,70 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference AlertService ConfigService API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ConfigService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GetConfig",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/config"
+          }
+        },
+        {
+          "info": {
+            "name": "PutConfig",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{central-host}/v1/config",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "GetPrivateConfig",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/config/private"
+          }
+        },
+        {
+          "info": {
+            "name": "GetPublicConfig",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/config/public"
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

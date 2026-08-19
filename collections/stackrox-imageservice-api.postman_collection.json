@@ -1,0 +1,797 @@
+{
+  "item": [
+    {
+      "id": "eedbcebd-cb09-4e47-8aef-f20678cff549",
+      "name": "ImageService",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "02c7e059-2557-4a6e-9dca-a0e152ae1606",
+          "name": "ListImages returns all the images.",
+          "request": {
+            "name": "ListImages returns all the images.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "images"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination.limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination.offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination.sort_option.field",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination.sort_option.reversed",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6ba64e86-d6f6-4ae3-a89c-ba5b63c05837",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "images"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pagination.limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pagination.offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pagination.sort_option.field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pagination.sort_option.reversed",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"images\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"components\": 7515,\n      \"cves\": 9889,\n      \"fixableCves\": 9661,\n      \"created\": \"2019-11-11T17:12:10.538Z\",\n      \"lastUpdated\": \"1991-05-11T12:32:27.867Z\",\n      \"priority\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"components\": 5252,\n      \"cves\": 3686,\n      \"fixableCves\": 8826,\n      \"created\": \"1988-02-02T09:30:47.479Z\",\n      \"lastUpdated\": \"2006-12-08T08:48:05.422Z\",\n      \"priority\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5eecc4fd-35b5-4e76-a8b5-0c5c7684c3ac",
+          "name": "DeleteImage removes the images based on a query",
+          "request": {
+            "name": "DeleteImage removes the images based on a query",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "images"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query.query",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "query.pagination.limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "query.pagination.offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "query.pagination.sort_option.field",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "query.pagination.sort_option.reversed",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "confirm",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6b7c6d22-b731-4228-83d2-9b293c3ebad1",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "images"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query.query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query.pagination.limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "query.pagination.offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "query.pagination.sort_option.field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query.pagination.sort_option.reversed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "confirm",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"numDeleted\": 6480,\n  \"dryRun\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "57063361-f046-4a8f-92cf-ad00de9226d1",
+          "name": "InvalidateScanAndRegistryCaches removes the image metadata cache.",
+          "request": {
+            "name": "InvalidateScanAndRegistryCaches removes the image metadata cache.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "images",
+                "cache",
+                "invalidate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "99eea2b8-70ef-43c5-91f3-cec0c13aa5ed",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "images",
+                    "cache",
+                    "invalidate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "67004350-b15d-4a5e-8958-2eaed2201545",
+          "name": "ScanImage scans a single image and returns the result",
+          "request": {
+            "name": "ScanImage scans a single image and returns the result",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "images",
+                "scan"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"imageName\": \"<string>\",\n  \"force\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "25da27e2-a5d0-45f9-8efe-80e3a8a7e3d6",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "images",
+                    "scan"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"imageName\": \"<string>\",\n  \"force\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": {\n    \"registry\": \"string\",\n    \"remote\": \"string\",\n    \"tag\": \"string\",\n    \"fullName\": \"string\"\n  },\n  \"metadata\": {\n    \"v1\": {\n      \"digest\": \"string\",\n      \"created\": \"1994-04-16T18:47:49.565Z\",\n      \"author\": \"string\",\n      \"layers\": [\n        {\n          \"instruction\": \"string\",\n          \"value\": \"string\",\n          \"created\": \"1996-06-01T00:21:28.028Z\",\n          \"author\": \"string\",\n          \"DEPRECATEDComponents\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"empty\": false\n        },\n        {\n          \"instruction\": \"string\",\n          \"value\": \"string\",\n          \"created\": \"1973-08-19T13:21:34.266Z\",\n          \"author\": \"string\",\n          \"DEPRECATEDComponents\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"empty\": false\n        }\n      ],\n      \"user\": \"string\",\n      \"command\": [\n        \"string\",\n        \"string\"\n      ],\n      \"entrypoint\": [\n        \"string\",\n        \"string\"\n      ],\n      \"volumes\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"v2\": {\n      \"digest\": \"string\"\n    },\n    \"layerShas\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"scan\": {\n    \"scanTime\": \"2021-08-09T07:09:40.110Z\",\n    \"components\": [\n      {\n        \"name\": \"string\",\n        \"version\": \"string\",\n        \"license\": {\n          \"name\": \"string\",\n          \"type\": \"string\",\n          \"url\": \"string\"\n        },\n        \"vulns\": [\n          {\n            \"cve\": \"string\",\n            \"cvss\": 2962.8356317160865,\n            \"summary\": \"string\",\n            \"link\": \"string\",\n            \"fixedBy\": \"string\",\n            \"scoreVersion\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cvssV2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cvssV3\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"publishedOn\": \"1984-07-14T10:34:54.251Z\",\n            \"lastModified\": \"1993-12-01T21:23:15.982Z\",\n            \"vulnerabilityType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"cve\": \"string\",\n            \"cvss\": 9448.828512693655,\n            \"summary\": \"string\",\n            \"link\": \"string\",\n            \"fixedBy\": \"string\",\n            \"scoreVersion\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cvssV2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cvssV3\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"publishedOn\": \"1959-07-15T08:14:20.105Z\",\n            \"lastModified\": \"1950-02-01T13:14:15.851Z\",\n            \"vulnerabilityType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"layerIndex\": 3915,\n        \"priority\": \"string\",\n        \"source\": \"OS\",\n        \"location\": \"string\"\n      },\n      {\n        \"name\": \"string\",\n        \"version\": \"string\",\n        \"license\": {\n          \"name\": \"string\",\n          \"type\": \"string\",\n          \"url\": \"string\"\n        },\n        \"vulns\": [\n          {\n            \"cve\": \"string\",\n            \"cvss\": 2036.4481818991599,\n            \"summary\": \"string\",\n            \"link\": \"string\",\n            \"fixedBy\": \"string\",\n            \"scoreVersion\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cvssV2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cvssV3\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"publishedOn\": \"2013-07-11T01:21:34.524Z\",\n            \"lastModified\": \"1991-04-16T01:37:44.123Z\",\n            \"vulnerabilityType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"cve\": \"string\",\n            \"cvss\": 6050.904272356639,\n            \"summary\": \"string\",\n            \"link\": \"string\",\n            \"fixedBy\": \"string\",\n            \"scoreVersion\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cvssV2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cvssV3\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"publishedOn\": \"1957-06-09T04:16:45.738Z\",\n            \"lastModified\": \"1960-04-10T05:30:20.181Z\",\n            \"vulnerabilityType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"layerIndex\": 800,\n        \"priority\": \"string\",\n        \"source\": \"OS\",\n        \"location\": \"string\"\n      }\n    ]\n  },\n  \"components\": 4591,\n  \"cves\": 4117,\n  \"fixableCves\": 6537,\n  \"lastUpdated\": \"2007-03-14T19:55:19.379Z\",\n  \"notPullable\": false,\n  \"priority\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1e48b15b-3732-4561-852d-c1ce5f1ea6df",
+          "name": "GetImage returns the image given its ID.",
+          "request": {
+            "name": "GetImage returns the image given its ID.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "images",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ee51e8fd-bd75-4d4a-9a5c-78268b05d0ca",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "images",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": {\n    \"registry\": \"string\",\n    \"remote\": \"string\",\n    \"tag\": \"string\",\n    \"fullName\": \"string\"\n  },\n  \"metadata\": {\n    \"v1\": {\n      \"digest\": \"string\",\n      \"created\": \"1996-10-03T05:11:12.031Z\",\n      \"author\": \"string\",\n      \"layers\": [\n        {\n          \"instruction\": \"string\",\n          \"value\": \"string\",\n          \"created\": \"1971-08-27T04:41:44.603Z\",\n          \"author\": \"string\",\n          \"DEPRECATEDComponents\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"empty\": true\n        },\n        {\n          \"instruction\": \"string\",\n          \"value\": \"string\",\n          \"created\": \"2000-04-11T09:35:01.883Z\",\n          \"author\": \"string\",\n          \"DEPRECATEDComponents\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"empty\": true\n        }\n      ],\n      \"user\": \"string\",\n      \"command\": [\n        \"string\",\n        \"string\"\n      ],\n      \"entrypoint\": [\n        \"string\",\n        \"string\"\n      ],\n      \"volumes\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"v2\": {\n      \"digest\": \"string\"\n    },\n    \"layerShas\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"scan\": {\n    \"scanTime\": \"1967-12-10T02:44:57.113Z\",\n    \"components\": [\n      {\n        \"name\": \"string\",\n        \"version\": \"string\",\n        \"license\": {\n          \"name\": \"string\",\n          \"type\": \"string\",\n          \"url\": \"string\"\n        },\n        \"vulns\": [\n          {\n            \"cve\": \"string\",\n            \"cvss\": 4923.110351138758,\n            \"summary\": \"string\",\n            \"link\": \"string\",\n            \"fixedBy\": \"string\",\n            \"scoreVersion\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cvssV2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cvssV3\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"publishedOn\": \"1961-09-12T03:33:15.853Z\",\n            \"lastModified\": \"2012-06-15T20:19:34.533Z\",\n            \"vulnerabilityType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"cve\": \"string\",\n            \"cvss\": 522.8296912001229,\n            \"summary\": \"string\",\n            \"link\": \"string\",\n            \"fixedBy\": \"string\",\n            \"scoreVersion\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cvssV2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cvssV3\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"publishedOn\": \"1982-10-16T19:05:58.080Z\",\n            \"lastModified\": \"1964-04-06T01:47:05.529Z\",\n            \"vulnerabilityType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"layerIndex\": 5524,\n        \"priority\": \"string\",\n        \"source\": \"OS\",\n        \"location\": \"string\"\n      },\n      {\n        \"name\": \"string\",\n        \"version\": \"string\",\n        \"license\": {\n          \"name\": \"string\",\n          \"type\": \"string\",\n          \"url\": \"string\"\n        },\n        \"vulns\": [\n          {\n            \"cve\": \"string\",\n            \"cvss\": 4053.3481077644674,\n            \"summary\": \"string\",\n            \"link\": \"string\",\n            \"fixedBy\": \"string\",\n            \"scoreVersion\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cvssV2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cvssV3\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"publishedOn\": \"2010-07-18T23:07:13.145Z\",\n            \"lastModified\": \"2001-12-13T09:04:23.457Z\",\n            \"vulnerabilityType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"cve\": \"string\",\n            \"cvss\": 6891.3513912823055,\n            \"summary\": \"string\",\n            \"link\": \"string\",\n            \"fixedBy\": \"string\",\n            \"scoreVersion\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cvssV2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cvssV3\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"publishedOn\": \"1977-09-17T23:40:04.110Z\",\n            \"lastModified\": \"2008-12-07T08:46:11.129Z\",\n            \"vulnerabilityType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"layerIndex\": 6594,\n        \"priority\": \"string\",\n        \"source\": \"OS\",\n        \"location\": \"string\"\n      }\n    ]\n  },\n  \"components\": 2974,\n  \"cves\": 6448,\n  \"fixableCves\": 6679,\n  \"lastUpdated\": \"2008-06-25T21:14:36.849Z\",\n  \"notPullable\": false,\n  \"priority\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "be270a83-fbdd-4247-a19f-d49eab9b9462",
+          "name": "ListImages returns all the images.",
+          "request": {
+            "name": "ListImages returns all the images.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "imagescount"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination.limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination.offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination.sort_option.field",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination.sort_option.reversed",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e4066fa9-3b6b-445c-8223-49f0d8b3e854",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "imagescount"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pagination.limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pagination.offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pagination.sort_option.field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pagination.sort_option.reversed",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 5190\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "StackRox Central hostname or IP",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "stackrox.localhost",
+      "key": "central-host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{central-host}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d34d300f-9b1e-4f18-ab43-be691596cd1d",
+    "name": "API Reference AlertService ImageService API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.\n\nContact Support:\n Email: support@stackrox.com",
+      "type": "text/plain"
+    }
+  }
+}

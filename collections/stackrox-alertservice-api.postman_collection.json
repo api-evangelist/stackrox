@@ -1,0 +1,1397 @@
+{
+  "item": [
+    {
+      "id": "d3253d15-29da-4663-8379-5281d107e224",
+      "name": "AlertService",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "da95fcb6-0269-47c8-b9b3-1cd363c50979",
+          "name": "List returns the slim list version of the alerts.",
+          "request": {
+            "name": "List returns the slim list version of the alerts.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "alerts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination.limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination.offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination.sort_option.field",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination.sort_option.reversed",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2b1d7372-c128-4851-9fcf-2ab9c5c36d2e",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pagination.limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pagination.offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pagination.sort_option.field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pagination.sort_option.reversed",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"alerts\": [\n    {\n      \"id\": \"string\",\n      \"lifecycleStage\": \"DEPLOY\",\n      \"time\": \"1968-07-30T18:59:56.455Z\",\n      \"policy\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"severity\": \"UNSET_SEVERITY\",\n        \"description\": \"string\",\n        \"categories\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"deployment\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"clusterName\": \"string\",\n        \"namespace\": \"string\",\n        \"clusterId\": \"string\",\n        \"inactive\": false\n      },\n      \"state\": \"ACTIVE\",\n      \"enforcementCount\": 3606\n    },\n    {\n      \"id\": \"string\",\n      \"lifecycleStage\": \"DEPLOY\",\n      \"time\": \"2021-03-11T00:43:51.891Z\",\n      \"policy\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"severity\": \"UNSET_SEVERITY\",\n        \"description\": \"string\",\n        \"categories\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"deployment\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"clusterName\": \"string\",\n        \"namespace\": \"string\",\n        \"clusterId\": \"string\",\n        \"inactive\": true\n      },\n      \"state\": \"ACTIVE\",\n      \"enforcementCount\": 2395\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "13bb4198-9fc2-4fe6-894f-118ca6246c86",
+          "name": "Delete Alerts",
+          "request": {
+            "name": "Delete Alerts",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "alerts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query.query",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "query.pagination.limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "query.pagination.offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "query.pagination.sort_option.field",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "query.pagination.sort_option.reversed",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "confirm",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1227933d-25ba-4455-b7a4-13b322320de1",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query.query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query.pagination.limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "query.pagination.offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "query.pagination.sort_option.field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query.pagination.sort_option.reversed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "confirm",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"numDeleted\": 4279,\n  \"dryRun\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2855153a-73dc-4ce7-b641-0012240b8945",
+          "name": "ResolveAlertsByQuery marks alerts matching search query as resolved.",
+          "request": {
+            "name": "ResolveAlertsByQuery marks alerts matching search query as resolved.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "alerts",
+                "resolve"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fc974b51-f90b-456d-8e0b-844739495d9c",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "alerts",
+                    "resolve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "acb43dd6-23a8-443c-8b85-76aba59edee7",
+          "name": "GetAlertsCounts returns the number of alerts in the requested cluster or category.",
+          "request": {
+            "name": "GetAlertsCounts returns the number of alerts in the requested cluster or category.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "alerts",
+                "summary",
+                "counts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "request.query",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "request.pagination.limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "request.pagination.offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "request.pagination.sort_option.field",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "request.pagination.sort_option.reversed",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "groupBy",
+                  "value": "UNSET"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ac9f6685-0f85-416a-ad42-a4787ef40935",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "alerts",
+                    "summary",
+                    "counts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "request.query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "request.pagination.limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "request.pagination.offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "request.pagination.sort_option.field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "request.pagination.sort_option.reversed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "groupBy",
+                      "value": "UNSET"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"groups\": [\n    {\n      \"group\": \"string\",\n      \"counts\": [\n        {\n          \"severity\": \"UNSET_SEVERITY\",\n          \"count\": \"string\"\n        },\n        {\n          \"severity\": \"UNSET_SEVERITY\",\n          \"count\": \"string\"\n        }\n      ]\n    },\n    {\n      \"group\": \"string\",\n      \"counts\": [\n        {\n          \"severity\": \"UNSET_SEVERITY\",\n          \"count\": \"string\"\n        },\n        {\n          \"severity\": \"UNSET_SEVERITY\",\n          \"count\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b5bf0bdd-cfdd-49a7-a624-b2e7cfb76049",
+          "name": "GetAlertsGroup returns alerts grouped by policy.",
+          "request": {
+            "name": "GetAlertsGroup returns alerts grouped by policy.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "alerts",
+                "summary",
+                "groups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination.limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination.offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination.sort_option.field",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination.sort_option.reversed",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "39638744-4270-4fe8-8e8f-62060439b1a5",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "alerts",
+                    "summary",
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pagination.limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pagination.offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pagination.sort_option.field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pagination.sort_option.reversed",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"alertsByPolicies\": [\n    {\n      \"policy\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"severity\": \"UNSET_SEVERITY\",\n        \"description\": \"string\",\n        \"categories\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"numAlerts\": \"string\"\n    },\n    {\n      \"policy\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"severity\": \"UNSET_SEVERITY\",\n        \"description\": \"string\",\n        \"categories\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"numAlerts\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "02a72873-5891-4844-b246-2ce9903f7812",
+          "name": "GetAlertTimeseries returns the alerts sorted by time.",
+          "request": {
+            "name": "GetAlertTimeseries returns the alerts sorted by time.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "alerts",
+                "summary",
+                "timeseries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination.limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination.offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination.sort_option.field",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination.sort_option.reversed",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8c99704f-b064-4f8f-aee9-072f6052420a",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "alerts",
+                    "summary",
+                    "timeseries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pagination.limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pagination.offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pagination.sort_option.field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pagination.sort_option.reversed",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"clusters\": [\n    {\n      \"cluster\": \"string\",\n      \"severities\": [\n        {\n          \"severity\": \"UNSET_SEVERITY\",\n          \"events\": [\n            {\n              \"time\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"time\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"severity\": \"UNSET_SEVERITY\",\n          \"events\": [\n            {\n              \"time\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"time\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"cluster\": \"string\",\n      \"severities\": [\n        {\n          \"severity\": \"UNSET_SEVERITY\",\n          \"events\": [\n            {\n              \"time\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"time\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"severity\": \"UNSET_SEVERITY\",\n          \"events\": [\n            {\n              \"time\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"time\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cb71970e-b638-4ccc-ad2d-e0b9d9dc55b7",
+          "name": "GetAlert returns the alert given its id.",
+          "request": {
+            "name": "GetAlert returns the alert given its id.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "alerts",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "67f12bf3-133d-4dec-9869-8da6c6078311",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "alerts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"policy\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"rationale\": \"string\",\n    \"remediation\": \"string\",\n    \"disabled\": false,\n    \"categories\": [\n      \"string\",\n      \"string\"\n    ],\n    \"fields\": {\n      \"imageName\": {\n        \"registry\": \"string\",\n        \"remote\": \"string\",\n        \"tag\": \"string\"\n      },\n      \"imageAgeDays\": \"string\",\n      \"lineRule\": {\n        \"instruction\": \"string\",\n        \"value\": \"string\"\n      },\n      \"cvss\": {\n        \"op\": \"LESS_THAN\",\n        \"value\": 1358.0007560423658\n      },\n      \"cve\": \"string\",\n      \"component\": {\n        \"name\": \"string\",\n        \"version\": \"string\"\n      },\n      \"scanAgeDays\": \"string\",\n      \"noScanExists\": true,\n      \"env\": {\n        \"key\": \"string\",\n        \"value\": \"string\",\n        \"envVarSource\": \"UNSET\"\n      },\n      \"command\": \"string\",\n      \"args\": \"string\",\n      \"directory\": \"string\",\n      \"user\": \"string\",\n      \"volumePolicy\": {\n        \"name\": \"string\",\n        \"source\": \"string\",\n        \"destination\": \"string\",\n        \"readOnly\": true,\n        \"type\": \"string\"\n      },\n      \"portPolicy\": {\n        \"port\": 2467,\n        \"protocol\": \"string\"\n      },\n      \"requiredLabel\": {\n        \"key\": \"string\",\n        \"value\": \"string\",\n        \"envVarSource\": \"UNSET\"\n      },\n      \"requiredAnnotation\": {\n        \"key\": \"string\",\n        \"value\": \"string\",\n        \"envVarSource\": \"UNSET\"\n      },\n      \"disallowedAnnotation\": {\n        \"key\": \"string\",\n        \"value\": \"string\",\n        \"envVarSource\": \"UNSET\"\n      },\n      \"privileged\": false,\n      \"dropCapabilities\": [\n        \"string\",\n        \"string\"\n      ],\n      \"addCapabilities\": [\n        \"string\",\n        \"string\"\n      ],\n      \"containerResourcePolicy\": {\n        \"cpuResourceRequest\": {\n          \"op\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": 2064.9459412531933\n        },\n        \"cpuResourceLimit\": {\n          \"op\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": 4279.038899845706\n        },\n        \"memoryResourceRequest\": {\n          \"op\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": 1754.1296908854142\n        },\n        \"memoryResourceLimit\": {\n          \"op\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": 2652.361485785345\n        }\n      },\n      \"processPolicy\": {\n        \"name\": \"string\",\n        \"args\": \"string\",\n        \"ancestor\": \"string\",\n        \"uid\": \"string\"\n      },\n      \"readOnlyRootFs\": true,\n      \"fixedBy\": \"string\",\n      \"portExposurePolicy\": {\n        \"exposureLevels\": [\n          \"UNSET\",\n          \"UNSET\"\n        ]\n      },\n      \"permissionPolicy\": {\n        \"permissionLevel\": \"UNSET\"\n      },\n      \"hostMountPolicy\": {\n        \"readOnly\": true\n      },\n      \"whitelistEnabled\": true\n    },\n    \"lifecycleStages\": [\n      \"DEPLOY\",\n      \"DEPLOY\"\n    ],\n    \"whitelists\": [\n      {\n        \"name\": \"string\",\n        \"deployment\": {\n          \"name\": \"string\",\n          \"scope\": {\n            \"cluster\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"namespace\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"label\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"image\": {\n          \"name\": \"string\"\n        },\n        \"expiration\": \"2011-12-17T13:28:54.054Z\"\n      },\n      {\n        \"name\": \"string\",\n        \"deployment\": {\n          \"name\": \"string\",\n          \"scope\": {\n            \"cluster\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"namespace\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"label\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"image\": {\n          \"name\": \"string\"\n        },\n        \"expiration\": \"2019-01-14T17:57:07.727Z\"\n      }\n    ],\n    \"scope\": [\n      {\n        \"cluster\": \"string\",\n        \"namespace\": \"string\",\n        \"label\": {\n          \"key\": \"string\",\n          \"value\": \"string\"\n        }\n      },\n      {\n        \"cluster\": \"string\",\n        \"namespace\": \"string\",\n        \"label\": {\n          \"key\": \"string\",\n          \"value\": \"string\"\n        }\n      }\n    ],\n    \"severity\": \"UNSET_SEVERITY\",\n    \"enforcementActions\": [\n      \"UNSET_ENFORCEMENT\",\n      \"UNSET_ENFORCEMENT\"\n    ],\n    \"notifiers\": [\n      \"string\",\n      \"string\"\n    ],\n    \"lastUpdated\": \"2012-09-08T02:31:01.955Z\"\n  },\n  \"lifecycleStage\": \"DEPLOY\",\n  \"deployment\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"type\": \"string\",\n    \"namespace\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\"\n    },\n    \"clusterId\": \"string\",\n    \"clusterName\": \"string\",\n    \"containers\": [\n      {\n        \"image\": {\n          \"id\": \"string\",\n          \"name\": {\n            \"registry\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"remote\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tag\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fullName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"notPullable\": true\n        },\n        \"name\": \"string\"\n      },\n      {\n        \"image\": {\n          \"id\": \"string\",\n          \"name\": {\n            \"registry\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"remote\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tag\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fullName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"notPullable\": false\n        },\n        \"name\": \"string\"\n      }\n    ],\n    \"annotations\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\",\n      \"key_3\": \"string\"\n    },\n    \"inactive\": true\n  },\n  \"violations\": [\n    {\n      \"message\": \"string\",\n      \"DEPRECATEDProcesses\": [\n        {\n          \"id\": \"string\",\n          \"deploymentId\": \"string\",\n          \"deploymentStateTs\": \"string\",\n          \"containerName\": \"string\",\n          \"podId\": \"string\",\n          \"signal\": {\n            \"id\": \"string\",\n            \"containerId\": \"string\",\n            \"time\": \"1982-03-23T17:14:13.689Z\",\n            \"name\": \"string\",\n            \"args\": \"string\",\n            \"execFilePath\": \"string\",\n            \"pid\": 406,\n            \"uid\": 1223,\n            \"gid\": 3160,\n            \"lineage\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"clusterId\": \"string\",\n          \"namespace\": \"string\",\n          \"containerStartTime\": \"1998-12-09T08:59:09.275Z\"\n        },\n        {\n          \"id\": \"string\",\n          \"deploymentId\": \"string\",\n          \"deploymentStateTs\": \"string\",\n          \"containerName\": \"string\",\n          \"podId\": \"string\",\n          \"signal\": {\n            \"id\": \"string\",\n            \"containerId\": \"string\",\n            \"time\": \"1985-11-18T11:03:40.085Z\",\n            \"name\": \"string\",\n            \"args\": \"string\",\n            \"execFilePath\": \"string\",\n            \"pid\": 3609,\n            \"uid\": 4609,\n            \"gid\": 5649,\n            \"lineage\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"clusterId\": \"string\",\n          \"namespace\": \"string\",\n          \"containerStartTime\": \"2020-03-21T18:36:07.154Z\"\n        }\n      ]\n    },\n    {\n      \"message\": \"string\",\n      \"DEPRECATEDProcesses\": [\n        {\n          \"id\": \"string\",\n          \"deploymentId\": \"string\",\n          \"deploymentStateTs\": \"string\",\n          \"containerName\": \"string\",\n          \"podId\": \"string\",\n          \"signal\": {\n            \"id\": \"string\",\n            \"containerId\": \"string\",\n            \"time\": \"1968-10-12T02:09:11.255Z\",\n            \"name\": \"string\",\n            \"args\": \"string\",\n            \"execFilePath\": \"string\",\n            \"pid\": 2105,\n            \"uid\": 8341,\n            \"gid\": 1191,\n            \"lineage\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"clusterId\": \"string\",\n          \"namespace\": \"string\",\n          \"containerStartTime\": \"1979-09-03T09:42:06.026Z\"\n        },\n        {\n          \"id\": \"string\",\n          \"deploymentId\": \"string\",\n          \"deploymentStateTs\": \"string\",\n          \"containerName\": \"string\",\n          \"podId\": \"string\",\n          \"signal\": {\n            \"id\": \"string\",\n            \"containerId\": \"string\",\n            \"time\": \"2023-02-13T10:11:44.657Z\",\n            \"name\": \"string\",\n            \"args\": \"string\",\n            \"execFilePath\": \"string\",\n            \"pid\": 3534,\n            \"uid\": 8737,\n            \"gid\": 9615,\n            \"lineage\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"clusterId\": \"string\",\n          \"namespace\": \"string\",\n          \"containerStartTime\": \"1974-08-03T10:25:46.701Z\"\n        }\n      ]\n    }\n  ],\n  \"processViolation\": {\n    \"message\": \"string\",\n    \"processes\": [\n      {\n        \"id\": \"string\",\n        \"deploymentId\": \"string\",\n        \"deploymentStateTs\": \"string\",\n        \"containerName\": \"string\",\n        \"podId\": \"string\",\n        \"signal\": {\n          \"id\": \"string\",\n          \"containerId\": \"string\",\n          \"time\": \"2004-08-03T16:45:17.269Z\",\n          \"name\": \"string\",\n          \"args\": \"string\",\n          \"execFilePath\": \"string\",\n          \"pid\": 295,\n          \"uid\": 7529,\n          \"gid\": 2779,\n          \"lineage\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"clusterId\": \"string\",\n        \"namespace\": \"string\",\n        \"containerStartTime\": \"2003-08-29T13:28:15.496Z\"\n      },\n      {\n        \"id\": \"string\",\n        \"deploymentId\": \"string\",\n        \"deploymentStateTs\": \"string\",\n        \"containerName\": \"string\",\n        \"podId\": \"string\",\n        \"signal\": {\n          \"id\": \"string\",\n          \"containerId\": \"string\",\n          \"time\": \"1984-02-04T06:48:36.188Z\",\n          \"name\": \"string\",\n          \"args\": \"string\",\n          \"execFilePath\": \"string\",\n          \"pid\": 4986,\n          \"uid\": 7248,\n          \"gid\": 5125,\n          \"lineage\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"clusterId\": \"string\",\n        \"namespace\": \"string\",\n        \"containerStartTime\": \"1983-02-04T19:45:09.816Z\"\n      }\n    ]\n  },\n  \"enforcement\": {\n    \"action\": \"UNSET_ENFORCEMENT\",\n    \"message\": \"string\"\n  },\n  \"time\": \"1965-03-08T09:12:14.881Z\",\n  \"firstOccurred\": \"2020-07-29T16:12:53.146Z\",\n  \"state\": \"ACTIVE\",\n  \"snoozeTill\": \"1983-11-11T12:24:21.130Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0c40f3ae-c6f2-4af7-ba21-9367838c660b",
+          "name": "ResolveAlert marks the given alert (by ID) as resolved.",
+          "request": {
+            "name": "ResolveAlert marks the given alert (by ID) as resolved.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "alerts",
+                ":id",
+                "resolve"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"whitelist\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4e963cbf-7e92-4465-a58c-84cdb9da5ae7",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "alerts",
+                    ":id",
+                    "resolve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"whitelist\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "69a455ce-43de-492f-ab66-4740a2716007",
+          "name": "SnoozeAlert is deprecated.",
+          "request": {
+            "name": "SnoozeAlert is deprecated.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "alerts",
+                ":id",
+                "snooze"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"snoozeTill\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3dba2812-3a12-4d38-a2a6-4b9b6fff9e0d",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "alerts",
+                    ":id",
+                    "snooze"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"snoozeTill\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "458c8f4d-79c0-4dd6-9d7e-004d53f50b4c",
+          "name": "CountAlerts counts how many alerts match the get request.",
+          "request": {
+            "name": "CountAlerts counts how many alerts match the get request.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "alertscount"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination.limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination.offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination.sort_option.field",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination.sort_option.reversed",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4d054913-3837-4007-a333-46a9e4b414c4",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "alertscount"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pagination.limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pagination.offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pagination.sort_option.field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pagination.sort_option.reversed",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1512\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "StackRox Central hostname or IP",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "stackrox.localhost",
+      "key": "central-host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{central-host}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d43bce7f-bbb6-4da7-9e3a-3d63f71a73de",
+    "name": "API Reference AlertService API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.\n\nContact Support:\n Email: support@stackrox.com",
+      "type": "text/plain"
+    }
+  }
+}

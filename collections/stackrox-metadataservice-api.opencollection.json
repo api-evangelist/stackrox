@@ -1,0 +1,36 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference AlertService MetadataService API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "MetadataService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GetMetadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/metadata"
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

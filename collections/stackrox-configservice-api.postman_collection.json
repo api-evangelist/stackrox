@@ -1,0 +1,447 @@
+{
+  "item": [
+    {
+      "id": "f5130197-a764-4c97-a6dc-12fd848148a9",
+      "name": "ConfigService",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2d4b5738-8943-4afc-ad88-94f58808524d",
+          "name": "Get Config",
+          "request": {
+            "name": "Get Config",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "config"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b607ca5d-7781-49a1-afde-2d158b6e38f0",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"publicConfig\": {\n    \"loginNotice\": {\n      \"enabled\": false,\n      \"text\": \"string\"\n    },\n    \"header\": {\n      \"enabled\": false,\n      \"text\": \"string\",\n      \"size\": \"UNSET\",\n      \"color\": \"string\",\n      \"backgroundColor\": \"string\"\n    },\n    \"footer\": {\n      \"enabled\": true,\n      \"text\": \"string\",\n      \"size\": \"UNSET\",\n      \"color\": \"string\",\n      \"backgroundColor\": \"string\"\n    }\n  },\n  \"privateConfig\": {\n    \"DEPRECATEDAlertRetentionDurationDays\": 6288,\n    \"alertConfig\": {\n      \"resolvedDeployRetentionDurationDays\": 9040,\n      \"deletedRuntimeRetentionDurationDays\": 9501,\n      \"allRuntimeRetentionDurationDays\": 1379\n    },\n    \"imageRetentionDurationDays\": 6132\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2a88f2c9-972e-4b35-9480-122b3b460cee",
+          "name": "Put Config",
+          "request": {
+            "name": "Put Config",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "config"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"config\": {\n    \"publicConfig\": {\n      \"loginNotice\": {\n        \"enabled\": \"<boolean>\",\n        \"text\": \"<string>\"\n      },\n      \"header\": {\n        \"enabled\": \"<boolean>\",\n        \"text\": \"<string>\",\n        \"size\": \"UNSET\",\n        \"color\": \"<string>\",\n        \"backgroundColor\": \"<string>\"\n      },\n      \"footer\": {\n        \"enabled\": \"<boolean>\",\n        \"text\": \"<string>\",\n        \"size\": \"UNSET\",\n        \"color\": \"<string>\",\n        \"backgroundColor\": \"<string>\"\n      }\n    },\n    \"privateConfig\": {\n      \"DEPRECATEDAlertRetentionDurationDays\": \"<integer>\",\n      \"alertConfig\": {\n        \"resolvedDeployRetentionDurationDays\": \"<integer>\",\n        \"deletedRuntimeRetentionDurationDays\": \"<integer>\",\n        \"allRuntimeRetentionDurationDays\": \"<integer>\"\n      },\n      \"imageRetentionDurationDays\": \"<integer>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b50aac36-b6c8-4d76-91b2-e989de4ea2a1",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"config\": {\n    \"publicConfig\": {\n      \"loginNotice\": {\n        \"enabled\": \"<boolean>\",\n        \"text\": \"<string>\"\n      },\n      \"header\": {\n        \"enabled\": \"<boolean>\",\n        \"text\": \"<string>\",\n        \"size\": \"UNSET\",\n        \"color\": \"<string>\",\n        \"backgroundColor\": \"<string>\"\n      },\n      \"footer\": {\n        \"enabled\": \"<boolean>\",\n        \"text\": \"<string>\",\n        \"size\": \"UNSET\",\n        \"color\": \"<string>\",\n        \"backgroundColor\": \"<string>\"\n      }\n    },\n    \"privateConfig\": {\n      \"DEPRECATEDAlertRetentionDurationDays\": \"<integer>\",\n      \"alertConfig\": {\n        \"resolvedDeployRetentionDurationDays\": \"<integer>\",\n        \"deletedRuntimeRetentionDurationDays\": \"<integer>\",\n        \"allRuntimeRetentionDurationDays\": \"<integer>\"\n      },\n      \"imageRetentionDurationDays\": \"<integer>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"publicConfig\": {\n    \"loginNotice\": {\n      \"enabled\": \"<boolean>\",\n      \"text\": \"<string>\"\n    },\n    \"header\": {\n      \"enabled\": \"<boolean>\",\n      \"text\": \"<string>\",\n      \"size\": \"UNSET\",\n      \"color\": \"<string>\",\n      \"backgroundColor\": \"<string>\"\n    },\n    \"footer\": {\n      \"enabled\": \"<boolean>\",\n      \"text\": \"<string>\",\n      \"size\": \"UNSET\",\n      \"color\": \"<string>\",\n      \"backgroundColor\": \"<string>\"\n    }\n  },\n  \"privateConfig\": {\n    \"DEPRECATEDAlertRetentionDurationDays\": \"<integer>\",\n    \"alertConfig\": {\n      \"resolvedDeployRetentionDurationDays\": \"<integer>\",\n      \"deletedRuntimeRetentionDurationDays\": \"<integer>\",\n      \"allRuntimeRetentionDurationDays\": \"<integer>\"\n    },\n    \"imageRetentionDurationDays\": \"<integer>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fb839572-006b-4d8c-898a-feab7e8938e6",
+          "name": "Get Private Config",
+          "request": {
+            "name": "Get Private Config",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "config",
+                "private"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e219123b-30e2-4424-9868-8d19d0597a56",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "config",
+                    "private"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"DEPRECATEDAlertRetentionDurationDays\": \"<integer>\",\n  \"alertConfig\": {\n    \"resolvedDeployRetentionDurationDays\": \"<integer>\",\n    \"deletedRuntimeRetentionDurationDays\": \"<integer>\",\n    \"allRuntimeRetentionDurationDays\": \"<integer>\"\n  },\n  \"imageRetentionDurationDays\": \"<integer>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4b672a27-3065-4bed-a93b-83b5cb7c0afc",
+          "name": "Get Public Config",
+          "request": {
+            "name": "Get Public Config",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "config",
+                "public"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3f83c271-a3fc-4520-b3b6-8c7e40d67028",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "config",
+                    "public"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"loginNotice\": {\n    \"enabled\": \"<boolean>\",\n    \"text\": \"<string>\"\n  },\n  \"header\": {\n    \"enabled\": \"<boolean>\",\n    \"text\": \"<string>\",\n    \"size\": \"UNSET\",\n    \"color\": \"<string>\",\n    \"backgroundColor\": \"<string>\"\n  },\n  \"footer\": {\n    \"enabled\": \"<boolean>\",\n    \"text\": \"<string>\",\n    \"size\": \"UNSET\",\n    \"color\": \"<string>\",\n    \"backgroundColor\": \"<string>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "StackRox Central hostname or IP",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "stackrox.localhost",
+      "key": "central-host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{central-host}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "da24c299-d5e5-4a8f-b6c2-49e3387f8a4f",
+    "name": "API Reference AlertService ConfigService API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.\n\nContact Support:\n Email: support@stackrox.com",
+      "type": "text/plain"
+    }
+  }
+}

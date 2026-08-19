@@ -1,0 +1,387 @@
+{
+  "item": [
+    {
+      "id": "cd87af4a-22ed-4c0f-a867-ddfab26537d8",
+      "name": "LicenseService",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "259522f1-424a-45cb-98ec-6b3400f4029c",
+          "name": "Add License",
+          "request": {
+            "name": "Add License",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "licenses",
+                "add"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"licenseKey\": \"<string>\",\n  \"activate\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "eeab1685-a673-4ae7-9ecb-1288df3fd084",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "licenses",
+                    "add"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"licenseKey\": \"<string>\",\n  \"activate\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"license\": {\n    \"license\": {\n      \"metadata\": {\n        \"id\": \"string\",\n        \"signingKeyId\": \"string\",\n        \"issueDate\": \"1978-06-08T09:27:15.144Z\",\n        \"licensedForId\": \"string\",\n        \"licensedForName\": \"string\"\n      },\n      \"supportContact\": {\n        \"phone\": \"string\",\n        \"email\": \"string\",\n        \"url\": \"string\",\n        \"name\": \"string\"\n      },\n      \"restrictions\": {\n        \"notValidBefore\": \"1949-01-28T02:52:32.881Z\",\n        \"notValidAfter\": \"1975-01-07T12:31:04.793Z\",\n        \"enforcementUrl\": \"string\",\n        \"allowOffline\": false,\n        \"maxNodes\": 8032,\n        \"noNodeRestriction\": false,\n        \"buildFlavors\": [\n          \"string\",\n          \"string\"\n        ],\n        \"noBuildFlavorRestriction\": true,\n        \"deploymentEnvironments\": [\n          \"string\",\n          \"string\"\n        ],\n        \"noDeploymentEnvironmentRestriction\": true\n      }\n    },\n    \"status\": \"UNKNOWN\",\n    \"statusReason\": \"string\",\n    \"active\": true\n  },\n  \"accepted\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0ffd162f-c260-474c-a307-1441728843a9",
+          "name": "Get Active License Expiration",
+          "request": {
+            "name": "Get Active License Expiration",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "licenses",
+                "expiration"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "984e3ef8-56f7-4887-a96c-874cec131346",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "licenses",
+                    "expiration"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"expirationTime\": \"1963-01-21T23:21:50.499Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f100db02-3f65-4954-a6b8-733a2746505b",
+          "name": "Get Licenses",
+          "request": {
+            "name": "Get Licenses",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "licenses",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "active",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "statuses",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "statuses",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "be369e0a-4749-480b-a6b0-d9a49d58b157",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "licenses",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "statuses",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "statuses",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"licenses\": [\n    {\n      \"license\": {\n        \"metadata\": {\n          \"id\": \"string\",\n          \"signingKeyId\": \"string\",\n          \"issueDate\": \"1991-01-05T21:52:31.631Z\",\n          \"licensedForId\": \"string\",\n          \"licensedForName\": \"string\"\n        },\n        \"supportContact\": {\n          \"phone\": \"string\",\n          \"email\": \"string\",\n          \"url\": \"string\",\n          \"name\": \"string\"\n        },\n        \"restrictions\": {\n          \"notValidBefore\": \"1952-10-14T17:45:40.362Z\",\n          \"notValidAfter\": \"2000-05-15T02:07:35.896Z\",\n          \"enforcementUrl\": \"string\",\n          \"allowOffline\": true,\n          \"maxNodes\": 4175,\n          \"noNodeRestriction\": false,\n          \"buildFlavors\": [\n            \"string\",\n            \"string\"\n          ],\n          \"noBuildFlavorRestriction\": false,\n          \"deploymentEnvironments\": [\n            \"string\",\n            \"string\"\n          ],\n          \"noDeploymentEnvironmentRestriction\": true\n        }\n      },\n      \"status\": \"UNKNOWN\",\n      \"statusReason\": \"string\",\n      \"active\": true\n    },\n    {\n      \"license\": {\n        \"metadata\": {\n          \"id\": \"string\",\n          \"signingKeyId\": \"string\",\n          \"issueDate\": \"1986-11-19T23:47:53.490Z\",\n          \"licensedForId\": \"string\",\n          \"licensedForName\": \"string\"\n        },\n        \"supportContact\": {\n          \"phone\": \"string\",\n          \"email\": \"string\",\n          \"url\": \"string\",\n          \"name\": \"string\"\n        },\n        \"restrictions\": {\n          \"notValidBefore\": \"1991-02-18T03:42:12.237Z\",\n          \"notValidAfter\": \"1997-11-17T06:38:59.561Z\",\n          \"enforcementUrl\": \"string\",\n          \"allowOffline\": true,\n          \"maxNodes\": 9874,\n          \"noNodeRestriction\": false,\n          \"buildFlavors\": [\n            \"string\",\n            \"string\"\n          ],\n          \"noBuildFlavorRestriction\": false,\n          \"deploymentEnvironments\": [\n            \"string\",\n            \"string\"\n          ],\n          \"noDeploymentEnvironmentRestriction\": true\n        }\n      },\n      \"status\": \"UNKNOWN\",\n      \"statusReason\": \"string\",\n      \"active\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "StackRox Central hostname or IP",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "stackrox.localhost",
+      "key": "central-host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{central-host}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3adcdd02-a05e-4344-a760-dcd89f5a21c3",
+    "name": "API Reference AlertService LicenseService API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.\n\nContact Support:\n Email: support@stackrox.com",
+      "type": "text/plain"
+    }
+  }
+}

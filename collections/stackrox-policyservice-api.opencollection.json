@@ -1,0 +1,258 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference AlertService PolicyService API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PolicyService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ListPolicies returns the list of policies.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/policies",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.field",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.reversed",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "ListPolicies returns the list of policies."
+        },
+        {
+          "info": {
+            "name": "PostPolicy creates a new policy.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/policies",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "PostPolicy creates a new policy."
+        },
+        {
+          "info": {
+            "name": "DryRunPolicy evaluates the given policy and returns any alerts without creating the policy.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/policies/dryrun",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "DryRunPolicy evaluates the given policy and returns any alerts without creating the policy."
+        },
+        {
+          "info": {
+            "name": "ReassessPolicies reevaluates all the policies.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/policies/reassess"
+          },
+          "docs": "ReassessPolicies reevaluates all the policies."
+        },
+        {
+          "info": {
+            "name": "GetPolicy returns the requested policy by ID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/policies/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "GetPolicy returns the requested policy by ID."
+        },
+        {
+          "info": {
+            "name": "PutPolicy modifies an existing policy.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{central-host}/v1/policies/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "PutPolicy modifies an existing policy."
+        },
+        {
+          "info": {
+            "name": "PatchPolicy edits an existing policy.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{central-host}/v1/policies/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "PatchPolicy edits an existing policy."
+        },
+        {
+          "info": {
+            "name": "DeletePolicy removes a policy by ID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{central-host}/v1/policies/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "DeletePolicy removes a policy by ID."
+        },
+        {
+          "info": {
+            "name": "EnableDisablePolicyNotification enables or disables notifications for a policy by ID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{central-host}/v1/policies/:policyId/notifiers",
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "EnableDisablePolicyNotification enables or disables notifications for a policy by ID."
+        },
+        {
+          "info": {
+            "name": "GetPolicyCategories returns the policy categories.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/policyCategories"
+          },
+          "docs": "GetPolicyCategories returns the policy categories."
+        },
+        {
+          "info": {
+            "name": "DeletePolicyCategory removes the given policy category.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{central-host}/v1/policyCategories/:category",
+            "params": [
+              {
+                "name": "category",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "DeletePolicyCategory removes the given policy category."
+        },
+        {
+          "info": {
+            "name": "RenamePolicyCategory renames the given policy category.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{central-host}/v1/policyCategories/:oldCategory",
+            "params": [
+              {
+                "name": "oldCategory",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "RenamePolicyCategory renames the given policy category."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

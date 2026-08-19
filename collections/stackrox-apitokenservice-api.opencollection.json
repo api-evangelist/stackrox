@@ -1,0 +1,95 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference AlertService APITokenService API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "APITokenService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GetAPITokens returns all the API tokens.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/apitokens",
+            "params": [
+              {
+                "name": "revoked",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "GetAPITokens returns all the API tokens."
+        },
+        {
+          "info": {
+            "name": "GenerateToken generates API token for a given user and role.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/apitokens/generate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "GenerateToken generates API token for a given user and role."
+        },
+        {
+          "info": {
+            "name": "RevokeToken removes the API token for a given id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{central-host}/v1/apitokens/revoke/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "RevokeToken removes the API token for a given id."
+        },
+        {
+          "info": {
+            "name": "GetAPIToken returns API token metadata for a given id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/apitokens/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "GetAPIToken returns API token metadata for a given id."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

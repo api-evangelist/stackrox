@@ -1,0 +1,288 @@
+{
+  "item": [
+    {
+      "id": "ac2031e7-3a67-4969-8ade-01304e7e7426",
+      "name": "NodeService",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "437e199e-4c19-47ff-b820-14c86f14fc62",
+          "name": "List Nodes",
+          "request": {
+            "name": "List Nodes",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "nodes",
+                ":clusterId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "clusterId",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2b57888a-9121-475a-ae5f-5710b8c37083",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "nodes",
+                    ":clusterId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clusterId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"nodes\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"taints\": [\n        {\n          \"key\": \"string\",\n          \"value\": \"string\",\n          \"taintEffect\": \"UNKNOWN_TAINT_EFFECT\"\n        },\n        {\n          \"key\": \"string\",\n          \"value\": \"string\",\n          \"taintEffect\": \"UNKNOWN_TAINT_EFFECT\"\n        }\n      ],\n      \"clusterId\": \"string\",\n      \"clusterName\": \"string\",\n      \"labels\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      },\n      \"annotations\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"internalIpAddresses\": [\n        \"string\",\n        \"string\"\n      ],\n      \"externalIpAddresses\": [\n        \"string\",\n        \"string\"\n      ],\n      \"containerRuntimeVersion\": \"string\",\n      \"containerRuntime\": {\n        \"type\": \"UNKNOWN_CONTAINER_RUNTIME\",\n        \"version\": \"string\"\n      },\n      \"kernelVersion\": \"string\",\n      \"osImage\": \"string\",\n      \"joinedAt\": \"1971-05-30T21:16:31.946Z\",\n      \"kubeletVersion\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"taints\": [\n        {\n          \"key\": \"string\",\n          \"value\": \"string\",\n          \"taintEffect\": \"UNKNOWN_TAINT_EFFECT\"\n        },\n        {\n          \"key\": \"string\",\n          \"value\": \"string\",\n          \"taintEffect\": \"UNKNOWN_TAINT_EFFECT\"\n        }\n      ],\n      \"clusterId\": \"string\",\n      \"clusterName\": \"string\",\n      \"labels\": {\n        \"key_0\": \"string\"\n      },\n      \"annotations\": {\n        \"key_0\": \"string\"\n      },\n      \"internalIpAddresses\": [\n        \"string\",\n        \"string\"\n      ],\n      \"externalIpAddresses\": [\n        \"string\",\n        \"string\"\n      ],\n      \"containerRuntimeVersion\": \"string\",\n      \"containerRuntime\": {\n        \"type\": \"UNKNOWN_CONTAINER_RUNTIME\",\n        \"version\": \"string\"\n      },\n      \"kernelVersion\": \"string\",\n      \"osImage\": \"string\",\n      \"joinedAt\": \"1980-03-29T05:02:52.143Z\",\n      \"kubeletVersion\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b1002ab9-32bf-4c6a-883f-d91a3fb7c993",
+          "name": "Get Node",
+          "request": {
+            "name": "Get Node",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "nodes",
+                ":clusterId",
+                ":nodeId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "clusterId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "nodeId",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "50ede79c-403a-41e4-9d9c-2697652ed54b",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "nodes",
+                    ":clusterId",
+                    ":nodeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clusterId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"taints\": [\n    {\n      \"key\": \"string\",\n      \"value\": \"string\",\n      \"taintEffect\": \"UNKNOWN_TAINT_EFFECT\"\n    },\n    {\n      \"key\": \"string\",\n      \"value\": \"string\",\n      \"taintEffect\": \"UNKNOWN_TAINT_EFFECT\"\n    }\n  ],\n  \"clusterId\": \"string\",\n  \"clusterName\": \"string\",\n  \"labels\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"annotations\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  },\n  \"internalIpAddresses\": [\n    \"string\",\n    \"string\"\n  ],\n  \"externalIpAddresses\": [\n    \"string\",\n    \"string\"\n  ],\n  \"containerRuntimeVersion\": \"string\",\n  \"containerRuntime\": {\n    \"type\": \"UNKNOWN_CONTAINER_RUNTIME\",\n    \"version\": \"string\"\n  },\n  \"kernelVersion\": \"string\",\n  \"osImage\": \"string\",\n  \"joinedAt\": \"1994-01-04T09:41:30.919Z\",\n  \"kubeletVersion\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "StackRox Central hostname or IP",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "stackrox.localhost",
+      "key": "central-host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{central-host}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5367abd9-53a2-4459-9536-7a5e91468f24",
+    "name": "API Reference AlertService NodeService API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.\n\nContact Support:\n Email: support@stackrox.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,189 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference AlertService ImageService API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ImageService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ListImages returns all the images.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/images",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.field",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.reversed",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "ListImages returns all the images."
+        },
+        {
+          "info": {
+            "name": "DeleteImage removes the images based on a query",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{central-host}/v1/images",
+            "params": [
+              {
+                "name": "query.query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "query.pagination.limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "query.pagination.offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "query.pagination.sort_option.field",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "query.pagination.sort_option.reversed",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "confirm",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "DeleteImage removes the images based on a query"
+        },
+        {
+          "info": {
+            "name": "InvalidateScanAndRegistryCaches removes the image metadata cache.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/images/cache/invalidate"
+          },
+          "docs": "InvalidateScanAndRegistryCaches removes the image metadata cache."
+        },
+        {
+          "info": {
+            "name": "ScanImage scans a single image and returns the result",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/images/scan",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "ScanImage scans a single image and returns the result"
+        },
+        {
+          "info": {
+            "name": "GetImage returns the image given its ID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/images/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "GetImage returns the image given its ID."
+        },
+        {
+          "info": {
+            "name": "ListImages returns all the images.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/imagescount",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.field",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.reversed",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "ListImages returns all the images."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

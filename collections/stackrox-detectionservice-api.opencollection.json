@@ -1,0 +1,71 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference AlertService DetectionService API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "DetectionService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "DetectBuildTime checks if any images violate build time policies.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/detect/build",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "DetectBuildTime checks if any images violate build time policies."
+        },
+        {
+          "info": {
+            "name": "DetectDeployTime checks if any deployments violate deploy time policies.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/detect/deploy",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "DetectDeployTime checks if any deployments violate deploy time policies."
+        },
+        {
+          "info": {
+            "name": "DetectDeployTimeFromYAML checks if the given deployment yaml violates any deploy time policies.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/detect/deploy/yaml",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "DetectDeployTimeFromYAML checks if the given deployment yaml violates any deploy time policies."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

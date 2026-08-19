@@ -1,0 +1,165 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference AlertService ComplianceService API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ComplianceService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GetAggregatedResults",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/compliance/aggregatedresults",
+            "params": [
+              {
+                "name": "groupBy",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "unit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "where.query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "where.pagination.limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "where.pagination.offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "where.pagination.sort_option.field",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "where.pagination.sort_option.reversed",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GetComplianceControlResults",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/compliance/results",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.field",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.reversed",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GetRunResults",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/compliance/runresults",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "standardId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "runId",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the run ID for which to return results. If empty, the most recent run is returned.\nCAVEAT: Setting this field circumvents the results cache on the server-side, which may lead to significantly\n        increased memory pressure and decreased performance."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GetStandards",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/compliance/standards"
+          }
+        },
+        {
+          "info": {
+            "name": "GetStandard",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/compliance/standards/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

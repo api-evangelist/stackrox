@@ -1,0 +1,713 @@
+{
+  "item": [
+    {
+      "id": "f67b0b20-5bc9-4ddf-8b16-6cbdc64d9c67",
+      "name": "ImageIntegrationService",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4f6ca23b-7050-41b5-96d3-87100faa03f8",
+          "name": "GetImageIntegrations returns all image integrations.",
+          "request": {
+            "name": "GetImageIntegrations returns all image integrations.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "imageintegrations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "cluster",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4a59cf51-2122-4867-8c2e-62d32ed6522c",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "imageintegrations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cluster",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"integrations\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"clusters\": [\n        \"string\",\n        \"string\"\n      ],\n      \"categories\": [\n        \"REGISTRY\",\n        \"REGISTRY\"\n      ],\n      \"dtr\": {\n        \"username\": \"string\",\n        \"password\": \"string\",\n        \"endpoint\": \"string\",\n        \"insecure\": false\n      },\n      \"clairify\": {\n        \"endpoint\": \"string\"\n      },\n      \"docker\": {\n        \"endpoint\": \"string\",\n        \"username\": \"string\",\n        \"password\": \"string\",\n        \"insecure\": true\n      },\n      \"quay\": {\n        \"endpoint\": \"string\",\n        \"oauthToken\": \"string\"\n      },\n      \"ecr\": {\n        \"registryId\": \"string\",\n        \"accessKeyId\": \"string\",\n        \"secretAccessKey\": \"string\",\n        \"region\": \"string\",\n        \"useIam\": false\n      },\n      \"tenable\": {\n        \"accessKey\": \"string\",\n        \"secretKey\": \"string\"\n      },\n      \"google\": {\n        \"endpoint\": \"string\",\n        \"serviceAccount\": \"string\",\n        \"project\": \"string\"\n      },\n      \"clair\": {\n        \"endpoint\": \"string\"\n      },\n      \"anchore\": {\n        \"endpoint\": \"string\",\n        \"username\": \"string\",\n        \"password\": \"string\"\n      },\n      \"scannerv2\": {\n        \"endpoint\": \"string\"\n      },\n      \"ibm\": {\n        \"endpoint\": \"string\",\n        \"apiKey\": \"string\"\n      },\n      \"autogenerated\": true,\n      \"clusterId\": \"string\",\n      \"skipTestIntegration\": false\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"clusters\": [\n        \"string\",\n        \"string\"\n      ],\n      \"categories\": [\n        \"REGISTRY\",\n        \"REGISTRY\"\n      ],\n      \"dtr\": {\n        \"username\": \"string\",\n        \"password\": \"string\",\n        \"endpoint\": \"string\",\n        \"insecure\": false\n      },\n      \"clairify\": {\n        \"endpoint\": \"string\"\n      },\n      \"docker\": {\n        \"endpoint\": \"string\",\n        \"username\": \"string\",\n        \"password\": \"string\",\n        \"insecure\": false\n      },\n      \"quay\": {\n        \"endpoint\": \"string\",\n        \"oauthToken\": \"string\"\n      },\n      \"ecr\": {\n        \"registryId\": \"string\",\n        \"accessKeyId\": \"string\",\n        \"secretAccessKey\": \"string\",\n        \"region\": \"string\",\n        \"useIam\": true\n      },\n      \"tenable\": {\n        \"accessKey\": \"string\",\n        \"secretKey\": \"string\"\n      },\n      \"google\": {\n        \"endpoint\": \"string\",\n        \"serviceAccount\": \"string\",\n        \"project\": \"string\"\n      },\n      \"clair\": {\n        \"endpoint\": \"string\"\n      },\n      \"anchore\": {\n        \"endpoint\": \"string\",\n        \"username\": \"string\",\n        \"password\": \"string\"\n      },\n      \"scannerv2\": {\n        \"endpoint\": \"string\"\n      },\n      \"ibm\": {\n        \"endpoint\": \"string\",\n        \"apiKey\": \"string\"\n      },\n      \"autogenerated\": false,\n      \"clusterId\": \"string\",\n      \"skipTestIntegration\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "59b3e1e2-2a5b-43d6-b8cd-ffb120d71ed8",
+          "name": "PostImageIntegration creates a image integraton.",
+          "request": {
+            "name": "PostImageIntegration creates a image integraton.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "imageintegrations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"clusters\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"categories\": [\n    \"REGISTRY\",\n    \"REGISTRY\"\n  ],\n  \"dtr\": {\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"endpoint\": \"<string>\",\n    \"insecure\": \"<boolean>\"\n  },\n  \"clairify\": {\n    \"endpoint\": \"<string>\"\n  },\n  \"docker\": {\n    \"endpoint\": \"<string>\",\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"insecure\": \"<boolean>\"\n  },\n  \"quay\": {\n    \"endpoint\": \"<string>\",\n    \"oauthToken\": \"<string>\"\n  },\n  \"ecr\": {\n    \"registryId\": \"<string>\",\n    \"accessKeyId\": \"<string>\",\n    \"secretAccessKey\": \"<string>\",\n    \"region\": \"<string>\",\n    \"useIam\": \"<boolean>\"\n  },\n  \"tenable\": {\n    \"accessKey\": \"<string>\",\n    \"secretKey\": \"<string>\"\n  },\n  \"google\": {\n    \"endpoint\": \"<string>\",\n    \"serviceAccount\": \"<string>\",\n    \"project\": \"<string>\"\n  },\n  \"clair\": {\n    \"endpoint\": \"<string>\"\n  },\n  \"anchore\": {\n    \"endpoint\": \"<string>\",\n    \"username\": \"<string>\",\n    \"password\": \"<string>\"\n  },\n  \"scannerv2\": {\n    \"endpoint\": \"<string>\"\n  },\n  \"ibm\": {\n    \"endpoint\": \"<string>\",\n    \"apiKey\": \"<string>\"\n  },\n  \"autogenerated\": \"<boolean>\",\n  \"clusterId\": \"<string>\",\n  \"skipTestIntegration\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bd5640ea-b189-4922-a4d5-bbb3fd38119c",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "imageintegrations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"clusters\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"categories\": [\n    \"REGISTRY\",\n    \"REGISTRY\"\n  ],\n  \"dtr\": {\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"endpoint\": \"<string>\",\n    \"insecure\": \"<boolean>\"\n  },\n  \"clairify\": {\n    \"endpoint\": \"<string>\"\n  },\n  \"docker\": {\n    \"endpoint\": \"<string>\",\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"insecure\": \"<boolean>\"\n  },\n  \"quay\": {\n    \"endpoint\": \"<string>\",\n    \"oauthToken\": \"<string>\"\n  },\n  \"ecr\": {\n    \"registryId\": \"<string>\",\n    \"accessKeyId\": \"<string>\",\n    \"secretAccessKey\": \"<string>\",\n    \"region\": \"<string>\",\n    \"useIam\": \"<boolean>\"\n  },\n  \"tenable\": {\n    \"accessKey\": \"<string>\",\n    \"secretKey\": \"<string>\"\n  },\n  \"google\": {\n    \"endpoint\": \"<string>\",\n    \"serviceAccount\": \"<string>\",\n    \"project\": \"<string>\"\n  },\n  \"clair\": {\n    \"endpoint\": \"<string>\"\n  },\n  \"anchore\": {\n    \"endpoint\": \"<string>\",\n    \"username\": \"<string>\",\n    \"password\": \"<string>\"\n  },\n  \"scannerv2\": {\n    \"endpoint\": \"<string>\"\n  },\n  \"ibm\": {\n    \"endpoint\": \"<string>\",\n    \"apiKey\": \"<string>\"\n  },\n  \"autogenerated\": \"<boolean>\",\n  \"clusterId\": \"<string>\",\n  \"skipTestIntegration\": \"<boolean>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5d15a044-9b4a-4510-87fc-fcdfb7639802",
+          "name": "TestImageIntegration checks if the given image integration is correctly configured.",
+          "request": {
+            "name": "TestImageIntegration checks if the given image integration is correctly configured.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "imageintegrations",
+                "test"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"clusters\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"categories\": [\n    \"REGISTRY\",\n    \"REGISTRY\"\n  ],\n  \"dtr\": {\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"endpoint\": \"<string>\",\n    \"insecure\": \"<boolean>\"\n  },\n  \"clairify\": {\n    \"endpoint\": \"<string>\"\n  },\n  \"docker\": {\n    \"endpoint\": \"<string>\",\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"insecure\": \"<boolean>\"\n  },\n  \"quay\": {\n    \"endpoint\": \"<string>\",\n    \"oauthToken\": \"<string>\"\n  },\n  \"ecr\": {\n    \"registryId\": \"<string>\",\n    \"accessKeyId\": \"<string>\",\n    \"secretAccessKey\": \"<string>\",\n    \"region\": \"<string>\",\n    \"useIam\": \"<boolean>\"\n  },\n  \"tenable\": {\n    \"accessKey\": \"<string>\",\n    \"secretKey\": \"<string>\"\n  },\n  \"google\": {\n    \"endpoint\": \"<string>\",\n    \"serviceAccount\": \"<string>\",\n    \"project\": \"<string>\"\n  },\n  \"clair\": {\n    \"endpoint\": \"<string>\"\n  },\n  \"anchore\": {\n    \"endpoint\": \"<string>\",\n    \"username\": \"<string>\",\n    \"password\": \"<string>\"\n  },\n  \"scannerv2\": {\n    \"endpoint\": \"<string>\"\n  },\n  \"ibm\": {\n    \"endpoint\": \"<string>\",\n    \"apiKey\": \"<string>\"\n  },\n  \"autogenerated\": \"<boolean>\",\n  \"clusterId\": \"<string>\",\n  \"skipTestIntegration\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bab0a84e-d424-4f39-ada0-38db086372fc",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "imageintegrations",
+                    "test"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "90161557-8778-4303-9b0d-9731e7535b8d",
+          "name": "GetImageIntegration returns the image integration given its ID.",
+          "request": {
+            "name": "GetImageIntegration returns the image integration given its ID.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "imageintegrations",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "153624be-f0dc-4873-b247-2444e26e8886",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "imageintegrations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"clusters\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"categories\": [\n    \"REGISTRY\",\n    \"REGISTRY\"\n  ],\n  \"dtr\": {\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"endpoint\": \"<string>\",\n    \"insecure\": \"<boolean>\"\n  },\n  \"clairify\": {\n    \"endpoint\": \"<string>\"\n  },\n  \"docker\": {\n    \"endpoint\": \"<string>\",\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"insecure\": \"<boolean>\"\n  },\n  \"quay\": {\n    \"endpoint\": \"<string>\",\n    \"oauthToken\": \"<string>\"\n  },\n  \"ecr\": {\n    \"registryId\": \"<string>\",\n    \"accessKeyId\": \"<string>\",\n    \"secretAccessKey\": \"<string>\",\n    \"region\": \"<string>\",\n    \"useIam\": \"<boolean>\"\n  },\n  \"tenable\": {\n    \"accessKey\": \"<string>\",\n    \"secretKey\": \"<string>\"\n  },\n  \"google\": {\n    \"endpoint\": \"<string>\",\n    \"serviceAccount\": \"<string>\",\n    \"project\": \"<string>\"\n  },\n  \"clair\": {\n    \"endpoint\": \"<string>\"\n  },\n  \"anchore\": {\n    \"endpoint\": \"<string>\",\n    \"username\": \"<string>\",\n    \"password\": \"<string>\"\n  },\n  \"scannerv2\": {\n    \"endpoint\": \"<string>\"\n  },\n  \"ibm\": {\n    \"endpoint\": \"<string>\",\n    \"apiKey\": \"<string>\"\n  },\n  \"autogenerated\": \"<boolean>\",\n  \"clusterId\": \"<string>\",\n  \"skipTestIntegration\": \"<boolean>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1e8b0bcc-7d94-486b-980e-6b6628784796",
+          "name": "DeleteImageIntegration removes a image integration given its ID.",
+          "request": {
+            "name": "DeleteImageIntegration removes a image integration given its ID.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "imageintegrations",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ca627d30-73d7-41c1-802c-ef35d35790b6",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "imageintegrations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "191ea655-8667-4af9-b583-ac55be2cb63c",
+          "name": "PutImageIntegration modifies a given image integration.",
+          "request": {
+            "name": "PutImageIntegration modifies a given image integration.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "imageintegrations",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"clusters\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"categories\": [\n    \"REGISTRY\",\n    \"REGISTRY\"\n  ],\n  \"dtr\": {\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"endpoint\": \"<string>\",\n    \"insecure\": \"<boolean>\"\n  },\n  \"clairify\": {\n    \"endpoint\": \"<string>\"\n  },\n  \"docker\": {\n    \"endpoint\": \"<string>\",\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"insecure\": \"<boolean>\"\n  },\n  \"quay\": {\n    \"endpoint\": \"<string>\",\n    \"oauthToken\": \"<string>\"\n  },\n  \"ecr\": {\n    \"registryId\": \"<string>\",\n    \"accessKeyId\": \"<string>\",\n    \"secretAccessKey\": \"<string>\",\n    \"region\": \"<string>\",\n    \"useIam\": \"<boolean>\"\n  },\n  \"tenable\": {\n    \"accessKey\": \"<string>\",\n    \"secretKey\": \"<string>\"\n  },\n  \"google\": {\n    \"endpoint\": \"<string>\",\n    \"serviceAccount\": \"<string>\",\n    \"project\": \"<string>\"\n  },\n  \"clair\": {\n    \"endpoint\": \"<string>\"\n  },\n  \"anchore\": {\n    \"endpoint\": \"<string>\",\n    \"username\": \"<string>\",\n    \"password\": \"<string>\"\n  },\n  \"scannerv2\": {\n    \"endpoint\": \"<string>\"\n  },\n  \"ibm\": {\n    \"endpoint\": \"<string>\",\n    \"apiKey\": \"<string>\"\n  },\n  \"autogenerated\": \"<boolean>\",\n  \"clusterId\": \"<string>\",\n  \"skipTestIntegration\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e72658d1-893d-42fe-8a54-89e1fb51f04c",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "imageintegrations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "StackRox Central hostname or IP",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "stackrox.localhost",
+      "key": "central-host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{central-host}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "bb578329-c679-49fc-890c-7e1f9aeef720",
+    "name": "API Reference AlertService ImageIntegrationService API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.\n\nContact Support:\n Email: support@stackrox.com",
+      "type": "text/plain"
+    }
+  }
+}

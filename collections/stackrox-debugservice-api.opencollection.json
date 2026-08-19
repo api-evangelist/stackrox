@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference AlertService DebugService API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "DebugService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the current logging level for StackRox services.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/debug/loglevel",
+            "params": [
+              {
+                "name": "modules",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get the current logging level for StackRox services."
+        },
+        {
+          "info": {
+            "name": "Set logging level for StackRox services.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{central-host}/v1/debug/loglevel",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set logging level for StackRox services."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

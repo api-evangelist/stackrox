@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference AlertService ProcessService API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ProcessService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GetProcessesByDeployment returns the processes executed in the given deployment.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/processes/deployment/:deploymentId",
+            "params": [
+              {
+                "name": "deploymentId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "GetProcessesByDeployment returns the processes executed in the given deployment."
+        },
+        {
+          "info": {
+            "name": "GetGroupedProcessByDeployment returns all the processes executed grouped by deployment.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/processes/deployment/:deploymentId/grouped",
+            "params": [
+              {
+                "name": "deploymentId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "GetGroupedProcessByDeployment returns all the processes executed grouped by deployment."
+        },
+        {
+          "info": {
+            "name": "GetGroupedProcessByDeploymentAndContainer returns all the processes executed grouped by deployment and container.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/processes/deployment/:deploymentId/grouped/container",
+            "params": [
+              {
+                "name": "deploymentId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "GetGroupedProcessByDeploymentAndContainer returns all the processes executed grouped by deployment and container."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

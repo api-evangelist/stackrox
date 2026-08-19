@@ -1,0 +1,90 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference AlertService ProcessWhitelistService API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ProcessWhitelistService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AddToProcessWhitelists adds a list of process names to each of a list of process whitelists",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{central-host}/v1/processwhitelists",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "AddToProcessWhitelists adds a list of process names to each of a list of process whitelists"
+        },
+        {
+          "info": {
+            "name": "GetProcessWhitelistById returns the single process whitelist referenced by the given ID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/processwhitelists/key",
+            "params": [
+              {
+                "name": "key.deploymentId",
+                "value": "",
+                "type": "query",
+                "description": "The idea is for the keys to be flexible.\nOnly certain combinations of these will be supported."
+              },
+              {
+                "name": "key.containerName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "key.clusterId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "key.namespace",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "GetProcessWhitelistById returns the single process whitelist referenced by the given ID."
+        },
+        {
+          "info": {
+            "name": "LockProcessWhitelists accepts a list of whitelist IDs, locks those whitelists, and returns the updated whitelist objects",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{central-host}/v1/processwhitelists/lock",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "LockProcessWhitelists accepts a list of whitelist IDs, locks those whitelists, and returns the updated whitelist objects"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

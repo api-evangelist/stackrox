@@ -1,0 +1,36 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference AlertService SummaryService API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SummaryService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GetSummaryCounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/summary/counts"
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

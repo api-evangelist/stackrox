@@ -1,0 +1,407 @@
+{
+  "item": [
+    {
+      "id": "3319e47b-9c31-4f29-a6ec-8392038eb7b0",
+      "name": "ComplianceManagementService",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2b9fceb8-3a4c-4a7a-8aaa-e5af2d2f2f98",
+          "name": "Get Recent Runs",
+          "request": {
+            "name": "Get Recent Runs",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "complianceManagement",
+                "runs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "clusterId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "standardId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "since",
+                  "value": "<dateTime>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dada8715-e996-4cab-bacd-71c4daddb562",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "complianceManagement",
+                    "runs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "clusterId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "standardId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"complianceRuns\": [\n    {\n      \"id\": \"string\",\n      \"clusterId\": \"string\",\n      \"standardId\": \"string\",\n      \"scheduleId\": \"string\",\n      \"startTime\": \"1996-10-04T23:03:25.437Z\",\n      \"finishTime\": \"2002-03-31T12:46:36.710Z\",\n      \"state\": \"INVALID\",\n      \"errorMessage\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"clusterId\": \"string\",\n      \"standardId\": \"string\",\n      \"scheduleId\": \"string\",\n      \"startTime\": \"1972-05-31T18:17:17.276Z\",\n      \"finishTime\": \"1972-06-25T11:02:49.676Z\",\n      \"state\": \"INVALID\",\n      \"errorMessage\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e61f8073-d5f9-4600-b129-a8630e4ce481",
+          "name": "Trigger Runs",
+          "request": {
+            "name": "Trigger Runs",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "compliancemanagement",
+                "runs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"selection\": {\n    \"clusterId\": \"<string>\",\n    \"standardId\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a79e5446-06d9-49ec-95dd-b4647d37f024",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compliancemanagement",
+                    "runs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"selection\": {\n    \"clusterId\": \"<string>\",\n    \"standardId\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"startedRuns\": [\n    {\n      \"id\": \"string\",\n      \"clusterId\": \"string\",\n      \"standardId\": \"string\",\n      \"scheduleId\": \"string\",\n      \"startTime\": \"1986-03-23T07:46:50.498Z\",\n      \"finishTime\": \"1965-11-15T03:06:14.566Z\",\n      \"state\": \"INVALID\",\n      \"errorMessage\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"clusterId\": \"string\",\n      \"standardId\": \"string\",\n      \"scheduleId\": \"string\",\n      \"startTime\": \"2008-09-04T12:29:27.450Z\",\n      \"finishTime\": \"2023-10-07T09:18:27.311Z\",\n      \"state\": \"INVALID\",\n      \"errorMessage\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8199d96f-f7c2-4a7d-8ae9-030fd6f1b28b",
+          "name": "Get Run Statuses",
+          "request": {
+            "name": "Get Run Statuses",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "compliancemanagement",
+                "runstatuses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "runIds",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "runIds",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9cad9e12-9563-40b9-a738-c7c65880a5c6",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "compliancemanagement",
+                    "runstatuses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "runIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "runIds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"invalidRunIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"runs\": [\n    {\n      \"id\": \"string\",\n      \"clusterId\": \"string\",\n      \"standardId\": \"string\",\n      \"scheduleId\": \"string\",\n      \"startTime\": \"2002-11-11T12:51:38.546Z\",\n      \"finishTime\": \"1951-01-31T13:21:17.914Z\",\n      \"state\": \"INVALID\",\n      \"errorMessage\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"clusterId\": \"string\",\n      \"standardId\": \"string\",\n      \"scheduleId\": \"string\",\n      \"startTime\": \"1984-05-25T16:35:38.686Z\",\n      \"finishTime\": \"1993-08-31T16:14:36.500Z\",\n      \"state\": \"INVALID\",\n      \"errorMessage\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "StackRox Central hostname or IP",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "stackrox.localhost",
+      "key": "central-host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{central-host}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "52574d0f-5aa8-4e38-8447-396081603168",
+    "name": "API Reference AlertService ComplianceManagementService API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.\n\nContact Support:\n Email: support@stackrox.com",
+      "type": "text/plain"
+    }
+  }
+}

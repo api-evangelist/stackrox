@@ -1,0 +1,724 @@
+{
+  "item": [
+    {
+      "id": "dc2d34a7-532b-412c-be0e-4f00986975e8",
+      "name": "NotifierService",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a4f9eb94-c3cb-4d0e-a167-37dbe96a7e9c",
+          "name": "Get Notifiers",
+          "request": {
+            "name": "Get Notifiers",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "notifiers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "35bbf454-6e30-4779-adb4-5195201dbbf3",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "notifiers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"notifiers\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"uiEndpoint\": \"string\",\n      \"enabled\": true,\n      \"labelKey\": \"string\",\n      \"labelDefault\": \"string\",\n      \"jira\": {\n        \"url\": \"string\",\n        \"username\": \"string\",\n        \"password\": \"string\",\n        \"issueType\": \"string\"\n      },\n      \"email\": {\n        \"server\": \"string\",\n        \"sender\": \"string\",\n        \"username\": \"string\",\n        \"password\": \"string\",\n        \"disableTLS\": false,\n        \"useSTARTTLS\": false,\n        \"from\": \"string\"\n      },\n      \"cscc\": {\n        \"serviceAccount\": \"string\",\n        \"sourceId\": \"string\"\n      },\n      \"splunk\": {\n        \"httpToken\": \"string\",\n        \"httpEndpoint\": \"string\",\n        \"insecure\": false,\n        \"truncate\": \"string\",\n        \"auditLoggingEnabled\": false\n      },\n      \"pagerduty\": {\n        \"apiKey\": \"string\"\n      },\n      \"generic\": {\n        \"endpoint\": \"string\",\n        \"skipTLSVerify\": false,\n        \"caCert\": \"string\",\n        \"username\": \"string\",\n        \"password\": \"string\",\n        \"headers\": [\n          {\n            \"key\": \"string\",\n            \"value\": \"string\"\n          },\n          {\n            \"key\": \"string\",\n            \"value\": \"string\"\n          }\n        ],\n        \"extraFields\": [\n          {\n            \"key\": \"string\",\n            \"value\": \"string\"\n          },\n          {\n            \"key\": \"string\",\n            \"value\": \"string\"\n          }\n        ],\n        \"auditLoggingEnabled\": false\n      },\n      \"sumologic\": {\n        \"httpSourceAddress\": \"string\",\n        \"skipTLSVerify\": false\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"uiEndpoint\": \"string\",\n      \"enabled\": true,\n      \"labelKey\": \"string\",\n      \"labelDefault\": \"string\",\n      \"jira\": {\n        \"url\": \"string\",\n        \"username\": \"string\",\n        \"password\": \"string\",\n        \"issueType\": \"string\"\n      },\n      \"email\": {\n        \"server\": \"string\",\n        \"sender\": \"string\",\n        \"username\": \"string\",\n        \"password\": \"string\",\n        \"disableTLS\": true,\n        \"useSTARTTLS\": false,\n        \"from\": \"string\"\n      },\n      \"cscc\": {\n        \"serviceAccount\": \"string\",\n        \"sourceId\": \"string\"\n      },\n      \"splunk\": {\n        \"httpToken\": \"string\",\n        \"httpEndpoint\": \"string\",\n        \"insecure\": true,\n        \"truncate\": \"string\",\n        \"auditLoggingEnabled\": true\n      },\n      \"pagerduty\": {\n        \"apiKey\": \"string\"\n      },\n      \"generic\": {\n        \"endpoint\": \"string\",\n        \"skipTLSVerify\": true,\n        \"caCert\": \"string\",\n        \"username\": \"string\",\n        \"password\": \"string\",\n        \"headers\": [\n          {\n            \"key\": \"string\",\n            \"value\": \"string\"\n          },\n          {\n            \"key\": \"string\",\n            \"value\": \"string\"\n          }\n        ],\n        \"extraFields\": [\n          {\n            \"key\": \"string\",\n            \"value\": \"string\"\n          },\n          {\n            \"key\": \"string\",\n            \"value\": \"string\"\n          }\n        ],\n        \"auditLoggingEnabled\": false\n      },\n      \"sumologic\": {\n        \"httpSourceAddress\": \"string\",\n        \"skipTLSVerify\": true\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "90ce0884-00ef-48af-ac60-1a4b93345be4",
+          "name": "Post Notifier",
+          "request": {
+            "name": "Post Notifier",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "notifiers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"uiEndpoint\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"labelKey\": \"<string>\",\n  \"labelDefault\": \"<string>\",\n  \"jira\": {\n    \"url\": \"<string>\",\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"issueType\": \"<string>\"\n  },\n  \"email\": {\n    \"server\": \"<string>\",\n    \"sender\": \"<string>\",\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"disableTLS\": \"<boolean>\",\n    \"useSTARTTLS\": \"<boolean>\",\n    \"from\": \"<string>\"\n  },\n  \"cscc\": {\n    \"serviceAccount\": \"<string>\",\n    \"sourceId\": \"<string>\"\n  },\n  \"splunk\": {\n    \"httpToken\": \"<string>\",\n    \"httpEndpoint\": \"<string>\",\n    \"insecure\": \"<boolean>\",\n    \"truncate\": \"<int64>\",\n    \"auditLoggingEnabled\": \"<boolean>\"\n  },\n  \"pagerduty\": {\n    \"apiKey\": \"<string>\"\n  },\n  \"generic\": {\n    \"endpoint\": \"<string>\",\n    \"skipTLSVerify\": \"<boolean>\",\n    \"caCert\": \"<string>\",\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"headers\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"extraFields\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"auditLoggingEnabled\": \"<boolean>\"\n  },\n  \"sumologic\": {\n    \"httpSourceAddress\": \"<string>\",\n    \"skipTLSVerify\": \"<boolean>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "24ebb0e3-719b-4951-8a8f-04864c063ace",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "notifiers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"uiEndpoint\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"labelKey\": \"<string>\",\n  \"labelDefault\": \"<string>\",\n  \"jira\": {\n    \"url\": \"<string>\",\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"issueType\": \"<string>\"\n  },\n  \"email\": {\n    \"server\": \"<string>\",\n    \"sender\": \"<string>\",\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"disableTLS\": \"<boolean>\",\n    \"useSTARTTLS\": \"<boolean>\",\n    \"from\": \"<string>\"\n  },\n  \"cscc\": {\n    \"serviceAccount\": \"<string>\",\n    \"sourceId\": \"<string>\"\n  },\n  \"splunk\": {\n    \"httpToken\": \"<string>\",\n    \"httpEndpoint\": \"<string>\",\n    \"insecure\": \"<boolean>\",\n    \"truncate\": \"<int64>\",\n    \"auditLoggingEnabled\": \"<boolean>\"\n  },\n  \"pagerduty\": {\n    \"apiKey\": \"<string>\"\n  },\n  \"generic\": {\n    \"endpoint\": \"<string>\",\n    \"skipTLSVerify\": \"<boolean>\",\n    \"caCert\": \"<string>\",\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"headers\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"extraFields\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"auditLoggingEnabled\": \"<boolean>\"\n  },\n  \"sumologic\": {\n    \"httpSourceAddress\": \"<string>\",\n    \"skipTLSVerify\": \"<boolean>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "98ac8af1-33d2-400f-91f0-0e96ee7e50cf",
+          "name": "Test Notifier",
+          "request": {
+            "name": "Test Notifier",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "notifiers",
+                "test"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"uiEndpoint\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"labelKey\": \"<string>\",\n  \"labelDefault\": \"<string>\",\n  \"jira\": {\n    \"url\": \"<string>\",\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"issueType\": \"<string>\"\n  },\n  \"email\": {\n    \"server\": \"<string>\",\n    \"sender\": \"<string>\",\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"disableTLS\": \"<boolean>\",\n    \"useSTARTTLS\": \"<boolean>\",\n    \"from\": \"<string>\"\n  },\n  \"cscc\": {\n    \"serviceAccount\": \"<string>\",\n    \"sourceId\": \"<string>\"\n  },\n  \"splunk\": {\n    \"httpToken\": \"<string>\",\n    \"httpEndpoint\": \"<string>\",\n    \"insecure\": \"<boolean>\",\n    \"truncate\": \"<int64>\",\n    \"auditLoggingEnabled\": \"<boolean>\"\n  },\n  \"pagerduty\": {\n    \"apiKey\": \"<string>\"\n  },\n  \"generic\": {\n    \"endpoint\": \"<string>\",\n    \"skipTLSVerify\": \"<boolean>\",\n    \"caCert\": \"<string>\",\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"headers\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"extraFields\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"auditLoggingEnabled\": \"<boolean>\"\n  },\n  \"sumologic\": {\n    \"httpSourceAddress\": \"<string>\",\n    \"skipTLSVerify\": \"<boolean>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "92b03976-2293-435b-b5e8-50c28272ff95",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "notifiers",
+                    "test"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f71b1ad0-ffd7-4d31-b127-bd835245cb68",
+          "name": "Get Notifier",
+          "request": {
+            "name": "Get Notifier",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "notifiers",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2f797e6a-d535-4dc4-8b46-4ad9dae44ea9",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "notifiers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"uiEndpoint\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"labelKey\": \"<string>\",\n  \"labelDefault\": \"<string>\",\n  \"jira\": {\n    \"url\": \"<string>\",\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"issueType\": \"<string>\"\n  },\n  \"email\": {\n    \"server\": \"<string>\",\n    \"sender\": \"<string>\",\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"disableTLS\": \"<boolean>\",\n    \"useSTARTTLS\": \"<boolean>\",\n    \"from\": \"<string>\"\n  },\n  \"cscc\": {\n    \"serviceAccount\": \"<string>\",\n    \"sourceId\": \"<string>\"\n  },\n  \"splunk\": {\n    \"httpToken\": \"<string>\",\n    \"httpEndpoint\": \"<string>\",\n    \"insecure\": \"<boolean>\",\n    \"truncate\": \"<int64>\",\n    \"auditLoggingEnabled\": \"<boolean>\"\n  },\n  \"pagerduty\": {\n    \"apiKey\": \"<string>\"\n  },\n  \"generic\": {\n    \"endpoint\": \"<string>\",\n    \"skipTLSVerify\": \"<boolean>\",\n    \"caCert\": \"<string>\",\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"headers\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"extraFields\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"auditLoggingEnabled\": \"<boolean>\"\n  },\n  \"sumologic\": {\n    \"httpSourceAddress\": \"<string>\",\n    \"skipTLSVerify\": \"<boolean>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "af7913c8-f7ed-47db-8a16-256be21cb355",
+          "name": "Delete Notifier",
+          "request": {
+            "name": "Delete Notifier",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "notifiers",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "force",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dab991b1-3d70-46fa-b1bd-7ba7efb7b4cc",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "notifiers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "force",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "96824427-826e-4208-bb87-e91a43a0bfac",
+          "name": "Put Notifier",
+          "request": {
+            "name": "Put Notifier",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "notifiers",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"uiEndpoint\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"labelKey\": \"<string>\",\n  \"labelDefault\": \"<string>\",\n  \"jira\": {\n    \"url\": \"<string>\",\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"issueType\": \"<string>\"\n  },\n  \"email\": {\n    \"server\": \"<string>\",\n    \"sender\": \"<string>\",\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"disableTLS\": \"<boolean>\",\n    \"useSTARTTLS\": \"<boolean>\",\n    \"from\": \"<string>\"\n  },\n  \"cscc\": {\n    \"serviceAccount\": \"<string>\",\n    \"sourceId\": \"<string>\"\n  },\n  \"splunk\": {\n    \"httpToken\": \"<string>\",\n    \"httpEndpoint\": \"<string>\",\n    \"insecure\": \"<boolean>\",\n    \"truncate\": \"<int64>\",\n    \"auditLoggingEnabled\": \"<boolean>\"\n  },\n  \"pagerduty\": {\n    \"apiKey\": \"<string>\"\n  },\n  \"generic\": {\n    \"endpoint\": \"<string>\",\n    \"skipTLSVerify\": \"<boolean>\",\n    \"caCert\": \"<string>\",\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"headers\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"extraFields\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"auditLoggingEnabled\": \"<boolean>\"\n  },\n  \"sumologic\": {\n    \"httpSourceAddress\": \"<string>\",\n    \"skipTLSVerify\": \"<boolean>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e6f82788-3cea-4f3d-9a04-cf5b435212ae",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "notifiers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "StackRox Central hostname or IP",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "stackrox.localhost",
+      "key": "central-host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{central-host}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4bfd6cbc-37e5-4eb9-ba91-2c1f18cae590",
+    "name": "API Reference AlertService NotifierService API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.\n\nContact Support:\n Email: support@stackrox.com",
+      "type": "text/plain"
+    }
+  }
+}

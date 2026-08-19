@@ -1,0 +1,137 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference AlertService ImageIntegrationService API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ImageIntegrationService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GetImageIntegrations returns all image integrations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/imageintegrations",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "cluster",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "GetImageIntegrations returns all image integrations."
+        },
+        {
+          "info": {
+            "name": "PostImageIntegration creates a image integraton.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/imageintegrations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "PostImageIntegration creates a image integraton."
+        },
+        {
+          "info": {
+            "name": "TestImageIntegration checks if the given image integration is correctly configured.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{central-host}/v1/imageintegrations/test",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "TestImageIntegration checks if the given image integration is correctly configured."
+        },
+        {
+          "info": {
+            "name": "GetImageIntegration returns the image integration given its ID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/imageintegrations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "GetImageIntegration returns the image integration given its ID."
+        },
+        {
+          "info": {
+            "name": "PutImageIntegration modifies a given image integration.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{central-host}/v1/imageintegrations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "PutImageIntegration modifies a given image integration."
+        },
+        {
+          "info": {
+            "name": "DeleteImageIntegration removes a image integration given its ID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{central-host}/v1/imageintegrations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "DeleteImageIntegration removes a image integration given its ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

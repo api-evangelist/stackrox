@@ -1,0 +1,598 @@
+{
+  "item": [
+    {
+      "id": "8b109f61-9bac-4efa-a574-d6a160ab7a12",
+      "name": "ClustersService",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "46bb7159-57ca-4afa-8975-4632359ab371",
+          "name": "Get Clusters",
+          "request": {
+            "name": "Get Clusters",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "clusters"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "273731da-9029-4113-91a0-86fb6c959c07",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "clusters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"clusters\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"GENERIC_CLUSTER\",\n      \"mainImage\": \"string\",\n      \"collectorImage\": \"string\",\n      \"centralApiEndpoint\": \"string\",\n      \"runtimeSupport\": true,\n      \"monitoringEndpoint\": \"string\",\n      \"collectionMethod\": \"UNSET_COLLECTION\",\n      \"DEPRECATEDProviderMetadata\": {\n        \"region\": \"string\",\n        \"zone\": \"string\",\n        \"google\": {\n          \"project\": \"string\",\n          \"clusterName\": \"string\"\n        },\n        \"aws\": {\n          \"accountId\": \"string\"\n        },\n        \"azure\": {\n          \"subscriptionId\": \"string\"\n        },\n        \"verified\": false\n      },\n      \"admissionController\": true,\n      \"DEPRECATEDOrchestratorMetadata\": {\n        \"version\": \"string\",\n        \"buildDate\": \"1989-11-08T12:32:50.358Z\",\n        \"apiVersions\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"status\": {\n        \"sensorVersion\": \"string\",\n        \"lastContact\": \"2009-07-01T18:11:50.245Z\",\n        \"providerMetadata\": {\n          \"region\": \"string\",\n          \"zone\": \"string\",\n          \"google\": {\n            \"project\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"clusterName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"aws\": {\n            \"accountId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"azure\": {\n            \"subscriptionId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"verified\": true\n        },\n        \"orchestratorMetadata\": {\n          \"version\": \"string\",\n          \"buildDate\": \"1975-04-05T23:34:46.515Z\",\n          \"apiVersions\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"upgradeStatus\": {\n          \"upgradability\": \"UNSET\",\n          \"upgradabilityStatusReason\": \"string\",\n          \"mostRecentProcess\": {\n            \"active\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"targetVersion\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"upgraderImage\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"initiatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"progress\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      },\n      \"dynamicConfig\": {\n        \"admissionControllerConfig\": {\n          \"enabled\": true,\n          \"timeoutSeconds\": 6657,\n          \"scanInline\": true,\n          \"disableBypass\": false\n        },\n        \"registryOverride\": \"string\"\n      },\n      \"tolerationsConfig\": {\n        \"disabled\": false\n      },\n      \"priority\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"GENERIC_CLUSTER\",\n      \"mainImage\": \"string\",\n      \"collectorImage\": \"string\",\n      \"centralApiEndpoint\": \"string\",\n      \"runtimeSupport\": false,\n      \"monitoringEndpoint\": \"string\",\n      \"collectionMethod\": \"UNSET_COLLECTION\",\n      \"DEPRECATEDProviderMetadata\": {\n        \"region\": \"string\",\n        \"zone\": \"string\",\n        \"google\": {\n          \"project\": \"string\",\n          \"clusterName\": \"string\"\n        },\n        \"aws\": {\n          \"accountId\": \"string\"\n        },\n        \"azure\": {\n          \"subscriptionId\": \"string\"\n        },\n        \"verified\": true\n      },\n      \"admissionController\": true,\n      \"DEPRECATEDOrchestratorMetadata\": {\n        \"version\": \"string\",\n        \"buildDate\": \"1975-11-06T21:22:05.723Z\",\n        \"apiVersions\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"status\": {\n        \"sensorVersion\": \"string\",\n        \"lastContact\": \"1959-04-29T11:08:19.429Z\",\n        \"providerMetadata\": {\n          \"region\": \"string\",\n          \"zone\": \"string\",\n          \"google\": {\n            \"project\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"clusterName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"aws\": {\n            \"accountId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"azure\": {\n            \"subscriptionId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"verified\": true\n        },\n        \"orchestratorMetadata\": {\n          \"version\": \"string\",\n          \"buildDate\": \"1974-05-08T22:42:58.676Z\",\n          \"apiVersions\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"upgradeStatus\": {\n          \"upgradability\": \"UNSET\",\n          \"upgradabilityStatusReason\": \"string\",\n          \"mostRecentProcess\": {\n            \"active\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"targetVersion\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"upgraderImage\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"initiatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"progress\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      },\n      \"dynamicConfig\": {\n        \"admissionControllerConfig\": {\n          \"enabled\": false,\n          \"timeoutSeconds\": 9995,\n          \"scanInline\": false,\n          \"disableBypass\": true\n        },\n        \"registryOverride\": \"string\"\n      },\n      \"tolerationsConfig\": {\n        \"disabled\": true\n      },\n      \"priority\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "84cbf654-1ecd-4ac6-a6d7-19675c0b4b8a",
+          "name": "Post Cluster",
+          "request": {
+            "name": "Post Cluster",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "clusters"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"GENERIC_CLUSTER\",\n  \"mainImage\": \"<string>\",\n  \"collectorImage\": \"<string>\",\n  \"centralApiEndpoint\": \"<string>\",\n  \"runtimeSupport\": \"<boolean>\",\n  \"monitoringEndpoint\": \"<string>\",\n  \"collectionMethod\": \"UNSET_COLLECTION\",\n  \"DEPRECATEDProviderMetadata\": {\n    \"region\": \"<string>\",\n    \"zone\": \"<string>\",\n    \"google\": {\n      \"project\": \"<string>\",\n      \"clusterName\": \"<string>\"\n    },\n    \"aws\": {\n      \"accountId\": \"<string>\"\n    },\n    \"azure\": {\n      \"subscriptionId\": \"<string>\"\n    },\n    \"verified\": \"<boolean>\"\n  },\n  \"admissionController\": \"<boolean>\",\n  \"DEPRECATEDOrchestratorMetadata\": {\n    \"version\": \"<string>\",\n    \"buildDate\": \"<dateTime>\",\n    \"apiVersions\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"status\": {\n    \"sensorVersion\": \"<string>\",\n    \"lastContact\": \"<dateTime>\",\n    \"providerMetadata\": {\n      \"region\": \"<string>\",\n      \"zone\": \"<string>\",\n      \"google\": {\n        \"project\": \"<string>\",\n        \"clusterName\": \"<string>\"\n      },\n      \"aws\": {\n        \"accountId\": \"<string>\"\n      },\n      \"azure\": {\n        \"subscriptionId\": \"<string>\"\n      },\n      \"verified\": \"<boolean>\"\n    },\n    \"orchestratorMetadata\": {\n      \"version\": \"<string>\",\n      \"buildDate\": \"<dateTime>\",\n      \"apiVersions\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"upgradeStatus\": {\n      \"upgradability\": \"UNSET\",\n      \"upgradabilityStatusReason\": \"<string>\",\n      \"mostRecentProcess\": {\n        \"active\": \"<boolean>\",\n        \"id\": \"<string>\",\n        \"targetVersion\": \"<string>\",\n        \"upgraderImage\": \"<string>\",\n        \"initiatedAt\": \"<dateTime>\",\n        \"progress\": {\n          \"upgradeState\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"upgradeStatusDetail\": \"<string>\",\n          \"since\": \"<dateTime>\"\n        }\n      }\n    }\n  },\n  \"dynamicConfig\": {\n    \"admissionControllerConfig\": {\n      \"enabled\": \"<boolean>\",\n      \"timeoutSeconds\": \"<integer>\",\n      \"scanInline\": \"<boolean>\",\n      \"disableBypass\": \"<boolean>\"\n    },\n    \"registryOverride\": \"<string>\"\n  },\n  \"tolerationsConfig\": {\n    \"disabled\": \"<boolean>\"\n  },\n  \"priority\": \"<int64>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "12a37ee8-b982-4d0e-bd23-4c94d3d1d18e",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "clusters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cluster\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"type\": \"GENERIC_CLUSTER\",\n    \"mainImage\": \"<string>\",\n    \"collectorImage\": \"<string>\",\n    \"centralApiEndpoint\": \"<string>\",\n    \"runtimeSupport\": \"<boolean>\",\n    \"monitoringEndpoint\": \"<string>\",\n    \"collectionMethod\": \"UNSET_COLLECTION\",\n    \"DEPRECATEDProviderMetadata\": {\n      \"region\": \"<string>\",\n      \"zone\": \"<string>\",\n      \"google\": {\n        \"project\": \"<string>\",\n        \"clusterName\": \"<string>\"\n      },\n      \"aws\": {\n        \"accountId\": \"<string>\"\n      },\n      \"azure\": {\n        \"subscriptionId\": \"<string>\"\n      },\n      \"verified\": \"<boolean>\"\n    },\n    \"admissionController\": \"<boolean>\",\n    \"DEPRECATEDOrchestratorMetadata\": {\n      \"version\": \"<string>\",\n      \"buildDate\": \"<dateTime>\",\n      \"apiVersions\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"status\": {\n      \"sensorVersion\": \"<string>\",\n      \"lastContact\": \"<dateTime>\",\n      \"providerMetadata\": {\n        \"region\": \"<string>\",\n        \"zone\": \"<string>\",\n        \"google\": {\n          \"project\": \"<string>\",\n          \"clusterName\": \"<string>\"\n        },\n        \"aws\": {\n          \"accountId\": \"<string>\"\n        },\n        \"azure\": {\n          \"subscriptionId\": \"<string>\"\n        },\n        \"verified\": \"<boolean>\"\n      },\n      \"orchestratorMetadata\": {\n        \"version\": \"<string>\",\n        \"buildDate\": \"<dateTime>\",\n        \"apiVersions\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"upgradeStatus\": {\n        \"upgradability\": \"UNSET\",\n        \"upgradabilityStatusReason\": \"<string>\",\n        \"mostRecentProcess\": {\n          \"active\": \"<boolean>\",\n          \"id\": \"<string>\",\n          \"targetVersion\": \"<string>\",\n          \"upgraderImage\": \"<string>\",\n          \"initiatedAt\": \"<dateTime>\",\n          \"progress\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    \"dynamicConfig\": {\n      \"admissionControllerConfig\": {\n        \"enabled\": \"<boolean>\",\n        \"timeoutSeconds\": \"<integer>\",\n        \"scanInline\": \"<boolean>\",\n        \"disableBypass\": \"<boolean>\"\n      },\n      \"registryOverride\": \"<string>\"\n    },\n    \"tolerationsConfig\": {\n      \"disabled\": \"<boolean>\"\n    },\n    \"priority\": \"<int64>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9df47375-6ee7-4c21-84f7-c2b6a32e5360",
+          "name": "Get Cluster",
+          "request": {
+            "name": "Get Cluster",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "clusters",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1cef0b86-c3f4-4e96-b537-b8014b887bee",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "clusters",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cluster\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"type\": \"GENERIC_CLUSTER\",\n    \"mainImage\": \"<string>\",\n    \"collectorImage\": \"<string>\",\n    \"centralApiEndpoint\": \"<string>\",\n    \"runtimeSupport\": \"<boolean>\",\n    \"monitoringEndpoint\": \"<string>\",\n    \"collectionMethod\": \"UNSET_COLLECTION\",\n    \"DEPRECATEDProviderMetadata\": {\n      \"region\": \"<string>\",\n      \"zone\": \"<string>\",\n      \"google\": {\n        \"project\": \"<string>\",\n        \"clusterName\": \"<string>\"\n      },\n      \"aws\": {\n        \"accountId\": \"<string>\"\n      },\n      \"azure\": {\n        \"subscriptionId\": \"<string>\"\n      },\n      \"verified\": \"<boolean>\"\n    },\n    \"admissionController\": \"<boolean>\",\n    \"DEPRECATEDOrchestratorMetadata\": {\n      \"version\": \"<string>\",\n      \"buildDate\": \"<dateTime>\",\n      \"apiVersions\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"status\": {\n      \"sensorVersion\": \"<string>\",\n      \"lastContact\": \"<dateTime>\",\n      \"providerMetadata\": {\n        \"region\": \"<string>\",\n        \"zone\": \"<string>\",\n        \"google\": {\n          \"project\": \"<string>\",\n          \"clusterName\": \"<string>\"\n        },\n        \"aws\": {\n          \"accountId\": \"<string>\"\n        },\n        \"azure\": {\n          \"subscriptionId\": \"<string>\"\n        },\n        \"verified\": \"<boolean>\"\n      },\n      \"orchestratorMetadata\": {\n        \"version\": \"<string>\",\n        \"buildDate\": \"<dateTime>\",\n        \"apiVersions\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"upgradeStatus\": {\n        \"upgradability\": \"UNSET\",\n        \"upgradabilityStatusReason\": \"<string>\",\n        \"mostRecentProcess\": {\n          \"active\": \"<boolean>\",\n          \"id\": \"<string>\",\n          \"targetVersion\": \"<string>\",\n          \"upgraderImage\": \"<string>\",\n          \"initiatedAt\": \"<dateTime>\",\n          \"progress\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    \"dynamicConfig\": {\n      \"admissionControllerConfig\": {\n        \"enabled\": \"<boolean>\",\n        \"timeoutSeconds\": \"<integer>\",\n        \"scanInline\": \"<boolean>\",\n        \"disableBypass\": \"<boolean>\"\n      },\n      \"registryOverride\": \"<string>\"\n    },\n    \"tolerationsConfig\": {\n      \"disabled\": \"<boolean>\"\n    },\n    \"priority\": \"<int64>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "37decf27-1f1e-49d4-a9d7-8b6a6e0ce2f2",
+          "name": "Delete Cluster",
+          "request": {
+            "name": "Delete Cluster",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "clusters",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "74a401f4-80eb-41f1-92fb-da1b2d7817af",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "clusters",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "531cc7c2-b23a-4b6c-ad45-8077c543d182",
+          "name": "Put Cluster",
+          "request": {
+            "name": "Put Cluster",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "clusters",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "StackRox Central hostname or IP",
+                  "type": "any",
+                  "value": "{{central-host}}",
+                  "key": "central-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"GENERIC_CLUSTER\",\n  \"mainImage\": \"<string>\",\n  \"collectorImage\": \"<string>\",\n  \"centralApiEndpoint\": \"<string>\",\n  \"runtimeSupport\": \"<boolean>\",\n  \"monitoringEndpoint\": \"<string>\",\n  \"collectionMethod\": \"UNSET_COLLECTION\",\n  \"DEPRECATEDProviderMetadata\": {\n    \"region\": \"<string>\",\n    \"zone\": \"<string>\",\n    \"google\": {\n      \"project\": \"<string>\",\n      \"clusterName\": \"<string>\"\n    },\n    \"aws\": {\n      \"accountId\": \"<string>\"\n    },\n    \"azure\": {\n      \"subscriptionId\": \"<string>\"\n    },\n    \"verified\": \"<boolean>\"\n  },\n  \"admissionController\": \"<boolean>\",\n  \"DEPRECATEDOrchestratorMetadata\": {\n    \"version\": \"<string>\",\n    \"buildDate\": \"<dateTime>\",\n    \"apiVersions\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"status\": {\n    \"sensorVersion\": \"<string>\",\n    \"lastContact\": \"<dateTime>\",\n    \"providerMetadata\": {\n      \"region\": \"<string>\",\n      \"zone\": \"<string>\",\n      \"google\": {\n        \"project\": \"<string>\",\n        \"clusterName\": \"<string>\"\n      },\n      \"aws\": {\n        \"accountId\": \"<string>\"\n      },\n      \"azure\": {\n        \"subscriptionId\": \"<string>\"\n      },\n      \"verified\": \"<boolean>\"\n    },\n    \"orchestratorMetadata\": {\n      \"version\": \"<string>\",\n      \"buildDate\": \"<dateTime>\",\n      \"apiVersions\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"upgradeStatus\": {\n      \"upgradability\": \"UNSET\",\n      \"upgradabilityStatusReason\": \"<string>\",\n      \"mostRecentProcess\": {\n        \"active\": \"<boolean>\",\n        \"id\": \"<string>\",\n        \"targetVersion\": \"<string>\",\n        \"upgraderImage\": \"<string>\",\n        \"initiatedAt\": \"<dateTime>\",\n        \"progress\": {\n          \"upgradeState\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"upgradeStatusDetail\": \"<string>\",\n          \"since\": \"<dateTime>\"\n        }\n      }\n    }\n  },\n  \"dynamicConfig\": {\n    \"admissionControllerConfig\": {\n      \"enabled\": \"<boolean>\",\n      \"timeoutSeconds\": \"<integer>\",\n      \"scanInline\": \"<boolean>\",\n      \"disableBypass\": \"<boolean>\"\n    },\n    \"registryOverride\": \"<string>\"\n  },\n  \"tolerationsConfig\": {\n    \"disabled\": \"<boolean>\"\n  },\n  \"priority\": \"<int64>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b63fb6d9-88b5-46d7-a57f-6fbfe849228f",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "clusters",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "StackRox Central hostname or IP",
+                      "type": "any",
+                      "value": "{{central-host}}",
+                      "key": "central-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cluster\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"type\": \"GENERIC_CLUSTER\",\n    \"mainImage\": \"<string>\",\n    \"collectorImage\": \"<string>\",\n    \"centralApiEndpoint\": \"<string>\",\n    \"runtimeSupport\": \"<boolean>\",\n    \"monitoringEndpoint\": \"<string>\",\n    \"collectionMethod\": \"UNSET_COLLECTION\",\n    \"DEPRECATEDProviderMetadata\": {\n      \"region\": \"<string>\",\n      \"zone\": \"<string>\",\n      \"google\": {\n        \"project\": \"<string>\",\n        \"clusterName\": \"<string>\"\n      },\n      \"aws\": {\n        \"accountId\": \"<string>\"\n      },\n      \"azure\": {\n        \"subscriptionId\": \"<string>\"\n      },\n      \"verified\": \"<boolean>\"\n    },\n    \"admissionController\": \"<boolean>\",\n    \"DEPRECATEDOrchestratorMetadata\": {\n      \"version\": \"<string>\",\n      \"buildDate\": \"<dateTime>\",\n      \"apiVersions\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"status\": {\n      \"sensorVersion\": \"<string>\",\n      \"lastContact\": \"<dateTime>\",\n      \"providerMetadata\": {\n        \"region\": \"<string>\",\n        \"zone\": \"<string>\",\n        \"google\": {\n          \"project\": \"<string>\",\n          \"clusterName\": \"<string>\"\n        },\n        \"aws\": {\n          \"accountId\": \"<string>\"\n        },\n        \"azure\": {\n          \"subscriptionId\": \"<string>\"\n        },\n        \"verified\": \"<boolean>\"\n      },\n      \"orchestratorMetadata\": {\n        \"version\": \"<string>\",\n        \"buildDate\": \"<dateTime>\",\n        \"apiVersions\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"upgradeStatus\": {\n        \"upgradability\": \"UNSET\",\n        \"upgradabilityStatusReason\": \"<string>\",\n        \"mostRecentProcess\": {\n          \"active\": \"<boolean>\",\n          \"id\": \"<string>\",\n          \"targetVersion\": \"<string>\",\n          \"upgraderImage\": \"<string>\",\n          \"initiatedAt\": \"<dateTime>\",\n          \"progress\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    \"dynamicConfig\": {\n      \"admissionControllerConfig\": {\n        \"enabled\": \"<boolean>\",\n        \"timeoutSeconds\": \"<integer>\",\n        \"scanInline\": \"<boolean>\",\n        \"disableBypass\": \"<boolean>\"\n      },\n      \"registryOverride\": \"<string>\"\n    },\n    \"tolerationsConfig\": {\n      \"disabled\": \"<boolean>\"\n    },\n    \"priority\": \"<int64>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "StackRox Central hostname or IP",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "stackrox.localhost",
+      "key": "central-host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{central-host}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "34173d2b-5ba1-422d-891f-4b30d91ba126",
+    "name": "API Reference AlertService ClustersService API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.\n\nContact Support:\n Email: support@stackrox.com",
+      "type": "text/plain"
+    }
+  }
+}

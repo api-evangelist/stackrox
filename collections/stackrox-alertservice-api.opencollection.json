@@ -1,0 +1,340 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference AlertService API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "AlertService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List returns the slim list version of the alerts.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/alerts",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.field",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.reversed",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List returns the slim list version of the alerts."
+        },
+        {
+          "info": {
+            "name": "DeleteAlerts",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{central-host}/v1/alerts",
+            "params": [
+              {
+                "name": "query.query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "query.pagination.limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "query.pagination.offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "query.pagination.sort_option.field",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "query.pagination.sort_option.reversed",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "confirm",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "ResolveAlertsByQuery marks alerts matching search query as resolved.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{central-host}/v1/alerts/resolve",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "ResolveAlertsByQuery marks alerts matching search query as resolved."
+        },
+        {
+          "info": {
+            "name": "GetAlertsCounts returns the number of alerts in the requested cluster or category.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/alerts/summary/counts",
+            "params": [
+              {
+                "name": "request.query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "request.pagination.limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "request.pagination.offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "request.pagination.sort_option.field",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "request.pagination.sort_option.reversed",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "groupBy",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "GetAlertsCounts returns the number of alerts in the requested cluster or category."
+        },
+        {
+          "info": {
+            "name": "GetAlertsGroup returns alerts grouped by policy.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/alerts/summary/groups",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.field",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.reversed",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "GetAlertsGroup returns alerts grouped by policy."
+        },
+        {
+          "info": {
+            "name": "GetAlertTimeseries returns the alerts sorted by time.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/alerts/summary/timeseries",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.field",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.reversed",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "GetAlertTimeseries returns the alerts sorted by time."
+        },
+        {
+          "info": {
+            "name": "GetAlert returns the alert given its id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/alerts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "GetAlert returns the alert given its id."
+        },
+        {
+          "info": {
+            "name": "ResolveAlert marks the given alert (by ID) as resolved.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{central-host}/v1/alerts/:id/resolve",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "ResolveAlert marks the given alert (by ID) as resolved."
+        },
+        {
+          "info": {
+            "name": "SnoozeAlert is deprecated.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{central-host}/v1/alerts/:id/snooze",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "SnoozeAlert is deprecated."
+        },
+        {
+          "info": {
+            "name": "CountAlerts counts how many alerts match the get request.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{central-host}/v1/alertscount",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.field",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination.sort_option.reversed",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "CountAlerts counts how many alerts match the get request."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
