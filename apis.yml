@@ -24,6 +24,13 @@ tags:
   - Compliance
   - Container Security
   - Kubernetes
+  - Open-Source
+  - Runtime Protection
+  - Security
+tags_raw:
+  - Compliance
+  - Container Security
+  - Kubernetes
   - Open Source
   - Runtime Protection
   - Security
@@ -143,6 +150,8 @@ apis:
   description: The DBService API from StackRox — 4 operation(s) for dbservice.
   humanURL: https://www.stackrox.io/docs/
   tags:
+  - DB Service
+  tags_raw:
   - DBService
   properties:
   - type: OpenAPI
@@ -274,6 +283,8 @@ apis:
   description: The MetadataService API from StackRox — 1 operation(s) for metadataservice.
   humanURL: https://www.stackrox.io/docs/
   tags:
+  - Metadata Service
+  tags_raw:
   - MetadataService
   properties:
   - type: OpenAPI
@@ -458,6 +469,8 @@ apis:
   description: The SearchService API from StackRox — 3 operation(s) for searchservice.
   humanURL: https://www.stackrox.io/docs/
   tags:
+  - Search Service
+  tags_raw:
   - SearchService
   properties:
   - type: OpenAPI
