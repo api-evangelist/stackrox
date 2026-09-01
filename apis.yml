@@ -163,7 +163,7 @@ apis:
   description: The DBService API from StackRox — 4 operation(s) for dbservice.
   humanURL: https://www.stackrox.io/docs/
   tags:
-  - DBService
+  - DB Service
   tags_raw:
   - DBService
   properties:
