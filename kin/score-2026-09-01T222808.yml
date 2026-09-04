@@ -1,28 +1,31 @@
-# Kin Score artifact — stackrox — 2026-08-04T083143
+# Kin Score artifact — stackrox — 2026-09-01T222808
 # The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
 ---
 kin_score:
   slug: stackrox
-  schema_version: 0.9
-  scored_at: '2026-08-04'
-  run_ts: 2026-08-04T083143
-  composite: 45.9
+  schema_version: 0.18.0
+  scored_at: '2026-09-01'
+  run_ts: 2026-09-01T222808
+  composite: 39.6
   band: developing
   facets:
-    discoverability: 64.8
-    contract_quality: 54.7
-    governance: 58.3
+    discoverability: 59.3
+    contract_quality: 52.3
+    governance: 9.8
     operational_transparency: 36.8
-    developer_ergonomics: 30.4
-    commercial_clarity: 39.5
+    developer_ergonomics: 23.8
+    commercial_clarity: 15.8
+    contract_governance: 9.8
+    access_clarity: 15.8
   agent_readiness:
-    score: 41.4
-    band: agent-ready
+    score: 25.0
+    band: agent-aware
     dimensions:
       spec_presence: true
       agentic_access: derived
-      mcp_server: true
-      auth_clarity: true
+      reversibility_documented: documented
+      mcp_server: documented
+      auth_clarity: bearer
       idempotency: false
       error_semantics: false
       openapi_examples: false
@@ -33,6 +36,13 @@ kin_score:
       consent_identity: false
       agent_card: false
       dry_run_mode: false
+      delegated_identity: false
+      protected_resource_metadata: false
+      dynamic_client_registration: false
+      agentic_commerce: false
+  open_source:
+    applies: true
+    score: 100.0
   provenance:
     agentic_access: derived
     contracts:
