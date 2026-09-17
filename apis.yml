@@ -93,19 +93,6 @@ apis:
     url: https://www.stackrox.io/docs/
   - type: GitHub
     url: https://github.com/stackrox/stackrox
-- aid: stackrox:stackrox-authservice-api
-  name: StackRox AuthService API
-  description: The AuthService API from StackRox — 1 operation(s) for authservice.
-  humanURL: https://www.stackrox.io/docs/
-  tags:
-  - AuthService
-  properties:
-  - type: OpenAPI
-    url: openapi/stackrox-authservice-api-openapi.yml
-  - type: Documentation
-    url: https://www.stackrox.io/docs/
-  - type: GitHub
-    url: https://github.com/stackrox/stackrox
 - aid: stackrox:stackrox-clustersservice-api
   name: StackRox ClustersService API
   description: The ClustersService API from StackRox — 2 operation(s) for clustersservice.
@@ -155,21 +142,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/stackrox-configservice-api-openapi.yml
-  - type: Documentation
-    url: https://www.stackrox.io/docs/
-  - type: GitHub
-    url: https://github.com/stackrox/stackrox
-- aid: stackrox:stackrox-dbservice-api
-  name: StackRox DBService API
-  description: The DBService API from StackRox — 4 operation(s) for dbservice.
-  humanURL: https://www.stackrox.io/docs/
-  tags:
-  - DB Service
-  tags_raw:
-  - DBService
-  properties:
-  - type: OpenAPI
-    url: openapi/stackrox-dbservice-api-openapi.yml
   - type: Documentation
     url: https://www.stackrox.io/docs/
   - type: GitHub
@@ -288,21 +260,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/stackrox-licenseservice-api-openapi.yml
-  - type: Documentation
-    url: https://www.stackrox.io/docs/
-  - type: GitHub
-    url: https://github.com/stackrox/stackrox
-- aid: stackrox:stackrox-metadataservice-api
-  name: StackRox MetadataService API
-  description: The MetadataService API from StackRox — 1 operation(s) for metadataservice.
-  humanURL: https://www.stackrox.io/docs/
-  tags:
-  - Metadata Service
-  tags_raw:
-  - MetadataService
-  properties:
-  - type: OpenAPI
-    url: openapi/stackrox-metadataservice-api-openapi.yml
   - type: Documentation
     url: https://www.stackrox.io/docs/
   - type: GitHub
@@ -438,19 +395,6 @@ apis:
     url: https://www.stackrox.io/docs/
   - type: GitHub
     url: https://github.com/stackrox/stackrox
-- aid: stackrox:stackrox-rbacservice-api
-  name: StackRox RbacService API
-  description: The RbacService API from StackRox — 6 operation(s) for rbacservice.
-  humanURL: https://www.stackrox.io/docs/
-  tags:
-  - RbacService
-  properties:
-  - type: OpenAPI
-    url: openapi/stackrox-rbacservice-api-openapi.yml
-  - type: Documentation
-    url: https://www.stackrox.io/docs/
-  - type: GitHub
-    url: https://github.com/stackrox/stackrox
 - aid: stackrox:stackrox-roleservice-api
   name: StackRox RoleService API
   description: The RoleService API from StackRox — 5 operation(s) for roleservice.
@@ -474,21 +418,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/stackrox-scopedaccesscontrolservice-api-openapi.yml
-  - type: Documentation
-    url: https://www.stackrox.io/docs/
-  - type: GitHub
-    url: https://github.com/stackrox/stackrox
-- aid: stackrox:stackrox-searchservice-api
-  name: StackRox SearchService API
-  description: The SearchService API from StackRox — 3 operation(s) for searchservice.
-  humanURL: https://www.stackrox.io/docs/
-  tags:
-  - Search Service
-  tags_raw:
-  - SearchService
-  properties:
-  - type: OpenAPI
-    url: openapi/stackrox-searchservice-api-openapi.yml
   - type: Documentation
     url: https://www.stackrox.io/docs/
   - type: GitHub
@@ -568,6 +497,71 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/stackrox-userservice-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-auth-service-api
+  name: StackRox Auth Service API
+  description: The Auth Service API from StackRox — 1 operation(s) for auth service.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - Auth Service
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-auth-service-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-db-service-api
+  name: StackRox DB Service API
+  description: The DB Service API from StackRox — 4 operation(s) for db service.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - DB Service
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-db-service-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-metadata-service-api
+  name: StackRox Metadata Service API
+  description: The Metadata Service API from StackRox — 1 operation(s) for metadata service.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - Metadata Service
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-metadata-service-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-rbac-service-api
+  name: StackRox RBAC Service API
+  description: The RBAC Service API from StackRox — 6 operation(s) for rbac service.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - RBAC Service
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-rbac-service-api-openapi.yml
+  - type: Documentation
+    url: https://www.stackrox.io/docs/
+  - type: GitHub
+    url: https://github.com/stackrox/stackrox
+- aid: stackrox:stackrox-search-service-api
+  name: StackRox Search Service API
+  description: The Search Service API from StackRox — 3 operation(s) for search service.
+  humanURL: https://www.stackrox.io/docs/
+  tags:
+  - Search Service
+  properties:
+  - type: OpenAPI
+    url: openapi/stackrox-search-service-api-openapi.yml
   - type: Documentation
     url: https://www.stackrox.io/docs/
   - type: GitHub
