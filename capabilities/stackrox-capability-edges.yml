@@ -35,7 +35,8 @@ edges:
     signals, deployment context) with triage/resolution and counts over time — security threat detection
     and response, not financial-crime or generic monitoring alerting.
 - tag: RbacService
-  spec_file: stackrox-rbacservice-api-openapi.yml
+  spec_file: stackrox-rbac-service-api-openapi.yml
+  reanchored_from: stackrox-rbacservice-api-openapi.yml
   capability_id: BC-620.20
   capability_id_l1: BC-620
   capability_name: Identity & Access Management
