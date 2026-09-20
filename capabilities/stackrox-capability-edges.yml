@@ -1,0 +1,122 @@
+slug: stackrox
+provider: StackRox
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 10
+edges:
+- tag: ImageService
+  spec_file: stackrox-imageservice-api-openapi.yml
+  capability_id: BC-620.40
+  capability_id_l1: BC-620
+  capability_name: Vulnerability Management
+  confidence: 0.9
+  evidence: POST /v1/images/scan  ScanImage  ScanImage scans a single image and returns the result; schemas
+    storageEmbeddedVulnerability, storageCVSSV3Severity
+  reason: Scans container images and returns CVE/CVSS vulnerability findings — unambiguously vulnerability
+    scanning and management.
+- tag: AlertService
+  spec_file: stackrox-alertservice-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.85
+  evidence: GetAlertsGroup returns alerts grouped by policy; PATCH /v1/alerts/{id}/resolve  ResolveAlert
+    marks the given alert (by ID) as resolved; schemas storageListAlertPolicy, storageProcessSignal
+  reason: Alerts here are security policy violations on containerised workloads (runtime alerts, process
+    signals, deployment context) with triage/resolution and counts over time — security threat detection
+    and response, not financial-crime or generic monitoring alerting.
+- tag: RbacService
+  spec_file: stackrox-rbacservice-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.8
+  evidence: ListRoleBindings; ListRoles; GetSubject — 'Subjects served from this API are Groups and Users
+    only'; schemas storageK8sRole, storageK8sRoleBinding, storagePolicyRule
+  reason: Reads Kubernetes RBAC roles, role bindings and subjects (users/groups) with their permission
+    rules, giving visibility into who has what access in the cluster — Identity & Access Management.
+- tag: RoleService
+  spec_file: stackrox-roleservice-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.8
+  evidence: GET /v1/mypermissions GetMyPermissions; POST /v1/roles/{name} CreateRole; GET /v1/resources
+    GetResources; schemas storageRole, storageAccess
+  reason: Creates, updates and deletes roles and resolves the caller's permissions over resources — administration
+    of authorisation roles, i.e. Identity & Access Management.
+- tag: DetectionService
+  spec_file: stackrox-detectionservice-api-openapi.yml
+  capability_id: BC-620
+  capability_id_l1: BC-620
+  capability_name: Cybersecurity Management
+  confidence: 0.78
+  evidence: POST /v1/detect/build  DetectBuildTime  DetectBuildTime checks if any images violate build
+    time policies.
+  reason: Evaluates images and deployment manifests against security policies at build and deploy time
+    — security policy enforcement/detection. Clearly Cybersecurity Management at L1; sub-capability ambiguous
+    between policy governance and vulnerability/threat detection.
+- tag: PolicyService
+  spec_file: stackrox-policyservice-api-openapi.yml
+  capability_id: BC-620.10
+  capability_id_l1: BC-620
+  capability_name: Security Strategy & Governance Management
+  confidence: 0.78
+  evidence: PostPolicy creates a new policy; DryRunPolicy evaluates the given policy and returns any alerts
+    without creating the policy; ReassessPolicies reevaluates all the policies; GetPolicyCategories returns
+    the policy categories
+  reason: Full lifecycle management of security policies (with severity, scope, whitelists, image/port/process
+    criteria) that are evaluated against containerised workloads — security policy definition and governance
+    for a container security platform.
+- tag: ServiceIdentityService
+  spec_file: stackrox-serviceidentityservice-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.75
+  evidence: CreateServiceIdentity creates a new key pair and certificate; GET /v1/authorities GetAuthorities
+    returns the authorities currently in use
+  reason: Issuance of service identities via key pairs/certificates against certificate authorities —
+    machine identity and credential issuance, i.e. Identity & Access Management.
+- tag: DeploymentService
+  spec_file: stackrox-deploymentservice-api-openapi.yml
+  capability_id: BC-620
+  capability_id_l1: BC-620
+  capability_name: Cybersecurity Management
+  confidence: 0.72
+  evidence: GET /v1/deploymentswithrisk/{id}  GetDeploymentWithRisk  GetDeploymentWithRisk returns a deployment
+    and its risk given its ID.
+  reason: Provides visibility over Kubernetes deployments together with their computed security risk (storageRisk,
+    storageRiskResult, storageSecurityContext) — security posture/asset visibility within a container
+    security platform. L1 Cybersecurity Management; evidence does not cleanly name one L2.
+- tag: ScopedAccessControlService
+  spec_file: stackrox-scopedaccesscontrolservice-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.72
+  evidence: POST /v1/scopedaccessctrl/config AddAuthzPluginConfig; POST /v1/scopedaccessctrl/test DryRunAuthzPluginConfig;
+    schema storageAuthzPluginConfig
+  reason: Configures the external authorization plugin that scopes user access to clusters/namespaces
+    — access control configuration, hence Identity & Access Management. Slightly lower confidence as it
+    is a plugin-integration config surface.
+- tag: ServiceAccountService
+  spec_file: stackrox-serviceaccountservice-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.7
+  evidence: GET /v1/serviceaccounts ListServiceAccounts; schemas v1ScopedRoles, storageK8sRole, storagePolicyRule,
+    v1ServiceAccountAndRoles
+  reason: Exposes Kubernetes service accounts together with their bound roles and policy rules — visibility
+    over machine identities and their access grants, which is Identity & Access Management territory.
+    Read-only, so confidence moderated.
