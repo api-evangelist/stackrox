@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: API Reference AlertService SearchService API
+  title: Reference Search Service API
   version: '1'
   description: API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.
   contact:
@@ -19,7 +19,7 @@ servers:
 security:
 - ApiToken: []
 tags:
-- name: SearchService
+- name: Search Service
 paths:
   /v1/search:
     get:
@@ -69,7 +69,9 @@ paths:
             - IMAGE_COMPONENTS
             - VULNERABILITIES
       tags:
-      - SearchService
+      - Search Service
+      summary: Search
+      x-summary-source: derived
   /v1/search/autocomplete:
     get:
       operationId: Autocomplete
@@ -118,7 +120,9 @@ paths:
             - IMAGE_COMPONENTS
             - VULNERABILITIES
       tags:
-      - SearchService
+      - Search Service
+      summary: Autocomplete
+      x-summary-source: derived
   /v1/search/metadata/options:
     get:
       operationId: Options
@@ -162,52 +166,11 @@ paths:
             - IMAGE_COMPONENTS
             - VULNERABILITIES
       tags:
-      - SearchService
+      - Search Service
+      summary: Options
+      x-summary-source: derived
 components:
   schemas:
-    v1SearchOptionsResponse:
-      type: object
-      properties:
-        options:
-          type: array
-          items:
-            type: string
-    v1SearchResponse:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1SearchResult'
-        counts:
-          type: array
-          items:
-            $ref: '#/components/schemas/SearchResponseCount'
-    SearchResultMatches:
-      type: object
-      properties:
-        values:
-          type: array
-          items:
-            type: string
-    v1SearchResult:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        category:
-          $ref: '#/components/schemas/v1SearchCategory'
-        fieldToMatches:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/SearchResultMatches'
-        score:
-          type: number
-          format: double
-        location:
-          type: string
     v1SearchCategory:
       type: string
       enum:
@@ -234,6 +197,24 @@ components:
       - IMAGE_COMPONENTS
       - VULNERABILITIES
       default: SEARCH_UNSET
+    v1AutocompleteResponse:
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            type: string
+    v1SearchResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1SearchResult'
+        counts:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchResponseCount'
     SearchResponseCount:
       type: object
       properties:
@@ -242,10 +223,35 @@ components:
         count:
           type: string
           format: int64
-    v1AutocompleteResponse:
+    SearchResultMatches:
       type: object
       properties:
         values:
+          type: array
+          items:
+            type: string
+    v1SearchResult:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        category:
+          $ref: '#/components/schemas/v1SearchCategory'
+        fieldToMatches:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/SearchResultMatches'
+        score:
+          type: number
+          format: double
+        location:
+          type: string
+    v1SearchOptionsResponse:
+      type: object
+      properties:
+        options:
           type: array
           items:
             type: string

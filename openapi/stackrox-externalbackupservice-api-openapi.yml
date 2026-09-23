@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: API Reference AlertService ExternalBackupService API
+  title: Reference External Backup Service API
   version: '1'
   description: API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.
   contact:
@@ -33,6 +33,8 @@ paths:
                 $ref: '#/components/schemas/v1GetExternalBackupsResponse'
       tags:
       - ExternalBackupService
+      summary: Get external backups
+      x-summary-source: derived
     post:
       operationId: PostExternalBackup
       responses:
@@ -46,6 +48,8 @@ paths:
         $ref: '#/components/requestBodies/storageExternalBackup'
       tags:
       - ExternalBackupService
+      summary: Post external backup
+      x-summary-source: derived
   /v1/externalbackups/test:
     post:
       operationId: TestExternalBackup
@@ -60,6 +64,8 @@ paths:
         $ref: '#/components/requestBodies/storageExternalBackup'
       tags:
       - ExternalBackupService
+      summary: Test external backup
+      x-summary-source: derived
   /v1/externalbackups/{id}:
     get:
       operationId: GetExternalBackup
@@ -78,6 +84,8 @@ paths:
           type: string
       tags:
       - ExternalBackupService
+      summary: Get external backup
+      x-summary-source: derived
     delete:
       operationId: DeleteExternalBackup
       responses:
@@ -95,6 +103,8 @@ paths:
           type: string
       tags:
       - ExternalBackupService
+      summary: Delete external backup
+      x-summary-source: derived
     post:
       operationId: TriggerExternalBackup
       responses:
@@ -112,6 +122,8 @@ paths:
           type: string
       tags:
       - ExternalBackupService
+      summary: Trigger external backup
+      x-summary-source: derived
     put:
       operationId: PutExternalBackup
       responses:
@@ -131,6 +143,8 @@ paths:
         $ref: '#/components/requestBodies/storageExternalBackup'
       tags:
       - ExternalBackupService
+      summary: Put external backup
+      x-summary-source: derived
 components:
   schemas:
     storageSchedule:
@@ -146,15 +160,6 @@ components:
           format: int32
         weekly:
           $ref: '#/components/schemas/ScheduleWeeklyInterval'
-    v1Empty:
-      type: object
-    v1GetExternalBackupsResponse:
-      type: object
-      properties:
-        externalBackups:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageExternalBackup'
     storageS3Config:
       type: object
       properties:
@@ -171,6 +176,26 @@ components:
           type: string
         objectPrefix:
           type: string
+    v1GetExternalBackupsResponse:
+      type: object
+      properties:
+        externalBackups:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageExternalBackup'
+    ScheduleIntervalType:
+      type: string
+      enum:
+      - UNSET
+      - DAILY
+      - WEEKLY
+      default: UNSET
+    ScheduleWeeklyInterval:
+      type: object
+      properties:
+        day:
+          type: integer
+          format: int32
     storageExternalBackup:
       type: object
       properties:
@@ -187,19 +212,8 @@ components:
           format: int32
         s3:
           $ref: '#/components/schemas/storageS3Config'
-    ScheduleWeeklyInterval:
+    v1Empty:
       type: object
-      properties:
-        day:
-          type: integer
-          format: int32
-    ScheduleIntervalType:
-      type: string
-      enum:
-      - UNSET
-      - DAILY
-      - WEEKLY
-      default: UNSET
   requestBodies:
     storageExternalBackup:
       content:

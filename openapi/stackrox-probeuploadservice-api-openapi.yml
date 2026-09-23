@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: API Reference AlertService ProbeUploadService API
+  title: Reference Probe Upload Service API
   version: '1'
   description: API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.
   contact:
@@ -33,6 +33,8 @@ paths:
                 $ref: '#/components/schemas/v1GetExistingProbesResponse'
       tags:
       - ProbeUploadService
+      summary: Get existing probes
+      x-summary-source: derived
 components:
   schemas:
     v1GetExistingProbesResponse:

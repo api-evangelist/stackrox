@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: API Reference AlertService GroupService API
+  title: Reference Group Service API
   version: '1'
   description: API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.
   contact:
@@ -49,6 +49,8 @@ paths:
           type: string
       tags:
       - GroupService
+      summary: Get group
+      x-summary-source: derived
     delete:
       operationId: DeleteGroup
       responses:
@@ -76,6 +78,8 @@ paths:
           type: string
       tags:
       - GroupService
+      summary: Delete group
+      x-summary-source: derived
     post:
       operationId: CreateGroup
       responses:
@@ -89,6 +93,8 @@ paths:
         $ref: '#/components/requestBodies/storageGroup'
       tags:
       - GroupService
+      summary: Create group
+      x-summary-source: derived
     put:
       operationId: UpdateGroup
       responses:
@@ -102,6 +108,8 @@ paths:
         $ref: '#/components/requestBodies/storageGroup'
       tags:
       - GroupService
+      summary: Update group
+      x-summary-source: derived
   /v1/groupsbatch:
     post:
       operationId: BatchUpdate
@@ -120,19 +128,17 @@ paths:
         required: true
       tags:
       - GroupService
+      summary: Batch update
+      x-summary-source: derived
 components:
-  schemas:
+  requestBodies:
     storageGroup:
-      type: object
-      properties:
-        props:
-          $ref: '#/components/schemas/storageGroupProperties'
-        roleName:
-          type: string
-          description: This is the name of the role that will apply to users in this group.
-      description: 'Group is a GroupProperties : Role mapping.'
-    v1Empty:
-      type: object
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/storageGroup'
+      required: true
+  schemas:
     storageGroupProperties:
       type: object
       properties:
@@ -179,13 +185,17 @@ components:
       title: 'GroupBatchUpdateRequest is an in transaction batch update to the groups present.
 
         Next Available Tag: 3'
-  requestBodies:
     storageGroup:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/storageGroup'
-      required: true
+      type: object
+      properties:
+        props:
+          $ref: '#/components/schemas/storageGroupProperties'
+        roleName:
+          type: string
+          description: This is the name of the role that will apply to users in this group.
+      description: 'Group is a GroupProperties : Role mapping.'
+    v1Empty:
+      type: object
   securitySchemes:
     ApiToken:
       type: apiKey

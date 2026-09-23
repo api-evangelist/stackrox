@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: API Reference AlertService ClustersService API
+  title: Reference Clusters Service API
   version: '1'
   description: API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.
   contact:
@@ -39,6 +39,8 @@ paths:
           type: string
       tags:
       - ClustersService
+      summary: Get clusters
+      x-summary-source: derived
     post:
       operationId: PostCluster
       responses:
@@ -52,6 +54,8 @@ paths:
         $ref: '#/components/requestBodies/storageCluster'
       tags:
       - ClustersService
+      summary: Post cluster
+      x-summary-source: derived
   /v1/clusters/{id}:
     get:
       operationId: GetCluster
@@ -70,6 +74,8 @@ paths:
           type: string
       tags:
       - ClustersService
+      summary: Get cluster
+      x-summary-source: derived
     delete:
       operationId: DeleteCluster
       responses:
@@ -87,6 +93,8 @@ paths:
           type: string
       tags:
       - ClustersService
+      summary: Delete cluster
+      x-summary-source: derived
     put:
       operationId: PutCluster
       responses:
@@ -106,8 +114,94 @@ paths:
         $ref: '#/components/requestBodies/storageCluster'
       tags:
       - ClustersService
+      summary: Put cluster
+      x-summary-source: derived
 components:
   schemas:
+    storageClusterType:
+      type: string
+      enum:
+      - GENERIC_CLUSTER
+      - KUBERNETES_CLUSTER
+      - OPENSHIFT_CLUSTER
+      default: GENERIC_CLUSTER
+    storageCollectionMethod:
+      type: string
+      enum:
+      - UNSET_COLLECTION
+      - NO_COLLECTION
+      - KERNEL_MODULE
+      - EBPF
+      default: UNSET_COLLECTION
+    storageAzureProviderMetadata:
+      type: object
+      properties:
+        subscriptionId:
+          type: string
+    storageAWSProviderMetadata:
+      type: object
+      properties:
+        accountId:
+          type: string
+    ClusterUpgradeStatusUpgradability:
+      type: string
+      enum:
+      - UNSET
+      - UP_TO_DATE
+      - MANUAL_UPGRADE_REQUIRED
+      - AUTO_UPGRADE_POSSIBLE
+      - SENSOR_VERSION_HIGHER
+      default: UNSET
+      description: ' - SENSOR_VERSION_HIGHER: SENSOR_VERSION_HIGHER occurs when we detect that the sensor
+
+        is running a newer version than this Central. This is unexpected,
+
+        but can occur depending on the patches a customer does.
+
+        In this case, we will NOT automatically "upgrade" the sensor,
+
+        since that would be a downgrade, even if the autoupgrade setting is
+
+        on. The user will be allowed to manually trigger the upgrade, but they are
+
+        strongly discouraged from doing so without upgrading Central first, since this
+
+        is an unsupported configuration.'
+    storageUpgradeProgress:
+      type: object
+      properties:
+        upgradeState:
+          $ref: '#/components/schemas/UpgradeProgressUpgradeState'
+        upgradeStatusDetail:
+          type: string
+        since:
+          type: string
+          format: date-time
+    UpgradeProgressUpgradeState:
+      type: string
+      enum:
+      - UPGRADE_INITIALIZING
+      - UPGRADER_LAUNCHING
+      - UPGRADER_LAUNCHED
+      - PRE_FLIGHT_CHECKS_COMPLETE
+      - UPGRADE_OPERATIONS_DONE
+      - UPGRADE_COMPLETE
+      - UPGRADE_INITIALIZATION_ERROR
+      - PRE_FLIGHT_CHECKS_FAILED
+      - UPGRADE_ERROR_ROLLING_BACK
+      - UPGRADE_ERROR_ROLLED_BACK
+      - UPGRADE_ERROR_ROLLBACK_FAILED
+      - UPGRADE_ERROR_UNKNOWN
+      - UPGRADE_TIMED_OUT
+      default: UPGRADE_INITIALIZING
+      description: " - UPGRADER_LAUNCHING: In-progress states.\n - UPGRADE_COMPLETE: The success state.\nPLEASE NUMBER ALL IN-PROGRESS STATES ABOVE THIS\nAND ALL ERROR STATES BELOW THIS.\n - UPGRADE_INITIALIZATION_ERROR: Error states."
+    storageDynamicClusterConfig:
+      type: object
+      properties:
+        admissionControllerConfig:
+          $ref: '#/components/schemas/storageAdmissionControllerConfig'
+        registryOverride:
+          type: string
     storageOrchestratorMetadata:
       type: object
       properties:
@@ -120,19 +214,20 @@ components:
           type: array
           items:
             type: string
-    storageAWSProviderMetadata:
+    storageGoogleProviderMetadata:
       type: object
       properties:
-        accountId:
+        project:
           type: string
-    storageCollectionMethod:
-      type: string
-      enum:
-      - UNSET_COLLECTION
-      - NO_COLLECTION
-      - KERNEL_MODULE
-      - EBPF
-      default: UNSET_COLLECTION
+        clusterName:
+          type: string
+    v1Empty:
+      type: object
+    v1ClusterResponse:
+      type: object
+      properties:
+        cluster:
+          $ref: '#/components/schemas/storageCluster'
     storageAdmissionControllerConfig:
       type: object
       properties:
@@ -148,61 +243,6 @@ components:
         disableBypass:
           type: boolean
           format: boolean
-    storageDynamicClusterConfig:
-      type: object
-      properties:
-        admissionControllerConfig:
-          $ref: '#/components/schemas/storageAdmissionControllerConfig'
-        registryOverride:
-          type: string
-    ClusterUpgradeStatusUpgradeProcessStatus:
-      type: object
-      properties:
-        active:
-          type: boolean
-          format: boolean
-        id:
-          type: string
-        targetVersion:
-          type: string
-        upgraderImage:
-          type: string
-        initiatedAt:
-          type: string
-          format: date-time
-        progress:
-          $ref: '#/components/schemas/storageUpgradeProgress'
-    v1ClustersList:
-      type: object
-      properties:
-        clusters:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageCluster'
-    storageClusterType:
-      type: string
-      enum:
-      - GENERIC_CLUSTER
-      - KUBERNETES_CLUSTER
-      - OPENSHIFT_CLUSTER
-      default: GENERIC_CLUSTER
-    v1Empty:
-      type: object
-    v1ClusterResponse:
-      type: object
-      properties:
-        cluster:
-          $ref: '#/components/schemas/storageCluster'
-    storageUpgradeProgress:
-      type: object
-      properties:
-        upgradeState:
-          $ref: '#/components/schemas/UpgradeProgressUpgradeState'
-        upgradeStatusDetail:
-          type: string
-        since:
-          type: string
-          format: date-time
     storageCluster:
       type: object
       properties:
@@ -241,82 +281,6 @@ components:
         priority:
           type: string
           format: int64
-    ClusterUpgradeStatusUpgradability:
-      type: string
-      enum:
-      - UNSET
-      - UP_TO_DATE
-      - MANUAL_UPGRADE_REQUIRED
-      - AUTO_UPGRADE_POSSIBLE
-      - SENSOR_VERSION_HIGHER
-      default: UNSET
-      description: ' - SENSOR_VERSION_HIGHER: SENSOR_VERSION_HIGHER occurs when we detect that the sensor
-
-        is running a newer version than this Central. This is unexpected,
-
-        but can occur depending on the patches a customer does.
-
-        In this case, we will NOT automatically "upgrade" the sensor,
-
-        since that would be a downgrade, even if the autoupgrade setting is
-
-        on. The user will be allowed to manually trigger the upgrade, but they are
-
-        strongly discouraged from doing so without upgrading Central first, since this
-
-        is an unsupported configuration.'
-    storageAzureProviderMetadata:
-      type: object
-      properties:
-        subscriptionId:
-          type: string
-    UpgradeProgressUpgradeState:
-      type: string
-      enum:
-      - UPGRADE_INITIALIZING
-      - UPGRADER_LAUNCHING
-      - UPGRADER_LAUNCHED
-      - PRE_FLIGHT_CHECKS_COMPLETE
-      - UPGRADE_OPERATIONS_DONE
-      - UPGRADE_COMPLETE
-      - UPGRADE_INITIALIZATION_ERROR
-      - PRE_FLIGHT_CHECKS_FAILED
-      - UPGRADE_ERROR_ROLLING_BACK
-      - UPGRADE_ERROR_ROLLED_BACK
-      - UPGRADE_ERROR_ROLLBACK_FAILED
-      - UPGRADE_ERROR_UNKNOWN
-      - UPGRADE_TIMED_OUT
-      default: UPGRADE_INITIALIZING
-      description: " - UPGRADER_LAUNCHING: In-progress states.\n - UPGRADE_COMPLETE: The success state.\nPLEASE NUMBER ALL IN-PROGRESS STATES ABOVE THIS\nAND ALL ERROR STATES BELOW THIS.\n - UPGRADE_INITIALIZATION_ERROR: Error states."
-    storageTolerationsConfig:
-      type: object
-      properties:
-        disabled:
-          type: boolean
-          format: boolean
-    storageClusterUpgradeStatus:
-      type: object
-      properties:
-        upgradability:
-          $ref: '#/components/schemas/ClusterUpgradeStatusUpgradability'
-        upgradabilityStatusReason:
-          type: string
-        mostRecentProcess:
-          $ref: '#/components/schemas/ClusterUpgradeStatusUpgradeProcessStatus'
-    storageClusterStatus:
-      type: object
-      properties:
-        sensorVersion:
-          type: string
-        lastContact:
-          type: string
-          format: date-time
-        providerMetadata:
-          $ref: '#/components/schemas/storageProviderMetadata'
-        orchestratorMetadata:
-          $ref: '#/components/schemas/storageOrchestratorMetadata'
-        upgradeStatus:
-          $ref: '#/components/schemas/storageClusterUpgradeStatus'
     storageProviderMetadata:
       type: object
       properties:
@@ -333,13 +297,59 @@ components:
         verified:
           type: boolean
           format: boolean
-    storageGoogleProviderMetadata:
+    storageClusterStatus:
       type: object
       properties:
-        project:
+        sensorVersion:
           type: string
-        clusterName:
+        lastContact:
           type: string
+          format: date-time
+        providerMetadata:
+          $ref: '#/components/schemas/storageProviderMetadata'
+        orchestratorMetadata:
+          $ref: '#/components/schemas/storageOrchestratorMetadata'
+        upgradeStatus:
+          $ref: '#/components/schemas/storageClusterUpgradeStatus'
+    ClusterUpgradeStatusUpgradeProcessStatus:
+      type: object
+      properties:
+        active:
+          type: boolean
+          format: boolean
+        id:
+          type: string
+        targetVersion:
+          type: string
+        upgraderImage:
+          type: string
+        initiatedAt:
+          type: string
+          format: date-time
+        progress:
+          $ref: '#/components/schemas/storageUpgradeProgress'
+    storageClusterUpgradeStatus:
+      type: object
+      properties:
+        upgradability:
+          $ref: '#/components/schemas/ClusterUpgradeStatusUpgradability'
+        upgradabilityStatusReason:
+          type: string
+        mostRecentProcess:
+          $ref: '#/components/schemas/ClusterUpgradeStatusUpgradeProcessStatus'
+    storageTolerationsConfig:
+      type: object
+      properties:
+        disabled:
+          type: boolean
+          format: boolean
+    v1ClustersList:
+      type: object
+      properties:
+        clusters:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageCluster'
   requestBodies:
     storageCluster:
       content:

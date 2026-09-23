@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: API Reference AlertService DebugService API
+  title: Reference Debug Service API
   version: '1'
   description: API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.
   contact:
@@ -23,7 +23,7 @@ tags:
 paths:
   /v1/debug/loglevel:
     get:
-      summary: Get the current logging level for StackRox services.
+      summary: Get the current logging level for StackRox services
       operationId: GetLogLevel
       responses:
         '200':
@@ -44,7 +44,7 @@ paths:
       tags:
       - DebugService
     patch:
-      summary: Set logging level for StackRox services.
+      summary: Set logging level for StackRox services
       operationId: SetLogLevel
       responses:
         '200':
@@ -63,6 +63,13 @@ paths:
       - DebugService
 components:
   schemas:
+    v1ModuleLevel:
+      type: object
+      properties:
+        module:
+          type: string
+        level:
+          type: string
     v1LogLevelRequest:
       type: object
       properties:
@@ -72,13 +79,6 @@ components:
           type: array
           items:
             type: string
-    v1ModuleLevel:
-      type: object
-      properties:
-        module:
-          type: string
-        level:
-          type: string
     v1LogLevelResponse:
       type: object
       properties:

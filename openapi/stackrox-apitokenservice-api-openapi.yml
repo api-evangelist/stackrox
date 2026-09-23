@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: API Reference AlertService APITokenService API
+  title: Reference API Token Service API
   version: '1'
   description: API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.
   contact:
@@ -23,7 +23,7 @@ tags:
 paths:
   /v1/apitokens:
     get:
-      summary: GetAPITokens returns all the API tokens.
+      summary: GetAPITokens returns all the API tokens
       operationId: GetAPITokens
       responses:
         '200':
@@ -43,7 +43,7 @@ paths:
       - APITokenService
   /v1/apitokens/generate:
     post:
-      summary: GenerateToken generates API token for a given user and role.
+      summary: GenerateToken generates API token for a given user and role
       operationId: GenerateToken
       responses:
         '200':
@@ -62,7 +62,7 @@ paths:
       - APITokenService
   /v1/apitokens/revoke/{id}:
     patch:
-      summary: RevokeToken removes the API token for a given id.
+      summary: RevokeToken removes the API token for a given id
       operationId: RevokeToken
       responses:
         '200':
@@ -81,7 +81,7 @@ paths:
       - APITokenService
   /v1/apitokens/{id}:
     get:
-      summary: GetAPIToken returns API token metadata for a given id.
+      summary: GetAPIToken returns API token metadata for a given id
       operationId: GetAPIToken
       responses:
         '200':
@@ -100,8 +100,6 @@ paths:
       - APITokenService
 components:
   schemas:
-    v1Empty:
-      type: object
     storageTokenMetadata:
       type: object
       properties:
@@ -120,20 +118,6 @@ components:
         revoked:
           type: boolean
           format: boolean
-    v1GetAPITokensResponse:
-      type: object
-      properties:
-        tokens:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageTokenMetadata'
-    v1GenerateTokenRequest:
-      type: object
-      properties:
-        name:
-          type: string
-        role:
-          type: string
     v1GenerateTokenResponse:
       type: object
       properties:
@@ -141,6 +125,22 @@ components:
           type: string
         metadata:
           $ref: '#/components/schemas/storageTokenMetadata'
+    v1GenerateTokenRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        role:
+          type: string
+    v1GetAPITokensResponse:
+      type: object
+      properties:
+        tokens:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageTokenMetadata'
+    v1Empty:
+      type: object
   securitySchemes:
     ApiToken:
       type: apiKey

@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: API Reference AlertService RoleService API
+  title: Reference Role Service API
   version: '1'
   description: API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.
   contact:
@@ -33,6 +33,8 @@ paths:
                 $ref: '#/components/schemas/storageRole'
       tags:
       - RoleService
+      summary: Get my permissions
+      x-summary-source: derived
   /v1/resources:
     get:
       operationId: GetResources
@@ -45,6 +47,8 @@ paths:
                 $ref: '#/components/schemas/v1GetResourcesResponse'
       tags:
       - RoleService
+      summary: Get resources
+      x-summary-source: derived
   /v1/roles:
     get:
       operationId: GetRoles
@@ -57,6 +61,8 @@ paths:
                 $ref: '#/components/schemas/v1GetRolesResponse'
       tags:
       - RoleService
+      summary: Get roles
+      x-summary-source: derived
   /v1/roles/{id}:
     get:
       operationId: GetRole
@@ -75,6 +81,8 @@ paths:
           type: string
       tags:
       - RoleService
+      summary: Get role
+      x-summary-source: derived
     delete:
       operationId: DeleteRole
       responses:
@@ -92,6 +100,8 @@ paths:
           type: string
       tags:
       - RoleService
+      summary: Delete role
+      x-summary-source: derived
   /v1/roles/{name}:
     post:
       operationId: CreateRole
@@ -112,6 +122,8 @@ paths:
         $ref: '#/components/requestBodies/storageRole'
       tags:
       - RoleService
+      summary: Create role
+      x-summary-source: derived
     put:
       operationId: UpdateRole
       responses:
@@ -131,8 +143,17 @@ paths:
         $ref: '#/components/requestBodies/storageRole'
       tags:
       - RoleService
+      summary: Update role
+      x-summary-source: derived
 components:
   schemas:
+    v1GetRolesResponse:
+      type: object
+      properties:
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageRole'
     storageRole:
       type: object
       properties:
@@ -144,22 +165,6 @@ components:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/storageAccess'
-    v1Empty:
-      type: object
-    v1GetRolesResponse:
-      type: object
-      properties:
-        roles:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageRole'
-    storageAccess:
-      type: string
-      enum:
-      - NO_ACCESS
-      - READ_ACCESS
-      - READ_WRITE_ACCESS
-      default: NO_ACCESS
     v1GetResourcesResponse:
       type: object
       properties:
@@ -167,6 +172,15 @@ components:
           type: array
           items:
             type: string
+    storageAccess:
+      type: string
+      enum:
+      - NO_ACCESS
+      - READ_ACCESS
+      - READ_WRITE_ACCESS
+      default: NO_ACCESS
+    v1Empty:
+      type: object
   requestBodies:
     storageRole:
       content:

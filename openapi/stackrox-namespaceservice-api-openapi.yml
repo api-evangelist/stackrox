@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: API Reference AlertService NamespaceService API
+  title: Reference Namespace Service API
   version: '1'
   description: API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.
   contact:
@@ -33,6 +33,8 @@ paths:
                 $ref: '#/components/schemas/v1GetNamespacesResponse'
       tags:
       - NamespaceService
+      summary: Get namespaces
+      x-summary-source: derived
   /v1/namespaces/{id}:
     get:
       operationId: GetNamespace
@@ -51,6 +53,8 @@ paths:
           type: string
       tags:
       - NamespaceService
+      summary: Get namespace
+      x-summary-source: derived
 components:
   schemas:
     v1GetNamespacesResponse:
@@ -60,20 +64,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/v1Namespace'
-    v1Namespace:
-      type: object
-      properties:
-        metadata:
-          $ref: '#/components/schemas/storageNamespaceMetadata'
-        numDeployments:
-          type: integer
-          format: int32
-        numSecrets:
-          type: integer
-          format: int32
-        numNetworkPolicies:
-          type: integer
-          format: int32
     storageNamespaceMetadata:
       type: object
       properties:
@@ -95,6 +85,20 @@ components:
         priority:
           type: string
           format: int64
+    v1Namespace:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/storageNamespaceMetadata'
+        numDeployments:
+          type: integer
+          format: int32
+        numSecrets:
+          type: integer
+          format: int32
+        numNetworkPolicies:
+          type: integer
+          format: int32
   securitySchemes:
     ApiToken:
       type: apiKey

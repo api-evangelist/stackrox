@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: API Reference AlertService ServiceIdentityService API
+  title: Reference Service Identity Service API
   version: '1'
   description: API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.
   contact:
@@ -23,7 +23,7 @@ tags:
 paths:
   /v1/authorities:
     get:
-      summary: GetAuthorities returns the authorities currently in use.
+      summary: GetAuthorities returns the authorities currently in use
       operationId: GetAuthorities
       responses:
         '200':
@@ -46,10 +46,10 @@ paths:
                 $ref: '#/components/schemas/v1ServiceIdentityResponse'
       tags:
       - ServiceIdentityService
+      summary: Get service identities
+      x-summary-source: derived
     post:
-      summary: 'CreateServiceIdentity creates a new key pair and certificate.
-
-        The key and certificate are not retained and can never be retrieved again.'
+      summary: CreateServiceIdentity creates a new key pair and certificate.
       operationId: CreateServiceIdentity
       responses:
         '200':
@@ -68,6 +68,31 @@ paths:
       - ServiceIdentityService
 components:
   schemas:
+    storageServiceIdentity:
+      type: object
+      properties:
+        serial:
+          type: string
+          format: int64
+        serialStr:
+          type: string
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/storageServiceType'
+    v1Authorities:
+      type: object
+      properties:
+        authorities:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Authority'
+    v1Authority:
+      type: object
+      properties:
+        certificatePem:
+          type: string
+          format: byte
     storageServiceType:
       type: string
       enum:
@@ -82,18 +107,6 @@ components:
       - BENCHMARK_SERVICE
       - SCANNER_SERVICE
       default: UNKNOWN_SERVICE
-    storageServiceIdentity:
-      type: object
-      properties:
-        serial:
-          type: string
-          format: int64
-        serialStr:
-          type: string
-        id:
-          type: string
-        type:
-          $ref: '#/components/schemas/storageServiceType'
     v1ServiceIdentityResponse:
       type: object
       properties:
@@ -101,26 +114,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/storageServiceIdentity'
-    v1CreateServiceIdentityRequest:
-      type: object
-      properties:
-        id:
-          type: string
-        type:
-          $ref: '#/components/schemas/storageServiceType'
-    v1Authority:
-      type: object
-      properties:
-        certificatePem:
-          type: string
-          format: byte
-    v1Authorities:
-      type: object
-      properties:
-        authorities:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1Authority'
     v1CreateServiceIdentityResponse:
       type: object
       properties:
@@ -132,6 +125,13 @@ components:
         privateKeyPem:
           type: string
           format: byte
+    v1CreateServiceIdentityRequest:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/storageServiceType'
   securitySchemes:
     ApiToken:
       type: apiKey

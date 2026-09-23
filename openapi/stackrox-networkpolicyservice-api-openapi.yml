@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: API Reference AlertService NetworkPolicyService API
+  title: Reference Network Policy Service API
   version: '1'
   description: API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.
   contact:
@@ -44,6 +44,8 @@ paths:
           type: string
       tags:
       - NetworkPolicyService
+      summary: Get network policies
+      x-summary-source: derived
   /v1/networkpolicies/apply/{clusterId}:
     post:
       operationId: ApplyNetworkPolicy
@@ -64,6 +66,8 @@ paths:
         $ref: '#/components/requestBodies/storageNetworkPolicyModification'
       tags:
       - NetworkPolicyService
+      summary: Apply network policy
+      x-summary-source: derived
   /v1/networkpolicies/cluster/{clusterId}:
     get:
       operationId: GetNetworkGraph
@@ -87,6 +91,8 @@ paths:
           type: string
       tags:
       - NetworkPolicyService
+      summary: Get network graph
+      x-summary-source: derived
   /v1/networkpolicies/generate/{clusterId}:
     get:
       operationId: GenerateNetworkPolicies
@@ -127,6 +133,8 @@ paths:
           format: date-time
       tags:
       - NetworkPolicyService
+      summary: Generate network policies
+      x-summary-source: derived
   /v1/networkpolicies/graph/epoch:
     get:
       operationId: GetNetworkGraphEpoch
@@ -145,6 +153,8 @@ paths:
           type: string
       tags:
       - NetworkPolicyService
+      summary: Get network graph epoch
+      x-summary-source: derived
   /v1/networkpolicies/simulate/{clusterId}:
     post:
       operationId: SimulateNetworkGraph
@@ -165,6 +175,8 @@ paths:
         $ref: '#/components/requestBodies/storageNetworkPolicyModification'
       tags:
       - NetworkPolicyService
+      summary: Simulate network graph
+      x-summary-source: derived
   /v1/networkpolicies/simulate/{clusterId}/notify:
     post:
       operationId: SendNetworkPolicyYAML
@@ -185,6 +197,8 @@ paths:
         $ref: '#/components/requestBodies/storageNetworkPolicyModification'
       tags:
       - NetworkPolicyService
+      summary: Send network policy YAML
+      x-summary-source: derived
   /v1/networkpolicies/undo/{clusterId}:
     get:
       operationId: GetUndoModification
@@ -203,6 +217,8 @@ paths:
           type: string
       tags:
       - NetworkPolicyService
+      summary: Get undo modification
+      x-summary-source: derived
   /v1/networkpolicies/{id}:
     get:
       operationId: GetNetworkPolicy
@@ -221,40 +237,47 @@ paths:
           type: string
       tags:
       - NetworkPolicyService
+      summary: Get network policy
+      x-summary-source: derived
 components:
   schemas:
-    storageNetworkEntityInfo:
+    v1GenerateNetworkPoliciesResponse:
       type: object
       properties:
-        type:
-          $ref: '#/components/schemas/storageNetworkEntityInfoType'
-        id:
-          type: string
-        deployment:
-          $ref: '#/components/schemas/storageNetworkEntityInfoDeployment'
-    storageNetworkPolicyReference:
+        modification:
+          $ref: '#/components/schemas/storageNetworkPolicyModification'
+      title: 'Next available tag: 2'
+    v1NetworkPolicyInSimulation:
       type: object
       properties:
-        namespace:
+        policy:
+          $ref: '#/components/schemas/storageNetworkPolicy'
+        status:
+          $ref: '#/components/schemas/v1NetworkPolicyInSimulationStatus'
+        oldPolicy:
+          $ref: '#/components/schemas/storageNetworkPolicy'
+    storageNetworkPolicyModification:
+      type: object
+      properties:
+        applyYaml:
           type: string
-        name:
-          type: string
+        toDelete:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageNetworkPolicyReference'
       title: 'Next available tag: 3'
-    storageNetworkEntityInfoDeployment:
+    storageNetworkPolicyApplicationUndoRecord:
       type: object
       properties:
-        name:
+        user:
           type: string
-        namespace:
+        applyTimestamp:
           type: string
-        cluster:
-          type: string
-    v1NetworkGraphEpoch:
-      type: object
-      properties:
-        epoch:
-          type: integer
-          format: int64
+          format: date-time
+        originalModification:
+          $ref: '#/components/schemas/storageNetworkPolicyModification'
+        undoModification:
+          $ref: '#/components/schemas/storageNetworkPolicyModification'
     v1NetworkNode:
       type: object
       properties:
@@ -277,26 +300,43 @@ components:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/v1NetworkEdgePropertiesBundle'
-    storageIPBlock:
+    storageNetworkPolicyReference:
       type: object
       properties:
-        cidr:
+        namespace:
           type: string
-        except:
+        name:
+          type: string
+      title: 'Next available tag: 3'
+    storageLabelSelector:
+      type: object
+      properties:
+        matchLabels:
+          type: object
+          additionalProperties:
+            type: string
+          description: This is actually a oneof, but we can't make it one due to backwards compatibility constraints.
+        requirements:
           type: array
           items:
-            type: string
-    storageL4Protocol:
+            $ref: '#/components/schemas/LabelSelectorRequirement'
+      title: 'Next available tag: 3'
+    storageLabelSelectorOperator:
       type: string
       enum:
-      - L4_PROTOCOL_UNKNOWN
-      - L4_PROTOCOL_TCP
-      - L4_PROTOCOL_UDP
-      - L4_PROTOCOL_ICMP
-      - L4_PROTOCOL_RAW
-      default: L4_PROTOCOL_UNKNOWN
-    v1Empty:
-      type: object
+      - UNKNOWN
+      - IN
+      - NOT_IN
+      - EXISTS
+      - NOT_EXISTS
+      default: UNKNOWN
+    storageNetworkEntityInfoType:
+      type: string
+      enum:
+      - UNKNOWN_TYPE
+      - DEPLOYMENT
+      - INTERNET
+      default: UNKNOWN_TYPE
     v1NetworkPolicyInSimulationStatus:
       type: string
       enum:
@@ -306,18 +346,46 @@ components:
       - ADDED
       - DELETED
       default: INVALID
-    storageNetworkPolicyApplicationUndoRecord:
+    v1GetUndoModificationResponse:
       type: object
       properties:
-        user:
-          type: string
-        applyTimestamp:
-          type: string
-          format: date-time
-        originalModification:
-          $ref: '#/components/schemas/storageNetworkPolicyModification'
-        undoModification:
-          $ref: '#/components/schemas/storageNetworkPolicyModification'
+        undoRecord:
+          $ref: '#/components/schemas/storageNetworkPolicyApplicationUndoRecord'
+    storageNetworkPolicySpec:
+      type: object
+      properties:
+        podSelector:
+          $ref: '#/components/schemas/storageLabelSelector'
+        ingress:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageNetworkPolicyIngressRule'
+        egress:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageNetworkPolicyEgressRule'
+        policyTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageNetworkPolicyType'
+    v1NetworkPoliciesResponse:
+      type: object
+      properties:
+        networkPolicies:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageNetworkPolicy'
+    storageNetworkPolicyEgressRule:
+      type: object
+      properties:
+        ports:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageNetworkPolicyPort'
+        to:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageNetworkPolicyPeer'
     storageNetworkPolicyIngressRule:
       type: object
       properties:
@@ -329,13 +397,106 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/storageNetworkPolicyPeer'
-    v1NetworkPoliciesResponse:
+    v1Empty:
+      type: object
+    storageNetworkPolicyType:
+      type: string
+      enum:
+      - UNSET_NETWORK_POLICY_TYPE
+      - INGRESS_NETWORK_POLICY_TYPE
+      - EGRESS_NETWORK_POLICY_TYPE
+      default: UNSET_NETWORK_POLICY_TYPE
+    storageIPBlock:
       type: object
       properties:
-        networkPolicies:
+        cidr:
+          type: string
+        except:
           type: array
           items:
-            $ref: '#/components/schemas/storageNetworkPolicy'
+            type: string
+    v1NetworkNodeDiff:
+      type: object
+      properties:
+        policyIds:
+          type: array
+          items:
+            type: string
+        outEdges:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/v1NetworkEdgePropertiesBundle'
+        nonIsolatedIngress:
+          type: boolean
+          format: boolean
+        nonIsolatedEgress:
+          type: boolean
+          format: boolean
+    v1NetworkEdgePropertiesBundle:
+      type: object
+      properties:
+        properties:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1NetworkEdgeProperties'
+    v1NetworkGraph:
+      type: object
+      properties:
+        epoch:
+          type: integer
+          format: int64
+        nodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1NetworkNode'
+    v1NetworkEdgeProperties:
+      type: object
+      properties:
+        port:
+          type: integer
+          format: int64
+        protocol:
+          $ref: '#/components/schemas/storageL4Protocol'
+        lastActiveTimestamp:
+          type: string
+          format: date-time
+    storageNetworkPolicyPort:
+      type: object
+      properties:
+        protocol:
+          $ref: '#/components/schemas/storageProtocol'
+        port:
+          type: integer
+          format: int32
+    storageL4Protocol:
+      type: string
+      enum:
+      - L4_PROTOCOL_UNKNOWN
+      - L4_PROTOCOL_TCP
+      - L4_PROTOCOL_UDP
+      - L4_PROTOCOL_ICMP
+      - L4_PROTOCOL_RAW
+      default: L4_PROTOCOL_UNKNOWN
+    v1SimulateNetworkGraphResponse:
+      type: object
+      properties:
+        simulatedGraph:
+          $ref: '#/components/schemas/v1NetworkGraph'
+        policies:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1NetworkPolicyInSimulation'
+        added:
+          $ref: '#/components/schemas/v1NetworkGraphDiff'
+        removed:
+          $ref: '#/components/schemas/v1NetworkGraphDiff'
+    v1NetworkGraphDiff:
+      type: object
+      properties:
+        nodeDiffs:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/v1NetworkNodeDiff'
     storageNetworkPolicy:
       type: object
       properties:
@@ -366,101 +527,15 @@ components:
         created:
           type: string
           format: date-time
-    storageNetworkPolicyPort:
+    storageNetworkEntityInfoDeployment:
       type: object
       properties:
-        protocol:
-          $ref: '#/components/schemas/storageProtocol'
-        port:
-          type: integer
-          format: int32
-    LabelSelectorRequirement:
-      type: object
-      properties:
-        key:
+        name:
           type: string
-        op:
-          $ref: '#/components/schemas/storageLabelSelectorOperator'
-        values:
-          type: array
-          items:
-            type: string
-      title: 'Next available tag: 4'
-    v1SimulateNetworkGraphResponse:
-      type: object
-      properties:
-        simulatedGraph:
-          $ref: '#/components/schemas/v1NetworkGraph'
-        policies:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1NetworkPolicyInSimulation'
-        added:
-          $ref: '#/components/schemas/v1NetworkGraphDiff'
-        removed:
-          $ref: '#/components/schemas/v1NetworkGraphDiff'
-    v1GenerateNetworkPoliciesResponse:
-      type: object
-      properties:
-        modification:
-          $ref: '#/components/schemas/storageNetworkPolicyModification'
-      title: 'Next available tag: 2'
-    storageNetworkPolicyEgressRule:
-      type: object
-      properties:
-        ports:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageNetworkPolicyPort'
-        to:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageNetworkPolicyPeer'
-    v1NetworkGraphDiff:
-      type: object
-      properties:
-        nodeDiffs:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/v1NetworkNodeDiff'
-    v1NetworkEdgeProperties:
-      type: object
-      properties:
-        port:
-          type: integer
-          format: int64
-        protocol:
-          $ref: '#/components/schemas/storageL4Protocol'
-        lastActiveTimestamp:
+        namespace:
           type: string
-          format: date-time
-    v1NetworkGraph:
-      type: object
-      properties:
-        epoch:
-          type: integer
-          format: int64
-        nodes:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1NetworkNode'
-    storageNetworkPolicySpec:
-      type: object
-      properties:
-        podSelector:
-          $ref: '#/components/schemas/storageLabelSelector'
-        ingress:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageNetworkPolicyIngressRule'
-        egress:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageNetworkPolicyEgressRule'
-        policyTypes:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageNetworkPolicyType'
+        cluster:
+          type: string
     storageProtocol:
       type: string
       enum:
@@ -477,90 +552,33 @@ components:
           $ref: '#/components/schemas/storageLabelSelector'
         ipBlock:
           $ref: '#/components/schemas/storageIPBlock'
-    v1NetworkEdgePropertiesBundle:
+    v1NetworkGraphEpoch:
       type: object
       properties:
-        properties:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1NetworkEdgeProperties'
-    storageLabelSelectorOperator:
-      type: string
-      enum:
-      - UNKNOWN
-      - IN
-      - NOT_IN
-      - EXISTS
-      - NOT_EXISTS
-      default: UNKNOWN
-    storageNetworkPolicyModification:
+        epoch:
+          type: integer
+          format: int64
+    storageNetworkEntityInfo:
       type: object
       properties:
-        applyYaml:
+        type:
+          $ref: '#/components/schemas/storageNetworkEntityInfoType'
+        id:
           type: string
-        toDelete:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageNetworkPolicyReference'
-      title: 'Next available tag: 3'
-    storageLabelSelector:
+        deployment:
+          $ref: '#/components/schemas/storageNetworkEntityInfoDeployment'
+    LabelSelectorRequirement:
       type: object
       properties:
-        matchLabels:
-          type: object
-          additionalProperties:
-            type: string
-          description: This is actually a oneof, but we can't make it one due to backwards compatibility constraints.
-        requirements:
-          type: array
-          items:
-            $ref: '#/components/schemas/LabelSelectorRequirement'
-      title: 'Next available tag: 3'
-    v1NetworkPolicyInSimulation:
-      type: object
-      properties:
-        policy:
-          $ref: '#/components/schemas/storageNetworkPolicy'
-        status:
-          $ref: '#/components/schemas/v1NetworkPolicyInSimulationStatus'
-        oldPolicy:
-          $ref: '#/components/schemas/storageNetworkPolicy'
-    storageNetworkPolicyType:
-      type: string
-      enum:
-      - UNSET_NETWORK_POLICY_TYPE
-      - INGRESS_NETWORK_POLICY_TYPE
-      - EGRESS_NETWORK_POLICY_TYPE
-      default: UNSET_NETWORK_POLICY_TYPE
-    v1GetUndoModificationResponse:
-      type: object
-      properties:
-        undoRecord:
-          $ref: '#/components/schemas/storageNetworkPolicyApplicationUndoRecord'
-    v1NetworkNodeDiff:
-      type: object
-      properties:
-        policyIds:
+        key:
+          type: string
+        op:
+          $ref: '#/components/schemas/storageLabelSelectorOperator'
+        values:
           type: array
           items:
             type: string
-        outEdges:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/v1NetworkEdgePropertiesBundle'
-        nonIsolatedIngress:
-          type: boolean
-          format: boolean
-        nonIsolatedEgress:
-          type: boolean
-          format: boolean
-    storageNetworkEntityInfoType:
-      type: string
-      enum:
-      - UNKNOWN_TYPE
-      - DEPLOYMENT
-      - INTERNET
-      default: UNKNOWN_TYPE
+      title: 'Next available tag: 4'
   requestBodies:
     storageNetworkPolicyModification:
       content:

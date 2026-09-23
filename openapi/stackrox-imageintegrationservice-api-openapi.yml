@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: API Reference AlertService ImageIntegrationService API
+  title: Reference Image Integration Service API
   version: '1'
   description: API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.
   contact:
@@ -23,7 +23,7 @@ tags:
 paths:
   /v1/imageintegrations:
     get:
-      summary: GetImageIntegrations returns all image integrations.
+      summary: GetImageIntegrations returns all image integrations
       operationId: GetImageIntegrations
       responses:
         '200':
@@ -46,7 +46,7 @@ paths:
       tags:
       - ImageIntegrationService
     post:
-      summary: PostImageIntegration creates a image integraton.
+      summary: PostImageIntegration creates a image integraton
       operationId: PostImageIntegration
       responses:
         '200':
@@ -61,7 +61,7 @@ paths:
       - ImageIntegrationService
   /v1/imageintegrations/test:
     post:
-      summary: TestImageIntegration checks if the given image integration is correctly configured.
+      summary: TestImageIntegration checks if the given image integration is correctly…
       operationId: TestImageIntegration
       responses:
         '200':
@@ -76,7 +76,7 @@ paths:
       - ImageIntegrationService
   /v1/imageintegrations/{id}:
     get:
-      summary: GetImageIntegration returns the image integration given its ID.
+      summary: GetImageIntegration returns the image integration given its ID
       operationId: GetImageIntegration
       responses:
         '200':
@@ -94,7 +94,7 @@ paths:
       tags:
       - ImageIntegrationService
     delete:
-      summary: DeleteImageIntegration removes a image integration given its ID.
+      summary: DeleteImageIntegration removes a image integration given its ID
       operationId: DeleteImageIntegration
       responses:
         '200':
@@ -112,7 +112,7 @@ paths:
       tags:
       - ImageIntegrationService
     put:
-      summary: PutImageIntegration modifies a given image integration.
+      summary: PutImageIntegration modifies a given image integration
       operationId: PutImageIntegration
       responses:
         '200':
@@ -133,40 +133,58 @@ paths:
       - ImageIntegrationService
 components:
   schemas:
-    storageTenableConfig:
-      type: object
-      properties:
-        accessKey:
-          type: string
-        secretKey:
-          type: string
-    storageIBMRegistryConfig:
-      type: object
-      properties:
-        endpoint:
-          type: string
-        apiKey:
-          type: string
-    storageDTRConfig:
-      type: object
-      properties:
-        username:
-          type: string
-        password:
-          type: string
-        endpoint:
-          type: string
-        insecure:
-          type: boolean
-          format: boolean
-    v1Empty:
-      type: object
     storageQuayConfig:
       type: object
       properties:
         endpoint:
           type: string
         oauthToken:
+          type: string
+    storageECRConfig:
+      type: object
+      properties:
+        registryId:
+          type: string
+        accessKeyId:
+          type: string
+        secretAccessKey:
+          type: string
+        region:
+          type: string
+        useIam:
+          type: boolean
+          format: boolean
+    storageScannerV2Config:
+      type: object
+      properties:
+        endpoint:
+          type: string
+    storageDockerConfig:
+      type: object
+      properties:
+        endpoint:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+        insecure:
+          type: boolean
+          format: boolean
+    storageImageIntegrationCategory:
+      type: string
+      enum:
+      - REGISTRY
+      - SCANNER
+      default: REGISTRY
+    storageAnchoreConfig:
+      type: object
+      properties:
+        endpoint:
+          type: string
+        username:
+          type: string
+        password:
           type: string
     storageImageIntegration:
       type: object
@@ -221,18 +239,11 @@ components:
       properties:
         endpoint:
           type: string
-    storageDockerConfig:
+    storageClairConfig:
       type: object
       properties:
         endpoint:
           type: string
-        username:
-          type: string
-        password:
-          type: string
-        insecure:
-          type: boolean
-          format: boolean
     v1GetImageIntegrationsResponse:
       type: object
       properties:
@@ -240,25 +251,18 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/storageImageIntegration'
-    storageECRConfig:
+    storageDTRConfig:
       type: object
       properties:
-        registryId:
+        username:
           type: string
-        accessKeyId:
+        password:
           type: string
-        secretAccessKey:
-          type: string
-        region:
-          type: string
-        useIam:
-          type: boolean
-          format: boolean
-    storageClairConfig:
-      type: object
-      properties:
         endpoint:
           type: string
+        insecure:
+          type: boolean
+          format: boolean
     storageGoogleConfig:
       type: object
       properties:
@@ -268,26 +272,22 @@ components:
           type: string
         project:
           type: string
-    storageAnchoreConfig:
+    storageIBMRegistryConfig:
       type: object
       properties:
         endpoint:
           type: string
-        username:
+        apiKey:
           type: string
-        password:
-          type: string
-    storageScannerV2Config:
+    storageTenableConfig:
       type: object
       properties:
-        endpoint:
+        accessKey:
           type: string
-    storageImageIntegrationCategory:
-      type: string
-      enum:
-      - REGISTRY
-      - SCANNER
-      default: REGISTRY
+        secretKey:
+          type: string
+    v1Empty:
+      type: object
   requestBodies:
     storageImageIntegration:
       content:

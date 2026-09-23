@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: API Reference AlertService UserService API
+  title: Reference User Service API
   version: '1'
   description: API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.
   contact:
@@ -33,6 +33,8 @@ paths:
                 $ref: '#/components/schemas/v1GetUsersResponse'
       tags:
       - UserService
+      summary: Get users
+      x-summary-source: derived
   /v1/users/{id}:
     get:
       operationId: GetUser
@@ -51,6 +53,8 @@ paths:
           type: string
       tags:
       - UserService
+      summary: Get user
+      x-summary-source: derived
   /v1/usersattributes:
     get:
       operationId: GetUsersAttributes
@@ -63,8 +67,22 @@ paths:
                 $ref: '#/components/schemas/v1GetUsersAttributesResponse'
       tags:
       - UserService
+      summary: Get users attributes
+      x-summary-source: derived
 components:
   schemas:
+    v1UserAttributeTuple:
+      type: object
+      properties:
+        authProviderId:
+          type: string
+        key:
+          type: string
+        value:
+          type: string
+      title: 'UserAttributeTuple descript the auth:key:value tuple that decides group membership.
+
+        Next Tag: 4'
     storageUserAttribute:
       type: object
       properties:
@@ -92,18 +110,6 @@ components:
           items:
             $ref: '#/components/schemas/storageUserAttribute'
       description: User is an object that allows us to track the roles a user is tied to, and how they logged in.
-    v1UserAttributeTuple:
-      type: object
-      properties:
-        authProviderId:
-          type: string
-        key:
-          type: string
-        value:
-          type: string
-      title: 'UserAttributeTuple descript the auth:key:value tuple that decides group membership.
-
-        Next Tag: 4'
     v1GetUsersAttributesResponse:
       type: object
       properties:

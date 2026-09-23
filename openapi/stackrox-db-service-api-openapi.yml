@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: API Reference AlertService DBService API
+  title: Reference DB Service API
   version: '1'
   description: API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.
   contact:
@@ -19,7 +19,7 @@ servers:
 security:
 - ApiToken: []
 tags:
-- name: DBService
+- name: DB Service
 paths:
   /v1/db/exportcaps:
     get:
@@ -32,7 +32,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/v1GetDBExportCapabilitiesResponse'
       tags:
-      - DBService
+      - DB Service
+      summary: Get export capabilities
+      x-summary-source: derived
   /v1/db/interruptrestore/{processId}/{attemptId}:
     post:
       operationId: InterruptRestoreProcess
@@ -55,7 +57,9 @@ paths:
         schema:
           type: string
       tags:
-      - DBService
+      - DB Service
+      summary: Interrupt restore process
+      x-summary-source: derived
   /v1/db/restore:
     get:
       operationId: GetActiveRestoreProcess
@@ -67,7 +71,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/v1GetActiveDBRestoreProcessResponse'
       tags:
-      - DBService
+      - DB Service
+      summary: Get active restore process
+      x-summary-source: derived
   /v1/db/restore/{id}:
     delete:
       operationId: CancelRestoreProcess
@@ -85,86 +91,31 @@ paths:
         schema:
           type: string
       tags:
-      - DBService
+      - DB Service
+      summary: Cancel restore process
+      x-summary-source: derived
 components:
   schemas:
-    v1DBRestoreProcessStatusState:
-      type: string
-      enum:
-      - UNKNOWN
-      - NOT_STARTED
-      - IN_PROGRESS
-      - PAUSED
-      - COMPLETED
-      default: UNKNOWN
-    DBRestoreProcessStatusResumeInfo:
-      type: object
-      properties:
-        pos:
-          type: string
-          format: int64
-    DBExportManifestEncodingType:
-      type: string
-      enum:
-      - UNKNOWN
-      - UNCOMPREESSED
-      - DEFLATED
-      default: UNKNOWN
-      description: The encoding of the file data in the restore body, usually for compression purposes.
-    v1DBExportFormat:
-      type: object
-      properties:
-        formatName:
-          type: string
-        files:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1DBExportFormatFile'
-      description: DBExportFormat describes a format (= a collection of files) for the database export.
-    v1Empty:
-      type: object
-    v1GetDBExportCapabilitiesResponse:
-      type: object
-      properties:
-        formats:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1DBExportFormat'
-        supportedEncodings:
-          type: array
-          items:
-            $ref: '#/components/schemas/DBExportManifestEncodingType'
-    v1InterruptDBRestoreProcessResponse:
-      type: object
-      properties:
-        resumeInfo:
-          $ref: '#/components/schemas/DBRestoreProcessStatusResumeInfo'
-    DBRestoreRequestHeaderLocalFileInfo:
-      type: object
-      properties:
-        path:
-          type: string
-          description: The full path of the file.
-        bytesSize:
-          type: string
-          format: int64
-          description: The size of the file, in bytes. 0 if unknown.
-      description: 'LocalFileInfo provides information about the file on the local machine of the user initiating the restore
-
-        process, in order to provide information to other users about ongoing restore processes.'
     v1GetActiveDBRestoreProcessResponse:
       type: object
       properties:
         activeStatus:
           $ref: '#/components/schemas/v1DBRestoreProcessStatus'
-    v1DBExportFormatFile:
+    v1DBRestoreRequestHeader:
       type: object
       properties:
-        name:
+        formatName:
           type: string
-        optional:
-          type: boolean
-          format: boolean
+          description: The name of the database export format. Mandatory.
+        manifest:
+          $ref: '#/components/schemas/v1DBExportManifest'
+        localFile:
+          $ref: '#/components/schemas/DBRestoreRequestHeaderLocalFileInfo'
+    v1InterruptDBRestoreProcessResponse:
+      type: object
+      properties:
+        resumeInfo:
+          $ref: '#/components/schemas/DBRestoreProcessStatusResumeInfo'
     v1DBExportManifest:
       type: object
       properties:
@@ -196,34 +147,6 @@ components:
         filesProcessed:
           type: string
           format: int64
-    v1DBRestoreRequestHeader:
-      type: object
-      properties:
-        formatName:
-          type: string
-          description: The name of the database export format. Mandatory.
-        manifest:
-          $ref: '#/components/schemas/v1DBExportManifest'
-        localFile:
-          $ref: '#/components/schemas/DBRestoreRequestHeaderLocalFileInfo'
-    v1DBRestoreProcessMetadata:
-      type: object
-      properties:
-        id:
-          type: string
-          description: An ID identifying the restore process. Auto-assigned.
-        header:
-          $ref: '#/components/schemas/v1DBRestoreRequestHeader'
-        startTime:
-          type: string
-          format: date-time
-          description: The time at which the restore process was started.
-        initiatingUserName:
-          type: string
-          description: The user who initiated the database restore process.
-      description: 'The metadata of an ongoing or completed restore process. This is the *static* metadata, which will not change
-
-        (i.e., it is not a status).'
     v1DBExportManifestFile:
       type: object
       properties:
@@ -245,6 +168,91 @@ components:
           format: int64
           description: The CRC32 (IEEE) checksum of the decoded(!) data.
       description: A single file in the restore body.
+    v1DBRestoreProcessStatusState:
+      type: string
+      enum:
+      - UNKNOWN
+      - NOT_STARTED
+      - IN_PROGRESS
+      - PAUSED
+      - COMPLETED
+      default: UNKNOWN
+    DBRestoreProcessStatusResumeInfo:
+      type: object
+      properties:
+        pos:
+          type: string
+          format: int64
+    v1GetDBExportCapabilitiesResponse:
+      type: object
+      properties:
+        formats:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1DBExportFormat'
+        supportedEncodings:
+          type: array
+          items:
+            $ref: '#/components/schemas/DBExportManifestEncodingType'
+    v1DBExportFormatFile:
+      type: object
+      properties:
+        name:
+          type: string
+        optional:
+          type: boolean
+          format: boolean
+    v1DBExportFormat:
+      type: object
+      properties:
+        formatName:
+          type: string
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1DBExportFormatFile'
+      description: DBExportFormat describes a format (= a collection of files) for the database export.
+    v1DBRestoreProcessMetadata:
+      type: object
+      properties:
+        id:
+          type: string
+          description: An ID identifying the restore process. Auto-assigned.
+        header:
+          $ref: '#/components/schemas/v1DBRestoreRequestHeader'
+        startTime:
+          type: string
+          format: date-time
+          description: The time at which the restore process was started.
+        initiatingUserName:
+          type: string
+          description: The user who initiated the database restore process.
+      description: 'The metadata of an ongoing or completed restore process. This is the *static* metadata, which will not change
+
+        (i.e., it is not a status).'
+    DBExportManifestEncodingType:
+      type: string
+      enum:
+      - UNKNOWN
+      - UNCOMPREESSED
+      - DEFLATED
+      default: UNKNOWN
+      description: The encoding of the file data in the restore body, usually for compression purposes.
+    DBRestoreRequestHeaderLocalFileInfo:
+      type: object
+      properties:
+        path:
+          type: string
+          description: The full path of the file.
+        bytesSize:
+          type: string
+          format: int64
+          description: The size of the file, in bytes. 0 if unknown.
+      description: 'LocalFileInfo provides information about the file on the local machine of the user initiating the restore
+
+        process, in order to provide information to other users about ongoing restore processes.'
+    v1Empty:
+      type: object
   securitySchemes:
     ApiToken:
       type: apiKey

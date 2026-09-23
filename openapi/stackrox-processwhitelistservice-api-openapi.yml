@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: API Reference AlertService ProcessWhitelistService API
+  title: Reference Process Whitelist Service API
   version: '1'
   description: API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.
   contact:
@@ -23,7 +23,7 @@ tags:
 paths:
   /v1/processwhitelists:
     put:
-      summary: AddToProcessWhitelists adds a list of process names to each of a list of process whitelists
+      summary: AddToProcessWhitelists adds a list of process names to each of a list of…
       operationId: UpdateProcessWhitelists
       responses:
         '200':
@@ -42,7 +42,7 @@ paths:
       - ProcessWhitelistService
   /v1/processwhitelists/key:
     get:
-      summary: GetProcessWhitelistById returns the single process whitelist referenced by the given ID.
+      summary: GetProcessWhitelistById returns the single process whitelist referenced by the…
       operationId: GetProcessWhitelist
       responses:
         '200':
@@ -79,7 +79,7 @@ paths:
       - ProcessWhitelistService
   /v1/processwhitelists/lock:
     put:
-      summary: LockProcessWhitelists accepts a list of whitelist IDs, locks those whitelists, and returns the updated whitelist objects
+      summary: LockProcessWhitelists accepts a list of whitelist IDs, locks those whitelists…
       operationId: LockProcessWhitelists
       responses:
         '200':
@@ -98,14 +98,31 @@ paths:
       - ProcessWhitelistService
 components:
   schemas:
-    storageWhitelistElement:
+    v1UpdateProcessWhitelistsResponse:
       type: object
       properties:
-        element:
-          $ref: '#/components/schemas/storageWhitelistItem'
-        auto:
-          type: boolean
-          format: boolean
+        whitelists:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageProcessWhitelist'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ProcessWhitelistUpdateError'
+    storageProcessWhitelistKey:
+      type: object
+      properties:
+        deploymentId:
+          type: string
+          description: 'The idea is for the keys to be flexible.
+
+            Only certain combinations of these will be supported.'
+        containerName:
+          type: string
+        clusterId:
+          type: string
+        namespace:
+          type: string
     storageProcessWhitelist:
       type: object
       properties:
@@ -133,20 +150,6 @@ components:
         lastUpdate:
           type: string
           format: date-time
-    storageProcessWhitelistKey:
-      type: object
-      properties:
-        deploymentId:
-          type: string
-          description: 'The idea is for the keys to be flexible.
-
-            Only certain combinations of these will be supported.'
-        containerName:
-          type: string
-        clusterId:
-          type: string
-        namespace:
-          type: string
     v1ProcessWhitelistUpdateError:
       type: object
       properties:
@@ -169,17 +172,14 @@ components:
       properties:
         processName:
           type: string
-    v1UpdateProcessWhitelistsResponse:
+    storageWhitelistElement:
       type: object
       properties:
-        whitelists:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageProcessWhitelist'
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1ProcessWhitelistUpdateError'
+        element:
+          $ref: '#/components/schemas/storageWhitelistItem'
+        auto:
+          type: boolean
+          format: boolean
     v1UpdateProcessWhitelistsRequest:
       type: object
       properties:

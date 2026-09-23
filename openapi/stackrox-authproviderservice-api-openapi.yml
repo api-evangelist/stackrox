@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: API Reference AlertService AuthProviderService API
+  title: Reference Auth Provider Service API
   version: '1'
   description: API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.
   contact:
@@ -44,6 +44,8 @@ paths:
           type: string
       tags:
       - AuthProviderService
+      summary: Get auth providers
+      x-summary-source: derived
     post:
       operationId: PostAuthProvider
       responses:
@@ -57,6 +59,8 @@ paths:
         $ref: '#/components/requestBodies/storageAuthProvider'
       tags:
       - AuthProviderService
+      summary: Post auth provider
+      x-summary-source: derived
   /v1/authProviders/exchangeToken:
     post:
       operationId: ExchangeToken
@@ -75,6 +79,8 @@ paths:
         required: true
       tags:
       - AuthProviderService
+      summary: Exchange token
+      x-summary-source: derived
   /v1/authProviders/{id}:
     get:
       operationId: GetAuthProvider
@@ -93,6 +99,8 @@ paths:
           type: string
       tags:
       - AuthProviderService
+      summary: Get auth provider
+      x-summary-source: derived
     delete:
       operationId: DeleteAuthProvider
       responses:
@@ -110,6 +118,8 @@ paths:
           type: string
       tags:
       - AuthProviderService
+      summary: Delete auth provider
+      x-summary-source: derived
     put:
       operationId: PutAuthProvider
       responses:
@@ -129,6 +139,8 @@ paths:
         $ref: '#/components/requestBodies/storageAuthProvider'
       tags:
       - AuthProviderService
+      summary: Put auth provider
+      x-summary-source: derived
     patch:
       operationId: UpdateAuthProvider
       responses:
@@ -152,6 +164,8 @@ paths:
         required: true
       tags:
       - AuthProviderService
+      summary: Update auth provider
+      x-summary-source: derived
   /v1/login/authproviders:
     get:
       operationId: GetLoginAuthProviders
@@ -164,10 +178,35 @@ paths:
                 $ref: '#/components/schemas/v1GetLoginAuthProvidersResponse'
       tags:
       - AuthProviderService
+      summary: Get login auth providers
+      x-summary-source: derived
 components:
   schemas:
-    v1Empty:
+    v1GetLoginAuthProvidersResponse:
       type: object
+      properties:
+        authProviders:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetLoginAuthProvidersResponseLoginAuthProvider'
+    v1GetAuthProvidersResponse:
+      type: object
+      properties:
+        authProviders:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageAuthProvider'
+    GetLoginAuthProvidersResponseLoginAuthProvider:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        loginUrl:
+          type: string
     v1ExchangeTokenRequest:
       type: object
       properties:
@@ -184,34 +223,6 @@ components:
           type: string
         clientState:
           type: string
-    GetLoginAuthProvidersResponseLoginAuthProvider:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        type:
-          type: string
-        loginUrl:
-          type: string
-    v1GetAuthProvidersResponse:
-      type: object
-      properties:
-        authProviders:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageAuthProvider'
-    v1UpdateAuthProviderRequest:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        enabled:
-          type: boolean
-          format: boolean
     storageAuthProvider:
       type: object
       properties:
@@ -249,13 +260,18 @@ components:
           type: boolean
           format: boolean
       title: 'Next Tag: 9'
-    v1GetLoginAuthProvidersResponse:
+    v1UpdateAuthProviderRequest:
       type: object
       properties:
-        authProviders:
-          type: array
-          items:
-            $ref: '#/components/schemas/GetLoginAuthProvidersResponseLoginAuthProvider'
+        id:
+          type: string
+        name:
+          type: string
+        enabled:
+          type: boolean
+          format: boolean
+    v1Empty:
+      type: object
   requestBodies:
     storageAuthProvider:
       content:

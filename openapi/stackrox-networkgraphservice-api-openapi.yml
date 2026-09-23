@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: API Reference AlertService NetworkGraphService API
+  title: Reference Network Graph Service API
   version: '1'
   description: API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.
   contact:
@@ -50,26 +50,17 @@ paths:
           format: date-time
       tags:
       - NetworkGraphService
+      summary: Get network graph
+      x-summary-source: derived
 components:
   schemas:
-    storageNetworkEntityInfo:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/storageNetworkEntityInfoType'
-        id:
-          type: string
-        deployment:
-          $ref: '#/components/schemas/storageNetworkEntityInfoDeployment'
-    storageL4Protocol:
+    storageNetworkEntityInfoType:
       type: string
       enum:
-      - L4_PROTOCOL_UNKNOWN
-      - L4_PROTOCOL_TCP
-      - L4_PROTOCOL_UDP
-      - L4_PROTOCOL_ICMP
-      - L4_PROTOCOL_RAW
-      default: L4_PROTOCOL_UNKNOWN
+      - UNKNOWN_TYPE
+      - DEPLOYMENT
+      - INTERNET
+      default: UNKNOWN_TYPE
     storageNetworkEntityInfoDeployment:
       type: object
       properties:
@@ -79,13 +70,6 @@ components:
           type: string
         cluster:
           type: string
-    v1NetworkEdgePropertiesBundle:
-      type: object
-      properties:
-        properties:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1NetworkEdgeProperties'
     v1NetworkEdgeProperties:
       type: object
       properties:
@@ -97,6 +81,23 @@ components:
         lastActiveTimestamp:
           type: string
           format: date-time
+    v1NetworkEdgePropertiesBundle:
+      type: object
+      properties:
+        properties:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1NetworkEdgeProperties'
+    v1NetworkGraph:
+      type: object
+      properties:
+        epoch:
+          type: integer
+          format: int64
+        nodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1NetworkNode'
     v1NetworkNode:
       type: object
       properties:
@@ -119,23 +120,24 @@ components:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/v1NetworkEdgePropertiesBundle'
-    v1NetworkGraph:
+    storageNetworkEntityInfo:
       type: object
       properties:
-        epoch:
-          type: integer
-          format: int64
-        nodes:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1NetworkNode'
-    storageNetworkEntityInfoType:
+        type:
+          $ref: '#/components/schemas/storageNetworkEntityInfoType'
+        id:
+          type: string
+        deployment:
+          $ref: '#/components/schemas/storageNetworkEntityInfoDeployment'
+    storageL4Protocol:
       type: string
       enum:
-      - UNKNOWN_TYPE
-      - DEPLOYMENT
-      - INTERNET
-      default: UNKNOWN_TYPE
+      - L4_PROTOCOL_UNKNOWN
+      - L4_PROTOCOL_TCP
+      - L4_PROTOCOL_UDP
+      - L4_PROTOCOL_ICMP
+      - L4_PROTOCOL_RAW
+      default: L4_PROTOCOL_UNKNOWN
   securitySchemes:
     ApiToken:
       type: apiKey

@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: API Reference AlertService ProcessService API
+  title: Reference Process Service API
   version: '1'
   description: API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.
   contact:
@@ -23,7 +23,7 @@ tags:
 paths:
   /v1/processes/deployment/{deploymentId}:
     get:
-      summary: GetProcessesByDeployment returns the processes executed in the given deployment.
+      summary: GetProcessesByDeployment returns the processes executed in the given deployment
       operationId: GetProcessesByDeployment
       responses:
         '200':
@@ -42,7 +42,7 @@ paths:
       - ProcessService
   /v1/processes/deployment/{deploymentId}/grouped:
     get:
-      summary: GetGroupedProcessByDeployment returns all the processes executed grouped by deployment.
+      summary: GetGroupedProcessByDeployment returns all the processes executed grouped by…
       operationId: GetGroupedProcessByDeployment
       responses:
         '200':
@@ -61,7 +61,7 @@ paths:
       - ProcessService
   /v1/processes/deployment/{deploymentId}/grouped/container:
     get:
-      summary: GetGroupedProcessByDeploymentAndContainer returns all the processes executed grouped by deployment and container.
+      summary: GetGroupedProcessByDeploymentAndContainer returns all the processes executed…
       operationId: GetGroupedProcessByDeploymentAndContainer
       responses:
         '200':
@@ -80,26 +80,12 @@ paths:
       - ProcessService
 components:
   schemas:
-    v1GetGroupedProcessesWithContainerResponse:
-      type: object
-      properties:
-        groups:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1ProcessNameAndContainerNameGroup'
     v1ProcessGroup:
       type: object
       properties:
         args:
           type: string
         signals:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageProcessIndicator'
-    v1GetProcessesResponse:
-      type: object
-      properties:
-        processes:
           type: array
           items:
             $ref: '#/components/schemas/storageProcessIndicator'
@@ -115,6 +101,62 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/v1ProcessGroup'
+    v1ProcessNameAndContainerNameGroup:
+      type: object
+      properties:
+        name:
+          type: string
+        containerName:
+          type: string
+        timesExecuted:
+          type: integer
+          format: int64
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ProcessGroup'
+        suspicious:
+          type: boolean
+          format: boolean
+    v1GetGroupedProcessesResponse:
+      type: object
+      properties:
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ProcessNameGroup'
+    storageProcessIndicator:
+      type: object
+      properties:
+        id:
+          type: string
+          title: A unique uuid for the Indicator message
+        deploymentId:
+          type: string
+        deploymentStateTs:
+          type: string
+          format: int64
+        containerName:
+          type: string
+        podId:
+          type: string
+        signal:
+          $ref: '#/components/schemas/storageProcessSignal'
+        clusterId:
+          type: string
+        namespace:
+          type: string
+        containerStartTime:
+          type: string
+          format: date-time
+      title: 'Next available tag: 11'
+    v1GetGroupedProcessesWithContainerResponse:
+      type: object
+      properties:
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ProcessNameAndContainerNameGroup'
     storageProcessSignal:
       type: object
       properties:
@@ -160,55 +202,13 @@ components:
           items:
             type: string
           title: Process Lineage
-    v1GetGroupedProcessesResponse:
+    v1GetProcessesResponse:
       type: object
       properties:
-        groups:
+        processes:
           type: array
           items:
-            $ref: '#/components/schemas/v1ProcessNameGroup'
-    storageProcessIndicator:
-      type: object
-      properties:
-        id:
-          type: string
-          title: A unique uuid for the Indicator message
-        deploymentId:
-          type: string
-        deploymentStateTs:
-          type: string
-          format: int64
-        containerName:
-          type: string
-        podId:
-          type: string
-        signal:
-          $ref: '#/components/schemas/storageProcessSignal'
-        clusterId:
-          type: string
-        namespace:
-          type: string
-        containerStartTime:
-          type: string
-          format: date-time
-      title: 'Next available tag: 11'
-    v1ProcessNameAndContainerNameGroup:
-      type: object
-      properties:
-        name:
-          type: string
-        containerName:
-          type: string
-        timesExecuted:
-          type: integer
-          format: int64
-        groups:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1ProcessGroup'
-        suspicious:
-          type: boolean
-          format: boolean
+            $ref: '#/components/schemas/storageProcessIndicator'
   securitySchemes:
     ApiToken:
       type: apiKey

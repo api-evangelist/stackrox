@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: API Reference AlertService ImageService API
+  title: Reference Image Service API
   version: '1'
   description: API reference for the StackRox Kubernetes Security Platform (upstream of Red Hat Advanced Cluster Security). Provides risk analysis, visibility, runtime alerts, policy management, compliance checking, and vulnerability management for containerized workloads. Authentication uses API tokens generated via /v1/apitokens/generate and passed as Bearer tokens.
   contact:
@@ -23,7 +23,7 @@ tags:
 paths:
   /v1/images:
     get:
-      summary: ListImages returns all the images.
+      summary: ListImages returns all the images
       operationId: ListImages
       responses:
         '200':
@@ -112,7 +112,7 @@ paths:
       - ImageService
   /v1/images/cache/invalidate:
     get:
-      summary: InvalidateScanAndRegistryCaches removes the image metadata cache.
+      summary: InvalidateScanAndRegistryCaches removes the image metadata cache
       operationId: InvalidateScanAndRegistryCaches
       responses:
         '200':
@@ -144,7 +144,7 @@ paths:
       - ImageService
   /v1/images/{id}:
     get:
-      summary: GetImage returns the image given its ID.
+      summary: GetImage returns the image given its ID
       operationId: GetImage
       responses:
         '200':
@@ -163,7 +163,7 @@ paths:
       - ImageService
   /v1/imagescount:
     get:
-      summary: ListImages returns all the images.
+      summary: ListImages returns all the images
       operationId: CountImages
       responses:
         '200':
@@ -205,91 +205,24 @@ paths:
       - ImageService
 components:
   schemas:
-    storageV1Metadata:
-      type: object
-      properties:
-        digest:
-          type: string
-        created:
-          type: string
-          format: date-time
-        author:
-          type: string
-        layers:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageImageLayer'
-        user:
-          type: string
-        command:
-          type: array
-          items:
-            type: string
-        entrypoint:
-          type: array
-          items:
-            type: string
-        volumes:
-          type: array
-          items:
-            type: string
-    EmbeddedImageScanComponentSourceType:
+    storageEmbeddedVulnerabilityScoreVersion:
       type: string
       enum:
-      - OS
-      - PYTHON
-      - JAVA
-      - RUBY
-      - NODEJS
-      default: OS
-    storageV2Metadata:
+      - V2
+      - V3
+      default: V2
+    storageImageMetadata:
       type: object
       properties:
-        digest:
-          type: string
-    storageCVSSV3:
-      type: object
-      properties:
-        vector:
-          type: string
-        exploitabilityScore:
-          type: number
-          format: float
-        impactScore:
-          type: number
-          format: float
-        attackVector:
-          $ref: '#/components/schemas/storageCVSSV3AttackVector'
-        attackComplexity:
-          $ref: '#/components/schemas/CVSSV3Complexity'
-        privilegesRequired:
-          $ref: '#/components/schemas/CVSSV3Privileges'
-        userInteraction:
-          $ref: '#/components/schemas/CVSSV3UserInteraction'
-        scope:
-          $ref: '#/components/schemas/storageCVSSV3Scope'
-        confidentiality:
-          $ref: '#/components/schemas/storageCVSSV3Impact'
-        integrity:
-          $ref: '#/components/schemas/storageCVSSV3Impact'
-        availability:
-          $ref: '#/components/schemas/storageCVSSV3Impact'
-        score:
-          type: number
-          format: float
-        severity:
-          $ref: '#/components/schemas/storageCVSSV3Severity'
-    storageImageName:
-      type: object
-      properties:
-        registry:
-          type: string
-        remote:
-          type: string
-        tag:
-          type: string
-        fullName:
-          type: string
+        v1:
+          $ref: '#/components/schemas/storageV1Metadata'
+        v2:
+          $ref: '#/components/schemas/storageV2Metadata'
+        layerShas:
+          type: array
+          items:
+            type: string
+          title: We never need both sets of layers so consolidate them. They will be ordered by oldest->newest
     CVSSV2Authentication:
       type: string
       enum:
@@ -297,37 +230,21 @@ components:
       - AUTH_SINGLE
       - AUTH_NONE
       default: AUTH_MULTIPLE
-    storageCVSSV2AttackVector:
-      type: string
-      enum:
-      - ATTACK_LOCAL
-      - ATTACK_ADJACENT
-      - ATTACK_NETWORK
-      default: ATTACK_LOCAL
-    CVSSV3UserInteraction:
-      type: string
-      enum:
-      - UI_NONE
-      - UI_REQUIRED
-      default: UI_NONE
-    storageEmbeddedVulnerabilityScoreVersion:
-      type: string
-      enum:
-      - V2
-      - V3
-      default: V2
-    v1Empty:
+    v1ScanImageRequest:
       type: object
-    storageCVSSV3Severity:
+      properties:
+        imageName:
+          type: string
+        force:
+          type: boolean
+          format: boolean
+    CVSSV3Privileges:
       type: string
       enum:
-      - UNKNOWN
-      - NONE
-      - LOW
-      - MEDIUM
-      - HIGH
-      - CRITICAL
-      default: UNKNOWN
+      - PRIVILEGE_NONE
+      - PRIVILEGE_LOW
+      - PRIVILEGE_HIGH
+      default: PRIVILEGE_NONE
     v1DeleteImagesResponse:
       type: object
       properties:
@@ -337,74 +254,6 @@ components:
         dryRun:
           type: boolean
           format: boolean
-    v1CountImagesResponse:
-      type: object
-      properties:
-        count:
-          type: integer
-          format: int32
-    storageImage:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          $ref: '#/components/schemas/storageImageName'
-        metadata:
-          $ref: '#/components/schemas/storageImageMetadata'
-        scan:
-          $ref: '#/components/schemas/storageImageScan'
-        components:
-          type: integer
-          format: int32
-        cves:
-          type: integer
-          format: int32
-        fixableCves:
-          type: integer
-          format: int32
-        lastUpdated:
-          type: string
-          format: date-time
-        notPullable:
-          type: boolean
-          format: boolean
-        priority:
-          type: string
-          format: int64
-      title: 'Next Tag: 12'
-    CVSSV2AccessComplexity:
-      type: string
-      enum:
-      - ACCESS_HIGH
-      - ACCESS_MEDIUM
-      - ACCESS_LOW
-      default: ACCESS_HIGH
-    storageListImage:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        components:
-          type: integer
-          format: int32
-        cves:
-          type: integer
-          format: int32
-        fixableCves:
-          type: integer
-          format: int32
-        created:
-          type: string
-          format: date-time
-        lastUpdated:
-          type: string
-          format: date-time
-        priority:
-          type: string
-          format: int64
     storageEmbeddedVulnerability:
       type: object
       properties:
@@ -434,97 +283,6 @@ components:
         vulnerabilityType:
           $ref: '#/components/schemas/EmbeddedVulnerabilityVulnerabilityType'
       title: 'TODO: Remove when migration is in place'
-    storageImageLayer:
-      type: object
-      properties:
-        instruction:
-          type: string
-        value:
-          type: string
-        created:
-          type: string
-          format: date-time
-        author:
-          type: string
-        DEPRECATEDComponents:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageEmbeddedImageScanComponent'
-        empty:
-          type: boolean
-          format: boolean
-    storageCVSSV2Impact:
-      type: string
-      enum:
-      - IMPACT_NONE
-      - IMPACT_PARTIAL
-      - IMPACT_COMPLETE
-      default: IMPACT_NONE
-    CVSSV3Complexity:
-      type: string
-      enum:
-      - COMPLEXITY_LOW
-      - COMPLEXITY_HIGH
-      default: COMPLEXITY_LOW
-    storageCVSSV3Scope:
-      type: string
-      enum:
-      - UNCHANGED
-      - CHANGED
-      default: UNCHANGED
-    storageCVSSV2Severity:
-      type: string
-      enum:
-      - UNKNOWN
-      - LOW
-      - MEDIUM
-      - HIGH
-      default: UNKNOWN
-    v1ListImagesResponse:
-      type: object
-      properties:
-        images:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageListImage'
-    storageImageScan:
-      type: object
-      properties:
-        scanTime:
-          type: string
-          format: date-time
-        components:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageEmbeddedImageScanComponent'
-    storageCVSSV3AttackVector:
-      type: string
-      enum:
-      - ATTACK_LOCAL
-      - ATTACK_ADJACENT
-      - ATTACK_NETWORK
-      - ATTACK_PHYSICAL
-      default: ATTACK_LOCAL
-    storageImageMetadata:
-      type: object
-      properties:
-        v1:
-          $ref: '#/components/schemas/storageV1Metadata'
-        v2:
-          $ref: '#/components/schemas/storageV2Metadata'
-        layerShas:
-          type: array
-          items:
-            type: string
-          title: We never need both sets of layers so consolidate them. They will be ordered by oldest->newest
-    v1ScanImageRequest:
-      type: object
-      properties:
-        imageName:
-          type: string
-        force:
-          type: boolean
-          format: boolean
     storageLicense:
       type: object
       properties:
@@ -534,6 +292,131 @@ components:
           type: string
         url:
           type: string
+    storageV2Metadata:
+      type: object
+      properties:
+        digest:
+          type: string
+    v1ListImagesResponse:
+      type: object
+      properties:
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageListImage'
+    storageListImage:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        components:
+          type: integer
+          format: int32
+        cves:
+          type: integer
+          format: int32
+        fixableCves:
+          type: integer
+          format: int32
+        created:
+          type: string
+          format: date-time
+        lastUpdated:
+          type: string
+          format: date-time
+        priority:
+          type: string
+          format: int64
+    CVSSV3UserInteraction:
+      type: string
+      enum:
+      - UI_NONE
+      - UI_REQUIRED
+      default: UI_NONE
+    storageCVSSV2Severity:
+      type: string
+      enum:
+      - UNKNOWN
+      - LOW
+      - MEDIUM
+      - HIGH
+      default: UNKNOWN
+    storageCVSSV3Scope:
+      type: string
+      enum:
+      - UNCHANGED
+      - CHANGED
+      default: UNCHANGED
+    storageCVSSV3Severity:
+      type: string
+      enum:
+      - UNKNOWN
+      - NONE
+      - LOW
+      - MEDIUM
+      - HIGH
+      - CRITICAL
+      default: UNKNOWN
+    CVSSV3Complexity:
+      type: string
+      enum:
+      - COMPLEXITY_LOW
+      - COMPLEXITY_HIGH
+      default: COMPLEXITY_LOW
+    v1Empty:
+      type: object
+    EmbeddedVulnerabilityVulnerabilityType:
+      type: string
+      enum:
+      - UNKNOWN_VULNERABILITY
+      - IMAGE_VULNERABILITY
+      - K8S_VULNERABILITY
+      - ISTIO_VULNERABILITY
+      default: UNKNOWN_VULNERABILITY
+    storageImageName:
+      type: object
+      properties:
+        registry:
+          type: string
+        remote:
+          type: string
+        tag:
+          type: string
+        fullName:
+          type: string
+    EmbeddedImageScanComponentSourceType:
+      type: string
+      enum:
+      - OS
+      - PYTHON
+      - JAVA
+      - RUBY
+      - NODEJS
+      default: OS
+    storageCVSSV2Impact:
+      type: string
+      enum:
+      - IMPACT_NONE
+      - IMPACT_PARTIAL
+      - IMPACT_COMPLETE
+      default: IMPACT_NONE
+    storageCVSSV3AttackVector:
+      type: string
+      enum:
+      - ATTACK_LOCAL
+      - ATTACK_ADJACENT
+      - ATTACK_NETWORK
+      - ATTACK_PHYSICAL
+      default: ATTACK_LOCAL
+    CVSSV2AccessComplexity:
+      type: string
+      enum:
+      - ACCESS_HIGH
+      - ACCESS_MEDIUM
+      - ACCESS_LOW
+      default: ACCESS_HIGH
     storageCVSSV2:
       type: object
       properties:
@@ -569,21 +452,6 @@ components:
       - IMPACT_LOW
       - IMPACT_HIGH
       default: IMPACT_NONE
-    EmbeddedVulnerabilityVulnerabilityType:
-      type: string
-      enum:
-      - UNKNOWN_VULNERABILITY
-      - IMAGE_VULNERABILITY
-      - K8S_VULNERABILITY
-      - ISTIO_VULNERABILITY
-      default: UNKNOWN_VULNERABILITY
-    CVSSV3Privileges:
-      type: string
-      enum:
-      - PRIVILEGE_NONE
-      - PRIVILEGE_LOW
-      - PRIVILEGE_HIGH
-      default: PRIVILEGE_NONE
     storageEmbeddedImageScanComponent:
       type: object
       properties:
@@ -608,6 +476,138 @@ components:
         location:
           type: string
       title: 'TODO: Remove when migration is in place'
+    v1CountImagesResponse:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    storageCVSSV3:
+      type: object
+      properties:
+        vector:
+          type: string
+        exploitabilityScore:
+          type: number
+          format: float
+        impactScore:
+          type: number
+          format: float
+        attackVector:
+          $ref: '#/components/schemas/storageCVSSV3AttackVector'
+        attackComplexity:
+          $ref: '#/components/schemas/CVSSV3Complexity'
+        privilegesRequired:
+          $ref: '#/components/schemas/CVSSV3Privileges'
+        userInteraction:
+          $ref: '#/components/schemas/CVSSV3UserInteraction'
+        scope:
+          $ref: '#/components/schemas/storageCVSSV3Scope'
+        confidentiality:
+          $ref: '#/components/schemas/storageCVSSV3Impact'
+        integrity:
+          $ref: '#/components/schemas/storageCVSSV3Impact'
+        availability:
+          $ref: '#/components/schemas/storageCVSSV3Impact'
+        score:
+          type: number
+          format: float
+        severity:
+          $ref: '#/components/schemas/storageCVSSV3Severity'
+    storageImageScan:
+      type: object
+      properties:
+        scanTime:
+          type: string
+          format: date-time
+        components:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageEmbeddedImageScanComponent'
+    storageCVSSV2AttackVector:
+      type: string
+      enum:
+      - ATTACK_LOCAL
+      - ATTACK_ADJACENT
+      - ATTACK_NETWORK
+      default: ATTACK_LOCAL
+    storageImage:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          $ref: '#/components/schemas/storageImageName'
+        metadata:
+          $ref: '#/components/schemas/storageImageMetadata'
+        scan:
+          $ref: '#/components/schemas/storageImageScan'
+        components:
+          type: integer
+          format: int32
+        cves:
+          type: integer
+          format: int32
+        fixableCves:
+          type: integer
+          format: int32
+        lastUpdated:
+          type: string
+          format: date-time
+        notPullable:
+          type: boolean
+          format: boolean
+        priority:
+          type: string
+          format: int64
+      title: 'Next Tag: 12'
+    storageV1Metadata:
+      type: object
+      properties:
+        digest:
+          type: string
+        created:
+          type: string
+          format: date-time
+        author:
+          type: string
+        layers:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageImageLayer'
+        user:
+          type: string
+        command:
+          type: array
+          items:
+            type: string
+        entrypoint:
+          type: array
+          items:
+            type: string
+        volumes:
+          type: array
+          items:
+            type: string
+    storageImageLayer:
+      type: object
+      properties:
+        instruction:
+          type: string
+        value:
+          type: string
+        created:
+          type: string
+          format: date-time
+        author:
+          type: string
+        DEPRECATEDComponents:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageEmbeddedImageScanComponent'
+        empty:
+          type: boolean
+          format: boolean
   securitySchemes:
     ApiToken:
       type: apiKey
