@@ -211,34 +211,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    v1ScopedRoles:
-      type: object
-      properties:
-        namespace:
-          type: string
-        roles:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageK8sRole'
-    v1SubjectAndRoles:
-      type: object
-      properties:
-        subject:
-          $ref: '#/components/schemas/storageSubject'
-        roles:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageK8sRole'
-    v1ListRoleBindingsResponse:
-      type: object
-      properties:
-        bindings:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageK8sRoleBinding'
-      title: 'A list of k8s role bindings (free of scoped information)
-
-        Next Tag: 2'
     v1ListSubjectsResponse:
       type: object
       properties:
@@ -249,11 +221,48 @@ components:
       title: 'A list of k8s subjects (users and groups only, for service accounts, try the service account service)
 
         Next Tag: 2'
-    v1GetRoleResponse:
+    storageSubjectKind:
+      type: string
+      enum:
+      - UNSET_KIND
+      - SERVICE_ACCOUNT
+      - USER
+      - GROUP
+      default: UNSET_KIND
+    storageK8sRole:
       type: object
       properties:
-        role:
-          $ref: '#/components/schemas/storageK8sRole'
+        id:
+          type: string
+        name:
+          type: string
+        namespace:
+          type: string
+        clusterId:
+          type: string
+        clusterName:
+          type: string
+        clusterRole:
+          type: boolean
+          format: boolean
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+        annotations:
+          type: object
+          additionalProperties:
+            type: string
+        createdAt:
+          type: string
+          format: date-time
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/storagePolicyRule'
+      title: 'Properties of an individual k8s Role or ClusterRole.
+
+        ////////////////////////////////////////'
     storageK8sRoleBinding:
       type: object
       properties:
@@ -290,11 +299,6 @@ components:
       title: 'Properties of an individual k8s RoleBinding or ClusterRoleBinding.
 
         ////////////////////////////////////////'
-    v1GetRoleBindingResponse:
-      type: object
-      properties:
-        binding:
-          $ref: '#/components/schemas/storageK8sRoleBinding'
     storageSubject:
       type: object
       properties:
@@ -307,6 +311,67 @@ components:
       title: 'Properties of an individual subjects who are granted roles via role bindings.
 
         ////////////////////////////////////////'
+    v1ListRolesResponse:
+      type: object
+      properties:
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageK8sRole'
+      title: 'A list of k8s roles (free of scoped information)
+
+        Next Tag: 2'
+    v1GetSubjectResponse:
+      type: object
+      properties:
+        subject:
+          $ref: '#/components/schemas/storageSubject'
+        clusterRoles:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageK8sRole'
+        scopedRoles:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ScopedRoles'
+    v1GetRoleBindingResponse:
+      type: object
+      properties:
+        binding:
+          $ref: '#/components/schemas/storageK8sRoleBinding'
+    v1ScopedRoles:
+      type: object
+      properties:
+        namespace:
+          type: string
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageK8sRole'
+    v1GetRoleResponse:
+      type: object
+      properties:
+        role:
+          $ref: '#/components/schemas/storageK8sRole'
+    v1SubjectAndRoles:
+      type: object
+      properties:
+        subject:
+          $ref: '#/components/schemas/storageSubject'
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageK8sRole'
+    v1ListRoleBindingsResponse:
+      type: object
+      properties:
+        bindings:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageK8sRoleBinding'
+      title: 'A list of k8s role bindings (free of scoped information)
+
+        Next Tag: 2'
     storagePolicyRule:
       type: object
       properties:
@@ -333,71 +398,6 @@ components:
       title: 'Properties of an individual rules that grant permissions to resources.
 
         ////////////////////////////////////////'
-    storageK8sRole:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        namespace:
-          type: string
-        clusterId:
-          type: string
-        clusterName:
-          type: string
-        clusterRole:
-          type: boolean
-          format: boolean
-        labels:
-          type: object
-          additionalProperties:
-            type: string
-        annotations:
-          type: object
-          additionalProperties:
-            type: string
-        createdAt:
-          type: string
-          format: date-time
-        rules:
-          type: array
-          items:
-            $ref: '#/components/schemas/storagePolicyRule'
-      title: 'Properties of an individual k8s Role or ClusterRole.
-
-        ////////////////////////////////////////'
-    storageSubjectKind:
-      type: string
-      enum:
-      - UNSET_KIND
-      - SERVICE_ACCOUNT
-      - USER
-      - GROUP
-      default: UNSET_KIND
-    v1GetSubjectResponse:
-      type: object
-      properties:
-        subject:
-          $ref: '#/components/schemas/storageSubject'
-        clusterRoles:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageK8sRole'
-        scopedRoles:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1ScopedRoles'
-    v1ListRolesResponse:
-      type: object
-      properties:
-        roles:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageK8sRole'
-      title: 'A list of k8s roles (free of scoped information)
-
-        Next Tag: 2'
   securitySchemes:
     ApiToken:
       type: apiKey

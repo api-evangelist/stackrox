@@ -131,36 +131,7 @@ paths:
       summary: Batch update
       x-summary-source: derived
 components:
-  requestBodies:
-    storageGroup:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/storageGroup'
-      required: true
   schemas:
-    storageGroupProperties:
-      type: object
-      properties:
-        authProviderId:
-          type: string
-        key:
-          type: string
-        value:
-          type: string
-      description: 'GroupProperties defines the properties of a unique group.
-
-        Groups apply to users when their properties match. For instance:
-
-        If the GroupProperties on has a auth_provider_id, then that group applies to all users logged in
-
-        with that auth provider. If it has a claim key, then it applies to all users with that auth provider
-
-        and claim key, etc.
-
-        This can be used to create default groups/roles for All source provider (no fields set), a specific
-
-        auth provider (only auth_provider_id field set) etc.'
     v1GroupBatchUpdateRequest:
       type: object
       properties:
@@ -185,6 +156,30 @@ components:
       title: 'GroupBatchUpdateRequest is an in transaction batch update to the groups present.
 
         Next Available Tag: 3'
+    v1Empty:
+      type: object
+    storageGroupProperties:
+      type: object
+      properties:
+        authProviderId:
+          type: string
+        key:
+          type: string
+        value:
+          type: string
+      description: 'GroupProperties defines the properties of a unique group.
+
+        Groups apply to users when their properties match. For instance:
+
+        If the GroupProperties on has a auth_provider_id, then that group applies to all users logged in
+
+        with that auth provider. If it has a claim key, then it applies to all users with that auth provider
+
+        and claim key, etc.
+
+        This can be used to create default groups/roles for All source provider (no fields set), a specific
+
+        auth provider (only auth_provider_id field set) etc.'
     storageGroup:
       type: object
       properties:
@@ -194,8 +189,13 @@ components:
           type: string
           description: This is the name of the role that will apply to users in this group.
       description: 'Group is a GroupProperties : Role mapping.'
-    v1Empty:
-      type: object
+  requestBodies:
+    storageGroup:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/storageGroup'
+      required: true
   securitySchemes:
     ApiToken:
       type: apiKey

@@ -68,45 +68,6 @@ paths:
       - ServiceIdentityService
 components:
   schemas:
-    storageServiceIdentity:
-      type: object
-      properties:
-        serial:
-          type: string
-          format: int64
-        serialStr:
-          type: string
-        id:
-          type: string
-        type:
-          $ref: '#/components/schemas/storageServiceType'
-    v1Authorities:
-      type: object
-      properties:
-        authorities:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1Authority'
-    v1Authority:
-      type: object
-      properties:
-        certificatePem:
-          type: string
-          format: byte
-    storageServiceType:
-      type: string
-      enum:
-      - UNKNOWN_SERVICE
-      - SENSOR_SERVICE
-      - CENTRAL_SERVICE
-      - REMOTE_SERVICE
-      - COLLECTOR_SERVICE
-      - MONITORING_UI_SERVICE
-      - MONITORING_DB_SERVICE
-      - MONITORING_CLIENT_SERVICE
-      - BENCHMARK_SERVICE
-      - SCANNER_SERVICE
-      default: UNKNOWN_SERVICE
     v1ServiceIdentityResponse:
       type: object
       properties:
@@ -125,6 +86,27 @@ components:
         privateKeyPem:
           type: string
           format: byte
+    storageServiceType:
+      type: string
+      enum:
+      - UNKNOWN_SERVICE
+      - SENSOR_SERVICE
+      - CENTRAL_SERVICE
+      - REMOTE_SERVICE
+      - COLLECTOR_SERVICE
+      - MONITORING_UI_SERVICE
+      - MONITORING_DB_SERVICE
+      - MONITORING_CLIENT_SERVICE
+      - BENCHMARK_SERVICE
+      - SCANNER_SERVICE
+      default: UNKNOWN_SERVICE
+    v1Authorities:
+      type: object
+      properties:
+        authorities:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Authority'
     v1CreateServiceIdentityRequest:
       type: object
       properties:
@@ -132,6 +114,24 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/storageServiceType'
+    storageServiceIdentity:
+      type: object
+      properties:
+        serial:
+          type: string
+          format: int64
+        serialStr:
+          type: string
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/storageServiceType'
+    v1Authority:
+      type: object
+      properties:
+        certificatePem:
+          type: string
+          format: byte
   securitySchemes:
     ApiToken:
       type: apiKey

@@ -84,6 +84,27 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    storageLoginNotice:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          format: boolean
+        text:
+          type: string
+    v1PutConfigRequest:
+      type: object
+      properties:
+        config:
+          $ref: '#/components/schemas/storageConfig'
+    BannerConfigSize:
+      type: string
+      enum:
+      - UNSET
+      - SMALL
+      - MEDIUM
+      - LARGE
+      default: UNSET
     storageBannerConfig:
       type: object
       properties:
@@ -98,34 +119,6 @@ components:
           type: string
         backgroundColor:
           type: string
-    storageAlertRetentionConfig:
-      type: object
-      properties:
-        resolvedDeployRetentionDurationDays:
-          type: integer
-          format: int32
-        deletedRuntimeRetentionDurationDays:
-          type: integer
-          format: int32
-        allRuntimeRetentionDurationDays:
-          type: integer
-          format: int32
-    storageLoginNotice:
-      type: object
-      properties:
-        enabled:
-          type: boolean
-          format: boolean
-        text:
-          type: string
-    BannerConfigSize:
-      type: string
-      enum:
-      - UNSET
-      - SMALL
-      - MEDIUM
-      - LARGE
-      default: UNSET
     storagePrivateConfig:
       type: object
       properties:
@@ -139,11 +132,18 @@ components:
           type: integer
           format: int32
       title: 'next available tag: 4'
-    v1PutConfigRequest:
+    storageAlertRetentionConfig:
       type: object
       properties:
-        config:
-          $ref: '#/components/schemas/storageConfig'
+        resolvedDeployRetentionDurationDays:
+          type: integer
+          format: int32
+        deletedRuntimeRetentionDurationDays:
+          type: integer
+          format: int32
+        allRuntimeRetentionDurationDays:
+          type: integer
+          format: int32
     storageConfig:
       type: object
       properties:

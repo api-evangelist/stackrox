@@ -98,17 +98,6 @@ paths:
       - ProcessWhitelistService
 components:
   schemas:
-    v1UpdateProcessWhitelistsResponse:
-      type: object
-      properties:
-        whitelists:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageProcessWhitelist'
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1ProcessWhitelistUpdateError'
     storageProcessWhitelistKey:
       type: object
       properties:
@@ -122,6 +111,54 @@ components:
         clusterId:
           type: string
         namespace:
+          type: string
+    v1UpdateProcessWhitelistsResponse:
+      type: object
+      properties:
+        whitelists:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageProcessWhitelist'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ProcessWhitelistUpdateError'
+    v1UpdateProcessWhitelistsRequest:
+      type: object
+      properties:
+        keys:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageProcessWhitelistKey'
+        addElements:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageWhitelistItem'
+        removeElements:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageWhitelistItem'
+    v1LockProcessWhitelistsRequest:
+      type: object
+      properties:
+        keys:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageProcessWhitelistKey'
+        locked:
+          type: boolean
+          format: boolean
+    v1ProcessWhitelistUpdateError:
+      type: object
+      properties:
+        error:
+          type: string
+        key:
+          $ref: '#/components/schemas/storageProcessWhitelistKey'
+    storageWhitelistItem:
+      type: object
+      properties:
+        processName:
           type: string
     storageProcessWhitelist:
       type: object
@@ -150,28 +187,6 @@ components:
         lastUpdate:
           type: string
           format: date-time
-    v1ProcessWhitelistUpdateError:
-      type: object
-      properties:
-        error:
-          type: string
-        key:
-          $ref: '#/components/schemas/storageProcessWhitelistKey'
-    v1LockProcessWhitelistsRequest:
-      type: object
-      properties:
-        keys:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageProcessWhitelistKey'
-        locked:
-          type: boolean
-          format: boolean
-    storageWhitelistItem:
-      type: object
-      properties:
-        processName:
-          type: string
     storageWhitelistElement:
       type: object
       properties:
@@ -180,21 +195,6 @@ components:
         auto:
           type: boolean
           format: boolean
-    v1UpdateProcessWhitelistsRequest:
-      type: object
-      properties:
-        keys:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageProcessWhitelistKey'
-        addElements:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageWhitelistItem'
-        removeElements:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageWhitelistItem'
   securitySchemes:
     ApiToken:
       type: apiKey

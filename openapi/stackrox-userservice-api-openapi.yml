@@ -71,18 +71,14 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    v1UserAttributeTuple:
+    v1GetUsersAttributesResponse:
       type: object
       properties:
-        authProviderId:
-          type: string
-        key:
-          type: string
-        value:
-          type: string
-      title: 'UserAttributeTuple descript the auth:key:value tuple that decides group membership.
-
-        Next Tag: 4'
+        usersAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1UserAttributeTuple'
+      title: 'Next Tag: 2'
     storageUserAttribute:
       type: object
       properties:
@@ -98,6 +94,18 @@ components:
           items:
             $ref: '#/components/schemas/storageUser'
       title: 'Next Tag: 2'
+    v1UserAttributeTuple:
+      type: object
+      properties:
+        authProviderId:
+          type: string
+        key:
+          type: string
+        value:
+          type: string
+      title: 'UserAttributeTuple descript the auth:key:value tuple that decides group membership.
+
+        Next Tag: 4'
     storageUser:
       type: object
       properties:
@@ -110,14 +118,6 @@ components:
           items:
             $ref: '#/components/schemas/storageUserAttribute'
       description: User is an object that allows us to track the roles a user is tied to, and how they logged in.
-    v1GetUsersAttributesResponse:
-      type: object
-      properties:
-        usersAttributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1UserAttributeTuple'
-      title: 'Next Tag: 2'
   securitySchemes:
     ApiToken:
       type: apiKey

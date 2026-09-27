@@ -111,6 +111,30 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    v1Empty:
+      type: object
+    storageHTTPEndpointConfig:
+      type: object
+      properties:
+        endpoint:
+          type: string
+        skipTlsVerify:
+          type: boolean
+          format: boolean
+        caCert:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+        headers:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageKeyValuePair'
+        clientCertPem:
+          type: string
+        clientKeyPem:
+          type: string
     storageKeyValuePair:
       type: object
       properties:
@@ -137,30 +161,6 @@ components:
           format: boolean
         endpointConfig:
           $ref: '#/components/schemas/storageHTTPEndpointConfig'
-    storageHTTPEndpointConfig:
-      type: object
-      properties:
-        endpoint:
-          type: string
-        skipTlsVerify:
-          type: boolean
-          format: boolean
-        caCert:
-          type: string
-        username:
-          type: string
-        password:
-          type: string
-        headers:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageKeyValuePair'
-        clientCertPem:
-          type: string
-        clientKeyPem:
-          type: string
-    v1Empty:
-      type: object
   requestBodies:
     storageAuthzPluginConfig:
       content:

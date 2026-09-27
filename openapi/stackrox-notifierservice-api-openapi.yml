@@ -145,21 +145,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    storageKeyValuePair:
-      type: object
-      properties:
-        key:
-          type: string
-        value:
-          type: string
-    storageSumoLogic:
-      type: object
-      properties:
-        httpSourceAddress:
-          type: string
-        skipTLSVerify:
-          type: boolean
-          format: boolean
     storageSplunk:
       type: object
       properties:
@@ -176,6 +161,72 @@ components:
         auditLoggingEnabled:
           type: boolean
           format: boolean
+    storageJira:
+      type: object
+      properties:
+        url:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+        issueType:
+          type: string
+    storageEmail:
+      type: object
+      properties:
+        server:
+          type: string
+        sender:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+        disableTLS:
+          type: boolean
+          format: boolean
+        useSTARTTLS:
+          type: boolean
+          format: boolean
+        from:
+          type: string
+    storagePagerDuty:
+      type: object
+      properties:
+        apiKey:
+          type: string
+    v1GetNotifiersResponse:
+      type: object
+      properties:
+        notifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageNotifier'
+    v1Empty:
+      type: object
+    storageSumoLogic:
+      type: object
+      properties:
+        httpSourceAddress:
+          type: string
+        skipTLSVerify:
+          type: boolean
+          format: boolean
+    storageCSCC:
+      type: object
+      properties:
+        serviceAccount:
+          type: string
+        sourceId:
+          type: string
+    storageKeyValuePair:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
     storageNotifier:
       type: object
       properties:
@@ -208,43 +259,6 @@ components:
           $ref: '#/components/schemas/storageGeneric'
         sumologic:
           $ref: '#/components/schemas/storageSumoLogic'
-    storageJira:
-      type: object
-      properties:
-        url:
-          type: string
-        username:
-          type: string
-        password:
-          type: string
-        issueType:
-          type: string
-    v1GetNotifiersResponse:
-      type: object
-      properties:
-        notifiers:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageNotifier'
-    storageEmail:
-      type: object
-      properties:
-        server:
-          type: string
-        sender:
-          type: string
-        username:
-          type: string
-        password:
-          type: string
-        disableTLS:
-          type: boolean
-          format: boolean
-        useSTARTTLS:
-          type: boolean
-          format: boolean
-        from:
-          type: string
     storageGeneric:
       type: object
       properties:
@@ -270,20 +284,6 @@ components:
         auditLoggingEnabled:
           type: boolean
           format: boolean
-    storageCSCC:
-      type: object
-      properties:
-        serviceAccount:
-          type: string
-        sourceId:
-          type: string
-    storagePagerDuty:
-      type: object
-      properties:
-        apiKey:
-          type: string
-    v1Empty:
-      type: object
   requestBodies:
     storageNotifier:
       content:

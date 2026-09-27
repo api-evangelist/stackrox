@@ -80,85 +80,91 @@ paths:
       - DetectionService
 components:
   schemas:
-    storagePortExposurePolicy:
-      type: object
-      properties:
-        exposureLevels:
-          type: array
-          items:
-            $ref: '#/components/schemas/PortConfigExposureLevel'
-    storageVolume:
+    storageWhitelistDeployment:
       type: object
       properties:
         name:
           type: string
-        source:
-          type: string
-        destination:
-          type: string
-        readOnly:
-          type: boolean
-          format: boolean
-        type:
-          type: string
-    AlertEnforcement:
+        scope:
+          $ref: '#/components/schemas/storageScope'
+    storageAlert:
       type: object
       properties:
-        action:
-          $ref: '#/components/schemas/storageEnforcementAction'
-        message:
+        id:
           type: string
-    v1DeployYAMLDetectionRequest:
+        policy:
+          $ref: '#/components/schemas/storagePolicy'
+        lifecycleStage:
+          $ref: '#/components/schemas/storageLifecycleStage'
+        deployment:
+          $ref: '#/components/schemas/storageAlertDeployment'
+        violations:
+          type: array
+          items:
+            $ref: '#/components/schemas/AlertViolation'
+        processViolation:
+          $ref: '#/components/schemas/AlertProcessViolation'
+        enforcement:
+          $ref: '#/components/schemas/AlertEnforcement'
+        time:
+          type: string
+          format: date-time
+        firstOccurred:
+          type: string
+          format: date-time
+        state:
+          $ref: '#/components/schemas/storageViolationState'
+        snoozeTill:
+          type: string
+          format: date-time
+    v1DeployDetectionRequest:
       type: object
       properties:
-        yaml:
-          type: string
+        deployment:
+          $ref: '#/components/schemas/storageDeployment'
         noExternalMetadata:
           type: boolean
           format: boolean
         enforcementOnly:
           type: boolean
           format: boolean
-    storageContainer:
+        clusterId:
+          type: string
+    storageContainerInstanceID:
       type: object
       properties:
+        containerRuntime:
+          $ref: '#/components/schemas/storageContainerRuntime'
         id:
           type: string
-        config:
-          $ref: '#/components/schemas/storageContainerConfig'
-        image:
-          $ref: '#/components/schemas/storageContainerImage'
-        securityContext:
-          $ref: '#/components/schemas/storageSecurityContext'
-        volumes:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageVolume'
-        ports:
-          type: array
-          items:
-            $ref: '#/components/schemas/storagePortConfig'
-        secrets:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageEmbeddedSecret'
-        resources:
-          $ref: '#/components/schemas/storageResources'
-        instances:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageContainerInstance'
-        name:
+          description: The ID of the container, specific to the given runtime.
+        node:
           type: string
-    storageEnforcementAction:
-      type: string
-      enum:
-      - UNSET_ENFORCEMENT
-      - SCALE_TO_ZERO_ENFORCEMENT
-      - UNSATISFIABLE_NODE_CONSTRAINT_ENFORCEMENT
-      - KILL_POD_ENFORCEMENT
-      - FAIL_BUILD_ENFORCEMENT
-      default: UNSET_ENFORCEMENT
+          description: The node on which this container runs.
+    AlertViolation:
+      type: object
+      properties:
+        message:
+          type: string
+        DEPRECATEDProcesses:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageProcessIndicator'
+    storageHostMountPolicy:
+      type: object
+      properties:
+        readOnly:
+          type: boolean
+          format: boolean
+    storageImageNamePolicy:
+      type: object
+      properties:
+        registry:
+          type: string
+        remote:
+          type: string
+        tag:
+          type: string
     SecurityContextSELinux:
       type: object
       properties:
@@ -170,34 +176,29 @@ components:
           type: string
         level:
           type: string
-    storageComparator:
+    storageNumericalPolicy:
+      type: object
+      properties:
+        op:
+          $ref: '#/components/schemas/storageComparator'
+        value:
+          type: number
+          format: float
+    storageTolerationOperator:
       type: string
       enum:
-      - LESS_THAN
-      - LESS_THAN_OR_EQUALS
-      - EQUALS
-      - GREATER_THAN_OR_EQUALS
-      - GREATER_THAN
-      default: LESS_THAN
-    storageWhitelistImage:
+      - TOLERATION_OPERATION_UNKNOWN
+      - TOLERATION_OPERATOR_EXISTS
+      - TOLERATION_OPERATOR_EQUAL
+      default: TOLERATION_OPERATION_UNKNOWN
+    storageScopeLabel:
       type: object
       properties:
-        name:
+        key:
           type: string
-    storageLabelSelector:
-      type: object
-      properties:
-        matchLabels:
-          type: object
-          additionalProperties:
-            type: string
-          description: This is actually a oneof, but we can't make it one due to backwards compatibility constraints.
-        requirements:
-          type: array
-          items:
-            $ref: '#/components/schemas/LabelSelectorRequirement'
-      title: 'Next available tag: 3'
-    storageImageNamePolicy:
+        value:
+          type: string
+    storageImageName:
       type: object
       properties:
         registry:
@@ -206,6 +207,51 @@ components:
           type: string
         tag:
           type: string
+        fullName:
+          type: string
+    storagePermissionPolicy:
+      type: object
+      properties:
+        permissionLevel:
+          $ref: '#/components/schemas/storagePermissionLevel'
+      description: K8S RBAC Permission level configuration.
+    v1BuildDetectionRequest:
+      type: object
+      properties:
+        image:
+          $ref: '#/components/schemas/storageContainerImage'
+        imageName:
+          type: string
+        noExternalMetadata:
+          type: boolean
+          format: boolean
+    storageContainerInstance:
+      type: object
+      properties:
+        instanceId:
+          $ref: '#/components/schemas/storageContainerInstanceID'
+        containingPodId:
+          type: string
+          description: The pod containing this container instance (kubernetes only).
+        containerIps:
+          type: array
+          items:
+            type: string
+          description: The IP addresses of this container.
+        started:
+          type: string
+          format: date-time
+          title: The start time of the container
+      description: ContainerInstanceID allows to uniquely identify a container within a cluster.
+    ContainerConfigEnvironmentConfig:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+        envVarSource:
+          $ref: '#/components/schemas/EnvironmentConfigEnvVarSource'
     storagePortPolicy:
       type: object
       properties:
@@ -214,113 +260,28 @@ components:
           format: int32
         protocol:
           type: string
-    storageLabelSelectorOperator:
-      type: string
-      enum:
-      - UNKNOWN
-      - IN
-      - NOT_IN
-      - EXISTS
-      - NOT_EXISTS
-      default: UNKNOWN
-    storageContainerRuntime:
-      type: string
-      enum:
-      - UNKNOWN_CONTAINER_RUNTIME
-      - DOCKER_CONTAINER_RUNTIME
-      - CRIO_CONTAINER_RUNTIME
-      default: UNKNOWN_CONTAINER_RUNTIME
-    storageComponent:
+    v1DeployDetectionResponse:
       type: object
       properties:
-        name:
-          type: string
-        version:
-          type: string
-    storageScopeLabel:
+        runs:
+          type: array
+          items:
+            $ref: '#/components/schemas/DeployDetectionResponseRun'
+    storageResources:
       type: object
       properties:
-        key:
-          type: string
-        value:
-          type: string
-    storagePermissionLevel:
-      type: string
-      enum:
-      - UNSET
-      - NONE
-      - DEFAULT
-      - ELEVATED_IN_NAMESPACE
-      - ELEVATED_CLUSTER_WIDE
-      - CLUSTER_ADMIN
-      default: UNSET
-      title: 'For any update to PermissionLevel, also update:
-
-        - central/searchbasedpolicies/builders/k8s_rbac.go
-
-        - ui/src/messages/common.js'
-    AlertProcessViolation:
-      type: object
-      properties:
-        message:
-          type: string
-        processes:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageProcessIndicator'
-    storageHostMountPolicy:
-      type: object
-      properties:
-        readOnly:
-          type: boolean
-          format: boolean
-    storagePolicy:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        rationale:
-          type: string
-        remediation:
-          type: string
-        disabled:
-          type: boolean
-          format: boolean
-        categories:
-          type: array
-          items:
-            type: string
-        fields:
-          $ref: '#/components/schemas/storagePolicyFields'
-        lifecycleStages:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageLifecycleStage'
-        whitelists:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageWhitelist'
-        scope:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageScope'
-        severity:
-          $ref: '#/components/schemas/storageSeverity'
-        enforcementActions:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageEnforcementAction'
-        notifiers:
-          type: array
-          items:
-            type: string
-        lastUpdated:
-          type: string
-          format: date-time
+        cpuCoresRequest:
+          type: number
+          format: float
+        cpuCoresLimit:
+          type: number
+          format: float
+        memoryMbRequest:
+          type: number
+          format: float
+        memoryMbLimit:
+          type: number
+          format: float
     storageEmbeddedSecret:
       type: object
       properties:
@@ -328,63 +289,67 @@ components:
           type: string
         path:
           type: string
-    storageWhitelistDeployment:
+    storageLifecycleStage:
+      type: string
+      enum:
+      - DEPLOY
+      - BUILD
+      - RUNTIME
+      default: DEPLOY
+    LabelSelectorRequirement:
+      type: object
+      properties:
+        key:
+          type: string
+        op:
+          $ref: '#/components/schemas/storageLabelSelectorOperator'
+        values:
+          type: array
+          items:
+            type: string
+      title: 'Next available tag: 4'
+    storageScope:
+      type: object
+      properties:
+        cluster:
+          type: string
+        namespace:
+          type: string
+        label:
+          $ref: '#/components/schemas/storageScopeLabel'
+    storageContainerConfig:
+      type: object
+      properties:
+        env:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContainerConfigEnvironmentConfig'
+        command:
+          type: array
+          items:
+            type: string
+        args:
+          type: array
+          items:
+            type: string
+        directory:
+          type: string
+        user:
+          type: string
+        uid:
+          type: string
+          format: int64
+    storageProcessPolicy:
       type: object
       properties:
         name:
           type: string
-        scope:
-          $ref: '#/components/schemas/storageScope'
-    storageResourcePolicy:
-      type: object
-      properties:
-        cpuResourceRequest:
-          $ref: '#/components/schemas/storageNumericalPolicy'
-        cpuResourceLimit:
-          $ref: '#/components/schemas/storageNumericalPolicy'
-        memoryResourceRequest:
-          $ref: '#/components/schemas/storageNumericalPolicy'
-        memoryResourceLimit:
-          $ref: '#/components/schemas/storageNumericalPolicy'
-    storagePortConfig:
-      type: object
-      properties:
-        name:
+        args:
           type: string
-        containerPort:
-          type: integer
-          format: int32
-        protocol:
+        ancestor:
           type: string
-        exposure:
-          $ref: '#/components/schemas/PortConfigExposureLevel'
-        exposedPort:
-          type: integer
-          format: int32
-        exposureInfos:
-          type: array
-          items:
-            $ref: '#/components/schemas/PortConfigExposureInfo'
-      title: 'Next Available Tag: 6'
-    storageSecurityContext:
-      type: object
-      properties:
-        privileged:
-          type: boolean
-          format: boolean
-        selinux:
-          $ref: '#/components/schemas/SecurityContextSELinux'
-        dropCapabilities:
-          type: array
-          items:
-            type: string
-        addCapabilities:
-          type: array
-          items:
-            type: string
-        readOnlyRootFilesystem:
-          type: boolean
-          format: boolean
+        uid:
+          type: string
     storagePolicyFields:
       type: object
       properties:
@@ -457,49 +422,41 @@ components:
           type: boolean
           format: boolean
       title: 'Next Available Tag: 29'
-    storageScope:
+    storageDockerfileLineRuleField:
       type: object
       properties:
-        cluster:
-          type: string
-        namespace:
-          type: string
-        label:
-          $ref: '#/components/schemas/storageScopeLabel'
-    storageKeyValuePolicy:
-      type: object
-      properties:
-        key:
+        instruction:
           type: string
         value:
           type: string
-        envVarSource:
-          $ref: '#/components/schemas/EnvironmentConfigEnvVarSource'
-    storageLifecycleStage:
-      type: string
-      enum:
-      - DEPLOY
-      - BUILD
-      - RUNTIME
-      default: DEPLOY
-    storageContainerInstance:
+    PortConfigExposureInfo:
       type: object
       properties:
-        instanceId:
-          $ref: '#/components/schemas/storageContainerInstanceID'
-        containingPodId:
+        level:
+          $ref: '#/components/schemas/PortConfigExposureLevel'
+        serviceName:
           type: string
-          description: The pod containing this container instance (kubernetes only).
-        containerIps:
+          title: only set if level is not HOST
+        serviceId:
+          type: string
+        serviceClusterIp:
+          type: string
+        servicePort:
+          type: integer
+          format: int32
+        nodePort:
+          type: integer
+          format: int32
+          title: only set if level is HOST, NODE, or EXTERNAL
+        externalIps:
           type: array
           items:
             type: string
-          description: The IP addresses of this container.
-        started:
-          type: string
-          format: date-time
-          title: The start time of the container
-      description: ContainerInstanceID allows to uniquely identify a container within a cluster.
+          title: only set if level is EXTERNAL
+        externalHostnames:
+          type: array
+          items:
+            type: string
     storageAlertDeployment:
       type: object
       properties:
@@ -530,21 +487,80 @@ components:
         inactive:
           type: boolean
           format: boolean
-    AlertDeploymentContainer:
+    storageLabelSelector:
       type: object
       properties:
-        image:
-          $ref: '#/components/schemas/storageContainerImage'
+        matchLabels:
+          type: object
+          additionalProperties:
+            type: string
+          description: This is actually a oneof, but we can't make it one due to backwards compatibility constraints.
+        requirements:
+          type: array
+          items:
+            $ref: '#/components/schemas/LabelSelectorRequirement'
+      title: 'Next available tag: 3'
+    storageContainerRuntime:
+      type: string
+      enum:
+      - UNKNOWN_CONTAINER_RUNTIME
+      - DOCKER_CONTAINER_RUNTIME
+      - CRIO_CONTAINER_RUNTIME
+      default: UNKNOWN_CONTAINER_RUNTIME
+    storagePolicy:
+      type: object
+      properties:
+        id:
+          type: string
         name:
           type: string
-    storageNumericalPolicy:
-      type: object
-      properties:
-        op:
-          $ref: '#/components/schemas/storageComparator'
-        value:
-          type: number
-          format: float
+        description:
+          type: string
+        rationale:
+          type: string
+        remediation:
+          type: string
+        disabled:
+          type: boolean
+          format: boolean
+        categories:
+          type: array
+          items:
+            type: string
+        fields:
+          $ref: '#/components/schemas/storagePolicyFields'
+        lifecycleStages:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageLifecycleStage'
+        whitelists:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageWhitelist'
+        scope:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageScope'
+        severity:
+          $ref: '#/components/schemas/storageSeverity'
+        enforcementActions:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageEnforcementAction'
+        notifiers:
+          type: array
+          items:
+            type: string
+        lastUpdated:
+          type: string
+          format: date-time
+    storageViolationState:
+      type: string
+      enum:
+      - ACTIVE
+      - SNOOZED
+      - RESOLVED
+      default: ACTIVE
     storageSeverity:
       type: string
       enum:
@@ -554,6 +570,53 @@ components:
       - HIGH_SEVERITY
       - CRITICAL_SEVERITY
       default: UNSET_SEVERITY
+    storagePortConfig:
+      type: object
+      properties:
+        name:
+          type: string
+        containerPort:
+          type: integer
+          format: int32
+        protocol:
+          type: string
+        exposure:
+          $ref: '#/components/schemas/PortConfigExposureLevel'
+        exposedPort:
+          type: integer
+          format: int32
+        exposureInfos:
+          type: array
+          items:
+            $ref: '#/components/schemas/PortConfigExposureInfo'
+      title: 'Next Available Tag: 6'
+    EnvironmentConfigEnvVarSource:
+      type: string
+      enum:
+      - UNSET
+      - RAW
+      - SECRET_KEY
+      - CONFIG_MAP_KEY
+      - FIELD
+      - RESOURCE_FIELD
+      - UNKNOWN
+      default: UNSET
+      title: For any update to EnvVarSource, please also update 'ui/src/messages/common.js'
+    v1BuildDetectionResponse:
+      type: object
+      properties:
+        alerts:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageAlert'
+    storageTaintEffect:
+      type: string
+      enum:
+      - UNKNOWN_TAINT_EFFECT
+      - NO_SCHEDULE_TAINT_EFFECT
+      - PREFER_NO_SCHEDULE_TAINT_EFFECT
+      - NO_EXECUTE_TAINT_EFFECT
+      default: UNKNOWN_TAINT_EFFECT
     storageWhitelist:
       type: object
       properties:
@@ -566,43 +629,83 @@ components:
         expiration:
           type: string
           format: date-time
-    storageImageName:
+    AlertDeploymentContainer:
       type: object
       properties:
-        registry:
+        image:
+          $ref: '#/components/schemas/storageContainerImage'
+        name:
           type: string
-        remote:
-          type: string
-        tag:
-          type: string
-        fullName:
-          type: string
-    storageToleration:
+    storageContainerImage:
       type: object
       properties:
-        key:
+        id:
           type: string
-        operator:
-          $ref: '#/components/schemas/storageTolerationOperator'
-        value:
-          type: string
-        taintEffect:
-          $ref: '#/components/schemas/storageTaintEffect'
-    storageResources:
+          title: These tags maintain backwards compatibiltiy with the previously embedded storage.Image
+        name:
+          $ref: '#/components/schemas/storageImageName'
+        notPullable:
+          type: boolean
+          format: boolean
+    storageContainer:
       type: object
       properties:
-        cpuCoresRequest:
-          type: number
-          format: float
-        cpuCoresLimit:
-          type: number
-          format: float
-        memoryMbRequest:
-          type: number
-          format: float
-        memoryMbLimit:
-          type: number
-          format: float
+        id:
+          type: string
+        config:
+          $ref: '#/components/schemas/storageContainerConfig'
+        image:
+          $ref: '#/components/schemas/storageContainerImage'
+        securityContext:
+          $ref: '#/components/schemas/storageSecurityContext'
+        volumes:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageVolume'
+        ports:
+          type: array
+          items:
+            $ref: '#/components/schemas/storagePortConfig'
+        secrets:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageEmbeddedSecret'
+        resources:
+          $ref: '#/components/schemas/storageResources'
+        instances:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageContainerInstance'
+        name:
+          type: string
+    storageComparator:
+      type: string
+      enum:
+      - LESS_THAN
+      - LESS_THAN_OR_EQUALS
+      - EQUALS
+      - GREATER_THAN_OR_EQUALS
+      - GREATER_THAN
+      default: LESS_THAN
+    storageSecurityContext:
+      type: object
+      properties:
+        privileged:
+          type: boolean
+          format: boolean
+        selinux:
+          $ref: '#/components/schemas/SecurityContextSELinux'
+        dropCapabilities:
+          type: array
+          items:
+            type: string
+        addCapabilities:
+          type: array
+          items:
+            type: string
+        readOnlyRootFilesystem:
+          type: boolean
+          format: boolean
     storageVolumePolicy:
       type: object
       properties:
@@ -617,6 +720,33 @@ components:
           format: boolean
         type:
           type: string
+    storageWhitelistImage:
+      type: object
+      properties:
+        name:
+          type: string
+    storageResourcePolicy:
+      type: object
+      properties:
+        cpuResourceRequest:
+          $ref: '#/components/schemas/storageNumericalPolicy'
+        cpuResourceLimit:
+          $ref: '#/components/schemas/storageNumericalPolicy'
+        memoryResourceRequest:
+          $ref: '#/components/schemas/storageNumericalPolicy'
+        memoryResourceLimit:
+          $ref: '#/components/schemas/storageNumericalPolicy'
+    DeployDetectionResponseRun:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+        alerts:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageAlert'
     storageProcessIndicator:
       type: object
       properties:
@@ -642,64 +772,6 @@ components:
           type: string
           format: date-time
       title: 'Next available tag: 11'
-    storageTolerationOperator:
-      type: string
-      enum:
-      - TOLERATION_OPERATION_UNKNOWN
-      - TOLERATION_OPERATOR_EXISTS
-      - TOLERATION_OPERATOR_EQUAL
-      default: TOLERATION_OPERATION_UNKNOWN
-    ContainerConfigEnvironmentConfig:
-      type: object
-      properties:
-        key:
-          type: string
-        value:
-          type: string
-        envVarSource:
-          $ref: '#/components/schemas/EnvironmentConfigEnvVarSource'
-    v1BuildDetectionResponse:
-      type: object
-      properties:
-        alerts:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageAlert'
-    v1DeployDetectionRequest:
-      type: object
-      properties:
-        deployment:
-          $ref: '#/components/schemas/storageDeployment'
-        noExternalMetadata:
-          type: boolean
-          format: boolean
-        enforcementOnly:
-          type: boolean
-          format: boolean
-        clusterId:
-          type: string
-    storageContainerConfig:
-      type: object
-      properties:
-        env:
-          type: array
-          items:
-            $ref: '#/components/schemas/ContainerConfigEnvironmentConfig'
-        command:
-          type: array
-          items:
-            type: string
-        args:
-          type: array
-          items:
-            type: string
-        directory:
-          type: string
-        user:
-          type: string
-        uid:
-          type: string
-          format: int64
     PortConfigExposureLevel:
       type: string
       enum:
@@ -709,140 +781,17 @@ components:
       - INTERNAL
       - HOST
       default: UNSET
-    storageContainerImage:
+    v1DeployYAMLDetectionRequest:
       type: object
       properties:
-        id:
+        yaml:
           type: string
-          title: These tags maintain backwards compatibiltiy with the previously embedded storage.Image
-        name:
-          $ref: '#/components/schemas/storageImageName'
-        notPullable:
+        noExternalMetadata:
           type: boolean
           format: boolean
-    EnvironmentConfigEnvVarSource:
-      type: string
-      enum:
-      - UNSET
-      - RAW
-      - SECRET_KEY
-      - CONFIG_MAP_KEY
-      - FIELD
-      - RESOURCE_FIELD
-      - UNKNOWN
-      default: UNSET
-      title: For any update to EnvVarSource, please also update 'ui/src/messages/common.js'
-    PortConfigExposureInfo:
-      type: object
-      properties:
-        level:
-          $ref: '#/components/schemas/PortConfigExposureLevel'
-        serviceName:
-          type: string
-          title: only set if level is not HOST
-        serviceId:
-          type: string
-        serviceClusterIp:
-          type: string
-        servicePort:
-          type: integer
-          format: int32
-        nodePort:
-          type: integer
-          format: int32
-          title: only set if level is HOST, NODE, or EXTERNAL
-        externalIps:
-          type: array
-          items:
-            type: string
-          title: only set if level is EXTERNAL
-        externalHostnames:
-          type: array
-          items:
-            type: string
-    AlertViolation:
-      type: object
-      properties:
-        message:
-          type: string
-        DEPRECATEDProcesses:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageProcessIndicator'
-    storageViolationState:
-      type: string
-      enum:
-      - ACTIVE
-      - SNOOZED
-      - RESOLVED
-      default: ACTIVE
-    storageAlert:
-      type: object
-      properties:
-        id:
-          type: string
-        policy:
-          $ref: '#/components/schemas/storagePolicy'
-        lifecycleStage:
-          $ref: '#/components/schemas/storageLifecycleStage'
-        deployment:
-          $ref: '#/components/schemas/storageAlertDeployment'
-        violations:
-          type: array
-          items:
-            $ref: '#/components/schemas/AlertViolation'
-        processViolation:
-          $ref: '#/components/schemas/AlertProcessViolation'
-        enforcement:
-          $ref: '#/components/schemas/AlertEnforcement'
-        time:
-          type: string
-          format: date-time
-        firstOccurred:
-          type: string
-          format: date-time
-        state:
-          $ref: '#/components/schemas/storageViolationState'
-        snoozeTill:
-          type: string
-          format: date-time
-    storageTaintEffect:
-      type: string
-      enum:
-      - UNKNOWN_TAINT_EFFECT
-      - NO_SCHEDULE_TAINT_EFFECT
-      - PREFER_NO_SCHEDULE_TAINT_EFFECT
-      - NO_EXECUTE_TAINT_EFFECT
-      default: UNKNOWN_TAINT_EFFECT
-    storageContainerInstanceID:
-      type: object
-      properties:
-        containerRuntime:
-          $ref: '#/components/schemas/storageContainerRuntime'
-        id:
-          type: string
-          description: The ID of the container, specific to the given runtime.
-        node:
-          type: string
-          description: The node on which this container runs.
-    DeployDetectionResponseRun:
-      type: object
-      properties:
-        name:
-          type: string
-        type:
-          type: string
-        alerts:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageAlert'
-    storageDockerfileLineRuleField:
-      type: object
-      properties:
-        instruction:
-          type: string
-        value:
-          type: string
+        enforcementOnly:
+          type: boolean
+          format: boolean
     storageProcessSignal:
       type: object
       properties:
@@ -888,16 +837,40 @@ components:
           items:
             type: string
           title: Process Lineage
-    v1BuildDetectionRequest:
+    storageVolume:
       type: object
       properties:
-        image:
-          $ref: '#/components/schemas/storageContainerImage'
-        imageName:
+        name:
           type: string
-        noExternalMetadata:
+        source:
+          type: string
+        destination:
+          type: string
+        readOnly:
           type: boolean
           format: boolean
+        type:
+          type: string
+    storageToleration:
+      type: object
+      properties:
+        key:
+          type: string
+        operator:
+          $ref: '#/components/schemas/storageTolerationOperator'
+        value:
+          type: string
+        taintEffect:
+          $ref: '#/components/schemas/storageTaintEffect'
+    AlertProcessViolation:
+      type: object
+      properties:
+        message:
+          type: string
+        processes:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageProcessIndicator'
     storageDeployment:
       type: object
       properties:
@@ -972,42 +945,69 @@ components:
           type: string
           format: int64
       title: 'Next available tag: 28'
-    storagePermissionPolicy:
+    storagePortExposurePolicy:
       type: object
       properties:
-        permissionLevel:
-          $ref: '#/components/schemas/storagePermissionLevel'
-      description: K8S RBAC Permission level configuration.
-    storageProcessPolicy:
+        exposureLevels:
+          type: array
+          items:
+            $ref: '#/components/schemas/PortConfigExposureLevel'
+    storageComponent:
       type: object
       properties:
         name:
           type: string
-        args:
+        version:
           type: string
-        ancestor:
-          type: string
-        uid:
-          type: string
-    v1DeployDetectionResponse:
+    AlertEnforcement:
       type: object
       properties:
-        runs:
-          type: array
-          items:
-            $ref: '#/components/schemas/DeployDetectionResponseRun'
-    LabelSelectorRequirement:
+        action:
+          $ref: '#/components/schemas/storageEnforcementAction'
+        message:
+          type: string
+    storagePermissionLevel:
+      type: string
+      enum:
+      - UNSET
+      - NONE
+      - DEFAULT
+      - ELEVATED_IN_NAMESPACE
+      - ELEVATED_CLUSTER_WIDE
+      - CLUSTER_ADMIN
+      default: UNSET
+      title: 'For any update to PermissionLevel, also update:
+
+        - central/searchbasedpolicies/builders/k8s_rbac.go
+
+        - ui/src/messages/common.js'
+    storageKeyValuePolicy:
       type: object
       properties:
         key:
           type: string
-        op:
-          $ref: '#/components/schemas/storageLabelSelectorOperator'
-        values:
-          type: array
-          items:
-            type: string
-      title: 'Next available tag: 4'
+        value:
+          type: string
+        envVarSource:
+          $ref: '#/components/schemas/EnvironmentConfigEnvVarSource'
+    storageLabelSelectorOperator:
+      type: string
+      enum:
+      - UNKNOWN
+      - IN
+      - NOT_IN
+      - EXISTS
+      - NOT_EXISTS
+      default: UNKNOWN
+    storageEnforcementAction:
+      type: string
+      enum:
+      - UNSET_ENFORCEMENT
+      - SCALE_TO_ZERO_ENFORCEMENT
+      - UNSATISFIABLE_NODE_CONSTRAINT_ENFORCEMENT
+      - KILL_POD_ENFORCEMENT
+      - FAIL_BUILD_ENFORCEMENT
+      default: UNSET_ENFORCEMENT
   securitySchemes:
     ApiToken:
       type: apiKey

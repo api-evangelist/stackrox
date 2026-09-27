@@ -76,22 +76,6 @@ components:
       - PREFER_NO_SCHEDULE_TAINT_EFFECT
       - NO_EXECUTE_TAINT_EFFECT
       default: UNKNOWN_TAINT_EFFECT
-    storageTaint:
-      type: object
-      properties:
-        key:
-          type: string
-        value:
-          type: string
-        taintEffect:
-          $ref: '#/components/schemas/storageTaintEffect'
-    v1ListNodesResponse:
-      type: object
-      properties:
-        nodes:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageNode'
     storageNode:
       type: object
       properties:
@@ -146,13 +130,15 @@ components:
       title: 'Node represents information about a node in the cluster.
 
         next available tag: 16'
-    storageContainerRuntimeInfo:
+    storageTaint:
       type: object
       properties:
-        type:
-          $ref: '#/components/schemas/storageContainerRuntime'
-        version:
+        key:
           type: string
+        value:
+          type: string
+        taintEffect:
+          $ref: '#/components/schemas/storageTaintEffect'
     storageContainerRuntime:
       type: string
       enum:
@@ -160,6 +146,20 @@ components:
       - DOCKER_CONTAINER_RUNTIME
       - CRIO_CONTAINER_RUNTIME
       default: UNKNOWN_CONTAINER_RUNTIME
+    v1ListNodesResponse:
+      type: object
+      properties:
+        nodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageNode'
+    storageContainerRuntimeInfo:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/storageContainerRuntime'
+        version:
+          type: string
   securitySchemes:
     ApiToken:
       type: apiKey

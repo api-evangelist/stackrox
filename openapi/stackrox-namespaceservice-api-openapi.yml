@@ -57,6 +57,20 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    v1Namespace:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/storageNamespaceMetadata'
+        numDeployments:
+          type: integer
+          format: int32
+        numSecrets:
+          type: integer
+          format: int32
+        numNetworkPolicies:
+          type: integer
+          format: int32
     v1GetNamespacesResponse:
       type: object
       properties:
@@ -85,20 +99,6 @@ components:
         priority:
           type: string
           format: int64
-    v1Namespace:
-      type: object
-      properties:
-        metadata:
-          $ref: '#/components/schemas/storageNamespaceMetadata'
-        numDeployments:
-          type: integer
-          format: int32
-        numSecrets:
-          type: integer
-          format: int32
-        numNetworkPolicies:
-          type: integer
-          format: int32
   securitySchemes:
     ApiToken:
       type: apiKey

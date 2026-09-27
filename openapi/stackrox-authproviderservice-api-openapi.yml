@@ -182,20 +182,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    v1GetLoginAuthProvidersResponse:
-      type: object
-      properties:
-        authProviders:
-          type: array
-          items:
-            $ref: '#/components/schemas/GetLoginAuthProvidersResponseLoginAuthProvider'
-    v1GetAuthProvidersResponse:
-      type: object
-      properties:
-        authProviders:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageAuthProvider'
     GetLoginAuthProvidersResponseLoginAuthProvider:
       type: object
       properties:
@@ -207,6 +193,39 @@ components:
           type: string
         loginUrl:
           type: string
+    v1UpdateAuthProviderRequest:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        enabled:
+          type: boolean
+          format: boolean
+    v1GetAuthProvidersResponse:
+      type: object
+      properties:
+        authProviders:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageAuthProvider'
+    v1ExchangeTokenResponse:
+      type: object
+      properties:
+        token:
+          type: string
+        clientState:
+          type: string
+    v1GetLoginAuthProvidersResponse:
+      type: object
+      properties:
+        authProviders:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetLoginAuthProvidersResponseLoginAuthProvider'
+    v1Empty:
+      type: object
     v1ExchangeTokenRequest:
       type: object
       properties:
@@ -215,13 +234,6 @@ components:
         type:
           type: string
         state:
-          type: string
-    v1ExchangeTokenResponse:
-      type: object
-      properties:
-        token:
-          type: string
-        clientState:
           type: string
     storageAuthProvider:
       type: object
@@ -260,18 +272,6 @@ components:
           type: boolean
           format: boolean
       title: 'Next Tag: 9'
-    v1UpdateAuthProviderRequest:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        enabled:
-          type: boolean
-          format: boolean
-    v1Empty:
-      type: object
   requestBodies:
     storageAuthProvider:
       content:

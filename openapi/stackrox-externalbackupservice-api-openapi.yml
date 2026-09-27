@@ -147,6 +147,13 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    v1GetExternalBackupsResponse:
+      type: object
+      properties:
+        externalBackups:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageExternalBackup'
     storageSchedule:
       type: object
       properties:
@@ -160,42 +167,8 @@ components:
           format: int32
         weekly:
           $ref: '#/components/schemas/ScheduleWeeklyInterval'
-    storageS3Config:
+    v1Empty:
       type: object
-      properties:
-        bucket:
-          type: string
-        useIam:
-          type: boolean
-          format: boolean
-        accessKeyId:
-          type: string
-        secretAccessKey:
-          type: string
-        region:
-          type: string
-        objectPrefix:
-          type: string
-    v1GetExternalBackupsResponse:
-      type: object
-      properties:
-        externalBackups:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageExternalBackup'
-    ScheduleIntervalType:
-      type: string
-      enum:
-      - UNSET
-      - DAILY
-      - WEEKLY
-      default: UNSET
-    ScheduleWeeklyInterval:
-      type: object
-      properties:
-        day:
-          type: integer
-          format: int32
     storageExternalBackup:
       type: object
       properties:
@@ -212,8 +185,35 @@ components:
           format: int32
         s3:
           $ref: '#/components/schemas/storageS3Config'
-    v1Empty:
+    storageS3Config:
       type: object
+      properties:
+        bucket:
+          type: string
+        useIam:
+          type: boolean
+          format: boolean
+        accessKeyId:
+          type: string
+        secretAccessKey:
+          type: string
+        region:
+          type: string
+        objectPrefix:
+          type: string
+    ScheduleWeeklyInterval:
+      type: object
+      properties:
+        day:
+          type: integer
+          format: int32
+    ScheduleIntervalType:
+      type: string
+      enum:
+      - UNSET
+      - DAILY
+      - WEEKLY
+      default: UNSET
   requestBodies:
     storageExternalBackup:
       content:

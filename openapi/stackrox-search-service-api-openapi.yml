@@ -171,6 +171,32 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    SearchResponseCount:
+      type: object
+      properties:
+        category:
+          $ref: '#/components/schemas/v1SearchCategory'
+        count:
+          type: string
+          format: int64
+    v1SearchResult:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        category:
+          $ref: '#/components/schemas/v1SearchCategory'
+        fieldToMatches:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/SearchResultMatches'
+        score:
+          type: number
+          format: double
+        location:
+          type: string
     v1SearchCategory:
       type: string
       enum:
@@ -197,7 +223,21 @@ components:
       - IMAGE_COMPONENTS
       - VULNERABILITIES
       default: SEARCH_UNSET
+    v1SearchOptionsResponse:
+      type: object
+      properties:
+        options:
+          type: array
+          items:
+            type: string
     v1AutocompleteResponse:
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            type: string
+    SearchResultMatches:
       type: object
       properties:
         values:
@@ -215,46 +255,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SearchResponseCount'
-    SearchResponseCount:
-      type: object
-      properties:
-        category:
-          $ref: '#/components/schemas/v1SearchCategory'
-        count:
-          type: string
-          format: int64
-    SearchResultMatches:
-      type: object
-      properties:
-        values:
-          type: array
-          items:
-            type: string
-    v1SearchResult:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        category:
-          $ref: '#/components/schemas/v1SearchCategory'
-        fieldToMatches:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/SearchResultMatches'
-        score:
-          type: number
-          format: double
-        location:
-          type: string
-    v1SearchOptionsResponse:
-      type: object
-      properties:
-        options:
-          type: array
-          items:
-            type: string
   securitySchemes:
     ApiToken:
       type: apiKey
