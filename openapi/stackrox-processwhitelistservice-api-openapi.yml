@@ -98,6 +98,27 @@ paths:
       - ProcessWhitelistService
 components:
   schemas:
+    v1LockProcessWhitelistsRequest:
+      type: object
+      properties:
+        keys:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageProcessWhitelistKey'
+        locked:
+          type: boolean
+          format: boolean
+    v1UpdateProcessWhitelistsResponse:
+      type: object
+      properties:
+        whitelists:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageProcessWhitelist'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ProcessWhitelistUpdateError'
     storageProcessWhitelistKey:
       type: object
       properties:
@@ -112,17 +133,6 @@ components:
           type: string
         namespace:
           type: string
-    v1UpdateProcessWhitelistsResponse:
-      type: object
-      properties:
-        whitelists:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageProcessWhitelist'
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1ProcessWhitelistUpdateError'
     v1UpdateProcessWhitelistsRequest:
       type: object
       properties:
@@ -138,28 +148,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/storageWhitelistItem'
-    v1LockProcessWhitelistsRequest:
-      type: object
-      properties:
-        keys:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageProcessWhitelistKey'
-        locked:
-          type: boolean
-          format: boolean
-    v1ProcessWhitelistUpdateError:
-      type: object
-      properties:
-        error:
-          type: string
-        key:
-          $ref: '#/components/schemas/storageProcessWhitelistKey'
-    storageWhitelistItem:
-      type: object
-      properties:
-        processName:
-          type: string
     storageProcessWhitelist:
       type: object
       properties:
@@ -187,6 +175,18 @@ components:
         lastUpdate:
           type: string
           format: date-time
+    v1ProcessWhitelistUpdateError:
+      type: object
+      properties:
+        error:
+          type: string
+        key:
+          $ref: '#/components/schemas/storageProcessWhitelistKey'
+    storageWhitelistItem:
+      type: object
+      properties:
+        processName:
+          type: string
     storageWhitelistElement:
       type: object
       properties:

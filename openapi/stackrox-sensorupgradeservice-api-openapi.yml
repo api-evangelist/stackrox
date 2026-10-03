@@ -76,6 +76,8 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    v1Empty:
+      type: object
     storageSensorUpgradeConfig:
       type: object
       properties:
@@ -89,8 +91,6 @@ components:
       properties:
         config:
           $ref: '#/components/schemas/storageSensorUpgradeConfig'
-    v1Empty:
-      type: object
     v1GetSensorUpgradeConfigResponse:
       type: object
       properties:

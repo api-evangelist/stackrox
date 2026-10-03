@@ -71,13 +71,6 @@ components:
         numNetworkPolicies:
           type: integer
           format: int32
-    v1GetNamespacesResponse:
-      type: object
-      properties:
-        namespaces:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1Namespace'
     storageNamespaceMetadata:
       type: object
       properties:
@@ -99,6 +92,13 @@ components:
         priority:
           type: string
           format: int64
+    v1GetNamespacesResponse:
+      type: object
+      properties:
+        namespaces:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Namespace'
   securitySchemes:
     ApiToken:
       type: apiKey

@@ -140,23 +140,52 @@ components:
           type: string
         secretKey:
           type: string
+    storageGoogleConfig:
+      type: object
+      properties:
+        endpoint:
+          type: string
+        serviceAccount:
+          type: string
+        project:
+          type: string
+    storageImageIntegrationCategory:
+      type: string
+      enum:
+      - REGISTRY
+      - SCANNER
+      default: REGISTRY
+    v1GetImageIntegrationsResponse:
+      type: object
+      properties:
+        integrations:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageImageIntegration'
     storageScannerV2Config:
       type: object
       properties:
         endpoint:
           type: string
-    storageDTRConfig:
+    storageDockerConfig:
       type: object
       properties:
+        endpoint:
+          type: string
         username:
           type: string
         password:
           type: string
-        endpoint:
-          type: string
         insecure:
           type: boolean
           format: boolean
+    storageIBMRegistryConfig:
+      type: object
+      properties:
+        endpoint:
+          type: string
+        apiKey:
+          type: string
     storageAnchoreConfig:
       type: object
       properties:
@@ -166,18 +195,38 @@ components:
           type: string
         password:
           type: string
-    storageImageIntegrationCategory:
-      type: string
-      enum:
-      - REGISTRY
-      - SCANNER
-      default: REGISTRY
-    storageIBMRegistryConfig:
+    storageClairifyConfig:
       type: object
       properties:
         endpoint:
           type: string
-        apiKey:
+    storageECRConfig:
+      type: object
+      properties:
+        registryId:
+          type: string
+        accessKeyId:
+          type: string
+        secretAccessKey:
+          type: string
+        region:
+          type: string
+        useIam:
+          type: boolean
+          format: boolean
+    v1Empty:
+      type: object
+    storageClairConfig:
+      type: object
+      properties:
+        endpoint:
+          type: string
+    storageQuayConfig:
+      type: object
+      properties:
+        endpoint:
+          type: string
+        oauthToken:
           type: string
     storageImageIntegration:
       type: object
@@ -227,65 +276,16 @@ components:
         skipTestIntegration:
           type: boolean
           format: boolean
-    v1GetImageIntegrationsResponse:
+    storageDTRConfig:
       type: object
       properties:
-        integrations:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageImageIntegration'
-    storageQuayConfig:
-      type: object
-      properties:
-        endpoint:
-          type: string
-        oauthToken:
-          type: string
-    storageClairConfig:
-      type: object
-      properties:
-        endpoint:
-          type: string
-    v1Empty:
-      type: object
-    storageClairifyConfig:
-      type: object
-      properties:
-        endpoint:
-          type: string
-    storageGoogleConfig:
-      type: object
-      properties:
-        endpoint:
-          type: string
-        serviceAccount:
-          type: string
-        project:
-          type: string
-    storageDockerConfig:
-      type: object
-      properties:
-        endpoint:
-          type: string
         username:
           type: string
         password:
           type: string
+        endpoint:
+          type: string
         insecure:
-          type: boolean
-          format: boolean
-    storageECRConfig:
-      type: object
-      properties:
-        registryId:
-          type: string
-        accessKeyId:
-          type: string
-        secretAccessKey:
-          type: string
-        region:
-          type: string
-        useIam:
           type: boolean
           format: boolean
   requestBodies:

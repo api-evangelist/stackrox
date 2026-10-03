@@ -211,56 +211,39 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    v1ListSubjectsResponse:
+    v1ScopedRoles:
       type: object
       properties:
-        subjectAndRoles:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1SubjectAndRoles'
-      title: 'A list of k8s subjects (users and groups only, for service accounts, try the service account service)
-
-        Next Tag: 2'
-    storageSubjectKind:
-      type: string
-      enum:
-      - UNSET_KIND
-      - SERVICE_ACCOUNT
-      - USER
-      - GROUP
-      default: UNSET_KIND
-    storageK8sRole:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
         namespace:
           type: string
-        clusterId:
-          type: string
-        clusterName:
-          type: string
-        clusterRole:
-          type: boolean
-          format: boolean
-        labels:
-          type: object
-          additionalProperties:
-            type: string
-        annotations:
-          type: object
-          additionalProperties:
-            type: string
-        createdAt:
-          type: string
-          format: date-time
-        rules:
+        roles:
           type: array
           items:
-            $ref: '#/components/schemas/storagePolicyRule'
-      title: 'Properties of an individual k8s Role or ClusterRole.
+            $ref: '#/components/schemas/storageK8sRole'
+    storagePolicyRule:
+      type: object
+      properties:
+        verbs:
+          type: array
+          items:
+            type: string
+        apiGroups:
+          type: array
+          items:
+            type: string
+        resources:
+          type: array
+          items:
+            type: string
+        nonResourceUrls:
+          type: array
+          items:
+            type: string
+        resourceNames:
+          type: array
+          items:
+            type: string
+      title: 'Properties of an individual rules that grant permissions to resources.
 
         ////////////////////////////////////////'
     storageK8sRoleBinding:
@@ -299,28 +282,6 @@ components:
       title: 'Properties of an individual k8s RoleBinding or ClusterRoleBinding.
 
         ////////////////////////////////////////'
-    storageSubject:
-      type: object
-      properties:
-        kind:
-          $ref: '#/components/schemas/storageSubjectKind'
-        name:
-          type: string
-        namespace:
-          type: string
-      title: 'Properties of an individual subjects who are granted roles via role bindings.
-
-        ////////////////////////////////////////'
-    v1ListRolesResponse:
-      type: object
-      properties:
-        roles:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageK8sRole'
-      title: 'A list of k8s roles (free of scoped information)
-
-        Next Tag: 2'
     v1GetSubjectResponse:
       type: object
       properties:
@@ -334,25 +295,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/v1ScopedRoles'
-    v1GetRoleBindingResponse:
-      type: object
-      properties:
-        binding:
-          $ref: '#/components/schemas/storageK8sRoleBinding'
-    v1ScopedRoles:
-      type: object
-      properties:
-        namespace:
-          type: string
-        roles:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageK8sRole'
-    v1GetRoleResponse:
-      type: object
-      properties:
-        role:
-          $ref: '#/components/schemas/storageK8sRole'
+    storageSubjectKind:
+      type: string
+      enum:
+      - UNSET_KIND
+      - SERVICE_ACCOUNT
+      - USER
+      - GROUP
+      default: UNSET_KIND
     v1SubjectAndRoles:
       type: object
       properties:
@@ -362,6 +312,82 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/storageK8sRole'
+    v1ListRolesResponse:
+      type: object
+      properties:
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageK8sRole'
+      title: 'A list of k8s roles (free of scoped information)
+
+        Next Tag: 2'
+    v1ListSubjectsResponse:
+      type: object
+      properties:
+        subjectAndRoles:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1SubjectAndRoles'
+      title: 'A list of k8s subjects (users and groups only, for service accounts, try the service account service)
+
+        Next Tag: 2'
+    storageSubject:
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/storageSubjectKind'
+        name:
+          type: string
+        namespace:
+          type: string
+      title: 'Properties of an individual subjects who are granted roles via role bindings.
+
+        ////////////////////////////////////////'
+    storageK8sRole:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        namespace:
+          type: string
+        clusterId:
+          type: string
+        clusterName:
+          type: string
+        clusterRole:
+          type: boolean
+          format: boolean
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+        annotations:
+          type: object
+          additionalProperties:
+            type: string
+        createdAt:
+          type: string
+          format: date-time
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/storagePolicyRule'
+      title: 'Properties of an individual k8s Role or ClusterRole.
+
+        ////////////////////////////////////////'
+    v1GetRoleBindingResponse:
+      type: object
+      properties:
+        binding:
+          $ref: '#/components/schemas/storageK8sRoleBinding'
+    v1GetRoleResponse:
+      type: object
+      properties:
+        role:
+          $ref: '#/components/schemas/storageK8sRole'
     v1ListRoleBindingsResponse:
       type: object
       properties:
@@ -372,32 +398,6 @@ components:
       title: 'A list of k8s role bindings (free of scoped information)
 
         Next Tag: 2'
-    storagePolicyRule:
-      type: object
-      properties:
-        verbs:
-          type: array
-          items:
-            type: string
-        apiGroups:
-          type: array
-          items:
-            type: string
-        resources:
-          type: array
-          items:
-            type: string
-        nonResourceUrls:
-          type: array
-          items:
-            type: string
-        resourceNames:
-          type: array
-          items:
-            type: string
-      title: 'Properties of an individual rules that grant permissions to resources.
-
-        ////////////////////////////////////////'
   securitySchemes:
     ApiToken:
       type: apiKey

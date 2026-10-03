@@ -68,14 +68,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    storageTaintEffect:
-      type: string
-      enum:
-      - UNKNOWN_TAINT_EFFECT
-      - NO_SCHEDULE_TAINT_EFFECT
-      - PREFER_NO_SCHEDULE_TAINT_EFFECT
-      - NO_EXECUTE_TAINT_EFFECT
-      default: UNKNOWN_TAINT_EFFECT
     storageNode:
       type: object
       properties:
@@ -146,13 +138,14 @@ components:
       - DOCKER_CONTAINER_RUNTIME
       - CRIO_CONTAINER_RUNTIME
       default: UNKNOWN_CONTAINER_RUNTIME
-    v1ListNodesResponse:
-      type: object
-      properties:
-        nodes:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageNode'
+    storageTaintEffect:
+      type: string
+      enum:
+      - UNKNOWN_TAINT_EFFECT
+      - NO_SCHEDULE_TAINT_EFFECT
+      - PREFER_NO_SCHEDULE_TAINT_EFFECT
+      - NO_EXECUTE_TAINT_EFFECT
+      default: UNKNOWN_TAINT_EFFECT
     storageContainerRuntimeInfo:
       type: object
       properties:
@@ -160,6 +153,13 @@ components:
           $ref: '#/components/schemas/storageContainerRuntime'
         version:
           type: string
+    v1ListNodesResponse:
+      type: object
+      properties:
+        nodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageNode'
   securitySchemes:
     ApiToken:
       type: apiKey

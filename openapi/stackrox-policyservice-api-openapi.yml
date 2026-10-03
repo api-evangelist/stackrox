@@ -270,27 +270,6 @@ paths:
       - PolicyService
 components:
   schemas:
-    storageWhitelistDeployment:
-      type: object
-      properties:
-        name:
-          type: string
-        scope:
-          $ref: '#/components/schemas/storageScope'
-    v1PatchPolicyRequest:
-      type: object
-      properties:
-        id:
-          type: string
-        disabled:
-          type: boolean
-          format: boolean
-    storageHostMountPolicy:
-      type: object
-      properties:
-        readOnly:
-          type: boolean
-          format: boolean
     storageImageNamePolicy:
       type: object
       properties:
@@ -300,89 +279,48 @@ components:
           type: string
         tag:
           type: string
-    storageNumericalPolicy:
+    storagePortExposurePolicy:
       type: object
       properties:
-        op:
-          $ref: '#/components/schemas/storageComparator'
-        value:
-          type: number
-          format: float
-    storageScopeLabel:
+        exposureLevels:
+          type: array
+          items:
+            $ref: '#/components/schemas/PortConfigExposureLevel'
+    storageResourcePolicy:
       type: object
       properties:
-        key:
-          type: string
-        value:
-          type: string
+        cpuResourceRequest:
+          $ref: '#/components/schemas/storageNumericalPolicy'
+        cpuResourceLimit:
+          $ref: '#/components/schemas/storageNumericalPolicy'
+        memoryResourceRequest:
+          $ref: '#/components/schemas/storageNumericalPolicy'
+        memoryResourceLimit:
+          $ref: '#/components/schemas/storageNumericalPolicy'
     v1Empty:
       type: object
-    storagePermissionPolicy:
-      type: object
-      properties:
-        permissionLevel:
-          $ref: '#/components/schemas/storagePermissionLevel'
-      description: K8S RBAC Permission level configuration.
-    storagePortPolicy:
-      type: object
-      properties:
-        port:
-          type: integer
-          format: int32
-        protocol:
-          type: string
-    v1EnableDisablePolicyNotificationRequest:
-      type: object
-      properties:
-        policyId:
-          type: string
-        notifierIds:
-          type: array
-          items:
-            type: string
-        disable:
-          type: boolean
-          format: boolean
-    storageLifecycleStage:
+    PortConfigExposureLevel:
       type: string
       enum:
-      - DEPLOY
-      - BUILD
-      - RUNTIME
-      default: DEPLOY
-    v1DryRunResponse:
+      - UNSET
+      - EXTERNAL
+      - NODE
+      - INTERNAL
+      - HOST
+      default: UNSET
+    v1RenamePolicyCategoryRequest:
       type: object
       properties:
-        alerts:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1DryRunResponseAlert'
-        excluded:
-          type: array
-          items:
-            $ref: '#/components/schemas/DryRunResponseExcluded'
+        oldCategory:
+          type: string
+        newCategory:
+          type: string
     v1DryRunResponseAlert:
       type: object
       properties:
         deployment:
           type: string
         violations:
-          type: array
-          items:
-            type: string
-    storageScope:
-      type: object
-      properties:
-        cluster:
-          type: string
-        namespace:
-          type: string
-        label:
-          $ref: '#/components/schemas/storageScopeLabel'
-    v1PolicyCategoriesResponse:
-      type: object
-      properties:
-        categories:
           type: array
           items:
             type: string
@@ -411,6 +349,20 @@ components:
         lastUpdated:
           type: string
           format: date-time
+    storageHostMountPolicy:
+      type: object
+      properties:
+        readOnly:
+          type: boolean
+          format: boolean
+    v1PatchPolicyRequest:
+      type: object
+      properties:
+        id:
+          type: string
+        disabled:
+          type: boolean
+          format: boolean
     storageProcessPolicy:
       type: object
       properties:
@@ -421,6 +373,179 @@ components:
         ancestor:
           type: string
         uid:
+          type: string
+    storageNumericalPolicy:
+      type: object
+      properties:
+        op:
+          $ref: '#/components/schemas/storageComparator'
+        value:
+          type: number
+          format: float
+    storageWhitelist:
+      type: object
+      properties:
+        name:
+          type: string
+        deployment:
+          $ref: '#/components/schemas/storageWhitelistDeployment'
+        image:
+          $ref: '#/components/schemas/storageWhitelistImage'
+        expiration:
+          type: string
+          format: date-time
+    DryRunResponseExcluded:
+      type: object
+      properties:
+        deployment:
+          type: string
+        whitelist:
+          $ref: '#/components/schemas/storageWhitelist'
+    v1DryRunResponse:
+      type: object
+      properties:
+        alerts:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1DryRunResponseAlert'
+        excluded:
+          type: array
+          items:
+            $ref: '#/components/schemas/DryRunResponseExcluded'
+    storageScopeLabel:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+    storagePermissionLevel:
+      type: string
+      enum:
+      - UNSET
+      - NONE
+      - DEFAULT
+      - ELEVATED_IN_NAMESPACE
+      - ELEVATED_CLUSTER_WIDE
+      - CLUSTER_ADMIN
+      default: UNSET
+      title: 'For any update to PermissionLevel, also update:
+
+        - central/searchbasedpolicies/builders/k8s_rbac.go
+
+        - ui/src/messages/common.js'
+    v1ListPoliciesResponse:
+      type: object
+      properties:
+        policies:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageListPolicy'
+    storageVolumePolicy:
+      type: object
+      properties:
+        name:
+          type: string
+        source:
+          type: string
+        destination:
+          type: string
+        readOnly:
+          type: boolean
+          format: boolean
+        type:
+          type: string
+    v1PolicyCategoriesResponse:
+      type: object
+      properties:
+        categories:
+          type: array
+          items:
+            type: string
+    storageKeyValuePolicy:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+        envVarSource:
+          $ref: '#/components/schemas/EnvironmentConfigEnvVarSource'
+    storagePortPolicy:
+      type: object
+      properties:
+        port:
+          type: integer
+          format: int32
+        protocol:
+          type: string
+    storageWhitelistDeployment:
+      type: object
+      properties:
+        name:
+          type: string
+        scope:
+          $ref: '#/components/schemas/storageScope'
+    storageEnforcementAction:
+      type: string
+      enum:
+      - UNSET_ENFORCEMENT
+      - SCALE_TO_ZERO_ENFORCEMENT
+      - UNSATISFIABLE_NODE_CONSTRAINT_ENFORCEMENT
+      - KILL_POD_ENFORCEMENT
+      - FAIL_BUILD_ENFORCEMENT
+      default: UNSET_ENFORCEMENT
+    storagePolicy:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        rationale:
+          type: string
+        remediation:
+          type: string
+        disabled:
+          type: boolean
+          format: boolean
+        categories:
+          type: array
+          items:
+            type: string
+        fields:
+          $ref: '#/components/schemas/storagePolicyFields'
+        lifecycleStages:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageLifecycleStage'
+        whitelists:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageWhitelist'
+        scope:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageScope'
+        severity:
+          $ref: '#/components/schemas/storageSeverity'
+        enforcementActions:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageEnforcementAction'
+        notifiers:
+          type: array
+          items:
+            type: string
+        lastUpdated:
+          type: string
+          format: date-time
+    storageWhitelistImage:
+      type: object
+      properties:
+        name:
           type: string
     storagePolicyFields:
       type: object
@@ -494,76 +619,6 @@ components:
           type: boolean
           format: boolean
       title: 'Next Available Tag: 29'
-    storageDockerfileLineRuleField:
-      type: object
-      properties:
-        instruction:
-          type: string
-        value:
-          type: string
-    v1ListPoliciesResponse:
-      type: object
-      properties:
-        policies:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageListPolicy'
-    storagePolicy:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        rationale:
-          type: string
-        remediation:
-          type: string
-        disabled:
-          type: boolean
-          format: boolean
-        categories:
-          type: array
-          items:
-            type: string
-        fields:
-          $ref: '#/components/schemas/storagePolicyFields'
-        lifecycleStages:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageLifecycleStage'
-        whitelists:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageWhitelist'
-        scope:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageScope'
-        severity:
-          $ref: '#/components/schemas/storageSeverity'
-        enforcementActions:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageEnforcementAction'
-        notifiers:
-          type: array
-          items:
-            type: string
-        lastUpdated:
-          type: string
-          format: date-time
-    storageSeverity:
-      type: string
-      enum:
-      - UNSET_SEVERITY
-      - LOW_SEVERITY
-      - MEDIUM_SEVERITY
-      - HIGH_SEVERITY
-      - CRITICAL_SEVERITY
-      default: UNSET_SEVERITY
     EnvironmentConfigEnvVarSource:
       type: string
       enum:
@@ -576,18 +631,27 @@ components:
       - UNKNOWN
       default: UNSET
       title: For any update to EnvVarSource, please also update 'ui/src/messages/common.js'
-    storageWhitelist:
+    storageLifecycleStage:
+      type: string
+      enum:
+      - DEPLOY
+      - BUILD
+      - RUNTIME
+      default: DEPLOY
+    storageComponent:
       type: object
       properties:
         name:
           type: string
-        deployment:
-          $ref: '#/components/schemas/storageWhitelistDeployment'
-        image:
-          $ref: '#/components/schemas/storageWhitelistImage'
-        expiration:
+        version:
           type: string
-          format: date-time
+    storageDockerfileLineRuleField:
+      type: object
+      properties:
+        instruction:
+          type: string
+        value:
+          type: string
     storageComparator:
       type: string
       enum:
@@ -597,106 +661,42 @@ components:
       - GREATER_THAN_OR_EQUALS
       - GREATER_THAN
       default: LESS_THAN
-    storageVolumePolicy:
-      type: object
-      properties:
-        name:
-          type: string
-        source:
-          type: string
-        destination:
-          type: string
-        readOnly:
-          type: boolean
-          format: boolean
-        type:
-          type: string
-    storageWhitelistImage:
-      type: object
-      properties:
-        name:
-          type: string
-    storageResourcePolicy:
-      type: object
-      properties:
-        cpuResourceRequest:
-          $ref: '#/components/schemas/storageNumericalPolicy'
-        cpuResourceLimit:
-          $ref: '#/components/schemas/storageNumericalPolicy'
-        memoryResourceRequest:
-          $ref: '#/components/schemas/storageNumericalPolicy'
-        memoryResourceLimit:
-          $ref: '#/components/schemas/storageNumericalPolicy'
-    v1RenamePolicyCategoryRequest:
-      type: object
-      properties:
-        oldCategory:
-          type: string
-        newCategory:
-          type: string
-    PortConfigExposureLevel:
+    storageSeverity:
       type: string
       enum:
-      - UNSET
-      - EXTERNAL
-      - NODE
-      - INTERNAL
-      - HOST
-      default: UNSET
-    storagePortExposurePolicy:
+      - UNSET_SEVERITY
+      - LOW_SEVERITY
+      - MEDIUM_SEVERITY
+      - HIGH_SEVERITY
+      - CRITICAL_SEVERITY
+      default: UNSET_SEVERITY
+    v1EnableDisablePolicyNotificationRequest:
       type: object
       properties:
-        exposureLevels:
+        policyId:
+          type: string
+        notifierIds:
           type: array
           items:
-            $ref: '#/components/schemas/PortConfigExposureLevel'
-    storageComponent:
+            type: string
+        disable:
+          type: boolean
+          format: boolean
+    storageScope:
       type: object
       properties:
-        name:
+        cluster:
           type: string
-        version:
+        namespace:
           type: string
-    storagePermissionLevel:
-      type: string
-      enum:
-      - UNSET
-      - NONE
-      - DEFAULT
-      - ELEVATED_IN_NAMESPACE
-      - ELEVATED_CLUSTER_WIDE
-      - CLUSTER_ADMIN
-      default: UNSET
-      title: 'For any update to PermissionLevel, also update:
-
-        - central/searchbasedpolicies/builders/k8s_rbac.go
-
-        - ui/src/messages/common.js'
-    DryRunResponseExcluded:
+        label:
+          $ref: '#/components/schemas/storageScopeLabel'
+    storagePermissionPolicy:
       type: object
       properties:
-        deployment:
-          type: string
-        whitelist:
-          $ref: '#/components/schemas/storageWhitelist'
-    storageKeyValuePolicy:
-      type: object
-      properties:
-        key:
-          type: string
-        value:
-          type: string
-        envVarSource:
-          $ref: '#/components/schemas/EnvironmentConfigEnvVarSource'
-    storageEnforcementAction:
-      type: string
-      enum:
-      - UNSET_ENFORCEMENT
-      - SCALE_TO_ZERO_ENFORCEMENT
-      - UNSATISFIABLE_NODE_CONSTRAINT_ENFORCEMENT
-      - KILL_POD_ENFORCEMENT
-      - FAIL_BUILD_ENFORCEMENT
-      default: UNSET_ENFORCEMENT
+        permissionLevel:
+          $ref: '#/components/schemas/storagePermissionLevel'
+      description: K8S RBAC Permission level configuration.
   requestBodies:
     storagePolicy:
       content:

@@ -84,6 +84,26 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    storageAlertRetentionConfig:
+      type: object
+      properties:
+        resolvedDeployRetentionDurationDays:
+          type: integer
+          format: int32
+        deletedRuntimeRetentionDurationDays:
+          type: integer
+          format: int32
+        allRuntimeRetentionDurationDays:
+          type: integer
+          format: int32
+    BannerConfigSize:
+      type: string
+      enum:
+      - UNSET
+      - SMALL
+      - MEDIUM
+      - LARGE
+      default: UNSET
     storageLoginNotice:
       type: object
       properties:
@@ -97,14 +117,6 @@ components:
       properties:
         config:
           $ref: '#/components/schemas/storageConfig'
-    BannerConfigSize:
-      type: string
-      enum:
-      - UNSET
-      - SMALL
-      - MEDIUM
-      - LARGE
-      default: UNSET
     storageBannerConfig:
       type: object
       properties:
@@ -132,25 +144,6 @@ components:
           type: integer
           format: int32
       title: 'next available tag: 4'
-    storageAlertRetentionConfig:
-      type: object
-      properties:
-        resolvedDeployRetentionDurationDays:
-          type: integer
-          format: int32
-        deletedRuntimeRetentionDurationDays:
-          type: integer
-          format: int32
-        allRuntimeRetentionDurationDays:
-          type: integer
-          format: int32
-    storageConfig:
-      type: object
-      properties:
-        publicConfig:
-          $ref: '#/components/schemas/storagePublicConfig'
-        privateConfig:
-          $ref: '#/components/schemas/storagePrivateConfig'
     storagePublicConfig:
       type: object
       properties:
@@ -160,6 +153,13 @@ components:
           $ref: '#/components/schemas/storageBannerConfig'
         footer:
           $ref: '#/components/schemas/storageBannerConfig'
+    storageConfig:
+      type: object
+      properties:
+        publicConfig:
+          $ref: '#/components/schemas/storagePublicConfig'
+        privateConfig:
+          $ref: '#/components/schemas/storagePrivateConfig'
   securitySchemes:
     ApiToken:
       type: apiKey

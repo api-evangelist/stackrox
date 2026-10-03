@@ -37,46 +37,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    storageServiceType:
-      type: string
-      enum:
-      - UNKNOWN_SERVICE
-      - SENSOR_SERVICE
-      - CENTRAL_SERVICE
-      - REMOTE_SERVICE
-      - COLLECTOR_SERVICE
-      - MONITORING_UI_SERVICE
-      - MONITORING_DB_SERVICE
-      - MONITORING_CLIENT_SERVICE
-      - BENCHMARK_SERVICE
-      - SCANNER_SERVICE
-      default: UNKNOWN_SERVICE
-    v1AuthStatus:
-      type: object
-      properties:
-        userId:
-          type: string
-        serviceId:
-          $ref: '#/components/schemas/storageServiceIdentity'
-        expires:
-          type: string
-          format: date-time
-        refreshUrl:
-          type: string
-        authProvider:
-          $ref: '#/components/schemas/storageAuthProvider'
-    storageServiceIdentity:
-      type: object
-      properties:
-        serial:
-          type: string
-          format: int64
-        serialStr:
-          type: string
-        id:
-          type: string
-        type:
-          $ref: '#/components/schemas/storageServiceType'
     storageAuthProvider:
       type: object
       properties:
@@ -114,6 +74,46 @@ components:
           type: boolean
           format: boolean
       title: 'Next Tag: 9'
+    storageServiceType:
+      type: string
+      enum:
+      - UNKNOWN_SERVICE
+      - SENSOR_SERVICE
+      - CENTRAL_SERVICE
+      - REMOTE_SERVICE
+      - COLLECTOR_SERVICE
+      - MONITORING_UI_SERVICE
+      - MONITORING_DB_SERVICE
+      - MONITORING_CLIENT_SERVICE
+      - BENCHMARK_SERVICE
+      - SCANNER_SERVICE
+      default: UNKNOWN_SERVICE
+    storageServiceIdentity:
+      type: object
+      properties:
+        serial:
+          type: string
+          format: int64
+        serialStr:
+          type: string
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/storageServiceType'
+    v1AuthStatus:
+      type: object
+      properties:
+        userId:
+          type: string
+        serviceId:
+          $ref: '#/components/schemas/storageServiceIdentity'
+        expires:
+          type: string
+          format: date-time
+        refreshUrl:
+          type: string
+        authProvider:
+          $ref: '#/components/schemas/storageAuthProvider'
   securitySchemes:
     ApiToken:
       type: apiKey

@@ -54,6 +54,16 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    v1NetworkGraph:
+      type: object
+      properties:
+        epoch:
+          type: integer
+          format: int64
+        nodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1NetworkNode'
     v1NetworkEdgePropertiesBundle:
       type: object
       properties:
@@ -61,15 +71,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/v1NetworkEdgeProperties'
-    storageL4Protocol:
-      type: string
-      enum:
-      - L4_PROTOCOL_UNKNOWN
-      - L4_PROTOCOL_TCP
-      - L4_PROTOCOL_UDP
-      - L4_PROTOCOL_ICMP
-      - L4_PROTOCOL_RAW
-      default: L4_PROTOCOL_UNKNOWN
+    v1NetworkEdgeProperties:
+      type: object
+      properties:
+        port:
+          type: integer
+          format: int64
+        protocol:
+          $ref: '#/components/schemas/storageL4Protocol'
+        lastActiveTimestamp:
+          type: string
+          format: date-time
     storageNetworkEntityInfoType:
       type: string
       enum:
@@ -77,24 +89,6 @@ components:
       - DEPLOYMENT
       - INTERNET
       default: UNKNOWN_TYPE
-    storageNetworkEntityInfoDeployment:
-      type: object
-      properties:
-        name:
-          type: string
-        namespace:
-          type: string
-        cluster:
-          type: string
-    storageNetworkEntityInfo:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/storageNetworkEntityInfoType'
-        id:
-          type: string
-        deployment:
-          $ref: '#/components/schemas/storageNetworkEntityInfoDeployment'
     v1NetworkNode:
       type: object
       properties:
@@ -117,27 +111,33 @@ components:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/v1NetworkEdgePropertiesBundle'
-    v1NetworkEdgeProperties:
+    storageNetworkEntityInfo:
       type: object
       properties:
-        port:
-          type: integer
-          format: int64
-        protocol:
-          $ref: '#/components/schemas/storageL4Protocol'
-        lastActiveTimestamp:
+        type:
+          $ref: '#/components/schemas/storageNetworkEntityInfoType'
+        id:
           type: string
-          format: date-time
-    v1NetworkGraph:
+        deployment:
+          $ref: '#/components/schemas/storageNetworkEntityInfoDeployment'
+    storageL4Protocol:
+      type: string
+      enum:
+      - L4_PROTOCOL_UNKNOWN
+      - L4_PROTOCOL_TCP
+      - L4_PROTOCOL_UDP
+      - L4_PROTOCOL_ICMP
+      - L4_PROTOCOL_RAW
+      default: L4_PROTOCOL_UNKNOWN
+    storageNetworkEntityInfoDeployment:
       type: object
       properties:
-        epoch:
-          type: integer
-          format: int64
-        nodes:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1NetworkNode'
+        name:
+          type: string
+        namespace:
+          type: string
+        cluster:
+          type: string
   securitySchemes:
     ApiToken:
       type: apiKey

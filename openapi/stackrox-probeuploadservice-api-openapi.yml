@@ -37,6 +37,13 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    v1GetExistingProbesResponse:
+      type: object
+      properties:
+        existingFiles:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ProbeUploadManifestFile'
     v1ProbeUploadManifestFile:
       type: object
       properties:
@@ -48,13 +55,6 @@ components:
         crc32:
           type: integer
           format: int64
-    v1GetExistingProbesResponse:
-      type: object
-      properties:
-        existingFiles:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1ProbeUploadManifestFile'
   securitySchemes:
     ApiToken:
       type: apiKey

@@ -100,6 +100,29 @@ paths:
       - APITokenService
 components:
   schemas:
+    v1GetAPITokensResponse:
+      type: object
+      properties:
+        tokens:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageTokenMetadata'
+    v1GenerateTokenRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        role:
+          type: string
+    v1Empty:
+      type: object
+    v1GenerateTokenResponse:
+      type: object
+      properties:
+        token:
+          type: string
+        metadata:
+          $ref: '#/components/schemas/storageTokenMetadata'
     storageTokenMetadata:
       type: object
       properties:
@@ -118,29 +141,6 @@ components:
         revoked:
           type: boolean
           format: boolean
-    v1GenerateTokenResponse:
-      type: object
-      properties:
-        token:
-          type: string
-        metadata:
-          $ref: '#/components/schemas/storageTokenMetadata'
-    v1Empty:
-      type: object
-    v1GenerateTokenRequest:
-      type: object
-      properties:
-        name:
-          type: string
-        role:
-          type: string
-    v1GetAPITokensResponse:
-      type: object
-      properties:
-        tokens:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageTokenMetadata'
   securitySchemes:
     ApiToken:
       type: apiKey
