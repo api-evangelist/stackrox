@@ -68,17 +68,20 @@ paths:
       - ServiceIdentityService
 components:
   schemas:
-    v1CreateServiceIdentityResponse:
+    v1Authorities:
       type: object
       properties:
-        identity:
-          $ref: '#/components/schemas/storageServiceIdentity'
-        certificatePem:
-          type: string
-          format: byte
-        privateKeyPem:
-          type: string
-          format: byte
+        authorities:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Authority'
+    v1ServiceIdentityResponse:
+      type: object
+      properties:
+        identities:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageServiceIdentity'
     v1CreateServiceIdentityRequest:
       type: object
       properties:
@@ -86,12 +89,6 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/storageServiceType'
-    v1Authority:
-      type: object
-      properties:
-        certificatePem:
-          type: string
-          format: byte
     storageServiceIdentity:
       type: object
       properties:
@@ -104,20 +101,6 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/storageServiceType'
-    v1ServiceIdentityResponse:
-      type: object
-      properties:
-        identities:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageServiceIdentity'
-    v1Authorities:
-      type: object
-      properties:
-        authorities:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1Authority'
     storageServiceType:
       type: string
       enum:
@@ -132,6 +115,23 @@ components:
       - BENCHMARK_SERVICE
       - SCANNER_SERVICE
       default: UNKNOWN_SERVICE
+    v1Authority:
+      type: object
+      properties:
+        certificatePem:
+          type: string
+          format: byte
+    v1CreateServiceIdentityResponse:
+      type: object
+      properties:
+        identity:
+          $ref: '#/components/schemas/storageServiceIdentity'
+        certificatePem:
+          type: string
+          format: byte
+        privateKeyPem:
+          type: string
+          format: byte
   securitySchemes:
     ApiToken:
       type: apiKey

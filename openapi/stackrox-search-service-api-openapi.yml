@@ -171,6 +171,13 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    v1AutocompleteResponse:
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            type: string
     v1SearchOptionsResponse:
       type: object
       properties:
@@ -178,6 +185,17 @@ components:
           type: array
           items:
             type: string
+    v1SearchResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1SearchResult'
+        counts:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchResponseCount'
     SearchResponseCount:
       type: object
       properties:
@@ -186,13 +204,6 @@ components:
         count:
           type: string
           format: int64
-    v1AutocompleteResponse:
-      type: object
-      properties:
-        values:
-          type: array
-          items:
-            type: string
     v1SearchResult:
       type: object
       properties:
@@ -211,17 +222,6 @@ components:
           format: double
         location:
           type: string
-    v1SearchResponse:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1SearchResult'
-        counts:
-          type: array
-          items:
-            $ref: '#/components/schemas/SearchResponseCount'
     v1SearchCategory:
       type: string
       enum:

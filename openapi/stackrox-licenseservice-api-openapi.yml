@@ -93,17 +93,15 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    LicenseContact:
+    licenseLicense:
       type: object
       properties:
-        phone:
-          type: string
-        email:
-          type: string
-        url:
-          type: string
-        name:
-          type: string
+        metadata:
+          $ref: '#/components/schemas/licenseLicenseMetadata'
+        supportContact:
+          $ref: '#/components/schemas/LicenseContact'
+        restrictions:
+          $ref: '#/components/schemas/LicenseRestrictions'
     v1GetLicensesResponse:
       type: object
       properties:
@@ -111,12 +109,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/v1LicenseInfo'
-    v1GetActiveLicenseExpirationResponse:
-      type: object
-      properties:
-        expirationTime:
-          type: string
-          format: date-time
     v1AddLicenseResponse:
       type: object
       properties:
@@ -130,30 +122,6 @@ components:
             not yet valid will be accepted. Note that we prefer this over a GRPC error, as it might be helpful to show the,
 
             e.g., contact information from the decoded blob.'
-    licenseLicenseMetadata:
-      type: object
-      properties:
-        id:
-          type: string
-        signingKeyId:
-          type: string
-        issueDate:
-          type: string
-          format: date-time
-        licensedForId:
-          type: string
-        licensedForName:
-          type: string
-    v1LicenseInfoStatus:
-      type: string
-      enum:
-      - UNKNOWN
-      - VALID
-      - REVOKED
-      - NOT_YET_VALID
-      - EXPIRED
-      - OTHER
-      default: UNKNOWN
     LicenseRestrictions:
       type: object
       properties:
@@ -200,24 +168,20 @@ components:
           type: boolean
           format: boolean
           description: Do not restrict license to certain deployment environments.
-    v1AddLicenseRequest:
+    licenseLicenseMetadata:
       type: object
       properties:
-        licenseKey:
+        id:
           type: string
-        activate:
-          type: boolean
-          format: boolean
-          description: Indicates whether the license represented by this key should be made the active license.
-    licenseLicense:
-      type: object
-      properties:
-        metadata:
-          $ref: '#/components/schemas/licenseLicenseMetadata'
-        supportContact:
-          $ref: '#/components/schemas/LicenseContact'
-        restrictions:
-          $ref: '#/components/schemas/LicenseRestrictions'
+        signingKeyId:
+          type: string
+        issueDate:
+          type: string
+          format: date-time
+        licensedForId:
+          type: string
+        licensedForName:
+          type: string
     v1LicenseInfo:
       type: object
       properties:
@@ -230,6 +194,42 @@ components:
         active:
           type: boolean
           format: boolean
+    v1GetActiveLicenseExpirationResponse:
+      type: object
+      properties:
+        expirationTime:
+          type: string
+          format: date-time
+    v1LicenseInfoStatus:
+      type: string
+      enum:
+      - UNKNOWN
+      - VALID
+      - REVOKED
+      - NOT_YET_VALID
+      - EXPIRED
+      - OTHER
+      default: UNKNOWN
+    LicenseContact:
+      type: object
+      properties:
+        phone:
+          type: string
+        email:
+          type: string
+        url:
+          type: string
+        name:
+          type: string
+    v1AddLicenseRequest:
+      type: object
+      properties:
+        licenseKey:
+          type: string
+        activate:
+          type: boolean
+          format: boolean
+          description: Indicates whether the license represented by this key should be made the active license.
   securitySchemes:
     ApiToken:
       type: apiKey

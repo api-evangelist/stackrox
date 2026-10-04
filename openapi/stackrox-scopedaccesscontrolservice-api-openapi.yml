@@ -110,33 +110,7 @@ paths:
       summary: Dry run authz plugin config
       x-summary-source: derived
 components:
-  requestBodies:
-    storageAuthzPluginConfig:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/storageAuthzPluginConfig'
-      required: true
   schemas:
-    storageAuthzPluginConfig:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        enabled:
-          type: boolean
-          format: boolean
-        endpointConfig:
-          $ref: '#/components/schemas/storageHTTPEndpointConfig'
-    v1GetAuthzPluginConfigsResponse:
-      type: object
-      properties:
-        configs:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageAuthzPluginConfig'
     storageHTTPEndpointConfig:
       type: object
       properties:
@@ -159,8 +133,6 @@ components:
           type: string
         clientKeyPem:
           type: string
-    v1Empty:
-      type: object
     storageKeyValuePair:
       type: object
       properties:
@@ -168,6 +140,34 @@ components:
           type: string
         value:
           type: string
+    v1GetAuthzPluginConfigsResponse:
+      type: object
+      properties:
+        configs:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageAuthzPluginConfig'
+    storageAuthzPluginConfig:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        enabled:
+          type: boolean
+          format: boolean
+        endpointConfig:
+          $ref: '#/components/schemas/storageHTTPEndpointConfig'
+    v1Empty:
+      type: object
+  requestBodies:
+    storageAuthzPluginConfig:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/storageAuthzPluginConfig'
+      required: true
   securitySchemes:
     ApiToken:
       type: apiKey

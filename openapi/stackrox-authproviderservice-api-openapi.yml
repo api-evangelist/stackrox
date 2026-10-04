@@ -191,6 +191,13 @@ components:
           type: string
         state:
           type: string
+    v1ExchangeTokenResponse:
+      type: object
+      properties:
+        token:
+          type: string
+        clientState:
+          type: string
     v1GetAuthProvidersResponse:
       type: object
       properties:
@@ -198,6 +205,26 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/storageAuthProvider'
+    v1GetLoginAuthProvidersResponse:
+      type: object
+      properties:
+        authProviders:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetLoginAuthProvidersResponseLoginAuthProvider'
+    GetLoginAuthProvidersResponseLoginAuthProvider:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        loginUrl:
+          type: string
+    v1Empty:
+      type: object
     storageAuthProvider:
       type: object
       properties:
@@ -245,33 +272,6 @@ components:
         enabled:
           type: boolean
           format: boolean
-    v1GetLoginAuthProvidersResponse:
-      type: object
-      properties:
-        authProviders:
-          type: array
-          items:
-            $ref: '#/components/schemas/GetLoginAuthProvidersResponseLoginAuthProvider'
-    v1ExchangeTokenResponse:
-      type: object
-      properties:
-        token:
-          type: string
-        clientState:
-          type: string
-    v1Empty:
-      type: object
-    GetLoginAuthProvidersResponseLoginAuthProvider:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        type:
-          type: string
-        loginUrl:
-          type: string
   requestBodies:
     storageAuthProvider:
       content:

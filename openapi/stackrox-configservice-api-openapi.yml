@@ -84,18 +84,34 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    storageAlertRetentionConfig:
+    v1PutConfigRequest:
       type: object
       properties:
-        resolvedDeployRetentionDurationDays:
-          type: integer
-          format: int32
-        deletedRuntimeRetentionDurationDays:
-          type: integer
-          format: int32
-        allRuntimeRetentionDurationDays:
-          type: integer
-          format: int32
+        config:
+          $ref: '#/components/schemas/storageConfig'
+    storagePublicConfig:
+      type: object
+      properties:
+        loginNotice:
+          $ref: '#/components/schemas/storageLoginNotice'
+        header:
+          $ref: '#/components/schemas/storageBannerConfig'
+        footer:
+          $ref: '#/components/schemas/storageBannerConfig'
+    storageBannerConfig:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          format: boolean
+        text:
+          type: string
+        size:
+          $ref: '#/components/schemas/BannerConfigSize'
+        color:
+          type: string
+        backgroundColor:
+          type: string
     BannerConfigSize:
       type: string
       enum:
@@ -112,25 +128,13 @@ components:
           format: boolean
         text:
           type: string
-    v1PutConfigRequest:
+    storageConfig:
       type: object
       properties:
-        config:
-          $ref: '#/components/schemas/storageConfig'
-    storageBannerConfig:
-      type: object
-      properties:
-        enabled:
-          type: boolean
-          format: boolean
-        text:
-          type: string
-        size:
-          $ref: '#/components/schemas/BannerConfigSize'
-        color:
-          type: string
-        backgroundColor:
-          type: string
+        publicConfig:
+          $ref: '#/components/schemas/storagePublicConfig'
+        privateConfig:
+          $ref: '#/components/schemas/storagePrivateConfig'
     storagePrivateConfig:
       type: object
       properties:
@@ -144,22 +148,18 @@ components:
           type: integer
           format: int32
       title: 'next available tag: 4'
-    storagePublicConfig:
+    storageAlertRetentionConfig:
       type: object
       properties:
-        loginNotice:
-          $ref: '#/components/schemas/storageLoginNotice'
-        header:
-          $ref: '#/components/schemas/storageBannerConfig'
-        footer:
-          $ref: '#/components/schemas/storageBannerConfig'
-    storageConfig:
-      type: object
-      properties:
-        publicConfig:
-          $ref: '#/components/schemas/storagePublicConfig'
-        privateConfig:
-          $ref: '#/components/schemas/storagePrivateConfig'
+        resolvedDeployRetentionDurationDays:
+          type: integer
+          format: int32
+        deletedRuntimeRetentionDurationDays:
+          type: integer
+          format: int32
+        allRuntimeRetentionDurationDays:
+          type: integer
+          format: int32
   securitySchemes:
     ApiToken:
       type: apiKey

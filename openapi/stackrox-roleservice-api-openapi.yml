@@ -147,13 +147,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    v1GetRolesResponse:
-      type: object
-      properties:
-        roles:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageRole'
     storageRole:
       type: object
       properties:
@@ -165,13 +158,6 @@ components:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/storageAccess'
-    storageAccess:
-      type: string
-      enum:
-      - NO_ACCESS
-      - READ_ACCESS
-      - READ_WRITE_ACCESS
-      default: NO_ACCESS
     v1GetResourcesResponse:
       type: object
       properties:
@@ -179,8 +165,22 @@ components:
           type: array
           items:
             type: string
+    v1GetRolesResponse:
+      type: object
+      properties:
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageRole'
     v1Empty:
       type: object
+    storageAccess:
+      type: string
+      enum:
+      - NO_ACCESS
+      - READ_ACCESS
+      - READ_WRITE_ACCESS
+      default: NO_ACCESS
   requestBodies:
     storageRole:
       content:

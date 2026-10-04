@@ -37,43 +37,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    storageAuthProvider:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        type:
-          type: string
-        uiEndpoint:
-          type: string
-        enabled:
-          type: boolean
-          format: boolean
-        config:
-          type: object
-          additionalProperties:
-            type: string
-        loginUrl:
-          type: string
-          description: The login URL will be provided by the backend, and may not be specified in a request.
-        validated:
-          type: boolean
-          format: boolean
-        extraUiEndpoints:
-          type: array
-          items:
-            type: string
-          description: 'UI endpoints which to allow in addition to `ui_endpoint`. I.e., if a login request
-
-            is coming from any of these, the auth request will use these for the callback URL,
-
-            not ui_endpoint.'
-        active:
-          type: boolean
-          format: boolean
-      title: 'Next Tag: 9'
     storageServiceType:
       type: string
       enum:
@@ -114,6 +77,43 @@ components:
           type: string
         authProvider:
           $ref: '#/components/schemas/storageAuthProvider'
+    storageAuthProvider:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        uiEndpoint:
+          type: string
+        enabled:
+          type: boolean
+          format: boolean
+        config:
+          type: object
+          additionalProperties:
+            type: string
+        loginUrl:
+          type: string
+          description: The login URL will be provided by the backend, and may not be specified in a request.
+        validated:
+          type: boolean
+          format: boolean
+        extraUiEndpoints:
+          type: array
+          items:
+            type: string
+          description: 'UI endpoints which to allow in addition to `ui_endpoint`. I.e., if a login request
+
+            is coming from any of these, the auth request will use these for the callback URL,
+
+            not ui_endpoint.'
+        active:
+          type: boolean
+          format: boolean
+      title: 'Next Tag: 9'
   securitySchemes:
     ApiToken:
       type: apiKey

@@ -54,16 +54,15 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    v1NetworkGraph:
-      type: object
-      properties:
-        epoch:
-          type: integer
-          format: int64
-        nodes:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1NetworkNode'
+    storageL4Protocol:
+      type: string
+      enum:
+      - L4_PROTOCOL_UNKNOWN
+      - L4_PROTOCOL_TCP
+      - L4_PROTOCOL_UDP
+      - L4_PROTOCOL_ICMP
+      - L4_PROTOCOL_RAW
+      default: L4_PROTOCOL_UNKNOWN
     v1NetworkEdgePropertiesBundle:
       type: object
       properties:
@@ -71,17 +70,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/v1NetworkEdgeProperties'
-    v1NetworkEdgeProperties:
+    storageNetworkEntityInfoDeployment:
       type: object
       properties:
-        port:
-          type: integer
-          format: int64
-        protocol:
-          $ref: '#/components/schemas/storageL4Protocol'
-        lastActiveTimestamp:
+        name:
           type: string
-          format: date-time
+        namespace:
+          type: string
+        cluster:
+          type: string
     storageNetworkEntityInfoType:
       type: string
       enum:
@@ -120,24 +117,27 @@ components:
           type: string
         deployment:
           $ref: '#/components/schemas/storageNetworkEntityInfoDeployment'
-    storageL4Protocol:
-      type: string
-      enum:
-      - L4_PROTOCOL_UNKNOWN
-      - L4_PROTOCOL_TCP
-      - L4_PROTOCOL_UDP
-      - L4_PROTOCOL_ICMP
-      - L4_PROTOCOL_RAW
-      default: L4_PROTOCOL_UNKNOWN
-    storageNetworkEntityInfoDeployment:
+    v1NetworkEdgeProperties:
       type: object
       properties:
-        name:
+        port:
+          type: integer
+          format: int64
+        protocol:
+          $ref: '#/components/schemas/storageL4Protocol'
+        lastActiveTimestamp:
           type: string
-        namespace:
-          type: string
-        cluster:
-          type: string
+          format: date-time
+    v1NetworkGraph:
+      type: object
+      properties:
+        epoch:
+          type: integer
+          format: int64
+        nodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1NetworkNode'
   securitySchemes:
     ApiToken:
       type: apiKey

@@ -107,15 +107,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/storageTokenMetadata'
-    v1GenerateTokenRequest:
-      type: object
-      properties:
-        name:
-          type: string
-        role:
-          type: string
-    v1Empty:
-      type: object
     v1GenerateTokenResponse:
       type: object
       properties:
@@ -141,6 +132,15 @@ components:
         revoked:
           type: boolean
           format: boolean
+    v1Empty:
+      type: object
+    v1GenerateTokenRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        role:
+          type: string
   securitySchemes:
     ApiToken:
       type: apiKey

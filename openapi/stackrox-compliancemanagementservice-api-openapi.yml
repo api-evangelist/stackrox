@@ -106,46 +106,6 @@ components:
         standardId:
           type: string
           description: The ID of the compliance standard. "*" means "all standards".
-    v1TriggerComplianceRunsResponse:
-      type: object
-      properties:
-        startedRuns:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1ComplianceRun'
-    v1GetComplianceRunStatusesResponse:
-      type: object
-      properties:
-        invalidRunIds:
-          type: array
-          items:
-            type: string
-        runs:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1ComplianceRun'
-    v1ComplianceRunState:
-      type: string
-      enum:
-      - INVALID
-      - READY
-      - STARTED
-      - WAIT_FOR_DATA
-      - EVALUTING_CHECKS
-      - FINISHED
-      default: INVALID
-    v1GetRecentComplianceRunsResponse:
-      type: object
-      properties:
-        complianceRuns:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1ComplianceRun'
-    v1TriggerComplianceRunsRequest:
-      type: object
-      properties:
-        selection:
-          $ref: '#/components/schemas/v1ComplianceRunSelection'
     v1ComplianceRun:
       type: object
       properties:
@@ -167,6 +127,46 @@ components:
           $ref: '#/components/schemas/v1ComplianceRunState'
         errorMessage:
           type: string
+    v1GetComplianceRunStatusesResponse:
+      type: object
+      properties:
+        invalidRunIds:
+          type: array
+          items:
+            type: string
+        runs:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ComplianceRun'
+    v1GetRecentComplianceRunsResponse:
+      type: object
+      properties:
+        complianceRuns:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ComplianceRun'
+    v1TriggerComplianceRunsResponse:
+      type: object
+      properties:
+        startedRuns:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ComplianceRun'
+    v1TriggerComplianceRunsRequest:
+      type: object
+      properties:
+        selection:
+          $ref: '#/components/schemas/v1ComplianceRunSelection'
+    v1ComplianceRunState:
+      type: string
+      enum:
+      - INVALID
+      - READY
+      - STARTED
+      - WAIT_FOR_DATA
+      - EVALUTING_CHECKS
+      - FINISHED
+      default: INVALID
   securitySchemes:
     ApiToken:
       type: apiKey

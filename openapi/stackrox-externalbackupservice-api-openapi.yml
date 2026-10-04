@@ -147,55 +147,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    ScheduleWeeklyInterval:
-      type: object
-      properties:
-        day:
-          type: integer
-          format: int32
-    v1GetExternalBackupsResponse:
-      type: object
-      properties:
-        externalBackups:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageExternalBackup'
-    storageExternalBackup:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        type:
-          type: string
-        schedule:
-          $ref: '#/components/schemas/storageSchedule'
-        backupsToKeep:
-          type: integer
-          format: int32
-        s3:
-          $ref: '#/components/schemas/storageS3Config'
-    storageSchedule:
-      type: object
-      properties:
-        intervalType:
-          $ref: '#/components/schemas/ScheduleIntervalType'
-        hour:
-          type: integer
-          format: int32
-        minute:
-          type: integer
-          format: int32
-        weekly:
-          $ref: '#/components/schemas/ScheduleWeeklyInterval'
-    ScheduleIntervalType:
-      type: string
-      enum:
-      - UNSET
-      - DAILY
-      - WEEKLY
-      default: UNSET
     storageS3Config:
       type: object
       properties:
@@ -212,6 +163,55 @@ components:
           type: string
         objectPrefix:
           type: string
+    storageExternalBackup:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        schedule:
+          $ref: '#/components/schemas/storageSchedule'
+        backupsToKeep:
+          type: integer
+          format: int32
+        s3:
+          $ref: '#/components/schemas/storageS3Config'
+    v1GetExternalBackupsResponse:
+      type: object
+      properties:
+        externalBackups:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageExternalBackup'
+    storageSchedule:
+      type: object
+      properties:
+        intervalType:
+          $ref: '#/components/schemas/ScheduleIntervalType'
+        hour:
+          type: integer
+          format: int32
+        minute:
+          type: integer
+          format: int32
+        weekly:
+          $ref: '#/components/schemas/ScheduleWeeklyInterval'
+    ScheduleWeeklyInterval:
+      type: object
+      properties:
+        day:
+          type: integer
+          format: int32
+    ScheduleIntervalType:
+      type: string
+      enum:
+      - UNSET
+      - DAILY
+      - WEEKLY
+      default: UNSET
     v1Empty:
       type: object
   requestBodies:
