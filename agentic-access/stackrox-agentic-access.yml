@@ -1,17 +1,36 @@
-generated: '2026-07-15'
+generated: '2026-09-23'
 method: generated
-source: openapi/stackrox-openapi.yml
+source: openapi/stackrox-alertservice-api-openapi.yml, openapi/stackrox-apitokenservice-api-openapi.yml,
+  openapi/stackrox-auth-service-api-openapi.yml, openapi/stackrox-authproviderservice-api-openapi.yml,
+  openapi/stackrox-clustersservice-api-openapi.yml, openapi/stackrox-compliancemanagementservice-api-openapi.yml,
+  openapi/stackrox-complianceservice-api-openapi.yml, openapi/stackrox-configservice-api-openapi.yml,
+  openapi/stackrox-db-service-api-openapi.yml, openapi/stackrox-debugservice-api-openapi.yml,
+  openapi/stackrox-deploymentservice-api-openapi.yml, openapi/stackrox-detectionservice-api-openapi.yml,
+  openapi/stackrox-externalbackupservice-api-openapi.yml, openapi/stackrox-featureflagservice-api-openapi.yml,
+  openapi/stackrox-groupservice-api-openapi.yml, openapi/stackrox-imageintegrationservice-api-openapi.yml,
+  openapi/stackrox-imageservice-api-openapi.yml, openapi/stackrox-licenseservice-api-openapi.yml,
+  openapi/stackrox-metadata-service-api-openapi.yml, openapi/stackrox-namespaceservice-api-openapi.yml,
+  openapi/stackrox-networkgraphservice-api-openapi.yml, openapi/stackrox-networkpolicyservice-api-openapi.yml,
+  openapi/stackrox-nodeservice-api-openapi.yml, openapi/stackrox-notifierservice-api-openapi.yml,
+  openapi/stackrox-pingservice-api-openapi.yml, openapi/stackrox-policyservice-api-openapi.yml,
+  openapi/stackrox-probeuploadservice-api-openapi.yml, openapi/stackrox-processservice-api-openapi.yml,
+  openapi/stackrox-processwhitelistservice-api-openapi.yml, openapi/stackrox-rbac-service-api-openapi.yml,
+  openapi/stackrox-roleservice-api-openapi.yml, openapi/stackrox-scopedaccesscontrolservice-api-openapi.yml,
+  openapi/stackrox-search-service-api-openapi.yml, openapi/stackrox-secretservice-api-openapi.yml,
+  openapi/stackrox-sensorupgradeservice-api-openapi.yml, openapi/stackrox-serviceaccountservice-api-openapi.yml,
+  openapi/stackrox-serviceidentityservice-api-openapi.yml, openapi/stackrox-summaryservice-api-openapi.yml,
+  openapi/stackrox-userservice-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
   operations: 160
   by_action_class:
-    connected: 93
-    acting: 67
+    connected: 94
+    acting: 66
   by_consequence:
-    read: 93
-    write: 58
+    read: 94
+    write: 57
     safety-critical: 6
     physical: 3
   human_in_the_loop_required: 6
@@ -312,106 +331,6 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /v1/externalbackups
-  method: get
-  operationId: GetExternalBackups
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/externalbackups
-  method: post
-  operationId: PostExternalBackup
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/externalbackups/test
-  method: post
-  operationId: TestExternalBackup
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/externalbackups/{id}
-  method: get
-  operationId: GetExternalBackup
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/externalbackups/{id}
-  method: delete
-  operationId: DeleteExternalBackup
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/externalbackups/{id}
-  method: post
-  operationId: TriggerExternalBackup
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/externalbackups/{id}
-  method: put
-  operationId: PutExternalBackup
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /v1/clusters
   method: get
   operationId: GetClusters
@@ -796,6 +715,106 @@ operations:
       max-ttl: 300
       exchange: true
       purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/externalbackups
+  method: get
+  operationId: GetExternalBackups
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/externalbackups
+  method: post
+  operationId: PostExternalBackup
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/externalbackups/test
+  method: post
+  operationId: TestExternalBackup
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/externalbackups/{id}
+  method: get
+  operationId: GetExternalBackup
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/externalbackups/{id}
+  method: delete
+  operationId: DeleteExternalBackup
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/externalbackups/{id}
+  method: post
+  operationId: TriggerExternalBackup
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/externalbackups/{id}
+  method: put
+  operationId: PutExternalBackup
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
     escalation:
       human-in-the-loop: conditional
       triggers:
@@ -1520,18 +1539,12 @@ operations:
   method: post
   operationId: GetExistingProbes
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /v1/processes/deployment/{deploymentId}
   method: get
   operationId: GetProcessesByDeployment
