@@ -63,6 +63,13 @@ paths:
       - DebugService
 components:
   schemas:
+    v1ModuleLevel:
+      type: object
+      properties:
+        module:
+          type: string
+        level:
+          type: string
     v1LogLevelRequest:
       type: object
       properties:
@@ -72,13 +79,6 @@ components:
           type: array
           items:
             type: string
-    v1ModuleLevel:
-      type: object
-      properties:
-        module:
-          type: string
-        level:
-          type: string
     v1LogLevelResponse:
       type: object
       properties:

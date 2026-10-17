@@ -171,20 +171,32 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    v1AutocompleteResponse:
-      type: object
-      properties:
-        values:
-          type: array
-          items:
-            type: string
-    v1SearchOptionsResponse:
-      type: object
-      properties:
-        options:
-          type: array
-          items:
-            type: string
+    v1SearchCategory:
+      type: string
+      enum:
+      - SEARCH_UNSET
+      - ALERTS
+      - IMAGES
+      - POLICIES
+      - DEPLOYMENTS
+      - SECRETS
+      - PROCESS_INDICATORS
+      - COMPLIANCE
+      - CLUSTERS
+      - NAMESPACES
+      - NODES
+      - COMPLIANCE_STANDARD
+      - COMPLIANCE_CONTROL_GROUP
+      - COMPLIANCE_CONTROL
+      - SERVICE_ACCOUNTS
+      - ROLES
+      - ROLEBINDINGS
+      - PROCESS_WHITELISTS
+      - SUBJECTS
+      - RISKS
+      - IMAGE_COMPONENTS
+      - VULNERABILITIES
+      default: SEARCH_UNSET
     v1SearchResponse:
       type: object
       properties:
@@ -222,33 +234,21 @@ components:
           format: double
         location:
           type: string
-    v1SearchCategory:
-      type: string
-      enum:
-      - SEARCH_UNSET
-      - ALERTS
-      - IMAGES
-      - POLICIES
-      - DEPLOYMENTS
-      - SECRETS
-      - PROCESS_INDICATORS
-      - COMPLIANCE
-      - CLUSTERS
-      - NAMESPACES
-      - NODES
-      - COMPLIANCE_STANDARD
-      - COMPLIANCE_CONTROL_GROUP
-      - COMPLIANCE_CONTROL
-      - SERVICE_ACCOUNTS
-      - ROLES
-      - ROLEBINDINGS
-      - PROCESS_WHITELISTS
-      - SUBJECTS
-      - RISKS
-      - IMAGE_COMPONENTS
-      - VULNERABILITIES
-      default: SEARCH_UNSET
     SearchResultMatches:
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            type: string
+    v1SearchOptionsResponse:
+      type: object
+      properties:
+        options:
+          type: array
+          items:
+            type: string
+    v1AutocompleteResponse:
       type: object
       properties:
         values:

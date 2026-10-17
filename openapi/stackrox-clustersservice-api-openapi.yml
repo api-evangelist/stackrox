@@ -118,6 +118,15 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    v1ClustersList:
+      type: object
+      properties:
+        clusters:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageCluster'
+    v1Empty:
+      type: object
     UpgradeProgressUpgradeState:
       type: string
       enum:
@@ -136,134 +145,6 @@ components:
       - UPGRADE_TIMED_OUT
       default: UPGRADE_INITIALIZING
       description: " - UPGRADER_LAUNCHING: In-progress states.\n - UPGRADE_COMPLETE: The success state.\nPLEASE NUMBER ALL IN-PROGRESS STATES ABOVE THIS\nAND ALL ERROR STATES BELOW THIS.\n - UPGRADE_INITIALIZATION_ERROR: Error states."
-    ClusterUpgradeStatusUpgradeProcessStatus:
-      type: object
-      properties:
-        active:
-          type: boolean
-          format: boolean
-        id:
-          type: string
-        targetVersion:
-          type: string
-        upgraderImage:
-          type: string
-        initiatedAt:
-          type: string
-          format: date-time
-        progress:
-          $ref: '#/components/schemas/storageUpgradeProgress'
-    storageAdmissionControllerConfig:
-      type: object
-      properties:
-        enabled:
-          type: boolean
-          format: boolean
-        timeoutSeconds:
-          type: integer
-          format: int32
-        scanInline:
-          type: boolean
-          format: boolean
-        disableBypass:
-          type: boolean
-          format: boolean
-    storageClusterStatus:
-      type: object
-      properties:
-        sensorVersion:
-          type: string
-        lastContact:
-          type: string
-          format: date-time
-        providerMetadata:
-          $ref: '#/components/schemas/storageProviderMetadata'
-        orchestratorMetadata:
-          $ref: '#/components/schemas/storageOrchestratorMetadata'
-        upgradeStatus:
-          $ref: '#/components/schemas/storageClusterUpgradeStatus'
-    storageGoogleProviderMetadata:
-      type: object
-      properties:
-        project:
-          type: string
-        clusterName:
-          type: string
-    storageOrchestratorMetadata:
-      type: object
-      properties:
-        version:
-          type: string
-        buildDate:
-          type: string
-          format: date-time
-        apiVersions:
-          type: array
-          items:
-            type: string
-    storageAWSProviderMetadata:
-      type: object
-      properties:
-        accountId:
-          type: string
-    storageClusterUpgradeStatus:
-      type: object
-      properties:
-        upgradability:
-          $ref: '#/components/schemas/ClusterUpgradeStatusUpgradability'
-        upgradabilityStatusReason:
-          type: string
-        mostRecentProcess:
-          $ref: '#/components/schemas/ClusterUpgradeStatusUpgradeProcessStatus'
-    storageDynamicClusterConfig:
-      type: object
-      properties:
-        admissionControllerConfig:
-          $ref: '#/components/schemas/storageAdmissionControllerConfig'
-        registryOverride:
-          type: string
-    storageClusterType:
-      type: string
-      enum:
-      - GENERIC_CLUSTER
-      - KUBERNETES_CLUSTER
-      - OPENSHIFT_CLUSTER
-      default: GENERIC_CLUSTER
-    v1ClustersList:
-      type: object
-      properties:
-        clusters:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageCluster'
-    storageProviderMetadata:
-      type: object
-      properties:
-        region:
-          type: string
-        zone:
-          type: string
-        google:
-          $ref: '#/components/schemas/storageGoogleProviderMetadata'
-        aws:
-          $ref: '#/components/schemas/storageAWSProviderMetadata'
-        azure:
-          $ref: '#/components/schemas/storageAzureProviderMetadata'
-        verified:
-          type: boolean
-          format: boolean
-    v1Empty:
-      type: object
-    storageUpgradeProgress:
-      type: object
-      properties:
-        upgradeState:
-          $ref: '#/components/schemas/UpgradeProgressUpgradeState'
-        upgradeStatusDetail:
-          type: string
-        since:
-          type: string
-          format: date-time
     ClusterUpgradeStatusUpgradability:
       type: string
       enum:
@@ -288,11 +169,104 @@ components:
         strongly discouraged from doing so without upgrading Central first, since this
 
         is an unsupported configuration.'
+    storageDynamicClusterConfig:
+      type: object
+      properties:
+        admissionControllerConfig:
+          $ref: '#/components/schemas/storageAdmissionControllerConfig'
+        registryOverride:
+          type: string
+    storageOrchestratorMetadata:
+      type: object
+      properties:
+        version:
+          type: string
+        buildDate:
+          type: string
+          format: date-time
+        apiVersions:
+          type: array
+          items:
+            type: string
+    storageAzureProviderMetadata:
+      type: object
+      properties:
+        subscriptionId:
+          type: string
+    ClusterUpgradeStatusUpgradeProcessStatus:
+      type: object
+      properties:
+        active:
+          type: boolean
+          format: boolean
+        id:
+          type: string
+        targetVersion:
+          type: string
+        upgraderImage:
+          type: string
+        initiatedAt:
+          type: string
+          format: date-time
+        progress:
+          $ref: '#/components/schemas/storageUpgradeProgress'
     v1ClusterResponse:
       type: object
       properties:
         cluster:
           $ref: '#/components/schemas/storageCluster'
+    storageClusterType:
+      type: string
+      enum:
+      - GENERIC_CLUSTER
+      - KUBERNETES_CLUSTER
+      - OPENSHIFT_CLUSTER
+      default: GENERIC_CLUSTER
+    storageAWSProviderMetadata:
+      type: object
+      properties:
+        accountId:
+          type: string
+    storageClusterUpgradeStatus:
+      type: object
+      properties:
+        upgradability:
+          $ref: '#/components/schemas/ClusterUpgradeStatusUpgradability'
+        upgradabilityStatusReason:
+          type: string
+        mostRecentProcess:
+          $ref: '#/components/schemas/ClusterUpgradeStatusUpgradeProcessStatus'
+    storageAdmissionControllerConfig:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          format: boolean
+        timeoutSeconds:
+          type: integer
+          format: int32
+        scanInline:
+          type: boolean
+          format: boolean
+        disableBypass:
+          type: boolean
+          format: boolean
+    storageTolerationsConfig:
+      type: object
+      properties:
+        disabled:
+          type: boolean
+          format: boolean
+    storageUpgradeProgress:
+      type: object
+      properties:
+        upgradeState:
+          $ref: '#/components/schemas/UpgradeProgressUpgradeState'
+        upgradeStatusDetail:
+          type: string
+        since:
+          type: string
+          format: date-time
     storageCluster:
       type: object
       properties:
@@ -331,17 +305,36 @@ components:
         priority:
           type: string
           format: int64
-    storageAzureProviderMetadata:
+    storageProviderMetadata:
       type: object
       properties:
-        subscriptionId:
+        region:
           type: string
-    storageTolerationsConfig:
-      type: object
-      properties:
-        disabled:
+        zone:
+          type: string
+        google:
+          $ref: '#/components/schemas/storageGoogleProviderMetadata'
+        aws:
+          $ref: '#/components/schemas/storageAWSProviderMetadata'
+        azure:
+          $ref: '#/components/schemas/storageAzureProviderMetadata'
+        verified:
           type: boolean
           format: boolean
+    storageClusterStatus:
+      type: object
+      properties:
+        sensorVersion:
+          type: string
+        lastContact:
+          type: string
+          format: date-time
+        providerMetadata:
+          $ref: '#/components/schemas/storageProviderMetadata'
+        orchestratorMetadata:
+          $ref: '#/components/schemas/storageOrchestratorMetadata'
+        upgradeStatus:
+          $ref: '#/components/schemas/storageClusterUpgradeStatus'
     storageCollectionMethod:
       type: string
       enum:
@@ -350,6 +343,13 @@ components:
       - KERNEL_MODULE
       - EBPF
       default: UNSET_COLLECTION
+    storageGoogleProviderMetadata:
+      type: object
+      properties:
+        project:
+          type: string
+        clusterName:
+          type: string
   requestBodies:
     storageCluster:
       content:

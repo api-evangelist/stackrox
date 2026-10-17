@@ -182,6 +182,32 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    v1UpdateAuthProviderRequest:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        enabled:
+          type: boolean
+          format: boolean
+    v1GetAuthProvidersResponse:
+      type: object
+      properties:
+        authProviders:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageAuthProvider'
+    v1Empty:
+      type: object
+    v1GetLoginAuthProvidersResponse:
+      type: object
+      properties:
+        authProviders:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetLoginAuthProvidersResponseLoginAuthProvider'
     v1ExchangeTokenRequest:
       type: object
       properties:
@@ -191,40 +217,6 @@ components:
           type: string
         state:
           type: string
-    v1ExchangeTokenResponse:
-      type: object
-      properties:
-        token:
-          type: string
-        clientState:
-          type: string
-    v1GetAuthProvidersResponse:
-      type: object
-      properties:
-        authProviders:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageAuthProvider'
-    v1GetLoginAuthProvidersResponse:
-      type: object
-      properties:
-        authProviders:
-          type: array
-          items:
-            $ref: '#/components/schemas/GetLoginAuthProvidersResponseLoginAuthProvider'
-    GetLoginAuthProvidersResponseLoginAuthProvider:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        type:
-          type: string
-        loginUrl:
-          type: string
-    v1Empty:
-      type: object
     storageAuthProvider:
       type: object
       properties:
@@ -262,16 +254,24 @@ components:
           type: boolean
           format: boolean
       title: 'Next Tag: 9'
-    v1UpdateAuthProviderRequest:
+    v1ExchangeTokenResponse:
+      type: object
+      properties:
+        token:
+          type: string
+        clientState:
+          type: string
+    GetLoginAuthProvidersResponseLoginAuthProvider:
       type: object
       properties:
         id:
           type: string
         name:
           type: string
-        enabled:
-          type: boolean
-          format: boolean
+        type:
+          type: string
+        loginUrl:
+          type: string
   requestBodies:
     storageAuthProvider:
       content:

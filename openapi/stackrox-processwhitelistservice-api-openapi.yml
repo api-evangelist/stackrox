@@ -109,14 +109,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/v1ProcessWhitelistUpdateError'
-    v1LockProcessWhitelistsRequest:
+    storageWhitelistElement:
       type: object
       properties:
-        keys:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageProcessWhitelistKey'
-        locked:
+        element:
+          $ref: '#/components/schemas/storageWhitelistItem'
+        auto:
           type: boolean
           format: boolean
     storageProcessWhitelistKey:
@@ -133,36 +131,6 @@ components:
           type: string
         namespace:
           type: string
-    v1ProcessWhitelistUpdateError:
-      type: object
-      properties:
-        error:
-          type: string
-        key:
-          $ref: '#/components/schemas/storageProcessWhitelistKey'
-    storageWhitelistElement:
-      type: object
-      properties:
-        element:
-          $ref: '#/components/schemas/storageWhitelistItem'
-        auto:
-          type: boolean
-          format: boolean
-    v1UpdateProcessWhitelistsRequest:
-      type: object
-      properties:
-        keys:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageProcessWhitelistKey'
-        addElements:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageWhitelistItem'
-        removeElements:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageWhitelistItem'
     storageProcessWhitelist:
       type: object
       properties:
@@ -190,6 +158,38 @@ components:
         lastUpdate:
           type: string
           format: date-time
+    v1LockProcessWhitelistsRequest:
+      type: object
+      properties:
+        keys:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageProcessWhitelistKey'
+        locked:
+          type: boolean
+          format: boolean
+    v1UpdateProcessWhitelistsRequest:
+      type: object
+      properties:
+        keys:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageProcessWhitelistKey'
+        addElements:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageWhitelistItem'
+        removeElements:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageWhitelistItem'
+    v1ProcessWhitelistUpdateError:
+      type: object
+      properties:
+        error:
+          type: string
+        key:
+          $ref: '#/components/schemas/storageProcessWhitelistKey'
     storageWhitelistItem:
       type: object
       properties:

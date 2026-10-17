@@ -145,92 +145,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    storagePagerDuty:
-      type: object
-      properties:
-        apiKey:
-          type: string
-    storageCSCC:
-      type: object
-      properties:
-        serviceAccount:
-          type: string
-        sourceId:
-          type: string
-    storageKeyValuePair:
-      type: object
-      properties:
-        key:
-          type: string
-        value:
-          type: string
-    storageEmail:
-      type: object
-      properties:
-        server:
-          type: string
-        sender:
-          type: string
-        username:
-          type: string
-        password:
-          type: string
-        disableTLS:
-          type: boolean
-          format: boolean
-        useSTARTTLS:
-          type: boolean
-          format: boolean
-        from:
-          type: string
-    v1GetNotifiersResponse:
-      type: object
-      properties:
-        notifiers:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageNotifier'
-    storageSplunk:
-      type: object
-      properties:
-        httpToken:
-          type: string
-        httpEndpoint:
-          type: string
-        insecure:
-          type: boolean
-          format: boolean
-        truncate:
-          type: string
-          format: int64
-        auditLoggingEnabled:
-          type: boolean
-          format: boolean
-    storageGeneric:
-      type: object
-      properties:
-        endpoint:
-          type: string
-        skipTLSVerify:
-          type: boolean
-          format: boolean
-        caCert:
-          type: string
-        username:
-          type: string
-        password:
-          type: string
-        headers:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageKeyValuePair'
-        extraFields:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageKeyValuePair'
-        auditLoggingEnabled:
-          type: boolean
-          format: boolean
     storageNotifier:
       type: object
       properties:
@@ -263,16 +177,18 @@ components:
           $ref: '#/components/schemas/storageGeneric'
         sumologic:
           $ref: '#/components/schemas/storageSumoLogic'
-    v1Empty:
-      type: object
-    storageSumoLogic:
+    storagePagerDuty:
       type: object
       properties:
-        httpSourceAddress:
+        apiKey:
           type: string
-        skipTLSVerify:
-          type: boolean
-          format: boolean
+    v1GetNotifiersResponse:
+      type: object
+      properties:
+        notifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageNotifier'
     storageJira:
       type: object
       properties:
@@ -283,6 +199,90 @@ components:
         password:
           type: string
         issueType:
+          type: string
+    storageCSCC:
+      type: object
+      properties:
+        serviceAccount:
+          type: string
+        sourceId:
+          type: string
+    v1Empty:
+      type: object
+    storageKeyValuePair:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+    storageGeneric:
+      type: object
+      properties:
+        endpoint:
+          type: string
+        skipTLSVerify:
+          type: boolean
+          format: boolean
+        caCert:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+        headers:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageKeyValuePair'
+        extraFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageKeyValuePair'
+        auditLoggingEnabled:
+          type: boolean
+          format: boolean
+    storageSumoLogic:
+      type: object
+      properties:
+        httpSourceAddress:
+          type: string
+        skipTLSVerify:
+          type: boolean
+          format: boolean
+    storageSplunk:
+      type: object
+      properties:
+        httpToken:
+          type: string
+        httpEndpoint:
+          type: string
+        insecure:
+          type: boolean
+          format: boolean
+        truncate:
+          type: string
+          format: int64
+        auditLoggingEnabled:
+          type: boolean
+          format: boolean
+    storageEmail:
+      type: object
+      properties:
+        server:
+          type: string
+        sender:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+        disableTLS:
+          type: boolean
+          format: boolean
+        useSTARTTLS:
+          type: boolean
+          format: boolean
+        from:
           type: string
   requestBodies:
     storageNotifier:

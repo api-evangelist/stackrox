@@ -68,6 +68,37 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    storageTaintEffect:
+      type: string
+      enum:
+      - UNKNOWN_TAINT_EFFECT
+      - NO_SCHEDULE_TAINT_EFFECT
+      - PREFER_NO_SCHEDULE_TAINT_EFFECT
+      - NO_EXECUTE_TAINT_EFFECT
+      default: UNKNOWN_TAINT_EFFECT
+    storageContainerRuntimeInfo:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/storageContainerRuntime'
+        version:
+          type: string
+    storageContainerRuntime:
+      type: string
+      enum:
+      - UNKNOWN_CONTAINER_RUNTIME
+      - DOCKER_CONTAINER_RUNTIME
+      - CRIO_CONTAINER_RUNTIME
+      default: UNKNOWN_CONTAINER_RUNTIME
+    storageTaint:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+        taintEffect:
+          $ref: '#/components/schemas/storageTaintEffect'
     v1ListNodesResponse:
       type: object
       properties:
@@ -129,37 +160,6 @@ components:
       title: 'Node represents information about a node in the cluster.
 
         next available tag: 16'
-    storageContainerRuntimeInfo:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/storageContainerRuntime'
-        version:
-          type: string
-    storageContainerRuntime:
-      type: string
-      enum:
-      - UNKNOWN_CONTAINER_RUNTIME
-      - DOCKER_CONTAINER_RUNTIME
-      - CRIO_CONTAINER_RUNTIME
-      default: UNKNOWN_CONTAINER_RUNTIME
-    storageTaintEffect:
-      type: string
-      enum:
-      - UNKNOWN_TAINT_EFFECT
-      - NO_SCHEDULE_TAINT_EFFECT
-      - PREFER_NO_SCHEDULE_TAINT_EFFECT
-      - NO_EXECUTE_TAINT_EFFECT
-      default: UNKNOWN_TAINT_EFFECT
-    storageTaint:
-      type: object
-      properties:
-        key:
-          type: string
-        value:
-          type: string
-        taintEffect:
-          $ref: '#/components/schemas/storageTaintEffect'
   securitySchemes:
     ApiToken:
       type: apiKey

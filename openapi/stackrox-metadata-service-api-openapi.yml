@@ -37,15 +37,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    MetadataLicenseStatus:
-      type: string
-      enum:
-      - NONE
-      - INVALID
-      - EXPIRED
-      - RESTARTING
-      - VALID
-      default: NONE
     v1Metadata:
       type: object
       properties:
@@ -58,6 +49,15 @@ components:
           format: boolean
         licenseStatus:
           $ref: '#/components/schemas/MetadataLicenseStatus'
+    MetadataLicenseStatus:
+      type: string
+      enum:
+      - NONE
+      - INVALID
+      - EXPIRED
+      - RESTARTING
+      - VALID
+      default: NONE
   securitySchemes:
     ApiToken:
       type: apiKey

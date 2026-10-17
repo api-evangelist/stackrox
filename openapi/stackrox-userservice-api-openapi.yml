@@ -95,6 +95,14 @@ components:
           items:
             $ref: '#/components/schemas/storageUserAttribute'
       description: User is an object that allows us to track the roles a user is tied to, and how they logged in.
+    v1GetUsersResponse:
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/storageUser'
+      title: 'Next Tag: 2'
     storageUserAttribute:
       type: object
       properties:
@@ -109,14 +117,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/v1UserAttributeTuple'
-      title: 'Next Tag: 2'
-    v1GetUsersResponse:
-      type: object
-      properties:
-        users:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageUser'
       title: 'Next Tag: 2'
   securitySchemes:
     ApiToken:

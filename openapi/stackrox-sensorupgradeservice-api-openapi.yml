@@ -81,8 +81,6 @@ components:
       properties:
         config:
           $ref: '#/components/schemas/storageSensorUpgradeConfig'
-    v1Empty:
-      type: object
     v1GetSensorUpgradeConfigResponse:
       type: object
       properties:
@@ -96,6 +94,8 @@ components:
           format: boolean
           description: Whether to automatically trigger upgrades for out-of-date sensors.
       description: SensorUpgradeConfig encapsulates configuration relevant to sensor auto-upgrades.
+    v1Empty:
+      type: object
   securitySchemes:
     ApiToken:
       type: apiKey

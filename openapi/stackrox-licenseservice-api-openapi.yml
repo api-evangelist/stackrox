@@ -93,6 +93,50 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    v1GetLicensesResponse:
+      type: object
+      properties:
+        licenses:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1LicenseInfo'
+    v1LicenseInfoStatus:
+      type: string
+      enum:
+      - UNKNOWN
+      - VALID
+      - REVOKED
+      - NOT_YET_VALID
+      - EXPIRED
+      - OTHER
+      default: UNKNOWN
+    v1GetActiveLicenseExpirationResponse:
+      type: object
+      properties:
+        expirationTime:
+          type: string
+          format: date-time
+    v1LicenseInfo:
+      type: object
+      properties:
+        license:
+          $ref: '#/components/schemas/licenseLicense'
+        status:
+          $ref: '#/components/schemas/v1LicenseInfoStatus'
+        statusReason:
+          type: string
+        active:
+          type: boolean
+          format: boolean
+    v1AddLicenseRequest:
+      type: object
+      properties:
+        licenseKey:
+          type: string
+        activate:
+          type: boolean
+          format: boolean
+          description: Indicates whether the license represented by this key should be made the active license.
     licenseLicense:
       type: object
       properties:
@@ -102,26 +146,6 @@ components:
           $ref: '#/components/schemas/LicenseContact'
         restrictions:
           $ref: '#/components/schemas/LicenseRestrictions'
-    v1GetLicensesResponse:
-      type: object
-      properties:
-        licenses:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1LicenseInfo'
-    v1AddLicenseResponse:
-      type: object
-      properties:
-        license:
-          $ref: '#/components/schemas/v1LicenseInfo'
-        accepted:
-          type: boolean
-          format: boolean
-          description: 'Indicates whether or not the license was accepted by the product. Only licenses which are either valid or
-
-            not yet valid will be accepted. Note that we prefer this over a GRPC error, as it might be helpful to show the,
-
-            e.g., contact information from the decoded blob.'
     LicenseRestrictions:
       type: object
       properties:
@@ -168,6 +192,19 @@ components:
           type: boolean
           format: boolean
           description: Do not restrict license to certain deployment environments.
+    v1AddLicenseResponse:
+      type: object
+      properties:
+        license:
+          $ref: '#/components/schemas/v1LicenseInfo'
+        accepted:
+          type: boolean
+          format: boolean
+          description: 'Indicates whether or not the license was accepted by the product. Only licenses which are either valid or
+
+            not yet valid will be accepted. Note that we prefer this over a GRPC error, as it might be helpful to show the,
+
+            e.g., contact information from the decoded blob.'
     licenseLicenseMetadata:
       type: object
       properties:
@@ -182,34 +219,6 @@ components:
           type: string
         licensedForName:
           type: string
-    v1LicenseInfo:
-      type: object
-      properties:
-        license:
-          $ref: '#/components/schemas/licenseLicense'
-        status:
-          $ref: '#/components/schemas/v1LicenseInfoStatus'
-        statusReason:
-          type: string
-        active:
-          type: boolean
-          format: boolean
-    v1GetActiveLicenseExpirationResponse:
-      type: object
-      properties:
-        expirationTime:
-          type: string
-          format: date-time
-    v1LicenseInfoStatus:
-      type: string
-      enum:
-      - UNKNOWN
-      - VALID
-      - REVOKED
-      - NOT_YET_VALID
-      - EXPIRED
-      - OTHER
-      default: UNKNOWN
     LicenseContact:
       type: object
       properties:
@@ -221,15 +230,6 @@ components:
           type: string
         name:
           type: string
-    v1AddLicenseRequest:
-      type: object
-      properties:
-        licenseKey:
-          type: string
-        activate:
-          type: boolean
-          format: boolean
-          description: Indicates whether the license represented by this key should be made the active license.
   securitySchemes:
     ApiToken:
       type: apiKey

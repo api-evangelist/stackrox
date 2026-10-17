@@ -80,29 +80,6 @@ paths:
       - ProcessService
 components:
   schemas:
-    v1GetGroupedProcessesWithContainerResponse:
-      type: object
-      properties:
-        groups:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1ProcessNameAndContainerNameGroup'
-    v1ProcessGroup:
-      type: object
-      properties:
-        args:
-          type: string
-        signals:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageProcessIndicator'
-    v1GetProcessesResponse:
-      type: object
-      properties:
-        processes:
-          type: array
-          items:
-            $ref: '#/components/schemas/storageProcessIndicator'
     v1ProcessNameGroup:
       type: object
       properties:
@@ -115,6 +92,37 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/v1ProcessGroup'
+    v1GetGroupedProcessesWithContainerResponse:
+      type: object
+      properties:
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ProcessNameAndContainerNameGroup'
+    v1GetGroupedProcessesResponse:
+      type: object
+      properties:
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ProcessNameGroup'
+    v1ProcessNameAndContainerNameGroup:
+      type: object
+      properties:
+        name:
+          type: string
+        containerName:
+          type: string
+        timesExecuted:
+          type: integer
+          format: int64
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ProcessGroup'
+        suspicious:
+          type: boolean
+          format: boolean
     storageProcessSignal:
       type: object
       properties:
@@ -185,30 +193,22 @@ components:
           type: string
           format: date-time
       title: 'Next available tag: 11'
-    v1ProcessNameAndContainerNameGroup:
+    v1ProcessGroup:
       type: object
       properties:
-        name:
+        args:
           type: string
-        containerName:
-          type: string
-        timesExecuted:
-          type: integer
-          format: int64
-        groups:
+        signals:
           type: array
           items:
-            $ref: '#/components/schemas/v1ProcessGroup'
-        suspicious:
-          type: boolean
-          format: boolean
-    v1GetGroupedProcessesResponse:
+            $ref: '#/components/schemas/storageProcessIndicator'
+    v1GetProcessesResponse:
       type: object
       properties:
-        groups:
+        processes:
           type: array
           items:
-            $ref: '#/components/schemas/v1ProcessNameGroup'
+            $ref: '#/components/schemas/storageProcessIndicator'
   securitySchemes:
     ApiToken:
       type: apiKey

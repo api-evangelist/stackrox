@@ -154,15 +154,6 @@ components:
         This can be used to create default groups/roles for All source provider (no fields set), a specific
 
         auth provider (only auth_provider_id field set) etc.'
-    storageGroup:
-      type: object
-      properties:
-        props:
-          $ref: '#/components/schemas/storageGroupProperties'
-        roleName:
-          type: string
-          description: This is the name of the role that will apply to users in this group.
-      description: 'Group is a GroupProperties : Role mapping.'
     v1Empty:
       type: object
     v1GroupBatchUpdateRequest:
@@ -189,6 +180,15 @@ components:
       title: 'GroupBatchUpdateRequest is an in transaction batch update to the groups present.
 
         Next Available Tag: 3'
+    storageGroup:
+      type: object
+      properties:
+        props:
+          $ref: '#/components/schemas/storageGroupProperties'
+        roleName:
+          type: string
+          description: This is the name of the role that will apply to users in this group.
+      description: 'Group is a GroupProperties : Role mapping.'
   requestBodies:
     storageGroup:
       content:
