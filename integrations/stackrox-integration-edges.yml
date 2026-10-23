@@ -12,6 +12,9 @@ checked:
 - https://skillsmp.com/sitemap.xml
 - https://www.skills.sh/sitemap.xml
 - artifact-hub/integrations/artifact-hub-integration-edges.yml
+- https://landscape.cd.foundation/data/full.json
+- https://plugins.jenkins.io/api/plugin/
+- https://plugins.jenkins.io/api/plugins
 marketplace_apps: []
 edges:
 - partner_name: GitHub Marketplace (actions)
@@ -117,5 +120,24 @@ edges:
   category: Artifact Hub listing (Helm chart)
   badges:
   - 'Verified publisher (Artifact Hub verified publisher: repository ownership proven)'
+- partner_name: Jenkins (own)
+  partner: jenkins
+  partner_match: mirror
+  mirror_match: register
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://plugins.jenkins.io/stackrox-container-image-scanner/
+  mirror_of: jenkins/integrations/jenkins-integration-edges.yml
+  apps:
+  - StackRox Container Image Scanner (stackrox-container-image-scanner)
+  listing_count: 1
+  category: Jenkins plugin
+  signal_note: 'publisher side of the all/jenkins listing; vendor-control: stackrox-container-image-scanner: maintainer
+    account ''stackrox'' is the GitHub organization on all/stackrox''s apis.yml'
+  detected: '2026-10-22'
+  detected_by: sweep-jenkins-cd-foundation-plugins.py
 source:
 - https://github.com/marketplace?type=actions
